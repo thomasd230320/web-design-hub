@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Custom Websites for UK Small Businesses | WebDesignHub</title>
-<meta name="description" content="Custom websites for UK small businesses. Conversion-led design from £125, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
+<meta name="description" content="Custom websites for UK small businesses. Conversion-led design from £395, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
 
 <link rel="canonical" href="https://webdesignhub.net/" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="WebDesignHub" />
 <meta property="og:title" content="Custom Websites for UK Small Businesses | WebDesignHub" />
-<meta property="og:description" content="Custom websites for UK small businesses. Conversion-led design from £125, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
+<meta property="og:description" content="Custom websites for UK small businesses. Conversion-led design from £395, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
 <meta property="og:url" content="https://webdesignhub.net/" />
 <meta property="og:image" content="https://webdesignhub.net/social-banner.svg" />
 <meta property="og:locale" content="en_GB" />
@@ -27,7 +27,7 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Custom Websites for UK Small Businesses | WebDesignHub" />
-<meta name="twitter:description" content="Custom websites for UK small businesses. Conversion-led design from £125, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
+<meta name="twitter:description" content="Custom websites for UK small businesses. Conversion-led design from £395, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
 <meta name="twitter:image" content="https://webdesignhub.net/social-banner.svg" />
 
 <!-- JSON-LD: Organization (identity for AI search engines) -->
@@ -58,7 +58,7 @@
   "url": "https://webdesignhub.net/",
   "telephone": "+447827332393",
   "email": "hello@webdesignhub.net",
-  "priceRange": "From £125",
+  "priceRange": "From £395",
   "image": "https://webdesignhub.net/social-banner.svg",
   "address": {
     "@type": "PostalAddress",
@@ -80,23 +80,30 @@
     {
       "@type": "Offer",
       "name": "Starter website",
-      "price": "125",
+      "price": "395",
       "priceCurrency": "GBP",
       "itemOffered": { "@type": "Service", "name": "Starter website — up to 3 pages, mobile-first, delivered in 5 days" }
     },
     {
       "@type": "Offer",
       "name": "Pro website",
-      "price": "299",
+      "price": "895",
       "priceCurrency": "GBP",
-      "itemOffered": { "@type": "Service", "name": "Pro website — up to 7 pages with custom animations, booking system, on-page SEO, delivered in 7–10 days" }
+      "itemOffered": { "@type": "Service", "name": "Pro website — up to 7 pages with custom animations, booking or enquiry system, on-page SEO, delivered in 7–10 days" }
     },
     {
       "@type": "Offer",
       "name": "Premium website",
-      "price": "499",
+      "price": "1495",
       "priceCurrency": "GBP",
-      "itemOffered": { "@type": "Service", "name": "Premium website — unlimited pages, e-commerce, blog, advanced SEO, delivered in 10–14 days" }
+      "itemOffered": { "@type": "Service", "name": "Premium website — up to 15 pages, blog, advanced SEO and content strategy, custom lead-capture forms, delivered in 10–14 days" }
+    },
+    {
+      "@type": "Offer",
+      "name": "E-commerce website",
+      "price": "2495",
+      "priceCurrency": "GBP",
+      "itemOffered": { "@type": "Service", "name": "E-commerce website — full online shop with Stripe or Shopify integration, unlimited product pages, inventory and order management, advanced SEO and product schema, delivered in 14–21 days" }
     }
   ],
   "hasOfferCatalog": {
@@ -136,18 +143,18 @@
     },
     {
       "@type": "Question",
-      "name": "What's actually included in the £35/month?",
+      "name": "What's included in the hosting plans?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Secure hosting, automatic backups, security updates, content tweaks (text and images), and priority email and phone support. It keeps your site fast, safe and current — and you can cancel at any time."
+        "text": "Hosting is tiered to match your site. £55/month for Starter (Essentials), £95/month for Pro (Standard), £145/month for Premium (Pro+), and £245/month for E-commerce (Commerce). Every plan covers secure hosting, automatic backups, security updates, content tweaks, and priority email and phone support. Higher plans include faster response times, more frequent content updates, and shop or booking-system maintenance."
       }
     },
     {
       "@type": "Question",
-      "name": "Is the £35/month required?",
+      "name": "Is monthly hosting required?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. You can pay once for the build and host it yourself or anywhere else. We offer the £35 plan for clients who want everything looked after for them."
+        "text": "For Starter, Pro and Premium it's optional — you can pay once for the build and host it yourself or anywhere else. For the E-commerce tier ongoing hosting is required: a working online shop needs active care for payments, stock and security, and self-hosting genuinely risks breakage."
       }
     },
     {
@@ -800,9 +807,10 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 ─────────────────────────────────────────────── */
 .pricing{background:var(--paper)}
 .pricing-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
   align-items:stretch;margin-top:8px;
 }
+.hosting-required{color:var(--gold-soft)}
 .price-card{
   background:var(--paper);border:1px solid var(--line);
   border-radius:var(--r-lg);padding:40px 36px;
@@ -981,6 +989,9 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
 /* ───────────────────────────────────────────────
    RESPONSIVE
 ─────────────────────────────────────────────── */
+@media (max-width:1099px){
+  .pricing-grid{grid-template-columns:repeat(2,1fr);gap:20px}
+}
 @media (max-width:1024px){
   .svc-grid{grid-template-columns:repeat(4,1fr)}
   .svc-card.span-4{grid-column:span 4}
@@ -1072,12 +1083,12 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     </h1>
 
     <h2 class="hero-h2-sub reveal" data-d="2">
-      <span class="serif">Custom websites</span> for UK small businesses, from £125
+      <span class="serif">Custom websites</span> for UK small businesses, from £395
     </h2>
 
     <p class="hero-lead reveal" data-d="3">
       A small studio in <strong class="price-strong">Witney, Oxfordshire,</strong> crafting custom, conversion-led websites for UK small businesses.
-      Hand-designed, never templated. Live in 5 days. From <strong class="price-strong">£125</strong>.
+      Hand-designed, never templated. Live in 5 days. From <strong class="price-strong">£395</strong>.
     </p>
 
     <div class="hero-ctas reveal" data-d="4">
@@ -1097,7 +1108,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         <div class="lbl">Typical turnaround from brief to launch</div>
       </div>
       <div class="hero-meta-item">
-        <div class="num">£125<em>+</em></div>
+        <div class="num">£395<em>+</em></div>
         <div class="lbl">Starting price · transparent &amp; honest</div>
       </div>
     </div>
@@ -1138,7 +1149,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         </div>
         <div>
           <dt>Starting price</dt>
-          <dd>From <strong>£125</strong> one-off · <strong>£35/mo</strong> hosting (optional)</dd>
+          <dd>From <strong>£395</strong> one-off · from <strong>£55/mo</strong> hosting (optional)</dd>
         </div>
         <div>
           <dt>Turnaround</dt>
@@ -1181,8 +1192,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         <div class="stat-lbl">Average turnaround for the Starter package</div>
       </div>
       <div class="stat-cell reveal" data-d="3">
-        <div class="stat-num">£<span data-count="35">0</span></div>
-        <div class="stat-lbl">A month covers hosting, support &amp; updates</div>
+        <div class="stat-num">£<span data-count="55">0</span><em>+</em></div>
+        <div class="stat-lbl">Hosting plans from £55 a month — scaled to your site</div>
       </div>
       <div class="stat-cell reveal" data-d="4">
         <div class="stat-num" data-count="1" data-suffix="<em>:1</em>">0</div>
@@ -1245,7 +1256,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
           <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16v10H4z"/><path stroke-linecap="round" d="M4 11h16"/></svg>
         </div>
         <h3>Hosting &amp; care</h3>
-        <p>£35/mo keeps it secure, fast, and updated. Cancel any time.</p>
+        <p>Hosting plans from £55/mo keep your site secure, fast, and updated. Cancel any time.</p>
       </article>
 
       <article class="svc-card span-2 reveal" data-d="5">
@@ -1306,7 +1317,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
           <div class="proc-num">04</div>
           <div class="proc-body">
             <h3>We stick around — if you want us to</h3>
-            <p>£35/month keeps your site hosted, secure, backed up, and lets you ask for tweaks whenever. Or pay once, take everything, and host it yourself. Always your call.</p>
+            <p>Hosting from £55/month keeps your site hosted, secure, backed up — and scales for bigger sites. Or pay once, take everything, and host it yourself. Always your call.</p>
             <div class="proc-tag">Optional · cancel any time</div>
           </div>
         </div>
@@ -1424,7 +1435,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <div class="eyebrow">Pricing</div>
       <h2 class="h-1">How much does <span class="serif">a website</span> cost?</h2>
       <p class="lead">
-        Three honest, all-inclusive custom website packages for UK small businesses — from <strong class="price-strong">£125</strong>.
+        Four honest, all-inclusive custom website packages for UK small businesses — from <strong class="price-strong">£395</strong>.
         Every one includes a free consultation, mobile-first design, and SEO-ready build.
         Hosting &amp; updates are optional — never required.
       </p>
@@ -1433,8 +1444,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     <div class="pricing-grid">
       <article class="price-card reveal">
         <div class="price-tier">Starter</div>
-        <div class="price-amount">£125</div>
-        <div class="price-sub">One-time payment · <strong>+£35/mo</strong> hosting (optional)</div>
+        <div class="price-amount">£395</div>
+        <div class="price-sub">One-time payment · <strong>+£55/mo</strong> hosting (optional)</div>
         <div class="price-divider"></div>
         <ul class="feat-list">
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Up to 3 hand-designed pages</li>
@@ -1449,34 +1460,51 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <article class="price-card featured reveal" data-d="1">
         <span class="price-badge">Most Popular</span>
         <div class="price-tier">Pro</div>
-        <div class="price-amount">£<em>299</em></div>
-        <div class="price-sub">One-time payment · <strong>+£35/mo</strong> hosting (optional)</div>
+        <div class="price-amount">£<em>895</em></div>
+        <div class="price-sub">One-time payment · <strong>+£95/mo</strong> hosting (optional)</div>
         <div class="price-divider"></div>
         <ul class="feat-list">
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Up to 7 pages with custom animations</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Booking or enquiry system</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>On-page SEO + Google Analytics</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>3 months free support</li>
-          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivered within 7–10 days</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Free professional copy review</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivered within 7–10 days</li>
         </ul>
         <a href="#contact" class="btn btn-gold btn-block">Choose Pro <span class="arrow">→</span></a>
       </article>
 
       <article class="price-card reveal" data-d="2">
         <div class="price-tier">Premium</div>
-        <div class="price-amount">£499</div>
-        <div class="price-sub">One-time payment · <strong>+£35/mo</strong> hosting (optional)</div>
+        <div class="price-amount">£1,495</div>
+        <div class="price-sub">One-time payment · <strong>+£145/mo</strong> hosting (optional)</div>
         <div class="price-divider"></div>
         <ul class="feat-list">
-          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unlimited pages</li>
-          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>E-commerce or online shop</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Up to 15 pages</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Blog or news section</li>
-          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Advanced SEO strategy</li>
-          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12 months priority support</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Advanced on-page SEO + content strategy</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Custom lead-capture forms</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>6 months priority support</li>
           <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivered within 10–14 days</li>
         </ul>
         <a href="#contact" class="btn btn-ghost btn-block">Choose Premium <span class="arrow">→</span></a>
+      </article>
+
+      <article class="price-card reveal" data-d="3">
+        <div class="price-tier">E-commerce</div>
+        <div class="price-amount">£2,495</div>
+        <div class="price-sub">One-time payment · <strong class="hosting-required">+£245/mo</strong> hosting (required)</div>
+        <div class="price-divider"></div>
+        <ul class="feat-list">
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Full online shop (Stripe / Shopify integration)</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Unlimited product pages</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Inventory + order management setup</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Advanced SEO + product schema</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>12 months priority support</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Staff training session</li>
+          <li><span class="check"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Delivered within 14–21 days</li>
+        </ul>
+        <a href="#contact" class="btn btn-ghost btn-block">Choose E-commerce <span class="arrow">→</span></a>
       </article>
     </div>
   </div>
@@ -1509,18 +1537,18 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
 
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
-          What's actually included in the £35/month?
+          What's included in the hosting plans?
           <span class="faq-toggle" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">Secure hosting, automatic backups, security updates, content tweaks (text and images), and priority email and phone support. It keeps your site fast, safe and current — and you can cancel at any time.</div>
+        <div class="faq-a">Hosting is tiered to match your site. £55/month for Starter (Essentials), £95/month for Pro (Standard), £145/month for Premium (Pro+), and £245/month for E-commerce (Commerce). Every plan covers secure hosting, automatic backups, security updates, content tweaks, and priority email and phone support. Higher plans include faster response times, more frequent content updates, and shop or booking-system maintenance.</div>
       </div>
 
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">
-          Is the £35/month required?
+          Is monthly hosting required?
           <span class="faq-toggle" aria-hidden="true">+</span>
         </button>
-        <div class="faq-a">No. You can pay once for the build and host it yourself or anywhere else. We offer the £35 plan for clients who want everything looked after for them.</div>
+        <div class="faq-a">For Starter, Pro and Premium it's optional — you can pay once for the build and host it yourself or anywhere else. For the E-commerce tier ongoing hosting is required: a working online shop needs active care for payments, stock and security, and self-hosting genuinely risks breakage.</div>
       </div>
 
       <div class="faq-item reveal">
