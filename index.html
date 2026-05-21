@@ -8,6 +8,7 @@
 <meta name="description" content="Custom websites for UK small businesses. Conversion-led design from £125, live in 5 days. Based in Oxfordshire. Call +44 7827 332393 for a free quote." />
 
 <link rel="canonical" href="https://webdesignhub.net/" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="theme-color" content="#0C0A09" />
 
 <!-- Search Console verification — paste codes after creating GSC / Bing properties -->
@@ -379,9 +380,9 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
   transition:color 180ms var(--ease-out);
 }
 .nav-links a:hover{color:var(--gold)}
-.nav-cta{padding:10px 20px;font-size:.86rem}
+.nav-cta{padding:16px 22px;font-size:.86rem}
 .hamburger{
-  display:none;width:36px;height:36px;
+  display:none;width:44px;height:44px;
   flex-direction:column;justify-content:center;gap:5px;
 }
 .hamburger span{
@@ -397,7 +398,11 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 .mobnav.open{display:flex;opacity:1}
 .mobnav a{font-family:'Bodoni Moda',serif;font-weight:400;font-size:2rem;letter-spacing:-.02em;color:var(--paper)}
 .mobnav a em{font-style:italic;color:var(--gold-soft)}
-.mob-close{position:absolute;top:24px;right:24px;color:var(--paper);font-size:1.6rem;line-height:1}
+.mob-close{
+  position:absolute;top:18px;right:18px;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  color:var(--paper);font-size:1.4rem;line-height:1;padding:0;
+}
 
 /* ───────────────────────────────────────────────
    HERO  — Exaggerated Minimalism, oversized type
@@ -546,7 +551,7 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
   color:var(--muted);font-weight:500;margin-bottom:6px;
 }
 .quick-facts dd{
-  font-size:.98rem;color:var(--ink);line-height:1.45;font-weight:400;
+  font-size:1rem;color:var(--ink);line-height:1.5;font-weight:400;
 }
 .quick-facts dd a{color:var(--ink);border-bottom:1px solid var(--gold);transition:color 180ms var(--ease-out)}
 .quick-facts dd a:hover{color:var(--gold)}
@@ -579,7 +584,7 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 }
 .stat-num em{font-style:italic;color:var(--gold-soft)}
 .stat-lbl{
-  margin-top:18px;font-size:.92rem;color:rgba(250,250,249,.6);
+  margin-top:18px;font-size:1rem;color:rgba(250,250,249,.65);
   max-width:24ch;
 }
 
@@ -624,7 +629,7 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
   transition:stroke 280ms var(--ease-out);
 }
 .svc-card h3{margin-top:22px;font-size:1.5rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;color:var(--ink);transition:color 280ms var(--ease-out)}
-.svc-card p{margin-top:10px;font-size:.96rem;line-height:1.6;color:var(--muted);transition:color 280ms var(--ease-out)}
+.svc-card p{margin-top:10px;font-size:1rem;line-height:1.6;color:var(--muted);transition:color 280ms var(--ease-out)}
 
 .svc-card.span-2{grid-column:span 2}
 .svc-card.span-4{grid-column:span 4}
@@ -773,14 +778,20 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
   transition:opacity 320ms var(--ease-out);
 }
 .testimonial-nav{
-  display:flex;justify-content:center;gap:12px;margin-top:44px;
+  display:flex;justify-content:center;gap:0;margin-top:44px;
 }
 .testimonial-nav button{
+  /* 44x44 invisible hit area — visible dot is in ::before */
+  width:44px;height:44px;padding:0;background:transparent;border:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.testimonial-nav button::before{
+  content:'';display:block;
   width:10px;height:10px;border-radius:50%;
-  background:rgba(250,250,249,.22);padding:0;
+  background:rgba(250,250,249,.22);
   transition:background-color 220ms var(--ease-out),transform 220ms var(--ease-out);
 }
-.testimonial-nav button.active{background:var(--gold);transform:scale(1.4)}
+.testimonial-nav button.active::before{background:var(--gold);transform:scale(1.4)}
 .testimonial-stars{display:flex;justify-content:center;gap:4px;color:var(--gold-soft);margin-bottom:24px}
 .testimonial-stars svg{width:18px;height:18px;fill:currentColor}
 
@@ -830,7 +841,7 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 .price-divider{height:1px;background:var(--line);margin:28px 0}
 .price-card.featured .price-divider{background:rgba(250,250,249,.10)}
 .feat-list{display:flex;flex-direction:column;gap:14px;flex:1;margin-bottom:32px}
-.feat-list li{display:flex;gap:12px;font-size:.96rem;line-height:1.5;color:var(--ink-3)}
+.feat-list li{display:flex;gap:12px;font-size:1rem;line-height:1.55;color:var(--ink-3)}
 .price-card.featured .feat-list li{color:rgba(250,250,249,.82)}
 .check{
   flex-shrink:0;width:18px;height:18px;border-radius:50%;
@@ -906,22 +917,22 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
 .foot-brand{font-size:1.1rem;font-weight:600;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
 .foot-brand .brand-mark{background:var(--paper)}
 .foot-brand .brand-mark::after{background:var(--gold)}
-.foot-desc{font-size:.92rem;color:rgba(250,250,249,.55);line-height:1.72;max-width:34ch;margin-bottom:24px}
+.foot-desc{font-size:1rem;color:rgba(250,250,249,.55);line-height:1.72;max-width:34ch;margin-bottom:24px}
 .foot-socials{display:flex;gap:10px}
 .foot-soc{
-  width:38px;height:38px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   border:1px solid rgba(250,250,249,.12);background:transparent;
   display:flex;align-items:center;justify-content:center;
   color:rgba(250,250,249,.6);font-size:.85rem;font-weight:500;
   transition:background-color 200ms var(--ease-out),border-color 200ms var(--ease-out),color 200ms var(--ease-out);
 }
 .foot-soc:hover{background:var(--gold);border-color:var(--gold);color:#fff}
-.foot-col h5{
+.foot-col h3{
   font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
   color:rgba(250,250,249,.65);margin-bottom:18px;font-weight:500;
 }
 .foot-col ul{display:flex;flex-direction:column;gap:11px}
-.foot-col ul a{font-size:.92rem;color:rgba(250,250,249,.65);transition:color 180ms var(--ease-out)}
+.foot-col ul a{font-size:1rem;color:rgba(250,250,249,.65);transition:color 180ms var(--ease-out)}
 .foot-col ul a:hover{color:var(--paper)}
 .foot-bot{
   display:flex;align-items:center;justify-content:space-between;
@@ -1565,7 +1576,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         </div>
       </div>
       <div class="foot-col">
-        <h5>Studio</h5>
+        <h3>Studio</h3>
         <ul>
           <li><a href="#services">Services</a></li>
           <li><a href="#work">Recent work</a></li>
@@ -1574,7 +1585,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         </ul>
       </div>
       <div class="foot-col">
-        <h5>Common</h5>
+        <h3>Common</h3>
         <ul>
           <li><a href="#faq">FAQ</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1583,7 +1594,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         </ul>
       </div>
       <div class="foot-col">
-        <h5>Get in touch</h5>
+        <h3>Get in touch</h3>
         <ul>
           <li><a href="mailto:hello@webdesignhub.net">hello@webdesignhub.net</a></li>
           <li><a href="tel:+447827332393">+44 7827 332393</a></li>
