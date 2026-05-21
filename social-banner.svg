@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="42" height="42" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#A16207" fill-opacity="0.12"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0C0A09"/>
+  <rect width="1200" height="630" fill="url(#dots)"/>
+  <text x="80" y="270" font-family="Bodoni Moda, Georgia, serif" font-size="84" font-weight="500" fill="#FAFAF9" letter-spacing="-2">Websites that look</text>
+  <text x="80" y="370" font-family="Bodoni Moda, Georgia, serif" font-size="96" font-weight="500" font-style="italic" fill="#C9971F" letter-spacing="-2">extraordinary</text>
+  <text x="80" y="460" font-family="Bodoni Moda, Georgia, serif" font-size="84" font-weight="500" fill="#FAFAF9" letter-spacing="-2">&amp; sell quietly.</text>
+  <text x="80" y="560" font-family="Jost, Helvetica, sans-serif" font-size="22" font-weight="400" fill="#FAFAF9" fill-opacity="0.55" letter-spacing="3">WEBDESIGNHUB  ·  UK  ·  FROM £125</text>
+  <circle cx="1080" cy="100" r="22" fill="#0C0A09" stroke="#A16207" stroke-width="2"/>
+  <circle cx="1080" cy="100" r="10" fill="#A16207"/>
+</svg>
