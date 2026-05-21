@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <title>Web Design for UK Local Businesses | WebDesignHub</title>
-<meta name="description" content="Bespoke web design for UK local businesses. Hand-crafted, conversion-led websites from £125, live in just 5 days. Free consultation — call 07827 332 393." />
+<meta name="description" content="Bespoke conversion-led websites for UK local businesses. Hand-crafted in Witney, Oxfordshire. From £125, live in 5 days. Free quote — call +44 7827 332393." />
 
 <link rel="canonical" href="https://webdesignhub.net/" />
 <meta name="theme-color" content="#0C0A09" />
@@ -18,7 +18,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="WebDesignHub" />
 <meta property="og:title" content="Web Design for UK Local Businesses | WebDesignHub" />
-<meta property="og:description" content="Bespoke web design for UK local businesses. Hand-crafted, conversion-led websites from £125, live in just 5 days. Free consultation — call 07827 332 393." />
+<meta property="og:description" content="Bespoke conversion-led websites for UK local businesses. Hand-crafted in Witney, Oxfordshire. From £125, live in 5 days. Free quote — call +44 7827 332393." />
 <meta property="og:url" content="https://webdesignhub.net/" />
 <meta property="og:image" content="https://webdesignhub.net/social-banner.svg" />
 <meta property="og:locale" content="en_GB" />
@@ -26,8 +26,25 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Web Design for UK Local Businesses | WebDesignHub" />
-<meta name="twitter:description" content="Bespoke web design for UK local businesses. Hand-crafted, conversion-led websites from £125, live in just 5 days. Free consultation — call 07827 332 393." />
+<meta name="twitter:description" content="Bespoke conversion-led websites for UK local businesses. Hand-crafted in Witney, Oxfordshire. From £125, live in 5 days. Free quote — call +44 7827 332393." />
 <meta name="twitter:image" content="https://webdesignhub.net/social-banner.svg" />
+
+<!-- JSON-LD: Organization (identity for AI search engines) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://webdesignhub.net/#organization",
+  "name": "WebDesignHub",
+  "url": "https://webdesignhub.net/",
+  "logo": "https://webdesignhub.net/social-banner.svg",
+  "founder": {
+    "@type": "Person",
+    "name": "Thomas"
+  },
+  "description": "Bespoke conversion-led websites for UK local businesses, hand-crafted in Witney, Oxfordshire."
+}
+</script>
 
 <!-- JSON-LD: ProfessionalService (homepage) -->
 <script type="application/ld+json">
@@ -36,16 +53,17 @@
   "@type": "ProfessionalService",
   "@id": "https://webdesignhub.net/#business",
   "name": "WebDesignHub",
-  "description": "A small UK studio crafting bespoke, conversion-led websites for local businesses. Hand-designed, never templated. Live in 5 days, from £125.",
+  "description": "Bespoke conversion-led websites for UK local businesses, hand-crafted in Witney, Oxfordshire.",
   "url": "https://webdesignhub.net/",
   "telephone": "+447827332393",
-  "email": "thomassmithdonald@gmail.com",
-  "priceRange": "££",
+  "email": "hello@webdesignhub.net",
+  "priceRange": "From £125",
   "image": "https://webdesignhub.net/social-banner.svg",
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "GB",
-    "addressRegion": "United Kingdom"
+    "addressLocality": "Witney",
+    "addressRegion": "Oxfordshire",
+    "addressCountry": "GB"
   },
   "areaServed": [
     { "@type": "Country", "name": "United Kingdom" }
@@ -474,6 +492,24 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 }
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.marquee-track{animation:none}}
+
+/* ───────────────────────────────────────────────
+   UTILITY MODIFIERS  (extracted from inline styles)
+─────────────────────────────────────────────── */
+.price-strong{color:var(--ink);font-weight:500}
+.stats .serif{color:var(--gold-soft)}
+.section-hd .lead{margin-top:18px}
+.section-hd.center .lead{margin:18px auto 0}
+.process-sticky h2{margin-top:18px}
+.process-sticky .lead{margin-top:22px}
+.process-sticky .btn{margin-top:32px}
+.mobnav-cta{color:var(--gold-soft)}
+.foot-brand-em{
+  color:var(--gold-soft);
+  font-family:'Bodoni Moda',serif;
+  font-style:italic;
+  font-weight:500;
+}
 
 /* ───────────────────────────────────────────────
    QUICK FACTS  (GEO — "At a glance" panel)
@@ -975,7 +1011,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
   <a href="#process" data-mob>How <em>It Works</em></a>
   <a href="#pricing" data-mob>Pricing</a>
   <a href="#faq" data-mob>FAQ</a>
-  <a href="#contact" data-mob style="color:var(--gold-soft)">Get a Quote</a>
+  <a href="#contact" data-mob class="mobnav-cta">Get a Quote</a>
 </div>
 
 <!-- ══════════ NAV ══════════ -->
@@ -1015,8 +1051,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     </h1>
 
     <p class="hero-lead reveal" data-d="3">
-      A small UK studio crafting bespoke, conversion-led websites for local businesses.
-      Hand-designed, never templated. Live in 5 days. From <strong style="color:var(--ink);font-weight:500">£125</strong>.
+      A small studio in <strong class="price-strong">Witney, Oxfordshire,</strong> crafting bespoke, conversion-led websites for local businesses across the UK.
+      Hand-designed, never templated. Live in 5 days. From <strong class="price-strong">£125</strong>.
     </p>
 
     <div class="hero-ctas reveal" data-d="4">
@@ -1073,7 +1109,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <dl>
         <div>
           <dt>Based</dt>
-          <dd>United Kingdom · serving local businesses nationwide</dd>
+          <dd>Witney, Oxfordshire · serving local businesses across the UK</dd>
         </div>
         <div>
           <dt>Starting price</dt>
@@ -1085,11 +1121,11 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         </div>
         <div>
           <dt>Phone</dt>
-          <dd><a href="tel:+447827332393">07827 332 393</a></dd>
+          <dd><a href="tel:+447827332393">+44 7827 332393</a></dd>
         </div>
         <div>
           <dt>Email</dt>
-          <dd><a href="mailto:thomassmithdonald@gmail.com">thomassmithdonald@gmail.com</a></dd>
+          <dd><a href="mailto:hello@webdesignhub.net">hello@webdesignhub.net</a></dd>
         </div>
         <div>
           <dt>What's included</dt>
@@ -1105,8 +1141,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
   <div class="container">
     <div class="section-hd reveal">
       <div class="eyebrow eyebrow-light">Why local businesses choose us</div>
-      <h2 class="h-2" style="color:var(--paper)">
-        Built carefully. <span class="serif" style="color:var(--gold-soft)">Priced fairly.</span><br>
+      <h2 class="h-2">
+        Built carefully. <span class="serif">Priced fairly.</span><br>
         Delivered fast.
       </h2>
     </div>
@@ -1140,7 +1176,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         Everything your business needs<br>
         to <span class="serif">show up online.</span>
       </h2>
-      <p class="lead" style="margin-top:18px">
+      <p class="lead">
         From the first sketch to the moment you go live — one studio, one process, no middlemen.
       </p>
     </div>
@@ -1205,15 +1241,15 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     <div class="process-grid">
       <aside class="process-sticky reveal">
         <div class="eyebrow">How it works</div>
-        <h2 class="h-1" style="margin-top:18px">
+        <h2 class="h-1">
           Four <span class="serif">honest</span> steps.<br>
           No surprises.
         </h2>
-        <p class="lead" style="margin-top:22px">
+        <p class="lead">
           We've stripped the agency runaround out. You'll know exactly what's happening,
           when it's happening, and what it costs — before we start.
         </p>
-        <a href="#contact" class="btn btn-primary magnetic" style="margin-top:32px">Book a free chat <span class="arrow">→</span></a>
+        <a href="#contact" class="btn btn-primary magnetic">Book a free chat <span class="arrow">→</span></a>
       </aside>
 
       <div class="process-steps">
@@ -1362,8 +1398,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     <div class="section-hd center reveal">
       <div class="eyebrow">Pricing</div>
       <h2 class="h-1">How much does <span class="serif">a website</span> cost?</h2>
-      <p class="lead" style="margin:18px auto 0">
-        Three honest, all-inclusive packages — from <strong style="color:var(--ink);font-weight:500">£125</strong>.
+      <p class="lead">
+        Three honest, all-inclusive packages — from <strong class="price-strong">£125</strong>.
         Every one includes a free consultation, mobile-first design, and SEO-ready build.
         Hosting &amp; updates are optional — never required.
       </p>
@@ -1490,11 +1526,11 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       Send us a note. We'll reply within a few hours with honest thoughts on what your business actually needs — even if it isn't us.
     </p>
     <div class="cta-actions">
-      <a href="mailto:thomassmithdonald@gmail.com" class="btn btn-gold btn-lg magnetic">
-        thomassmithdonald@gmail.com <span class="arrow">→</span>
+      <a href="mailto:hello@webdesignhub.net" class="btn btn-gold btn-lg magnetic">
+        hello@webdesignhub.net <span class="arrow">→</span>
       </a>
-      <a href="tel:07827332393" class="btn btn-ghost-light btn-lg">
-        Call · 07827 332 393
+      <a href="tel:+447827332393" class="btn btn-ghost-light btn-lg">
+        Call · +44 7827 332393
       </a>
     </div>
     <p class="cta-meta">No commitment · Free consultation · Reply within hours</p>
@@ -1506,8 +1542,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
   <div class="container">
     <div class="foot-top">
       <div>
-        <div class="foot-brand"><span class="brand-mark"></span>WebDesign<em style="color:var(--gold-soft);font-family:'Bodoni Moda',serif;font-style:italic;font-weight:500">Hub</em></div>
-        <p class="foot-desc">A small UK studio crafting bespoke, conversion-led websites for local businesses. Hand-designed, never templated.</p>
+        <div class="foot-brand"><span class="brand-mark"></span>WebDesign<em class="foot-brand-em">Hub</em></div>
+        <p class="foot-desc">A small studio in Witney, Oxfordshire, crafting bespoke, conversion-led websites for local businesses across the UK. Hand-designed, never templated.</p>
         <div class="foot-socials">
           <a href="#" class="foot-soc" aria-label="Instagram">Ig</a>
           <a href="#" class="foot-soc" aria-label="Facebook">Fb</a>
@@ -1535,14 +1571,14 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <div class="foot-col">
         <h5>Get in touch</h5>
         <ul>
-          <li><a href="mailto:thomassmithdonald@gmail.com">thomassmithdonald<br>@gmail.com</a></li>
-          <li><a href="tel:07827332393">07827 332 393</a></li>
-          <li><a href="#">United Kingdom</a></li>
+          <li><a href="mailto:hello@webdesignhub.net">hello@webdesignhub.net</a></li>
+          <li><a href="tel:+447827332393">+44 7827 332393</a></li>
+          <li>Witney, Oxfordshire · UK</li>
         </ul>
       </div>
     </div>
     <div class="foot-bot">
-      <span>© 2026 WebDesignHub. Hand-built in the UK.</span>
+      <span>© 2026 WebDesignHub · Hand-built in Witney, Oxfordshire.</span>
       <div class="foot-legal">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
