@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thomasd230320.github.io/web-design-hub/sitemap.xml
+Sitemap: https://webdesignhub.net/sitemap.xml
