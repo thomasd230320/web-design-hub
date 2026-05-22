@@ -223,7 +223,9 @@ button{cursor:pointer;font-family:inherit;background:none;border:none;color:inhe
   --line-d:     rgba(250,250,249,.10);
 
   /* Type scale (Exaggerated Minimalism) */
-  --t-display:  clamp(3.4rem, 11vw, 11.5rem);
+  /* display min kept low enough that the longest hero word
+     ("extraordinary") fits a 320px viewport without clipping */
+  --t-display:  clamp(2.5rem, 12vw, 11.5rem);
   --t-h1:       clamp(2.4rem, 6vw, 4.4rem);
   --t-h2:       clamp(1.9rem, 4.2vw, 3.2rem);
   --t-h3:       clamp(1.15rem, 1.6vw, 1.35rem);
