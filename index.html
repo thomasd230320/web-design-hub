@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<!--
+  ░░  WebDesignHub — webdesignhub.net
+  ░░  Hand-written HTML & CSS. One file. No page builder, no theme,
+  ░░  no CSS framework, no JS dependencies — every selector typed by hand.
+  ░░  Designed & built by Thomas · Witney, Oxfordshire.
+  ░░  Like what you see under the hood? hello@webdesignhub.net
+-->
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
@@ -536,6 +543,24 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 }
 
 /* ───────────────────────────────────────────────
+   HAND-DRAWN UNDERLINE  — draws itself on scroll-in
+─────────────────────────────────────────────── */
+.ink-underline{position:relative;display:inline-block}
+.ul-draw{
+  position:absolute;left:-3%;bottom:-.16em;
+  width:106%;height:.42em;overflow:visible;
+}
+.ul-draw path{
+  fill:none;stroke:var(--gold);stroke-width:4;stroke-linecap:round;
+  stroke-dasharray:240;stroke-dashoffset:240;
+  transition:stroke-dashoffset 900ms var(--ease-out) 350ms;
+}
+.reveal.in .ul-draw path{stroke-dashoffset:0}
+@media (prefers-reduced-motion:reduce){
+  .ul-draw path{stroke-dashoffset:0}
+}
+
+/* ───────────────────────────────────────────────
    QUICK FACTS  (GEO — "At a glance" panel)
    Definition list pattern, extractable by AI crawlers
 ─────────────────────────────────────────────── */
@@ -715,10 +740,6 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
 .browser{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;background:var(--paper)}
 .browser .dots{display:flex;gap:6px}
 .browser .dots span{width:11px;height:11px;border-radius:50%;background:var(--line)}
-.browser .url{
-  flex:1;text-align:center;font-family:'Jost',sans-serif;
-  font-size:.78rem;color:var(--muted);letter-spacing:.02em;
-}
 .work-canvas{aspect-ratio:16/10;position:relative;overflow:hidden}
 .work-meta{
   padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;
@@ -778,31 +799,12 @@ p{color:var(--muted);font-size:var(--t-body);line-height:1.7;max-width:60ch}
   font-family:'Bodoni Moda',serif;font-style:italic;font-weight:400;
   font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.25;letter-spacing:-.02em;
   color:var(--paper);
-  transition:opacity 320ms var(--ease-out);
 }
 .testimonial cite{
   display:block;margin-top:36px;
   font-style:normal;font-size:.86rem;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(250,250,249,.6);
-  transition:opacity 320ms var(--ease-out);
 }
-.testimonial-nav{
-  display:flex;justify-content:center;gap:0;margin-top:44px;
-}
-.testimonial-nav button{
-  /* 44x44 invisible hit area — visible dot is in ::before */
-  width:44px;height:44px;padding:0;background:transparent;border:0;
-  display:flex;align-items:center;justify-content:center;
-}
-.testimonial-nav button::before{
-  content:'';display:block;
-  width:10px;height:10px;border-radius:50%;
-  background:rgba(250,250,249,.22);
-  transition:background-color 220ms var(--ease-out),transform 220ms var(--ease-out);
-}
-.testimonial-nav button.active::before{background:var(--gold);transform:scale(1.4)}
-.testimonial-stars{display:flex;justify-content:center;gap:4px;color:var(--gold-soft);margin-bottom:24px}
-.testimonial-stars svg{width:18px;height:18px;fill:currentColor}
 
 /* ───────────────────────────────────────────────
    PRICING
@@ -1097,13 +1099,13 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <a href="#contact" class="btn btn-primary btn-lg magnetic">
         Start your project <span class="arrow">→</span>
       </a>
-      <a href="#work" class="btn btn-ghost btn-lg">See recent work</a>
+      <a href="#work" class="btn btn-ghost btn-lg">See what we build</a>
     </div>
 
     <div class="hero-meta reveal" data-d="5">
       <div class="hero-meta-item">
-        <div class="num" data-count="4.7" data-suffix="<em>★</em>" data-decimals="1">0</div>
-        <div class="lbl">Average client rating across recent projects</div>
+        <div class="num" data-count="100" data-suffix="<em>%</em>">0</div>
+        <div class="lbl">Hand-written code — no page builders, no templates</div>
       </div>
       <div class="hero-meta-item">
         <div class="num" data-count="5" data-suffix="<em> days</em>">0</div>
@@ -1186,8 +1188,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
     </div>
     <div class="stats-grid">
       <div class="stat-cell reveal" data-d="1">
-        <div class="stat-num" data-count="97" data-suffix="<em>%</em>">0</div>
-        <div class="stat-lbl">Clients say their new site brought in more enquiries</div>
+        <div class="stat-num" data-count="24" data-suffix="<em>h</em>">0</div>
+        <div class="stat-lbl">A fixed, written quote within a day of our first call</div>
       </div>
       <div class="stat-cell reveal" data-d="2">
         <div class="stat-num" data-count="5" data-suffix="<em> days</em>">0</div>
@@ -1239,8 +1241,8 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       </article>
 
       <article class="svc-card svc-quote span-2 reveal" data-d="2">
-        <blockquote>"It looks like a London agency built it, but Thomas picked up every time I called."</blockquote>
-        <div class="by">— Sarah, café owner</div>
+        <blockquote>Every site is written by hand, line by line. No page builders, no themes, no shortcuts.</blockquote>
+        <div class="by">— How we work</div>
       </article>
 
       <article class="svc-card span-2 reveal" data-d="3">
@@ -1280,7 +1282,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       <aside class="process-sticky reveal">
         <div class="eyebrow">How it works</div>
         <h2 class="h-1">
-          Four <span class="serif">honest</span> steps.<br>
+          Four <span class="serif ink-underline">honest<svg class="ul-draw" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4,10 C38,3 72,13 104,8 C140,2 168,12 196,6"/></svg></span> steps.<br>
           No surprises.
         </h2>
         <p class="lead">
@@ -1332,72 +1334,72 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
 <section class="work section" id="work">
   <div class="container">
     <div class="section-hd reveal">
-      <div class="eyebrow">Recent work</div>
-      <h2 class="h-1">Custom websites we've <span class="serif">loved</span> building.</h2>
+      <div class="eyebrow">Design concepts</div>
+      <h2 class="h-1">Designed for every kind of <span class="serif">local business.</span></h2>
+      <p class="lead">
+        We're a new studio, so rather than show you someone else's website, here are
+        concept designs — the kind of site we'd build for four very different trades.
+      </p>
     </div>
     <div class="work-grid">
 
       <article class="work-item reveal">
         <div class="browser">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">themarketcafe.co.uk</div>
         </div>
-        <div class="work-canvas canvas-1" role="img" aria-label="Custom website mockup for a Brighton café">
+        <div class="work-canvas canvas-1" role="img" aria-label="Concept website design for a café">
           <div class="canvas-headline">Slow coffee.<br>Faster mornings.</div>
-          <span class="canvas-pill">Café · Brighton</span>
+          <span class="canvas-pill">Café</span>
           <div class="canvas-deco"></div>
         </div>
         <div class="work-meta">
-          <h3>The Market Café</h3>
-          <span class="tag">Hospitality</span>
+          <h3>Cafés &amp; restaurants</h3>
+          <span class="tag">Menus &amp; hours</span>
         </div>
       </article>
 
       <article class="work-item reveal" data-d="1">
         <div class="browser">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">oakwoodbarbers.com</div>
         </div>
-        <div class="work-canvas canvas-2" role="img" aria-label="Custom website mockup for a UK barbershop with online booking">
+        <div class="work-canvas canvas-2" role="img" aria-label="Concept website design for a barbershop with online booking">
           <div class="canvas-headline">Sharp cuts.<br>Sharper service.</div>
           <span class="canvas-pill">Book now</span>
           <div class="canvas-deco"></div>
         </div>
         <div class="work-meta">
-          <h3>Oakwood Barbers</h3>
-          <span class="tag">Booking system</span>
+          <h3>Salons &amp; barbers</h3>
+          <span class="tag">Online booking</span>
         </div>
       </article>
 
       <article class="work-item reveal" data-d="2">
         <div class="browser">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">harrowelectric.co.uk</div>
         </div>
-        <div class="work-canvas canvas-3" role="img" aria-label="Custom website mockup for a local electrician trade business">
+        <div class="work-canvas canvas-3" role="img" aria-label="Concept website design for an electrician or trade business">
           <div class="canvas-headline">Wired right<br>the first time.</div>
           <span class="canvas-pill">Get a quote</span>
           <div class="canvas-deco"></div>
         </div>
         <div class="work-meta">
-          <h3>Harrow Electric</h3>
-          <span class="tag">Local trade</span>
+          <h3>Trades &amp; services</h3>
+          <span class="tag">Quote requests</span>
         </div>
       </article>
 
       <article class="work-item reveal" data-d="3">
         <div class="browser">
           <div class="dots"><span></span><span></span><span></span></div>
-          <div class="url">ivybridge-venue.co.uk</div>
         </div>
-        <div class="work-canvas canvas-4" role="img" aria-label="Custom website mockup for a UK wedding venue">
+        <div class="work-canvas canvas-4" role="img" aria-label="Concept website design for a wedding venue">
           <div class="canvas-headline">Where stories<br>begin.</div>
           <span class="canvas-pill">Weddings</span>
           <div class="canvas-deco"></div>
         </div>
         <div class="work-meta">
-          <h3>Ivybridge Venue</h3>
-          <span class="tag">Wedding venue</span>
+          <h3>Venues &amp; events</h3>
+          <span class="tag">Enquiry-led</span>
         </div>
       </article>
 
@@ -1405,27 +1407,13 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
   </div>
 </section>
 
-<!-- ══════════ TESTIMONIAL ══════════ -->
+<!-- ══════════ PHILOSOPHY ══════════ -->
 <section class="testimonial section">
   <div class="container">
     <div class="testimonial-inner reveal">
-      <div class="testimonial-stars" aria-label="Five out of five stars">
-        <svg viewBox="0 0 24 24"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 18.27 5.82 21.5 7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 18.27 5.82 21.5 7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 18.27 5.82 21.5 7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 18.27 5.82 21.5 7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.87L12 18.27 5.82 21.5 7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>
-      </div>
       <div class="quote-mark" aria-hidden="true">“</div>
-      <div id="quoteRotator">
-        <blockquote id="quoteText">A good website isn't a luxury for a local business — it's the most reliable salesperson you'll ever hire.</blockquote>
-        <cite id="quoteCite">— Our quiet philosophy</cite>
-      </div>
-      <div class="testimonial-nav" role="tablist" aria-label="Choose testimonial">
-        <button class="active" data-q="0" aria-label="Testimonial 1"></button>
-        <button data-q="1" aria-label="Testimonial 2"></button>
-        <button data-q="2" aria-label="Testimonial 3"></button>
-      </div>
+      <blockquote>A good website isn't a luxury for a local business — it's the most reliable salesperson you'll ever hire.</blockquote>
+      <cite>— How we think about the work</cite>
     </div>
   </div>
 </section>
@@ -1609,7 +1597,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
         <h3>Studio</h3>
         <ul>
           <li><a href="#services">Services</a></li>
-          <li><a href="#work">Recent work</a></li>
+          <li><a href="#work">Concepts</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#pricing">Pricing</a></li>
         </ul>
@@ -1633,7 +1621,7 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       </div>
     </div>
     <div class="foot-bot">
-      <span>© 2026 WebDesignHub · Hand-built in Witney, Oxfordshire.</span>
+      <span>© 2026 WebDesignHub · Designed &amp; hand-coded by Thomas in Witney — one file, no page builder, no template.</span>
       <div class="foot-legal">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
@@ -1643,6 +1631,17 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
 </footer>
 
 <script>
+  /* ── For anyone who opens the console ── */
+  console.log(
+    '%cWebDesignHub',
+    'font:700 26px/1.2 Georgia,serif;color:#A16207'
+  );
+  console.log(
+    '%cHand-written HTML, CSS & JS — no page builder, no framework.\n' +
+    'If you got this far, you probably build things too. Say hello: hello@webdesignhub.net',
+    'color:#57534E;font:400 13px/1.6 system-ui,sans-serif'
+  );
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* Nav scrolled state + scroll progress */
@@ -1725,41 +1724,6 @@ footer{background:#08070a;color:var(--paper);padding:80px 0 36px}
       }
     });
   });
-
-  /* Testimonial rotator */
-  const quotes = [
-    { t: "A good website isn't a luxury for a local business — it's the most reliable salesperson you'll ever hire.", c: "— Our quiet philosophy" },
-    { t: "Within three weeks the new site had brought in more enquiries than our old one had in six months. I'm not exaggerating.", c: "— Mark, electrician · Surrey" },
-    { t: "It looks like a London agency built it, but Thomas picked up every time I called. That's the bit you can't fake.", c: "— Sarah, café owner · Brighton" }
-  ];
-  const qText = document.getElementById('quoteText');
-  const qCite = document.getElementById('quoteCite');
-  const qBtns = document.querySelectorAll('.testimonial-nav button');
-  let qIdx = 0, qTimer;
-  function setQuote(i){
-    qIdx = i;
-    if (reduceMotion){
-      qText.textContent = quotes[i].t;
-      qCite.textContent = quotes[i].c;
-    } else {
-      qText.style.opacity = '0';
-      qCite.style.opacity = '0';
-      setTimeout(() => {
-        qText.textContent = quotes[i].t;
-        qCite.textContent = quotes[i].c;
-        qText.style.opacity = '1';
-        qCite.style.opacity = '1';
-      }, 280);
-    }
-    qBtns.forEach((b, j) => b.classList.toggle('active', j === i));
-  }
-  qBtns.forEach((b, i) => b.addEventListener('click', () => { setQuote(i); resetTimer(); }));
-  function resetTimer(){
-    clearInterval(qTimer);
-    if (reduceMotion) return;
-    qTimer = setInterval(() => setQuote((qIdx + 1) % quotes.length), 7000);
-  }
-  resetTimer();
 
   /* Custom cursor + magnetic (desktop only, respects reduced motion) */
   const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
