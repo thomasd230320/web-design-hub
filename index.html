@@ -204,6 +204,12 @@ img,svg{display:block;max-width:100%}
 /* HERO */
 .hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px}
 .hero-bg{background-color:#3a2e1d;background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&q=80&auto=format&fit=crop')}
+.hero-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity 1.4s var(--ease);
+}
+.hero-canvas.in{opacity:1}
 .hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center}
 .hero-caption{
   color:rgba(255,255,255,.88);
@@ -288,6 +294,13 @@ img,svg{display:block;max-width:100%}
 }
 .head-scene h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
 .head-scene-bg{background-color:#152033;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=2400&q=80&auto=format&fit=crop')}
+.head-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity 1.6s var(--ease);
+  mix-blend-mode:screen;
+}
+.head-canvas.in{opacity:.85}
 
 /* ════════════════════════════════════════════════════
    SCROLLY — sticky phone, photo bg changes per step
@@ -579,6 +592,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <!-- ░░ HERO ░░ -->
 <section class="scene hero">
   <div class="scene-bg hero-bg" aria-hidden="true"></div>
+  <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="inner hero-inner">
     <div class="phone reveal" aria-label="Mobile website concept for a UK local business">
       <div class="phone-notch" aria-hidden="true"></div>
@@ -604,6 +618,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <!-- ░░ BIG HEADLINE SCENE ░░ -->
 <section class="scene head-scene">
   <div class="scene-bg head-scene-bg" aria-hidden="true"></div>
+  <canvas class="head-canvas" aria-hidden="true"></canvas>
   <div class="inner">
     <h1 class="reveal">WebDesignHub makes <em>websites</em> better.</h1>
   </div>
@@ -885,6 +900,281 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     </div>
   </div>
 </footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://esm.sh/three@0.184.0"
+  }
+}
+</script>
+
+<script type="module">
+  /* ════════════════════════════════════════════════════
+     AMBIENT THREE.JS — warm dust motes (hero)
+                      + slow gradient field (head-scene)
+     One render loop drives both canvases.
+  ═══════════════════════════════════════════════════ */
+  import * as THREE from 'three';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Reused soft-disc texture for points — radial gradient on a 2D canvas. */
+  function makeDiscTexture() {
+    const size = 128;
+    const c = document.createElement('canvas');
+    c.width = c.height = size;
+    const ctx = c.getContext('2d');
+    const g = ctx.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
+    g.addColorStop(0,    'rgba(255,245,225,1)');
+    g.addColorStop(0.20, 'rgba(255,210,170,0.55)');
+    g.addColorStop(0.55, 'rgba(255,170,120,0.10)');
+    g.addColorStop(1,    'rgba(255,150,100,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, size, size);
+    const t = new THREE.CanvasTexture(c);
+    t.colorSpace = THREE.SRGBColorSpace;
+    return t;
+  }
+  const discTex = makeDiscTexture();
+
+  const scenes = [];
+
+  /* ── Hero: warm floating embers ── */
+  (function buildHeroScene() {
+    const section = document.querySelector('.hero');
+    const canvas = section && section.querySelector('.hero-canvas');
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+    camera.position.set(0, 0, 8);
+
+    const COUNT = 260;
+    const positions = new Float32Array(COUNT * 3);
+    const colors    = new Float32Array(COUNT * 3);
+    const drift     = new Float32Array(COUNT);
+    const phase     = new Float32Array(COUNT);
+    const wobble    = new Float32Array(COUNT);
+
+    const palette = [
+      new THREE.Color('#FFD3B5'),
+      new THREE.Color('#F4B797'),
+      new THREE.Color('#FFE6D2'),
+      new THREE.Color('#FFA478'),
+      new THREE.Color('#C44B1F'),
+    ];
+
+    for (let i = 0; i < COUNT; i++) {
+      const i3 = i * 3;
+      positions[i3]     = (Math.random() - 0.5) * 22;
+      positions[i3 + 1] = (Math.random() - 0.5) * 14;
+      positions[i3 + 2] = (Math.random() - 0.5) * 10 - 1;
+      const col = palette[(Math.random() * palette.length) | 0];
+      colors[i3]     = col.r;
+      colors[i3 + 1] = col.g;
+      colors[i3 + 2] = col.b;
+      drift[i]  = 0.10 + Math.random() * 0.32;
+      phase[i]  = Math.random() * Math.PI * 2;
+      wobble[i] = 0.4 + Math.random() * 1.2;
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      map: discTex,
+      size: 0.42,
+      sizeAttenuation: true,
+      vertexColors: true,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    /* A few larger, slower "bokeh" orbs for depth. */
+    const bokehPos = new Float32Array(12 * 3);
+    const bokehCol = new Float32Array(12 * 3);
+    for (let i = 0; i < 12; i++) {
+      const i3 = i * 3;
+      bokehPos[i3]     = (Math.random() - 0.5) * 16;
+      bokehPos[i3 + 1] = (Math.random() - 0.5) * 10;
+      bokehPos[i3 + 2] = -3 - Math.random() * 4;
+      const col = palette[(Math.random() * palette.length) | 0];
+      bokehCol[i3]     = col.r;
+      bokehCol[i3 + 1] = col.g;
+      bokehCol[i3 + 2] = col.b;
+    }
+    const bokehGeo = new THREE.BufferGeometry();
+    bokehGeo.setAttribute('position', new THREE.BufferAttribute(bokehPos, 3));
+    bokehGeo.setAttribute('color',    new THREE.BufferAttribute(bokehCol, 3));
+    const bokehMat = new THREE.PointsMaterial({
+      map: discTex,
+      size: 3.4,
+      sizeAttenuation: true,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.35,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const bokeh = new THREE.Points(bokehGeo, bokehMat);
+    scene.add(bokeh);
+
+    const state = {
+      mouseX: 0, mouseY: 0, targetX: 0, targetY: 0,
+      scroll: 0, visible: true, ready: false,
+    };
+
+    function size() {
+      const w = section.clientWidth, h = section.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    size();
+    window.addEventListener('resize', size, { passive: true });
+
+    section.addEventListener('pointermove', (e) => {
+      const r = section.getBoundingClientRect();
+      state.targetX = ((e.clientX - r.left) / r.width  - 0.5) * 0.8;
+      state.targetY = ((e.clientY - r.top)  / r.height - 0.5) * 0.6;
+    });
+
+    const io = new IntersectionObserver(([entry]) => {
+      state.visible = entry.isIntersecting;
+    }, { threshold: 0 });
+    io.observe(section);
+
+    /* Fade canvas in on first frame to avoid a black flash. */
+    requestAnimationFrame(() => canvas.classList.add('in'));
+
+    const posAttr = geometry.getAttribute('position');
+    const motionScale = reduceMotion ? 0.15 : 1;
+
+    scenes.push(function tick(dt, t) {
+      if (!state.visible) return;
+
+      for (let i = 0; i < COUNT; i++) {
+        const i3 = i * 3;
+        positions[i3 + 1] += drift[i] * dt * motionScale;
+        positions[i3]     += Math.sin(t * 0.35 + phase[i]) * 0.002 * wobble[i] * motionScale;
+        if (positions[i3 + 1] > 7) {
+          positions[i3 + 1] = -7.5;
+          positions[i3]     = (Math.random() - 0.5) * 22;
+        }
+      }
+      posAttr.needsUpdate = true;
+
+      state.mouseX += (state.targetX - state.mouseX) * 0.04;
+      state.mouseY += (state.targetY - state.mouseY) * 0.04;
+
+      const scrollY = Math.max(0, Math.min(1, -section.getBoundingClientRect().top / section.clientHeight));
+      camera.position.x = state.mouseX * 1.4;
+      camera.position.y = -state.mouseY * 0.9 - scrollY * 1.2;
+      camera.position.z = 8 + scrollY * 2.5;
+      camera.lookAt(0, 0, 0);
+
+      points.rotation.z += dt * 0.01 * motionScale;
+      bokeh.rotation.z  -= dt * 0.006 * motionScale;
+
+      renderer.render(scene, camera);
+    });
+  })();
+
+  /* ── Head scene: slow rotating warm gradient field behind big headline ── */
+  (function buildHeadScene() {
+    const section = document.querySelector('.head-scene');
+    const canvas = section && section.querySelector('.head-canvas');
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+    camera.position.set(0, 0, 5);
+
+    /* A subtly-displaced icosahedron rendered with additive points along its
+       vertices — reads as a slow constellation, not a recognisable shape. */
+    const baseGeo = new THREE.IcosahedronGeometry(2.2, 4);
+    const positions = baseGeo.attributes.position.array;
+    const count = positions.length / 3;
+    const colors = new Float32Array(count * 3);
+    const palette = [
+      new THREE.Color('#FFD3B5'),
+      new THREE.Color('#F4B797'),
+      new THREE.Color('#C44B1F'),
+      new THREE.Color('#FFE6D2'),
+    ];
+    for (let i = 0; i < count; i++) {
+      const c = palette[(Math.random() * palette.length) | 0];
+      colors[i*3]   = c.r;
+      colors[i*3+1] = c.g;
+      colors[i*3+2] = c.b;
+    }
+    baseGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const mat = new THREE.PointsMaterial({
+      map: discTex,
+      size: 0.18,
+      sizeAttenuation: true,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.85,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    const cloud = new THREE.Points(baseGeo, mat);
+    scene.add(cloud);
+
+    const state = { visible: true };
+
+    function size() {
+      const w = section.clientWidth, h = section.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    size();
+    window.addEventListener('resize', size, { passive: true });
+
+    const io = new IntersectionObserver(([entry]) => {
+      state.visible = entry.isIntersecting;
+    }, { threshold: 0 });
+    io.observe(section);
+
+    requestAnimationFrame(() => canvas.classList.add('in'));
+
+    const motionScale = reduceMotion ? 0.2 : 1;
+
+    scenes.push(function tick(dt, t) {
+      if (!state.visible) return;
+      cloud.rotation.y += dt * 0.06 * motionScale;
+      cloud.rotation.x  = Math.sin(t * 0.15) * 0.25 * motionScale;
+      cloud.scale.setScalar(1 + Math.sin(t * 0.4) * 0.04 * motionScale);
+      renderer.render(scene, camera);
+    });
+  })();
+
+  /* ── Single shared render loop ── */
+  if (scenes.length) {
+    const clock = new THREE.Clock();
+    function loop() {
+      requestAnimationFrame(loop);
+      const dt = Math.min(clock.getDelta(), 0.05);
+      const t  = clock.elapsedTime;
+      for (let i = 0; i < scenes.length; i++) scenes[i](dt, t);
+    }
+    loop();
+  }
+</script>
 
 <script>
   /* For anyone reading the source */
