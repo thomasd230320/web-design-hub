@@ -212,19 +212,30 @@ img,svg{display:block;max-width:100%}
 .hero-canvas.in{opacity:1}
 .hero-phone-stage{
   position:relative;
-  width:min(340px,80vw);aspect-ratio:9/19.5;
+  width:min(440px,92vw);aspect-ratio:768/1168;
 }
-.hero-phone-stage > .phone{width:100%;height:100%}
-.hero-phone-3d{
-  position:absolute;
-  top:-40%;bottom:-40%;left:-100%;right:-100%;
-  pointer-events:none;z-index:2;
-  opacity:0;transition:opacity 1.2s var(--ease);
+.hero-phone-video{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  border-radius:24px;
+  display:block;
+  background:#efeae3;
+  opacity:0;transition:opacity .8s var(--ease);
+  box-shadow:
+    0 50px 100px -30px rgba(0,0,0,.55),
+    0 25px 60px -30px rgba(0,0,0,.45);
 }
-.hero-phone-3d canvas{display:block;width:100%;height:100%}
-.hero-phone-3d.in{opacity:1}
-/* When the 3D phone is live, hide the CSS phone but preserve its layout footprint. */
-body.three-ready .hero-phone-stage > .phone{visibility:hidden}
+.hero-phone-video.in{opacity:1}
+/* The CSS phone stays in the DOM as a fallback / accessible content.
+   When the video has started playing, hide it. Until then, position it
+   roughly where the real phone sits inside the video frame. */
+.hero-phone-stage > .phone{
+  position:absolute;top:50%;left:50%;
+  width:56%;height:96%;
+  transform:translate(-50%,-50%);
+}
+.hero-phone-stage.video-ready > .phone{visibility:hidden}
 .hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center}
 .hero-caption{
   color:rgba(255,255,255,.88);
@@ -673,6 +684,12 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="inner hero-inner">
     <div class="hero-phone-stage reveal">
+      <video
+        class="hero-phone-video"
+        src="/hero-phone.mp4"
+        muted playsinline preload="auto" loop
+        aria-hidden="true"
+      ></video>
       <div class="phone" aria-label="Mobile website concept for a UK local business">
         <div class="phone-notch" aria-hidden="true"></div>
         <div class="phone-screen ps-cafe">
@@ -689,7 +706,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
           </div>
         </div>
       </div>
-      <div class="hero-phone-3d" aria-hidden="true"></div>
     </div>
     <p class="hero-caption reveal">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
     <span class="hero-scroll" aria-hidden="true">Scroll</span>
@@ -998,8 +1014,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
      One render loop drives both canvases.
   ═══════════════════════════════════════════════════ */
   import * as THREE from 'three';
-  import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-  import { RoomEnvironment }    from 'three/addons/environments/RoomEnvironment.js';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1247,355 +1261,94 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   })();
 
-  /* ── Hero phone: a PBR phone the camera pans up across as the user
-        scrolls — starts looking up at the charger port, ends face-on
-        to the screen. ── */
-  (function buildHeroPhone3D() {
-    const hero = document.querySelector('.hero');
-    const mount = hero && hero.querySelector('.hero-phone-3d');
-    if (!mount) return;
+  /* ── Hero phone: a pre-rendered video, scroll-scrubbed.
+        Time-codes the video to the user's progress through the hero, so
+        the phone tilts up from charger-port view to screen-facing exactly
+        as they scroll. Falls back to a normal looped autoplay if the
+        browser refuses precise seeking (older iOS, blocked autoplay). ── */
+  (function buildHeroPhoneVideo() {
+    const hero  = document.querySelector('.hero');
+    const stage = hero && hero.querySelector('.hero-phone-stage');
+    const video = stage && stage.querySelector('.hero-phone-video');
+    if (!video) return;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.outputColorSpace   = THREE.SRGBColorSpace;
-    renderer.toneMapping        = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.05;
-    mount.appendChild(renderer.domElement);
+    let duration = 0;
+    let scrubReady = false;
+    let scrubFailed = false;
 
-    const scene  = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
-
-    /* Neutral studio IBL — gives every PBR material real reflections. */
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-
-    /* A touch of directional light on top of IBL for warm highlights. */
-    const key = new THREE.DirectionalLight(0xfff1e0, 1.0);
-    key.position.set(4, 6, 5);
-    scene.add(key);
-    const rim = new THREE.DirectionalLight(0xc44b1f, 0.55);
-    rim.position.set(-3, 0, -5);
-    scene.add(rim);
-
-    /* ── Phone (9:19.5 ratio, ~iPhone-15-Pro proportions) ── */
-    const W = 1.7, H = W * 19.5 / 9, D = 0.24, R = 0.22;
-    const phone = new THREE.Group();
-    scene.add(phone);
-
-    /* Titanium frame + back: high metalness, slight clearcoat. */
-    const titanium = new THREE.MeshPhysicalMaterial({
-      color: 0x2c2a28, metalness: 1.0, roughness: 0.30,
-      clearcoat: 0.4, clearcoatRoughness: 0.25, envMapIntensity: 1.2,
-    });
-    const body = new THREE.Mesh(
-      new RoundedBoxGeometry(W, H, D, 24, R), titanium
-    );
-    phone.add(body);
-
-    /* Black inset that the screen sits inside. */
-    const bezelMat = new THREE.MeshPhysicalMaterial({
-      color: 0x000000, metalness: 0.0, roughness: 0.45,
-    });
-    const bezel = new THREE.Mesh(
-      new RoundedBoxGeometry(W * 0.965, H * 0.985, 0.01, 6, R * 0.85),
-      bezelMat
-    );
-    bezel.position.z = D / 2 + 0.002;
-    phone.add(bezel);
-
-    /* Baked screen UI. */
-    const screenTex = makeScreenTexture();
-    const screen = new THREE.Mesh(
-      new THREE.PlaneGeometry(W * 0.93, H * 0.96),
-      new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false })
-    );
-    screen.position.z = D / 2 + 0.010;
-    phone.add(screen);
-
-    /* Glass cover — adds the reflective sheen of a real screen. */
-    const glassMat = new THREE.MeshPhysicalMaterial({
-      color: 0xffffff,
-      metalness: 0.0,
-      roughness: 0.04,
-      transparent: true,
-      opacity: 0.06,
-      clearcoat: 1.0,
-      clearcoatRoughness: 0.04,
-      reflectivity: 0.55,
-      ior: 1.5,
-      envMapIntensity: 1.6,
-    });
-    const glass = new THREE.Mesh(
-      new RoundedBoxGeometry(W * 0.96, H * 0.985, 0.012, 4, R * 0.83),
-      glassMat
-    );
-    glass.position.z = D / 2 + 0.017;
-    phone.add(glass);
-
-    /* Dynamic Island pill. */
-    const islandFrontMat = new THREE.MeshPhysicalMaterial({
-      color: 0x000000, metalness: 0.0, roughness: 0.15,
-    });
-    const island = new THREE.Mesh(
-      new THREE.CapsuleGeometry(0.072, 0.30, 6, 18),
-      islandFrontMat
-    );
-    island.rotation.z = Math.PI / 2;
-    island.position.set(0, H * 0.42, D / 2 + 0.026);
-    phone.add(island);
-
-    /* Camera island on the back: square plateau with three lens rings,
-       a flash and a LiDAR sensor. */
-    const backIsland = new THREE.Mesh(
-      new RoundedBoxGeometry(W * 0.46, W * 0.46, 0.10, 6, 0.10),
-      titanium
-    );
-    backIsland.position.set(-W * 0.20, H * 0.32, -D / 2 - 0.05);
-    phone.add(backIsland);
-
-    const lensRingMat = new THREE.MeshPhysicalMaterial({
-      color: 0x121212, metalness: 1.0, roughness: 0.45,
-    });
-    const lensGlassMat = new THREE.MeshPhysicalMaterial({
-      color: 0x05060a, metalness: 0.6, roughness: 0.05,
-      clearcoat: 1.0, clearcoatRoughness: 0.04, envMapIntensity: 1.4,
-    });
-    const lensPositions = [[-0.13, 0.13], [0.13, 0.13], [0, -0.13]];
-    for (const [lx, ly] of lensPositions) {
-      const ring = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.115, 0.115, 0.06, 36),
-        lensRingMat
-      );
-      ring.rotation.x = Math.PI / 2;
-      ring.position.set(-W * 0.20 + lx, H * 0.32 + ly, -D / 2 - 0.12);
-      phone.add(ring);
-
-      const lens = new THREE.Mesh(
-        new THREE.CircleGeometry(0.085, 36), lensGlassMat
-      );
-      lens.position.set(-W * 0.20 + lx, H * 0.32 + ly, -D / 2 - 0.151);
-      lens.rotation.y = Math.PI;
-      phone.add(lens);
-
-      /* Tiny spec reflection on each lens. */
-      const spec = new THREE.Mesh(
-        new THREE.CircleGeometry(0.025, 16),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 })
-      );
-      spec.position.set(-W * 0.20 + lx - 0.03, H * 0.32 + ly + 0.03, -D / 2 - 0.152);
-      spec.rotation.y = Math.PI;
-      phone.add(spec);
+    /* Mark the fallback CSS phone hidden once the first video frame paints. */
+    function markReady() {
+      stage.classList.add('video-ready');
+      requestAnimationFrame(() => video.classList.add('in'));
     }
-    /* Flash */
-    const flash = new THREE.Mesh(
-      new THREE.CircleGeometry(0.045, 24),
-      new THREE.MeshStandardMaterial({ color: 0xfff7e0, roughness: 0.3, metalness: 0.2,
-        emissive: 0x110a05 })
-    );
-    flash.position.set(-W * 0.20 + 0.13, H * 0.32 - 0.13, -D / 2 - 0.111);
-    flash.rotation.y = Math.PI;
-    phone.add(flash);
-    /* LiDAR */
-    const lidar = new THREE.Mesh(
-      new THREE.CircleGeometry(0.035, 18),
-      new THREE.MeshStandardMaterial({ color: 0x222630, metalness: 0.5, roughness: 0.4 })
-    );
-    lidar.position.set(-W * 0.20 - 0.13, H * 0.32 - 0.13, -D / 2 - 0.111);
-    lidar.rotation.y = Math.PI;
-    phone.add(lidar);
+    video.addEventListener('loadeddata', markReady, { once: true });
 
-    /* USB-C port on the bottom edge. */
-    const portMat = new THREE.MeshPhysicalMaterial({
-      color: 0x050505, metalness: 0.9, roughness: 0.35,
-    });
-    const port = new THREE.Mesh(
-      new RoundedBoxGeometry(0.34, 0.10, 0.14, 4, 0.04), portMat
-    );
-    port.rotation.x = Math.PI / 2;
-    port.position.set(0, -H / 2 + 0.005, 0);
-    phone.add(port);
+    /* Seeking-based scrub. We do the actual seek in rAF so we don't fire
+       a seek on every scroll event. */
+    video.addEventListener('loadedmetadata', () => {
+      duration = video.duration || 0;
+      if (!duration) return;
+      scrubReady = true;
+      /* Try one warm-up seek; if it never resolves, fall back to autoplay. */
+      const warmupTimer = setTimeout(() => fallbackAutoplay('seek warm-up timeout'), 1200);
+      video.addEventListener('seeked', () => clearTimeout(warmupTimer), { once: true });
+      try { video.currentTime = 0.001; } catch (e) { fallbackAutoplay(e); }
+    }, { once: true });
 
-    /* Speaker grilles on the bottom face either side of the port. */
-    for (let i = -1; i <= 1; i += 2) {
-      for (let j = -2; j <= 2; j++) {
-        const hole = new THREE.Mesh(
-          new THREE.CircleGeometry(0.022, 14), portMat
-        );
-        hole.position.set(i * 0.55 + j * 0.05, -H / 2 - 0.001, 0);
-        hole.rotation.x = -Math.PI / 2;
-        phone.add(hole);
+    function fallbackAutoplay(reason) {
+      if (scrubFailed) return;
+      scrubFailed = true;
+      scrubReady = false;
+      video.loop = true;
+      video.muted = true;
+      const p = video.play();
+      if (p && p.catch) p.catch(() => { /* nothing more we can do */ });
+    }
+
+    /* On hidden tab, pause; on visible, resume. (Only matters if we are in
+       fallback autoplay mode — scrubbing pauses naturally.) */
+    document.addEventListener('visibilitychange', () => {
+      if (scrubFailed) {
+        if (document.hidden) video.pause();
+        else video.play().catch(() => {});
       }
+    });
+
+    /* Reduced-motion: skip the scrub entirely, just show the last frame. */
+    if (reduceMotion) {
+      video.addEventListener('loadedmetadata', () => {
+        try { video.currentTime = video.duration - 0.05; } catch (e) {}
+      }, { once: true });
+      return;
     }
 
-    /* Side buttons — same titanium finish as the frame. */
-    function sideButton(x, y, h) {
-      const b = new THREE.Mesh(
-        new RoundedBoxGeometry(0.045, h, 0.13, 3, 0.02), titanium
-      );
-      b.position.set(x, y, 0);
-      phone.add(b);
-    }
-    sideButton(-W / 2 - 0.012, H * 0.32, 0.18);   // action button
-    sideButton(-W / 2 - 0.012, H * 0.20, 0.55);   // volume up
-    sideButton(-W / 2 - 0.012, H * 0.07, 0.30);   // volume down
-    sideButton( W / 2 + 0.012, H * 0.18, 0.55);   // power
-
-    /* ── Camera-pan animation (phone stays still; camera arcs from
-          below-looking-up to face-on). ── */
-    const state = { visible: true };
-
-    function resize() {
-      const r = mount.getBoundingClientRect();
-      const w = Math.max(1, r.width), h = Math.max(1, r.height);
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    resize();
-    window.addEventListener('resize', resize, { passive: true });
-
-    const io = new IntersectionObserver(([entry]) => {
-      state.visible = entry.isIntersecting;
-    }, { threshold: 0 });
-    io.observe(hero);
-
-    document.body.classList.add('three-ready');
-    requestAnimationFrame(() => mount.classList.add('in'));
-
-    const R_ORBIT = 7.2;     // distance from look-at point
-    const lookTmp = new THREE.Vector3();
-
-    scenes.push(function tick(dt, t) {
+    /* Compute hero scroll progress and queue a single seek per rAF. */
+    let targetTime = 0;
+    let scheduled = false;
+    function onScroll() {
+      if (!scrubReady) return;
       const r = hero.getBoundingClientRect();
       const raw = Math.max(0, Math.min(1, -r.top / r.height));
-      /* Compress the pan into the first 70% of the hero scroll. */
-      const p = Math.min(1, raw / 0.70);
-      const eased = 1 - Math.pow(1 - p, 2.2);
-
-      if (!state.visible && raw >= 1) return;
-
-      /* θ = π/2 → camera directly under the phone looking up
-         θ = 0   → camera in front of the phone looking at the screen. */
-      const theta = (1 - eased) * (Math.PI / 2);
-      const r_now = R_ORBIT * (1 + (1 - eased) * 0.10);
-
-      camera.position.set(
-        0,
-        -Math.sin(theta) * r_now,
-         Math.cos(theta) * r_now
-      );
-      /* Look at the bottom edge when below, at the centre once in front. */
-      lookTmp.set(0, -H / 2 * Math.sin(theta), 0);
-      camera.lookAt(lookTmp);
-
-      /* A small idle once the phone is mostly visible from the front. */
-      phone.rotation.y = Math.sin(t * 0.35) * 0.05 * eased;
-      phone.position.y = Math.sin(t * 0.7)  * 0.04 * eased;
-
-      renderer.render(scene, camera);
-    });
-
-    /* ── Screen UI baked into a canvas texture, re-rendered once webfonts
-          load so we don't ship a system-serif fallback. ── */
-    function makeScreenTexture() {
-      const c = document.createElement('canvas');
-      c.width = 540; c.height = 1170;
-      const ctx = c.getContext('2d');
-      drawScreen(ctx, c.width, c.height);
-
-      const tex = new THREE.CanvasTexture(c);
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      tex.needsUpdate = true;
-
-      if (document.fonts && document.fonts.ready) {
-        document.fonts.ready.then(() => {
-          drawScreen(ctx, c.width, c.height);
-          tex.needsUpdate = true;
-        });
+      /* Compress the pan into the first 80% of the hero so the final
+         screen-facing frame holds while the user reads the caption. */
+      const p = Math.min(1, raw / 0.80);
+      targetTime = p * duration;
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(applyScrub);
       }
-      return tex;
     }
-
-    function drawScreen(ctx, W, H) {
-      const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0,   '#FFE6D2');
-      g.addColorStop(0.7, '#FFD3B5');
-      g.addColorStop(1,   '#F4B797');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-
-      ctx.textBaseline = 'alphabetic';
-
-      /* Status bar */
-      ctx.fillStyle = '#2A1A12';
-      ctx.font = '600 28px "Plus Jakarta Sans", system-ui, sans-serif';
-      ctx.fillText('9:41', 38, 60);
-
-      /* Headline (Newsreader italic) */
-      ctx.font = 'italic 500 96px "Newsreader", Georgia, serif';
-      ctx.fillStyle = '#2A1A12';
-      ctx.fillText('Hey',       38, 280);
-      ctx.fillText('neighbour', 38, 380);
-
-      /* Outgoing message bubble (right-aligned, white) */
-      drawBubble(
-        ctx, W - 36, 470, 380, 130, 30,
-        '#ffffff', '#2A1A12',
-        ['My website is, frankly,', 'embarrassing.']
-      );
-
-      /* Reply text */
-      ctx.fillStyle = '#2A1A12';
-      ctx.font = 'italic 400 30px "Newsreader", Georgia, serif';
-      wrapText(ctx,
-        "Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.",
-        38, 700, W - 76, 40);
-
-      /* Footer */
-      ctx.fillStyle = 'rgba(255,255,255,.55)';
-      ctx.fillRect(0, H - 150, W, 150);
-      roundRect(ctx, 30, H - 115, W - 60, 80, 40);
-      ctx.fillStyle = '#ffffff'; ctx.fill();
-      ctx.fillStyle = '#7A6353';
-      ctx.font = '500 28px "Plus Jakarta Sans", system-ui, sans-serif';
-      ctx.fillText('Ask me anything…', 60, H - 65);
-    }
-
-    function roundRect(ctx, x, y, w, h, r) {
-      ctx.beginPath();
-      ctx.moveTo(x + r, y);
-      ctx.arcTo(x + w, y,     x + w, y + h, r);
-      ctx.arcTo(x + w, y + h, x,     y + h, r);
-      ctx.arcTo(x,     y + h, x,     y,     r);
-      ctx.arcTo(x,     y,     x + w, y,     r);
-      ctx.closePath();
-    }
-
-    function drawBubble(ctx, anchorX, y, w, h, r, bg, fg, lines) {
-      const x = anchorX - w;
-      roundRect(ctx, x, y, w, h, r);
-      ctx.fillStyle = bg; ctx.fill();
-      ctx.fillStyle = fg;
-      ctx.font = 'italic 400 32px "Newsreader", Georgia, serif';
-      lines.forEach((line, i) => ctx.fillText(line, x + 26, y + 54 + i * 44));
-    }
-
-    function wrapText(ctx, text, x, y, maxWidth, lh) {
-      const words = text.split(' ');
-      let line = '';
-      for (let n = 0; n < words.length; n++) {
-        const test = line + words[n] + ' ';
-        if (ctx.measureText(test).width > maxWidth && n > 0) {
-          ctx.fillText(line, x, y);
-          line = words[n] + ' ';
-          y += lh;
-        } else {
-          line = test;
-        }
+    function applyScrub() {
+      scheduled = false;
+      if (!scrubReady) return;
+      /* Only seek if we have moved meaningfully — saves work on idle scrolls. */
+      if (Math.abs(video.currentTime - targetTime) > 0.02) {
+        try { video.currentTime = targetTime; } catch (e) { fallbackAutoplay(e); }
       }
-      ctx.fillText(line, x, y);
     }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
   })();
 
   /* ── Single shared render loop ── */
