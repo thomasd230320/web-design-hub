@@ -210,6 +210,21 @@ img,svg{display:block;max-width:100%}
   opacity:0;transition:opacity 1.4s var(--ease);
 }
 .hero-canvas.in{opacity:1}
+.hero-phone-stage{
+  position:relative;
+  width:min(340px,80vw);aspect-ratio:9/19.5;
+}
+.hero-phone-stage > .phone{width:100%;height:100%}
+.hero-phone-3d{
+  position:absolute;
+  top:-40%;bottom:-40%;left:-100%;right:-100%;
+  pointer-events:none;z-index:2;
+  opacity:0;transition:opacity 1.2s var(--ease);
+}
+.hero-phone-3d canvas{display:block;width:100%;height:100%}
+.hero-phone-3d.in{opacity:1}
+/* When the 3D phone is live, hide the CSS phone but preserve its layout footprint. */
+body.three-ready .hero-phone-stage > .phone{visibility:hidden}
 .hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center}
 .hero-caption{
   color:rgba(255,255,255,.88);
@@ -657,21 +672,24 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   <div class="scene-bg hero-bg" aria-hidden="true"></div>
   <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="inner hero-inner">
-    <div class="phone reveal" aria-label="Mobile website concept for a UK local business">
-      <div class="phone-notch" aria-hidden="true"></div>
-      <div class="phone-screen ps-cafe">
-        <div class="phone-status">
-          <span>9:41</span>
-        </div>
-        <div class="phone-body">
-          <div class="phone-h">Hey<br/>neighbour</div>
-          <div class="phone-msg">My website is, frankly, embarrassing.</div>
-          <div class="phone-reply">Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.</div>
-        </div>
-        <div class="phone-footer">
-          <div class="phone-input"><span>Ask me anything…</span></div>
+    <div class="hero-phone-stage reveal">
+      <div class="phone" aria-label="Mobile website concept for a UK local business">
+        <div class="phone-notch" aria-hidden="true"></div>
+        <div class="phone-screen ps-cafe">
+          <div class="phone-status">
+            <span>9:41</span>
+          </div>
+          <div class="phone-body">
+            <div class="phone-h">Hey<br/>neighbour</div>
+            <div class="phone-msg">My website is, frankly, embarrassing.</div>
+            <div class="phone-reply">Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.</div>
+          </div>
+          <div class="phone-footer">
+            <div class="phone-input"><span>Ask me anything…</span></div>
+          </div>
         </div>
       </div>
+      <div class="hero-phone-3d" aria-hidden="true"></div>
     </div>
     <p class="hero-caption reveal">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
     <span class="hero-scroll" aria-hidden="true">Scroll</span>
@@ -967,7 +985,8 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <script type="importmap">
 {
   "imports": {
-    "three": "https://esm.sh/three@0.184.0"
+    "three":         "https://unpkg.com/three@0.184.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.184.0/examples/jsm/"
   }
 }
 </script>
@@ -979,6 +998,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
      One render loop drives both canvases.
   ═══════════════════════════════════════════════════ */
   import * as THREE from 'three';
+  import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1224,6 +1244,267 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       cloud.scale.setScalar(1 + Math.sin(t * 0.4) * 0.04 * motionScale);
       renderer.render(scene, camera);
     });
+  })();
+
+  /* ── Hero phone: a real 3D phone that flips from charger-port view
+        to screen-facing as the user scrolls through the hero. ── */
+  (function buildHeroPhone3D() {
+    const hero = document.querySelector('.hero');
+    const mount = hero && hero.querySelector('.hero-phone-3d');
+    if (!mount) return;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    mount.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
+    camera.position.set(0, 0, 14);
+
+    /* Lights — warm key, cool fill, brand-coloured rim. */
+    scene.add(new THREE.AmbientLight(0xfff1e0, 0.55));
+    const key = new THREE.DirectionalLight(0xffe4c2, 1.8);
+    key.position.set(4, 6, 5);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xa9c4ff, 0.45);
+    fill.position.set(-5, -2, 3);
+    scene.add(fill);
+    const rim = new THREE.DirectionalLight(0xc44b1f, 0.9);
+    rim.position.set(-2, 1, -5);
+    scene.add(rim);
+
+    /* Phone dimensions (world units). 9:19.5 aspect. */
+    const W = 1.8, H = W * 19.5 / 9, D = 0.22, R = 0.20;
+
+    /* Pivot at the bottom edge of the phone so it hinges open like a flap. */
+    const pivot = new THREE.Group();
+    scene.add(pivot);
+    const phone = new THREE.Group();
+    phone.position.y = H / 2;            // bottom of phone now at pivot origin
+    pivot.add(phone);
+
+    const bodyMat = new THREE.MeshStandardMaterial({
+      color: 0x1B0F0A, metalness: 0.55, roughness: 0.35,
+    });
+    const darkMat = new THREE.MeshStandardMaterial({
+      color: 0x050505, metalness: 0.7, roughness: 0.35,
+    });
+
+    const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 8, R), bodyMat);
+    phone.add(body);
+
+    /* Screen: a flat plane with a canvas-rendered UI texture, sat just
+       proud of the body front face. */
+    const screenTex = makeScreenTexture();
+    const screenMat = new THREE.MeshBasicMaterial({ map: screenTex });
+    const screen = new THREE.Mesh(
+      new THREE.PlaneGeometry(W * 0.93, H * 0.965),
+      screenMat
+    );
+    screen.position.z = D / 2 + 0.002;
+    phone.add(screen);
+
+    /* Notch / camera pill at the top of the screen. */
+    const notch = new THREE.Mesh(
+      new RoundedBoxGeometry(0.62, 0.18, 0.06, 4, 0.08),
+      darkMat
+    );
+    notch.position.set(0, H / 2 - 0.22, D / 2 + 0.01);
+    phone.add(notch);
+    const lens = new THREE.Mesh(
+      new THREE.CircleGeometry(0.04, 24),
+      new THREE.MeshStandardMaterial({ color: 0x111418, metalness: 0.9, roughness: 0.15 })
+    );
+    lens.position.set(0.22, H / 2 - 0.22, D / 2 + 0.05);
+    phone.add(lens);
+
+    /* USB-C port on the bottom edge (-Y face) plus speaker grilles. */
+    const port = new THREE.Mesh(
+      new RoundedBoxGeometry(0.36, 0.10, 0.10, 3, 0.04),
+      darkMat
+    );
+    port.position.set(0, -H / 2 + 0.002, 0);
+    port.rotation.x = Math.PI / 2;       // sit flush on the bottom face
+    phone.add(port);
+    for (let i = -1; i <= 1; i += 2) {
+      const grilleGroup = new THREE.Group();
+      grilleGroup.position.set(i * 0.55, -H / 2 + 0.002, 0);
+      for (let j = 0; j < 5; j++) {
+        const hole = new THREE.Mesh(
+          new THREE.CircleGeometry(0.018, 12),
+          darkMat
+        );
+        hole.position.set((j - 2) * 0.05, 0, 0);
+        hole.rotation.x = -Math.PI / 2;
+        grilleGroup.add(hole);
+      }
+      phone.add(grilleGroup);
+    }
+
+    /* Side buttons (volume on the left, power on the right). */
+    const sideMat = new THREE.MeshStandardMaterial({
+      color: 0x0d0807, metalness: 0.7, roughness: 0.3,
+    });
+    function sideButton(x, y, h) {
+      const b = new THREE.Mesh(new THREE.BoxGeometry(0.04, h, 0.12), sideMat);
+      b.position.set(x, y, 0);
+      phone.add(b);
+    }
+    sideButton(-W / 2 - 0.005, H * 0.18, 0.55);
+    sideButton(-W / 2 - 0.005, H * 0.06, 0.30);
+    sideButton( W / 2 + 0.005, H * 0.16, 0.50);
+
+    const state = { visible: true };
+
+    function resize() {
+      const r = mount.getBoundingClientRect();
+      const w = Math.max(1, r.width), h = Math.max(1, r.height);
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    const io = new IntersectionObserver(([entry]) => {
+      state.visible = entry.isIntersecting;
+    }, { threshold: 0 });
+    io.observe(hero);
+
+    /* Mark the body so the CSS phone hides and the 3D canvas fades in. */
+    document.body.classList.add('three-ready');
+    requestAnimationFrame(() => mount.classList.add('in'));
+
+    scenes.push(function tick(dt, t) {
+      /* Drive flip from hero scroll progress.
+         0  = top of hero at top of viewport → charger-port view
+         1  = hero fully scrolled past       → screen-facing */
+      const r = hero.getBoundingClientRect();
+      const total = Math.max(1, r.height);
+      const raw = Math.max(0, Math.min(1, -r.top / total));
+      /* Compress the flip into the first 75% of the hero so it finishes
+         clearly before the user reaches the next section. */
+      const p = Math.min(1, raw / 0.75);
+      const eased = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+
+      if (!state.visible && raw >= 1) return;
+
+      /* Start at +π/2 (bottom face toward camera = charger port view),
+         finish at 0 (screen toward camera). */
+      pivot.rotation.x = (1 - eased) * (Math.PI / 2);
+
+      /* Add a touch of yaw + idle bob once the phone is mostly upright. */
+      const idle = eased;
+      pivot.rotation.y = (1 - eased) * 0.25 + Math.sin(t * 0.5) * 0.08 * idle;
+      pivot.rotation.z = Math.sin(t * 0.4) * 0.025 * idle;
+
+      /* Keep the visible silhouette roughly centred in the frame as it flips:
+         lying flat the bottom edge sits at world origin; standing up the
+         centre wants to sit at origin, so slide the pivot down by H/2 as it
+         opens. */
+      pivot.position.y = -H / 2 * eased + Math.sin(t * 0.8) * 0.05 * idle;
+
+      /* A subtle scale lift so the phone "grows" out of the reveal. */
+      const sc = 0.92 + eased * 0.08;
+      pivot.scale.setScalar(sc);
+
+      renderer.render(scene, camera);
+    });
+
+    /* ── Canvas-2D screen UI, baked into a texture. ── */
+    function makeScreenTexture() {
+      const c = document.createElement('canvas');
+      c.width = 540; c.height = 1170;          // close to 9:19.5
+      const ctx = c.getContext('2d');
+
+      const g = ctx.createLinearGradient(0, 0, 0, c.height);
+      g.addColorStop(0, '#FFE6D2');
+      g.addColorStop(1, '#F4B797');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      /* Status bar */
+      ctx.fillStyle = '#2A1A12';
+      ctx.font = '600 30px "Plus Jakarta Sans", system-ui, sans-serif';
+      ctx.textBaseline = 'top';
+      ctx.fillText('9:41', 38, 36);
+
+      /* Headline (Newsreader italic) */
+      ctx.font = 'italic 500 96px "Newsreader", Georgia, serif';
+      ctx.fillStyle = '#2A1A12';
+      ctx.fillText('Hey',       38, 170);
+      ctx.fillText('neighbour', 38, 270);
+
+      /* Outgoing message bubble (right-aligned, white) */
+      drawBubble(
+        ctx,
+        c.width - 36, 480, 360, 130, 28,
+        '#ffffff', '#2A1A12',
+        ['My website is, frankly,', 'embarrassing.'],
+        'right'
+      );
+
+      /* Reply text (Newsreader italic) */
+      ctx.fillStyle = '#2A1A12';
+      ctx.font = 'italic 400 30px "Newsreader", Georgia, serif';
+      const reply = "Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.";
+      wrapText(ctx, reply, 38, 680, c.width - 76, 40);
+
+      /* Footer input bar */
+      ctx.fillStyle = 'rgba(255,255,255,.55)';
+      ctx.fillRect(0, c.height - 140, c.width, 140);
+      roundRect(ctx, 28, c.height - 110, c.width - 56, 80, 40);
+      ctx.fillStyle = '#ffffff';
+      ctx.fill();
+      ctx.fillStyle = '#7A6353';
+      ctx.font = '500 28px "Plus Jakarta Sans", system-ui, sans-serif';
+      ctx.fillText('Ask me anything…', 60, c.height - 90);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      tex.needsUpdate = true;
+      return tex;
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y,     x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x,     y + h, r);
+      ctx.arcTo(x,     y + h, x,     y,     r);
+      ctx.arcTo(x,     y,     x + w, y,     r);
+      ctx.closePath();
+    }
+
+    function drawBubble(ctx, anchorX, y, w, h, r, bg, fg, lines, align) {
+      const x = align === 'right' ? anchorX - w : anchorX;
+      roundRect(ctx, x, y, w, h, r);
+      ctx.fillStyle = bg;
+      ctx.fill();
+      ctx.fillStyle = fg;
+      ctx.font = 'italic 400 32px "Newsreader", Georgia, serif';
+      lines.forEach((line, i) => {
+        ctx.fillText(line, x + 26, y + 28 + i * 44);
+      });
+    }
+
+    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      for (let n = 0; n < words.length; n++) {
+        const test = line + words[n] + ' ';
+        if (ctx.measureText(test).width > maxWidth && n > 0) {
+          ctx.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += lineHeight;
+        } else {
+          line = test;
+        }
+      }
+      ctx.fillText(line, x, y);
+    }
   })();
 
   /* ── Single shared render loop ── */
