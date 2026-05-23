@@ -201,53 +201,70 @@ img,svg{display:block;max-width:100%}
 }
 .scene > .inner{position:relative;z-index:1}
 
-/* HERO */
-.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px}
-.hero-bg{background-color:#3a2e1d;background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&q=80&auto=format&fit=crop')}
-.hero-canvas{
-  position:absolute;inset:0;width:100%;height:100%;
-  pointer-events:none;z-index:0;
-  opacity:0;transition:opacity 1.4s var(--ease);
+/* ════════════════════════════════════════════════════
+   HERO — pinned, scroll-scrubbed phone video.
+
+   The hero is a tall outer section. Inside it, a 100vh sticky element
+   stays glued to the top of the viewport while the user scrolls past;
+   that scroll progress is mapped to the video's currentTime in JS, so
+   the phone appears to rotate in response to scroll. Once the outer
+   section has fully passed, the sticky releases and normal scrolling
+   continues with the next section.
+
+   Tune --hero-scrub-length to control how much page scrolling the
+   animation takes. It's the extra scroll *past* one viewport height,
+   so the whole hero section is (100vh + this) tall. Bigger value →
+   slower scrub. Set to 0 for an instant-release no-pin behaviour.
+═══════════════════════════════════════════════════ */
+:root{
+  --hero-scrub-length: 220vh;   /* TUNE ME */
 }
-.hero-canvas.in{opacity:1}
-.hero-phone-stage{
+.hero-pin{
   position:relative;
-  width:min(440px,92vw);aspect-ratio:768/1168;
+  height:calc(100vh + var(--hero-scrub-length));
+  height:calc(100dvh + var(--hero-scrub-length));
+  background:#0c0c0e;
 }
-.hero-phone-video{
+.hero-pin__sticky{
+  position:sticky;top:0;
+  height:100vh;height:100dvh;
+  width:100%;
+  overflow:hidden;
+}
+.hero-pin__video{
   position:absolute;inset:0;
   width:100%;height:100%;
-  object-fit:cover;
-  border-radius:24px;
+  object-fit:cover;       /* crop any leftover edges to fill the hero. */
+  object-position:center;
+  background:#0c0c0e;
   display:block;
-  background:#efeae3;
-  opacity:0;transition:opacity .8s var(--ease);
-  box-shadow:
-    0 50px 100px -30px rgba(0,0,0,.55),
-    0 25px 60px -30px rgba(0,0,0,.45);
 }
-.hero-phone-video.in{opacity:1}
-/* The CSS phone stays in the DOM as a fallback / accessible content.
-   When the video has started playing, hide it. Until then, position it
-   roughly where the real phone sits inside the video frame. */
-.hero-phone-stage > .phone{
-  position:absolute;top:50%;left:50%;
-  width:56%;height:96%;
-  transform:translate(-50%,-50%);
+.hero-pin__vignette{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 45%, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 100%),
+    linear-gradient(180deg, rgba(12,12,14,.20) 0%, rgba(12,12,14,0) 18%, rgba(12,12,14,0) 60%, rgba(12,12,14,.70) 100%);
 }
-.hero-phone-stage.video-ready > .phone{visibility:hidden}
-.hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center}
-.hero-caption{
-  color:rgba(255,255,255,.88);
+.hero-pin__copy{
+  position:absolute;left:0;right:0;bottom:7vh;
+  padding:0 24px;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  text-align:center;color:#fff;
+  pointer-events:none;
+}
+.hero-pin__caption{
   font-family:var(--serif);font-style:italic;font-weight:400;
   font-size:clamp(1.05rem,1.6vw,1.4rem);letter-spacing:-.01em;
-  max-width:32ch;line-height:1.4;
+  max-width:32ch;line-height:1.45;
+  color:rgba(255,255,255,.92);
+  text-shadow:0 1px 24px rgba(0,0,0,.55);
 }
-.hero-scroll{
-  margin-top:14px;display:inline-flex;align-items:center;gap:9px;
-  color:rgba(255,255,255,.72);font-size:.85rem;font-weight:500;letter-spacing:.02em;
+.hero-pin__scroll{
+  display:inline-flex;align-items:center;gap:9px;
+  color:rgba(255,255,255,.72);
+  font-size:.85rem;font-weight:500;letter-spacing:.02em;
 }
-.hero-scroll::after{
+.hero-pin__scroll::after{
   content:'';width:1px;height:28px;background:rgba(255,255,255,.65);
   animation:scroll-tick 1.6s infinite var(--ease);
 }
@@ -613,7 +630,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
-  .hero-scroll::after{animation:none}
+  .hero-pin__scroll::after{animation:none}
   .scrolly-screen .phone-h,
   .scrolly-screen .phone-msg,
   .scrolly-screen .phone-reply,
@@ -661,7 +678,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .faq{padding:80px 0}
   .faq-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr;gap:30px}
-  .stat,.head-scene,.cta-scene,.hero{padding:80px 20px}
+  .stat,.head-scene,.cta-scene{padding:80px 20px}
 }
 </style>
 </head>
@@ -678,37 +695,20 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 
 <a id="top"></a>
 
-<!-- ░░ HERO ░░ -->
-<section class="scene hero">
-  <div class="scene-bg hero-bg" aria-hidden="true"></div>
-  <canvas class="hero-canvas" aria-hidden="true"></canvas>
-  <div class="inner hero-inner">
-    <div class="hero-phone-stage reveal">
-      <video
-        class="hero-phone-video"
-        src="/hero-phone.mp4"
-        muted playsinline preload="auto" loop
-        aria-hidden="true"
-      ></video>
-      <div class="phone" aria-label="Mobile website concept for a UK local business">
-        <div class="phone-notch" aria-hidden="true"></div>
-        <div class="phone-screen ps-cafe">
-          <div class="phone-status">
-            <span>9:41</span>
-          </div>
-          <div class="phone-body">
-            <div class="phone-h">Hey<br/>neighbour</div>
-            <div class="phone-msg">My website is, frankly, embarrassing.</div>
-            <div class="phone-reply">Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.</div>
-          </div>
-          <div class="phone-footer">
-            <div class="phone-input"><span>Ask me anything…</span></div>
-          </div>
-        </div>
-      </div>
+<!-- ░░ HERO — pinned, scroll-scrubbed phone video ░░ -->
+<section class="hero-pin" aria-label="Hero">
+  <div class="hero-pin__sticky">
+    <video
+      class="hero-pin__video"
+      src="/public/assets/Video_Project_reversed.mp4"
+      muted playsinline preload="auto"
+      aria-hidden="true"
+    ></video>
+    <div class="hero-pin__vignette" aria-hidden="true"></div>
+    <div class="hero-pin__copy">
+      <p class="hero-pin__caption">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
+      <span class="hero-pin__scroll" aria-hidden="true">Scroll</span>
     </div>
-    <p class="hero-caption reveal">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
-    <span class="hero-scroll" aria-hidden="true">Scroll</span>
   </div>
 </section>
 
@@ -1038,154 +1038,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 
   const scenes = [];
 
-  /* ── Hero: warm floating embers ── */
-  (function buildHeroScene() {
-    const section = document.querySelector('.hero');
-    const canvas = section && section.querySelector('.hero-canvas');
-    if (!canvas) return;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
-    camera.position.set(0, 0, 8);
-
-    const COUNT = 260;
-    const positions = new Float32Array(COUNT * 3);
-    const colors    = new Float32Array(COUNT * 3);
-    const drift     = new Float32Array(COUNT);
-    const phase     = new Float32Array(COUNT);
-    const wobble    = new Float32Array(COUNT);
-
-    const palette = [
-      new THREE.Color('#FFD3B5'),
-      new THREE.Color('#F4B797'),
-      new THREE.Color('#FFE6D2'),
-      new THREE.Color('#FFA478'),
-      new THREE.Color('#C44B1F'),
-    ];
-
-    for (let i = 0; i < COUNT; i++) {
-      const i3 = i * 3;
-      positions[i3]     = (Math.random() - 0.5) * 22;
-      positions[i3 + 1] = (Math.random() - 0.5) * 14;
-      positions[i3 + 2] = (Math.random() - 0.5) * 10 - 1;
-      const col = palette[(Math.random() * palette.length) | 0];
-      colors[i3]     = col.r;
-      colors[i3 + 1] = col.g;
-      colors[i3 + 2] = col.b;
-      drift[i]  = 0.10 + Math.random() * 0.32;
-      phase[i]  = Math.random() * Math.PI * 2;
-      wobble[i] = 0.4 + Math.random() * 1.2;
-    }
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    geometry.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
-
-    const material = new THREE.PointsMaterial({
-      map: discTex,
-      size: 0.42,
-      sizeAttenuation: true,
-      vertexColors: true,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    const points = new THREE.Points(geometry, material);
-    scene.add(points);
-
-    /* A few larger, slower "bokeh" orbs for depth. */
-    const bokehPos = new Float32Array(12 * 3);
-    const bokehCol = new Float32Array(12 * 3);
-    for (let i = 0; i < 12; i++) {
-      const i3 = i * 3;
-      bokehPos[i3]     = (Math.random() - 0.5) * 16;
-      bokehPos[i3 + 1] = (Math.random() - 0.5) * 10;
-      bokehPos[i3 + 2] = -3 - Math.random() * 4;
-      const col = palette[(Math.random() * palette.length) | 0];
-      bokehCol[i3]     = col.r;
-      bokehCol[i3 + 1] = col.g;
-      bokehCol[i3 + 2] = col.b;
-    }
-    const bokehGeo = new THREE.BufferGeometry();
-    bokehGeo.setAttribute('position', new THREE.BufferAttribute(bokehPos, 3));
-    bokehGeo.setAttribute('color',    new THREE.BufferAttribute(bokehCol, 3));
-    const bokehMat = new THREE.PointsMaterial({
-      map: discTex,
-      size: 3.4,
-      sizeAttenuation: true,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.35,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    const bokeh = new THREE.Points(bokehGeo, bokehMat);
-    scene.add(bokeh);
-
-    const state = {
-      mouseX: 0, mouseY: 0, targetX: 0, targetY: 0,
-      scroll: 0, visible: true, ready: false,
-    };
-
-    function size() {
-      const w = section.clientWidth, h = section.clientHeight;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    size();
-    window.addEventListener('resize', size, { passive: true });
-
-    section.addEventListener('pointermove', (e) => {
-      const r = section.getBoundingClientRect();
-      state.targetX = ((e.clientX - r.left) / r.width  - 0.5) * 0.8;
-      state.targetY = ((e.clientY - r.top)  / r.height - 0.5) * 0.6;
-    });
-
-    const io = new IntersectionObserver(([entry]) => {
-      state.visible = entry.isIntersecting;
-    }, { threshold: 0 });
-    io.observe(section);
-
-    /* Fade canvas in on first frame to avoid a black flash. */
-    requestAnimationFrame(() => canvas.classList.add('in'));
-
-    const posAttr = geometry.getAttribute('position');
-    const motionScale = reduceMotion ? 0.15 : 1;
-
-    scenes.push(function tick(dt, t) {
-      if (!state.visible) return;
-
-      for (let i = 0; i < COUNT; i++) {
-        const i3 = i * 3;
-        positions[i3 + 1] += drift[i] * dt * motionScale;
-        positions[i3]     += Math.sin(t * 0.35 + phase[i]) * 0.002 * wobble[i] * motionScale;
-        if (positions[i3 + 1] > 7) {
-          positions[i3 + 1] = -7.5;
-          positions[i3]     = (Math.random() - 0.5) * 22;
-        }
-      }
-      posAttr.needsUpdate = true;
-
-      state.mouseX += (state.targetX - state.mouseX) * 0.04;
-      state.mouseY += (state.targetY - state.mouseY) * 0.04;
-
-      const scrollY = Math.max(0, Math.min(1, -section.getBoundingClientRect().top / section.clientHeight));
-      camera.position.x = state.mouseX * 1.4;
-      camera.position.y = -state.mouseY * 0.9 - scrollY * 1.2;
-      camera.position.z = 8 + scrollY * 2.5;
-      camera.lookAt(0, 0, 0);
-
-      points.rotation.z += dt * 0.01 * motionScale;
-      bokeh.rotation.z  -= dt * 0.006 * motionScale;
-
-      renderer.render(scene, camera);
-    });
-  })();
-
   /* ── Head scene: slow rotating warm gradient field behind big headline ── */
   (function buildHeadScene() {
     const section = document.querySelector('.head-scene');
@@ -1261,96 +1113,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   })();
 
-  /* ── Hero phone: a pre-rendered video, scroll-scrubbed.
-        Time-codes the video to the user's progress through the hero, so
-        the phone tilts up from charger-port view to screen-facing exactly
-        as they scroll. Falls back to a normal looped autoplay if the
-        browser refuses precise seeking (older iOS, blocked autoplay). ── */
-  (function buildHeroPhoneVideo() {
-    const hero  = document.querySelector('.hero');
-    const stage = hero && hero.querySelector('.hero-phone-stage');
-    const video = stage && stage.querySelector('.hero-phone-video');
-    if (!video) return;
-
-    let duration = 0;
-    let scrubReady = false;
-    let scrubFailed = false;
-
-    /* Mark the fallback CSS phone hidden once the first video frame paints. */
-    function markReady() {
-      stage.classList.add('video-ready');
-      requestAnimationFrame(() => video.classList.add('in'));
-    }
-    video.addEventListener('loadeddata', markReady, { once: true });
-
-    /* Seeking-based scrub. We do the actual seek in rAF so we don't fire
-       a seek on every scroll event. */
-    video.addEventListener('loadedmetadata', () => {
-      duration = video.duration || 0;
-      if (!duration) return;
-      scrubReady = true;
-      /* Try one warm-up seek; if it never resolves, fall back to autoplay. */
-      const warmupTimer = setTimeout(() => fallbackAutoplay('seek warm-up timeout'), 1200);
-      video.addEventListener('seeked', () => clearTimeout(warmupTimer), { once: true });
-      try { video.currentTime = 0.001; } catch (e) { fallbackAutoplay(e); }
-    }, { once: true });
-
-    function fallbackAutoplay(reason) {
-      if (scrubFailed) return;
-      scrubFailed = true;
-      scrubReady = false;
-      video.loop = true;
-      video.muted = true;
-      const p = video.play();
-      if (p && p.catch) p.catch(() => { /* nothing more we can do */ });
-    }
-
-    /* On hidden tab, pause; on visible, resume. (Only matters if we are in
-       fallback autoplay mode — scrubbing pauses naturally.) */
-    document.addEventListener('visibilitychange', () => {
-      if (scrubFailed) {
-        if (document.hidden) video.pause();
-        else video.play().catch(() => {});
-      }
-    });
-
-    /* Reduced-motion: skip the scrub entirely, just show the last frame. */
-    if (reduceMotion) {
-      video.addEventListener('loadedmetadata', () => {
-        try { video.currentTime = video.duration - 0.05; } catch (e) {}
-      }, { once: true });
-      return;
-    }
-
-    /* Compute hero scroll progress and queue a single seek per rAF. */
-    let targetTime = 0;
-    let scheduled = false;
-    function onScroll() {
-      if (!scrubReady) return;
-      const r = hero.getBoundingClientRect();
-      const raw = Math.max(0, Math.min(1, -r.top / r.height));
-      /* Compress the pan into the first 80% of the hero so the final
-         screen-facing frame holds while the user reads the caption. */
-      const p = Math.min(1, raw / 0.80);
-      targetTime = p * duration;
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(applyScrub);
-      }
-    }
-    function applyScrub() {
-      scheduled = false;
-      if (!scrubReady) return;
-      /* Only seek if we have moved meaningfully — saves work on idle scrolls. */
-      if (Math.abs(video.currentTime - targetTime) > 0.02) {
-        try { video.currentTime = targetTime; } catch (e) { fallbackAutoplay(e); }
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    onScroll();
-  })();
-
   /* ── Single shared render loop ── */
   if (scenes.length) {
     const clock = new THREE.Clock();
@@ -1376,6 +1138,114 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ════════════════════════════════════════════════════
+     PINNED HERO VIDEO — scroll-scrub controller.
+
+     A sticky element inside a tall outer section stays glued to the
+     top of the viewport while the user scrolls past. As they scroll,
+     we map their progress through the section to video.currentTime.
+     Scrolling up runs the timeline backward; scrolling down runs it
+     forward. The seek is queued through requestAnimationFrame so we
+     only seek once per frame, with a small dead-band to skip work on
+     idle scrolls.
+
+     Fallback hierarchy:
+       1. prefers-reduced-motion → park on the final frame, no scrub.
+       2. Mobile (<= 720px)      → autoplay once (muted, inline), no
+                                   scrub. Seeking is unreliable / janky
+                                   on lower-end mobile decoders.
+       3. Seek warm-up timeout   → if the first seek never resolves
+                                   within ~1.2 s, switch to looped
+                                   autoplay so the user sees motion.
+
+     The pin duration is exposed as the CSS variable
+     --hero-scrub-length (set in the stylesheet). To make the scrub
+     longer/slower, raise it; shorter/faster, lower it.
+  ═══════════════════════════════════════════════════ */
+  (function pinnedHeroVideo() {
+    const section = document.querySelector('.hero-pin');
+    const video   = section && section.querySelector('.hero-pin__video');
+    if (!video) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile     = window.matchMedia('(max-width: 720px)').matches;
+
+    /* ── Reduced motion: skip the scrub. ── */
+    if (reduceMotion) {
+      video.addEventListener('loadedmetadata', () => {
+        try { video.currentTime = Math.max(0, video.duration - 0.05); } catch (e) {}
+      }, { once: true });
+      return;
+    }
+
+    /* ── Mobile fallback: autoplay once on load. ── */
+    if (isMobile) {
+      video.loop = false;
+      video.muted = true;
+      video.setAttribute('playsinline', '');
+      const tryPlay = () => video.play().catch(() => {});
+      if (video.readyState >= 2) tryPlay();
+      else video.addEventListener('loadeddata', tryPlay, { once: true });
+      /* Collapse the section to one viewport so there is no extra
+         scroll length when we are not actually scrubbing. */
+      section.style.height = '100vh';
+      return;
+    }
+
+    /* ── Desktop / tablet: scroll-scrub. ── */
+    let duration   = 0;
+    let scrubReady = false;
+    let scrubFailed = false;
+
+    function fallbackAutoplay() {
+      if (scrubFailed) return;
+      scrubFailed = true; scrubReady = false;
+      video.loop  = true;
+      video.muted = true;
+      video.play().catch(() => {});
+    }
+
+    video.addEventListener('loadedmetadata', () => {
+      duration = video.duration || 0;
+      if (!duration) { fallbackAutoplay(); return; }
+      /* Warm-up seek; if it never resolves, drop to autoplay. */
+      const warm = setTimeout(() => fallbackAutoplay(), 1200);
+      video.addEventListener('seeked', () => {
+        clearTimeout(warm);
+        scrubReady = true;
+        onScroll(); /* paint the right frame for the current scroll */
+      }, { once: true });
+      try { video.currentTime = 0.001; } catch (e) { fallbackAutoplay(); }
+    }, { once: true });
+
+    /* rAF-throttled scrub. */
+    let target = 0;
+    let scheduled = false;
+    function onScroll() {
+      const r = section.getBoundingClientRect();
+      const total = section.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      /* progress 0 → top of hero at top of viewport
+         progress 1 → hero fully scrolled past */
+      const p = Math.max(0, Math.min(1, -r.top / total));
+      target = p * duration;
+      if (!scheduled) {
+        scheduled = true;
+        requestAnimationFrame(apply);
+      }
+    }
+    function apply() {
+      scheduled = false;
+      if (!scrubReady) return;
+      /* Only seek if we have moved meaningfully — saves work on idle scrolls. */
+      if (Math.abs(video.currentTime - target) > 0.02) {
+        try { video.currentTime = target; } catch (e) { fallbackAutoplay(); }
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+  })();
 
   /* Scrolly — sticky-phone with step-based photo/screen swap */
   const scrolly = document.querySelector('.scrolly');
