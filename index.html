@@ -239,11 +239,18 @@ img,svg{display:block;max-width:100%}
   background:#0c0c0e;
   display:block;
 }
+/* Warm tint bridges the cool grey video with the cream/peach palette below. */
+.hero-pin__warm{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 55%, rgba(255,180,120,.22) 0%, rgba(196,75,31,.06) 60%, rgba(0,0,0,0) 100%);
+  mix-blend-mode:soft-light;
+}
 .hero-pin__vignette{
   position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(ellipse 70% 60% at 50% 45%, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 100%),
-    linear-gradient(180deg, rgba(12,12,14,.20) 0%, rgba(12,12,14,0) 18%, rgba(12,12,14,0) 60%, rgba(12,12,14,.70) 100%);
+    linear-gradient(180deg, rgba(12,12,14,.20) 0%, rgba(12,12,14,0) 18%, rgba(12,12,14,0) 60%, rgba(12,12,14,.85) 100%);
 }
 .hero-pin__copy{
   position:absolute;left:0;right:0;bottom:7vh;
@@ -269,95 +276,6 @@ img,svg{display:block;max-width:100%}
   animation:scroll-tick 1.6s infinite var(--ease);
 }
 @keyframes scroll-tick{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* ── Web preview overlay ─────────────────────────────────────────
-   Sits on top of the final video frame where the phone screen lands.
-   Tune these three vars to nudge its position / scale / tilt to match
-   your hero crop on the screens you care about. */
-.hero-pin{
-  --preview-top: 51%;
-  --preview-width: clamp(280px, 55vmin, 560px);
-  --preview-tilt: 56deg;
-}
-.hero-pin__preview{
-  position:absolute;
-  left:50%;top:var(--preview-top);
-  width:var(--preview-width);
-  aspect-ratio:1/2.05;            /* portrait phone screen */
-  transform:translate(-50%,-50%) perspective(1100px) rotateX(var(--preview-tilt)) rotateZ(-.4deg);
-  transform-origin:center center;
-  border-radius:8%/4%;
-  overflow:hidden;
-  pointer-events:none;
-  opacity:0;
-  filter:saturate(1.05) brightness(.96);
-  /* Smoothed by JS via opacity, plus a shadow that grows with reveal. */
-  box-shadow:0 30px 60px -10px rgba(0,0,0,.55);
-  will-change:opacity,transform;
-  transition:opacity .35s linear;
-}
-.hero-pin__preview.show{opacity:1}
-@media (max-width:720px){
-  /* Mobile drops the scrub, so the preview never lands; hide it. */
-  .hero-pin__preview{display:none}
-}
-
-/* Mini fake website. Tiny by design — it reads as "a real site" at a
-   glance without competing for attention with the page copy below. */
-.wp{
-  width:100%;height:100%;display:flex;flex-direction:column;
-  background:#FFE6D2;
-  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
-  color:#2A1A12;
-}
-.wp__bar{
-  display:flex;align-items:center;gap:6px;
-  padding:7% 8%;
-  background:rgba(255,255,255,.78);
-  border-bottom:1px solid rgba(0,0,0,.06);
-}
-.wp__dot{width:6%;aspect-ratio:1;border-radius:50%;display:inline-block}
-.wp__dot--r{background:#FF6058}
-.wp__dot--y{background:#FFBC2E}
-.wp__dot--g{background:#27C940}
-.wp__url{
-  margin-left:auto;font-size:clamp(.55rem,1.4vmin,.78rem);
-  color:#7A6353;letter-spacing:.02em;
-}
-.wp__body{flex:1;padding:6% 8% 8%;display:flex;flex-direction:column;gap:6%}
-.wp__nav{
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:clamp(.5rem,1.2vmin,.7rem);color:#7A6353;
-}
-.wp__brand{
-  font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;
-  font-size:clamp(.95rem,2.4vmin,1.4rem);color:#2A1A12;
-}
-.wp__hero{
-  flex:1;display:flex;flex-direction:column;justify-content:center;gap:5%;
-  padding:5% 0;
-  background:linear-gradient(170deg,#FFE6D2 0%,#F8C8A8 100%);
-  border-radius:4%;
-}
-.wp__hero h3{
-  font-family:'Newsreader',Georgia,serif;font-weight:500;font-style:italic;
-  font-size:clamp(1.05rem,3vmin,1.9rem);line-height:1.05;letter-spacing:-.02em;
-  margin:0 6%;
-}
-.wp__hero p{
-  font-size:clamp(.55rem,1.3vmin,.78rem);color:#7A6353;margin:0 6%;
-}
-.wp__cta{
-  align-self:flex-start;margin:0 6%;
-  background:#2A1A12;color:#FFE6D2;
-  padding:3% 6%;border-radius:9999px;
-  font-size:clamp(.55rem,1.3vmin,.75rem);font-weight:600;
-}
-.wp__row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:4%;height:22%}
-.wp__card{border-radius:6%;background:#ECE2D2}
-.wp__card--a{background:linear-gradient(135deg,#8B5A3C 0%,#3D1F18 100%)}
-.wp__card--b{background:linear-gradient(135deg,#F4B797 0%,#C44B1F 100%)}
-.wp__card--c{background:linear-gradient(135deg,#FFE6D2 0%,#E8C9A8 100%)}
 
 /* ════════════════════════════════════════════════════
    PHONE FRAME — pure CSS
@@ -433,6 +351,15 @@ img,svg{display:block;max-width:100%}
   mix-blend-mode:screen;
 }
 .head-canvas.in{opacity:.85}
+
+/* Reused ambient canvas — sat above the section background photo, under content. */
+.ambient-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  opacity:0;transition:opacity 1.6s var(--ease);
+  mix-blend-mode:screen;
+}
+.ambient-canvas.in{opacity:.9}
 
 /* ════════════════════════════════════════════════════
    SCROLLY — sticky phone, photo bg changes per step
@@ -794,37 +721,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       aria-hidden="true"
     ></video>
 
-    <!-- Faux web preview that "appears" on the phone screen near the end
-         of the scrub. Positioned and skewed to roughly track the screen
-         in the final frame; full alignment is fine-tuned with the
-         --preview-* CSS variables further down. -->
-    <div class="hero-pin__preview" aria-hidden="true">
-      <div class="wp">
-        <div class="wp__bar">
-          <span class="wp__dot wp__dot--r"></span>
-          <span class="wp__dot wp__dot--y"></span>
-          <span class="wp__dot wp__dot--g"></span>
-          <span class="wp__url">brew-and-co.uk</span>
-        </div>
-        <div class="wp__body">
-          <div class="wp__nav">
-            <span class="wp__brand">Brew &amp; Co.</span>
-            <span class="wp__menu">Menu · Visit · Book</span>
-          </div>
-          <div class="wp__hero">
-            <h3>Slow coffee.<br/>Faster mornings.</h3>
-            <p>Open till 4 · 12 High St, Witney</p>
-            <span class="wp__cta">Reserve a table →</span>
-          </div>
-          <div class="wp__row">
-            <div class="wp__card wp__card--a"></div>
-            <div class="wp__card wp__card--b"></div>
-            <div class="wp__card wp__card--c"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <div class="hero-pin__warm" aria-hidden="true"></div>
     <div class="hero-pin__vignette" aria-hidden="true"></div>
     <div class="hero-pin__copy">
       <p class="hero-pin__caption">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
@@ -930,6 +827,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <!-- ░░ STAT MOMENT ░░ -->
 <section class="scene stat">
   <div class="scene-bg stat-bg" aria-hidden="true"></div>
+  <canvas class="ambient-canvas" data-scene="motes" aria-hidden="true"></canvas>
   <div class="inner">
     <h2 class="reveal">Live in <em>five</em> days. From £395.</h2>
     <p class="reveal">No templates, no page builders. Just hand-written code, designed around your business — and delivered fast.</p>
@@ -1067,6 +965,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <!-- ░░ CLOSING CTA ░░ -->
 <section class="scene cta-scene" id="contact">
   <div class="scene-bg cta-bg" aria-hidden="true"></div>
+  <canvas class="ambient-canvas" data-scene="motes" aria-hidden="true"></canvas>
   <div class="inner cta-inner reveal">
     <h2>Let's build <em>yours.</em></h2>
     <p>A short, honest email is all it takes. I'll come back to you within a few hours with a straight answer on whether I'm the right person for the job.</p>
@@ -1234,6 +1133,144 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   })();
 
+  /* ── Ambient drifting embers, one scene per .ambient-canvas[data-scene=motes].
+        Same warm palette throughout the page, additive blended over the
+        section's dark photo background. ── */
+  (function buildAmbientMotes() {
+    const isSmall = window.matchMedia('(max-width: 720px)').matches;
+    /* On phones we keep the page lighter; embers add up across sections. */
+    const COUNT = isSmall ? 80 : 200;
+
+    const palette = [
+      new THREE.Color('#FFD3B5'),
+      new THREE.Color('#F4B797'),
+      new THREE.Color('#FFE6D2'),
+      new THREE.Color('#FFA478'),
+      new THREE.Color('#C44B1F'),
+    ];
+
+    document.querySelectorAll('.ambient-canvas[data-scene="motes"]').forEach((canvas) => {
+      const section = canvas.parentElement;
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+      camera.position.set(0, 0, 8);
+
+      const positions = new Float32Array(COUNT * 3);
+      const colors    = new Float32Array(COUNT * 3);
+      const drift     = new Float32Array(COUNT);
+      const phase     = new Float32Array(COUNT);
+      const wobble    = new Float32Array(COUNT);
+
+      for (let i = 0; i < COUNT; i++) {
+        const i3 = i * 3;
+        positions[i3]     = (Math.random() - 0.5) * 22;
+        positions[i3 + 1] = (Math.random() - 0.5) * 14;
+        positions[i3 + 2] = (Math.random() - 0.5) * 8 - 1;
+        const col = palette[(Math.random() * palette.length) | 0];
+        colors[i3]     = col.r;
+        colors[i3 + 1] = col.g;
+        colors[i3 + 2] = col.b;
+        drift[i]  = 0.08 + Math.random() * 0.30;
+        phase[i]  = Math.random() * Math.PI * 2;
+        wobble[i] = 0.4 + Math.random() * 1.2;
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
+
+      const material = new THREE.PointsMaterial({
+        map: discTex,
+        size: 0.45,
+        sizeAttenuation: true,
+        vertexColors: true,
+        transparent: true,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      });
+      const points = new THREE.Points(geometry, material);
+      scene.add(points);
+
+      /* Larger bokeh orbs behind for depth. */
+      const BOKEH = isSmall ? 4 : 10;
+      const bpos = new Float32Array(BOKEH * 3);
+      const bcol = new Float32Array(BOKEH * 3);
+      for (let i = 0; i < BOKEH; i++) {
+        const i3 = i * 3;
+        bpos[i3]     = (Math.random() - 0.5) * 14;
+        bpos[i3 + 1] = (Math.random() - 0.5) * 9;
+        bpos[i3 + 2] = -3 - Math.random() * 4;
+        const c = palette[(Math.random() * palette.length) | 0];
+        bcol[i3] = c.r; bcol[i3+1] = c.g; bcol[i3+2] = c.b;
+      }
+      const bGeo = new THREE.BufferGeometry();
+      bGeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
+      bGeo.setAttribute('color',    new THREE.BufferAttribute(bcol, 3));
+      const bokeh = new THREE.Points(bGeo, new THREE.PointsMaterial({
+        map: discTex, size: 3.2, sizeAttenuation: true, vertexColors: true,
+        transparent: true, opacity: 0.32, depthWrite: false,
+        blending: THREE.AdditiveBlending,
+      }));
+      scene.add(bokeh);
+
+      const state = { visible: false, mx: 0, my: 0, tx: 0, ty: 0 };
+
+      function size() {
+        const r = section.getBoundingClientRect();
+        const w = Math.max(1, r.width), h = Math.max(1, r.height);
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      size();
+      window.addEventListener('resize', size, { passive: true });
+
+      section.addEventListener('pointermove', (e) => {
+        const r = section.getBoundingClientRect();
+        state.tx = ((e.clientX - r.left) / r.width  - 0.5) * 0.6;
+        state.ty = ((e.clientY - r.top)  / r.height - 0.5) * 0.5;
+      });
+
+      const io = new IntersectionObserver(([entry]) => {
+        state.visible = entry.isIntersecting;
+      }, { threshold: 0 });
+      io.observe(section);
+
+      requestAnimationFrame(() => canvas.classList.add('in'));
+
+      const posAttr = geometry.getAttribute('position');
+      const motionScale = reduceMotion ? 0.2 : 1;
+
+      scenes.push(function tick(dt, t) {
+        if (!state.visible) return;
+
+        for (let i = 0; i < COUNT; i++) {
+          const i3 = i * 3;
+          positions[i3 + 1] += drift[i] * dt * motionScale;
+          positions[i3]     += Math.sin(t * 0.35 + phase[i]) * 0.002 * wobble[i] * motionScale;
+          if (positions[i3 + 1] > 7) {
+            positions[i3 + 1] = -7.5;
+            positions[i3]     = (Math.random() - 0.5) * 22;
+          }
+        }
+        posAttr.needsUpdate = true;
+
+        state.mx += (state.tx - state.mx) * 0.04;
+        state.my += (state.ty - state.my) * 0.04;
+        camera.position.x = state.mx * 1.4;
+        camera.position.y = -state.my * 0.9;
+        camera.lookAt(0, 0, 0);
+
+        points.rotation.z += dt * 0.01 * motionScale;
+        bokeh.rotation.z  -= dt * 0.006 * motionScale;
+
+        renderer.render(scene, camera);
+      });
+    });
+  })();
+
   /* ── Single shared render loop ── */
   if (scenes.length) {
     const clock = new THREE.Clock();
@@ -1287,18 +1324,13 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   (function pinnedHeroVideo() {
     const section = document.querySelector('.hero-pin');
     const video   = section && section.querySelector('.hero-pin__video');
-    const preview = section && section.querySelector('.hero-pin__preview');
+    const caption = section && section.querySelector('.hero-pin__caption');
     if (!video) return;
 
     /* Tuneable: how strongly the playhead lerps toward the scroll target.
        Higher = snappier (closer to direct mapping). Lower = more "trailing"
        feel as the timeline glides into position. Set to 1 for instant. */
     const SCRUB_DAMPING = 0.22;
-
-    /* When (during the 0..1 hero scroll) the web preview should start
-       fading in / be fully shown. */
-    const PREVIEW_FADE_IN_START = 0.78;
-    const PREVIEW_FADE_IN_END   = 0.95;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile     = window.matchMedia('(max-width: 720px)').matches;
@@ -1307,7 +1339,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     if (reduceMotion) {
       video.addEventListener('loadedmetadata', () => {
         try { video.currentTime = Math.max(0, video.duration - 0.05); } catch (e) {}
-        if (preview) preview.classList.add('show');
       }, { once: true });
       return;
     }
@@ -1339,7 +1370,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       video.loop  = true;
       video.muted = true;
       video.play().catch(() => {});
-      if (preview) preview.classList.add('show');
     }
 
     video.addEventListener('loadedmetadata', () => {
@@ -1362,17 +1392,12 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       progress = Math.max(0, Math.min(1, -r.top / total));
       target = progress * duration;
 
-      /* Toggle the preview overlay between the configured progress range. */
-      if (preview) {
-        const show = progress >= PREVIEW_FADE_IN_START;
-        if (show && !preview.classList.contains('show')) preview.classList.add('show');
-        else if (!show && preview.classList.contains('show')) preview.classList.remove('show');
-        /* Set the preview's actual fade level — gives a smooth crossfade
-           rather than a hard CSS class flip. */
-        const t = (progress - PREVIEW_FADE_IN_START) /
-                  (PREVIEW_FADE_IN_END - PREVIEW_FADE_IN_START);
-        const fade = Math.max(0, Math.min(1, t));
-        preview.style.opacity = String(fade);
+      /* Caption parallax: drifts upward and fades as the scrub progresses,
+         so the page feels like it's giving way to the next section. */
+      if (caption) {
+        const ease = 1 - Math.pow(1 - progress, 1.6);
+        caption.style.transform = `translateY(${(-ease * 28).toFixed(1)}px)`;
+        caption.style.opacity   = String(Math.max(0, 1 - ease * 1.2));
       }
     }
 
