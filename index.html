@@ -999,6 +999,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   ═══════════════════════════════════════════════════ */
   import * as THREE from 'three';
   import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+  import { RoomEnvironment }    from 'three/addons/environments/RoomEnvironment.js';
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1246,8 +1247,9 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   })();
 
-  /* ── Hero phone: a real 3D phone that flips from charger-port view
-        to screen-facing as the user scrolls through the hero. ── */
+  /* ── Hero phone: a PBR phone the camera pans up across as the user
+        scrolls — starts looking up at the charger port, ends face-on
+        to the screen. ── */
   (function buildHeroPhone3D() {
     const hero = document.querySelector('.hero');
     const mount = hero && hero.querySelector('.hero-phone-3d');
@@ -1255,106 +1257,191 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.outputColorSpace   = THREE.SRGBColorSpace;
+    renderer.toneMapping        = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
     mount.appendChild(renderer.domElement);
 
-    const scene = new THREE.Scene();
+    const scene  = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(28, 1, 0.1, 100);
-    camera.position.set(0, 0, 14);
 
-    /* Lights — warm key, cool fill, brand-coloured rim. */
-    scene.add(new THREE.AmbientLight(0xfff1e0, 0.55));
-    const key = new THREE.DirectionalLight(0xffe4c2, 1.8);
+    /* Neutral studio IBL — gives every PBR material real reflections. */
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+
+    /* A touch of directional light on top of IBL for warm highlights. */
+    const key = new THREE.DirectionalLight(0xfff1e0, 1.0);
     key.position.set(4, 6, 5);
     scene.add(key);
-    const fill = new THREE.DirectionalLight(0xa9c4ff, 0.45);
-    fill.position.set(-5, -2, 3);
-    scene.add(fill);
-    const rim = new THREE.DirectionalLight(0xc44b1f, 0.9);
-    rim.position.set(-2, 1, -5);
+    const rim = new THREE.DirectionalLight(0xc44b1f, 0.55);
+    rim.position.set(-3, 0, -5);
     scene.add(rim);
 
-    /* Phone dimensions (world units). 9:19.5 aspect. */
-    const W = 1.8, H = W * 19.5 / 9, D = 0.22, R = 0.20;
-
-    /* Pivot at the bottom edge of the phone so it hinges open like a flap. */
-    const pivot = new THREE.Group();
-    scene.add(pivot);
+    /* ── Phone (9:19.5 ratio, ~iPhone-15-Pro proportions) ── */
+    const W = 1.7, H = W * 19.5 / 9, D = 0.24, R = 0.22;
     const phone = new THREE.Group();
-    phone.position.y = H / 2;            // bottom of phone now at pivot origin
-    pivot.add(phone);
+    scene.add(phone);
 
-    const bodyMat = new THREE.MeshStandardMaterial({
-      color: 0x1B0F0A, metalness: 0.55, roughness: 0.35,
+    /* Titanium frame + back: high metalness, slight clearcoat. */
+    const titanium = new THREE.MeshPhysicalMaterial({
+      color: 0x2c2a28, metalness: 1.0, roughness: 0.30,
+      clearcoat: 0.4, clearcoatRoughness: 0.25, envMapIntensity: 1.2,
     });
-    const darkMat = new THREE.MeshStandardMaterial({
-      color: 0x050505, metalness: 0.7, roughness: 0.35,
-    });
-
-    const body = new THREE.Mesh(new RoundedBoxGeometry(W, H, D, 8, R), bodyMat);
+    const body = new THREE.Mesh(
+      new RoundedBoxGeometry(W, H, D, 24, R), titanium
+    );
     phone.add(body);
 
-    /* Screen: a flat plane with a canvas-rendered UI texture, sat just
-       proud of the body front face. */
-    const screenTex = makeScreenTexture();
-    const screenMat = new THREE.MeshBasicMaterial({ map: screenTex });
-    const screen = new THREE.Mesh(
-      new THREE.PlaneGeometry(W * 0.93, H * 0.965),
-      screenMat
+    /* Black inset that the screen sits inside. */
+    const bezelMat = new THREE.MeshPhysicalMaterial({
+      color: 0x000000, metalness: 0.0, roughness: 0.45,
+    });
+    const bezel = new THREE.Mesh(
+      new RoundedBoxGeometry(W * 0.965, H * 0.985, 0.01, 6, R * 0.85),
+      bezelMat
     );
-    screen.position.z = D / 2 + 0.002;
+    bezel.position.z = D / 2 + 0.002;
+    phone.add(bezel);
+
+    /* Baked screen UI. */
+    const screenTex = makeScreenTexture();
+    const screen = new THREE.Mesh(
+      new THREE.PlaneGeometry(W * 0.93, H * 0.96),
+      new THREE.MeshBasicMaterial({ map: screenTex, toneMapped: false })
+    );
+    screen.position.z = D / 2 + 0.010;
     phone.add(screen);
 
-    /* Notch / camera pill at the top of the screen. */
-    const notch = new THREE.Mesh(
-      new RoundedBoxGeometry(0.62, 0.18, 0.06, 4, 0.08),
-      darkMat
+    /* Glass cover — adds the reflective sheen of a real screen. */
+    const glassMat = new THREE.MeshPhysicalMaterial({
+      color: 0xffffff,
+      metalness: 0.0,
+      roughness: 0.04,
+      transparent: true,
+      opacity: 0.06,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.04,
+      reflectivity: 0.55,
+      ior: 1.5,
+      envMapIntensity: 1.6,
+    });
+    const glass = new THREE.Mesh(
+      new RoundedBoxGeometry(W * 0.96, H * 0.985, 0.012, 4, R * 0.83),
+      glassMat
     );
-    notch.position.set(0, H / 2 - 0.22, D / 2 + 0.01);
-    phone.add(notch);
-    const lens = new THREE.Mesh(
-      new THREE.CircleGeometry(0.04, 24),
-      new THREE.MeshStandardMaterial({ color: 0x111418, metalness: 0.9, roughness: 0.15 })
-    );
-    lens.position.set(0.22, H / 2 - 0.22, D / 2 + 0.05);
-    phone.add(lens);
+    glass.position.z = D / 2 + 0.017;
+    phone.add(glass);
 
-    /* USB-C port on the bottom edge (-Y face) plus speaker grilles. */
-    const port = new THREE.Mesh(
-      new RoundedBoxGeometry(0.36, 0.10, 0.10, 3, 0.04),
-      darkMat
+    /* Dynamic Island pill. */
+    const islandFrontMat = new THREE.MeshPhysicalMaterial({
+      color: 0x000000, metalness: 0.0, roughness: 0.15,
+    });
+    const island = new THREE.Mesh(
+      new THREE.CapsuleGeometry(0.072, 0.30, 6, 18),
+      islandFrontMat
     );
-    port.position.set(0, -H / 2 + 0.002, 0);
-    port.rotation.x = Math.PI / 2;       // sit flush on the bottom face
+    island.rotation.z = Math.PI / 2;
+    island.position.set(0, H * 0.42, D / 2 + 0.026);
+    phone.add(island);
+
+    /* Camera island on the back: square plateau with three lens rings,
+       a flash and a LiDAR sensor. */
+    const backIsland = new THREE.Mesh(
+      new RoundedBoxGeometry(W * 0.46, W * 0.46, 0.10, 6, 0.10),
+      titanium
+    );
+    backIsland.position.set(-W * 0.20, H * 0.32, -D / 2 - 0.05);
+    phone.add(backIsland);
+
+    const lensRingMat = new THREE.MeshPhysicalMaterial({
+      color: 0x121212, metalness: 1.0, roughness: 0.45,
+    });
+    const lensGlassMat = new THREE.MeshPhysicalMaterial({
+      color: 0x05060a, metalness: 0.6, roughness: 0.05,
+      clearcoat: 1.0, clearcoatRoughness: 0.04, envMapIntensity: 1.4,
+    });
+    const lensPositions = [[-0.13, 0.13], [0.13, 0.13], [0, -0.13]];
+    for (const [lx, ly] of lensPositions) {
+      const ring = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.115, 0.115, 0.06, 36),
+        lensRingMat
+      );
+      ring.rotation.x = Math.PI / 2;
+      ring.position.set(-W * 0.20 + lx, H * 0.32 + ly, -D / 2 - 0.12);
+      phone.add(ring);
+
+      const lens = new THREE.Mesh(
+        new THREE.CircleGeometry(0.085, 36), lensGlassMat
+      );
+      lens.position.set(-W * 0.20 + lx, H * 0.32 + ly, -D / 2 - 0.151);
+      lens.rotation.y = Math.PI;
+      phone.add(lens);
+
+      /* Tiny spec reflection on each lens. */
+      const spec = new THREE.Mesh(
+        new THREE.CircleGeometry(0.025, 16),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.55 })
+      );
+      spec.position.set(-W * 0.20 + lx - 0.03, H * 0.32 + ly + 0.03, -D / 2 - 0.152);
+      spec.rotation.y = Math.PI;
+      phone.add(spec);
+    }
+    /* Flash */
+    const flash = new THREE.Mesh(
+      new THREE.CircleGeometry(0.045, 24),
+      new THREE.MeshStandardMaterial({ color: 0xfff7e0, roughness: 0.3, metalness: 0.2,
+        emissive: 0x110a05 })
+    );
+    flash.position.set(-W * 0.20 + 0.13, H * 0.32 - 0.13, -D / 2 - 0.111);
+    flash.rotation.y = Math.PI;
+    phone.add(flash);
+    /* LiDAR */
+    const lidar = new THREE.Mesh(
+      new THREE.CircleGeometry(0.035, 18),
+      new THREE.MeshStandardMaterial({ color: 0x222630, metalness: 0.5, roughness: 0.4 })
+    );
+    lidar.position.set(-W * 0.20 - 0.13, H * 0.32 - 0.13, -D / 2 - 0.111);
+    lidar.rotation.y = Math.PI;
+    phone.add(lidar);
+
+    /* USB-C port on the bottom edge. */
+    const portMat = new THREE.MeshPhysicalMaterial({
+      color: 0x050505, metalness: 0.9, roughness: 0.35,
+    });
+    const port = new THREE.Mesh(
+      new RoundedBoxGeometry(0.34, 0.10, 0.14, 4, 0.04), portMat
+    );
+    port.rotation.x = Math.PI / 2;
+    port.position.set(0, -H / 2 + 0.005, 0);
     phone.add(port);
+
+    /* Speaker grilles on the bottom face either side of the port. */
     for (let i = -1; i <= 1; i += 2) {
-      const grilleGroup = new THREE.Group();
-      grilleGroup.position.set(i * 0.55, -H / 2 + 0.002, 0);
-      for (let j = 0; j < 5; j++) {
+      for (let j = -2; j <= 2; j++) {
         const hole = new THREE.Mesh(
-          new THREE.CircleGeometry(0.018, 12),
-          darkMat
+          new THREE.CircleGeometry(0.022, 14), portMat
         );
-        hole.position.set((j - 2) * 0.05, 0, 0);
+        hole.position.set(i * 0.55 + j * 0.05, -H / 2 - 0.001, 0);
         hole.rotation.x = -Math.PI / 2;
-        grilleGroup.add(hole);
+        phone.add(hole);
       }
-      phone.add(grilleGroup);
     }
 
-    /* Side buttons (volume on the left, power on the right). */
-    const sideMat = new THREE.MeshStandardMaterial({
-      color: 0x0d0807, metalness: 0.7, roughness: 0.3,
-    });
+    /* Side buttons — same titanium finish as the frame. */
     function sideButton(x, y, h) {
-      const b = new THREE.Mesh(new THREE.BoxGeometry(0.04, h, 0.12), sideMat);
+      const b = new THREE.Mesh(
+        new RoundedBoxGeometry(0.045, h, 0.13, 3, 0.02), titanium
+      );
       b.position.set(x, y, 0);
       phone.add(b);
     }
-    sideButton(-W / 2 - 0.005, H * 0.18, 0.55);
-    sideButton(-W / 2 - 0.005, H * 0.06, 0.30);
-    sideButton( W / 2 + 0.005, H * 0.16, 0.50);
+    sideButton(-W / 2 - 0.012, H * 0.32, 0.18);   // action button
+    sideButton(-W / 2 - 0.012, H * 0.20, 0.55);   // volume up
+    sideButton(-W / 2 - 0.012, H * 0.07, 0.30);   // volume down
+    sideButton( W / 2 + 0.012, H * 0.18, 0.55);   // power
 
+    /* ── Camera-pan animation (phone stays still; camera arcs from
+          below-looking-up to face-on). ── */
     const state = { visible: true };
 
     function resize() {
@@ -1372,100 +1459,107 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     }, { threshold: 0 });
     io.observe(hero);
 
-    /* Mark the body so the CSS phone hides and the 3D canvas fades in. */
     document.body.classList.add('three-ready');
     requestAnimationFrame(() => mount.classList.add('in'));
 
+    const R_ORBIT = 7.2;     // distance from look-at point
+    const lookTmp = new THREE.Vector3();
+
     scenes.push(function tick(dt, t) {
-      /* Drive flip from hero scroll progress.
-         0  = top of hero at top of viewport → charger-port view
-         1  = hero fully scrolled past       → screen-facing */
       const r = hero.getBoundingClientRect();
-      const total = Math.max(1, r.height);
-      const raw = Math.max(0, Math.min(1, -r.top / total));
-      /* Compress the flip into the first 75% of the hero so it finishes
-         clearly before the user reaches the next section. */
-      const p = Math.min(1, raw / 0.75);
-      const eased = 1 - Math.pow(1 - p, 3);   // ease-out cubic
+      const raw = Math.max(0, Math.min(1, -r.top / r.height));
+      /* Compress the pan into the first 70% of the hero scroll. */
+      const p = Math.min(1, raw / 0.70);
+      const eased = 1 - Math.pow(1 - p, 2.2);
 
       if (!state.visible && raw >= 1) return;
 
-      /* Start at +π/2 (bottom face toward camera = charger port view),
-         finish at 0 (screen toward camera). */
-      pivot.rotation.x = (1 - eased) * (Math.PI / 2);
+      /* θ = π/2 → camera directly under the phone looking up
+         θ = 0   → camera in front of the phone looking at the screen. */
+      const theta = (1 - eased) * (Math.PI / 2);
+      const r_now = R_ORBIT * (1 + (1 - eased) * 0.10);
 
-      /* Add a touch of yaw + idle bob once the phone is mostly upright. */
-      const idle = eased;
-      pivot.rotation.y = (1 - eased) * 0.25 + Math.sin(t * 0.5) * 0.08 * idle;
-      pivot.rotation.z = Math.sin(t * 0.4) * 0.025 * idle;
+      camera.position.set(
+        0,
+        -Math.sin(theta) * r_now,
+         Math.cos(theta) * r_now
+      );
+      /* Look at the bottom edge when below, at the centre once in front. */
+      lookTmp.set(0, -H / 2 * Math.sin(theta), 0);
+      camera.lookAt(lookTmp);
 
-      /* Keep the visible silhouette roughly centred in the frame as it flips:
-         lying flat the bottom edge sits at world origin; standing up the
-         centre wants to sit at origin, so slide the pivot down by H/2 as it
-         opens. */
-      pivot.position.y = -H / 2 * eased + Math.sin(t * 0.8) * 0.05 * idle;
-
-      /* A subtle scale lift so the phone "grows" out of the reveal. */
-      const sc = 0.92 + eased * 0.08;
-      pivot.scale.setScalar(sc);
+      /* A small idle once the phone is mostly visible from the front. */
+      phone.rotation.y = Math.sin(t * 0.35) * 0.05 * eased;
+      phone.position.y = Math.sin(t * 0.7)  * 0.04 * eased;
 
       renderer.render(scene, camera);
     });
 
-    /* ── Canvas-2D screen UI, baked into a texture. ── */
+    /* ── Screen UI baked into a canvas texture, re-rendered once webfonts
+          load so we don't ship a system-serif fallback. ── */
     function makeScreenTexture() {
       const c = document.createElement('canvas');
-      c.width = 540; c.height = 1170;          // close to 9:19.5
+      c.width = 540; c.height = 1170;
       const ctx = c.getContext('2d');
-
-      const g = ctx.createLinearGradient(0, 0, 0, c.height);
-      g.addColorStop(0, '#FFE6D2');
-      g.addColorStop(1, '#F4B797');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, c.width, c.height);
-
-      /* Status bar */
-      ctx.fillStyle = '#2A1A12';
-      ctx.font = '600 30px "Plus Jakarta Sans", system-ui, sans-serif';
-      ctx.textBaseline = 'top';
-      ctx.fillText('9:41', 38, 36);
-
-      /* Headline (Newsreader italic) */
-      ctx.font = 'italic 500 96px "Newsreader", Georgia, serif';
-      ctx.fillStyle = '#2A1A12';
-      ctx.fillText('Hey',       38, 170);
-      ctx.fillText('neighbour', 38, 270);
-
-      /* Outgoing message bubble (right-aligned, white) */
-      drawBubble(
-        ctx,
-        c.width - 36, 480, 360, 130, 28,
-        '#ffffff', '#2A1A12',
-        ['My website is, frankly,', 'embarrassing.'],
-        'right'
-      );
-
-      /* Reply text (Newsreader italic) */
-      ctx.fillStyle = '#2A1A12';
-      ctx.font = 'italic 400 30px "Newsreader", Georgia, serif';
-      const reply = "Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.";
-      wrapText(ctx, reply, 38, 680, c.width - 76, 40);
-
-      /* Footer input bar */
-      ctx.fillStyle = 'rgba(255,255,255,.55)';
-      ctx.fillRect(0, c.height - 140, c.width, 140);
-      roundRect(ctx, 28, c.height - 110, c.width - 56, 80, 40);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-      ctx.fillStyle = '#7A6353';
-      ctx.font = '500 28px "Plus Jakarta Sans", system-ui, sans-serif';
-      ctx.fillText('Ask me anything…', 60, c.height - 90);
+      drawScreen(ctx, c.width, c.height);
 
       const tex = new THREE.CanvasTexture(c);
       tex.colorSpace = THREE.SRGBColorSpace;
       tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
       tex.needsUpdate = true;
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(() => {
+          drawScreen(ctx, c.width, c.height);
+          tex.needsUpdate = true;
+        });
+      }
       return tex;
+    }
+
+    function drawScreen(ctx, W, H) {
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0,   '#FFE6D2');
+      g.addColorStop(0.7, '#FFD3B5');
+      g.addColorStop(1,   '#F4B797');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+
+      ctx.textBaseline = 'alphabetic';
+
+      /* Status bar */
+      ctx.fillStyle = '#2A1A12';
+      ctx.font = '600 28px "Plus Jakarta Sans", system-ui, sans-serif';
+      ctx.fillText('9:41', 38, 60);
+
+      /* Headline (Newsreader italic) */
+      ctx.font = 'italic 500 96px "Newsreader", Georgia, serif';
+      ctx.fillStyle = '#2A1A12';
+      ctx.fillText('Hey',       38, 280);
+      ctx.fillText('neighbour', 38, 380);
+
+      /* Outgoing message bubble (right-aligned, white) */
+      drawBubble(
+        ctx, W - 36, 470, 380, 130, 30,
+        '#ffffff', '#2A1A12',
+        ['My website is, frankly,', 'embarrassing.']
+      );
+
+      /* Reply text */
+      ctx.fillStyle = '#2A1A12';
+      ctx.font = 'italic 400 30px "Newsreader", Georgia, serif';
+      wrapText(ctx,
+        "Then let's fix it. I'll design you something that actually wins customers — and it can be live within five days.",
+        38, 700, W - 76, 40);
+
+      /* Footer */
+      ctx.fillStyle = 'rgba(255,255,255,.55)';
+      ctx.fillRect(0, H - 150, W, 150);
+      roundRect(ctx, 30, H - 115, W - 60, 80, 40);
+      ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.fillStyle = '#7A6353';
+      ctx.font = '500 28px "Plus Jakarta Sans", system-ui, sans-serif';
+      ctx.fillText('Ask me anything…', 60, H - 65);
     }
 
     function roundRect(ctx, x, y, w, h, r) {
@@ -1478,19 +1572,16 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       ctx.closePath();
     }
 
-    function drawBubble(ctx, anchorX, y, w, h, r, bg, fg, lines, align) {
-      const x = align === 'right' ? anchorX - w : anchorX;
+    function drawBubble(ctx, anchorX, y, w, h, r, bg, fg, lines) {
+      const x = anchorX - w;
       roundRect(ctx, x, y, w, h, r);
-      ctx.fillStyle = bg;
-      ctx.fill();
+      ctx.fillStyle = bg; ctx.fill();
       ctx.fillStyle = fg;
       ctx.font = 'italic 400 32px "Newsreader", Georgia, serif';
-      lines.forEach((line, i) => {
-        ctx.fillText(line, x + 26, y + 28 + i * 44);
-      });
+      lines.forEach((line, i) => ctx.fillText(line, x + 26, y + 54 + i * 44));
     }
 
-    function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    function wrapText(ctx, text, x, y, maxWidth, lh) {
       const words = text.split(' ');
       let line = '';
       for (let n = 0; n < words.length; n++) {
@@ -1498,7 +1589,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
         if (ctx.measureText(test).width > maxWidth && n > 0) {
           ctx.fillText(line, x, y);
           line = words[n] + ' ';
-          y += lineHeight;
+          y += lh;
         } else {
           line = test;
         }
