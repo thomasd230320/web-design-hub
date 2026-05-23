@@ -270,6 +270,95 @@ img,svg{display:block;max-width:100%}
 }
 @keyframes scroll-tick{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
+/* ── Web preview overlay ─────────────────────────────────────────
+   Sits on top of the final video frame where the phone screen lands.
+   Tune these three vars to nudge its position / scale / tilt to match
+   your hero crop on the screens you care about. */
+.hero-pin{
+  --preview-top: 51%;
+  --preview-width: clamp(280px, 55vmin, 560px);
+  --preview-tilt: 56deg;
+}
+.hero-pin__preview{
+  position:absolute;
+  left:50%;top:var(--preview-top);
+  width:var(--preview-width);
+  aspect-ratio:1/2.05;            /* portrait phone screen */
+  transform:translate(-50%,-50%) perspective(1100px) rotateX(var(--preview-tilt)) rotateZ(-.4deg);
+  transform-origin:center center;
+  border-radius:8%/4%;
+  overflow:hidden;
+  pointer-events:none;
+  opacity:0;
+  filter:saturate(1.05) brightness(.96);
+  /* Smoothed by JS via opacity, plus a shadow that grows with reveal. */
+  box-shadow:0 30px 60px -10px rgba(0,0,0,.55);
+  will-change:opacity,transform;
+  transition:opacity .35s linear;
+}
+.hero-pin__preview.show{opacity:1}
+@media (max-width:720px){
+  /* Mobile drops the scrub, so the preview never lands; hide it. */
+  .hero-pin__preview{display:none}
+}
+
+/* Mini fake website. Tiny by design — it reads as "a real site" at a
+   glance without competing for attention with the page copy below. */
+.wp{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  background:#FFE6D2;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  color:#2A1A12;
+}
+.wp__bar{
+  display:flex;align-items:center;gap:6px;
+  padding:7% 8%;
+  background:rgba(255,255,255,.78);
+  border-bottom:1px solid rgba(0,0,0,.06);
+}
+.wp__dot{width:6%;aspect-ratio:1;border-radius:50%;display:inline-block}
+.wp__dot--r{background:#FF6058}
+.wp__dot--y{background:#FFBC2E}
+.wp__dot--g{background:#27C940}
+.wp__url{
+  margin-left:auto;font-size:clamp(.55rem,1.4vmin,.78rem);
+  color:#7A6353;letter-spacing:.02em;
+}
+.wp__body{flex:1;padding:6% 8% 8%;display:flex;flex-direction:column;gap:6%}
+.wp__nav{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:clamp(.5rem,1.2vmin,.7rem);color:#7A6353;
+}
+.wp__brand{
+  font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:500;
+  font-size:clamp(.95rem,2.4vmin,1.4rem);color:#2A1A12;
+}
+.wp__hero{
+  flex:1;display:flex;flex-direction:column;justify-content:center;gap:5%;
+  padding:5% 0;
+  background:linear-gradient(170deg,#FFE6D2 0%,#F8C8A8 100%);
+  border-radius:4%;
+}
+.wp__hero h3{
+  font-family:'Newsreader',Georgia,serif;font-weight:500;font-style:italic;
+  font-size:clamp(1.05rem,3vmin,1.9rem);line-height:1.05;letter-spacing:-.02em;
+  margin:0 6%;
+}
+.wp__hero p{
+  font-size:clamp(.55rem,1.3vmin,.78rem);color:#7A6353;margin:0 6%;
+}
+.wp__cta{
+  align-self:flex-start;margin:0 6%;
+  background:#2A1A12;color:#FFE6D2;
+  padding:3% 6%;border-radius:9999px;
+  font-size:clamp(.55rem,1.3vmin,.75rem);font-weight:600;
+}
+.wp__row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:4%;height:22%}
+.wp__card{border-radius:6%;background:#ECE2D2}
+.wp__card--a{background:linear-gradient(135deg,#8B5A3C 0%,#3D1F18 100%)}
+.wp__card--b{background:linear-gradient(135deg,#F4B797 0%,#C44B1F 100%)}
+.wp__card--c{background:linear-gradient(135deg,#FFE6D2 0%,#E8C9A8 100%)}
+
 /* ════════════════════════════════════════════════════
    PHONE FRAME — pure CSS
 ═══════════════════════════════════════════════════ */
@@ -704,6 +793,38 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       muted playsinline preload="auto"
       aria-hidden="true"
     ></video>
+
+    <!-- Faux web preview that "appears" on the phone screen near the end
+         of the scrub. Positioned and skewed to roughly track the screen
+         in the final frame; full alignment is fine-tuned with the
+         --preview-* CSS variables further down. -->
+    <div class="hero-pin__preview" aria-hidden="true">
+      <div class="wp">
+        <div class="wp__bar">
+          <span class="wp__dot wp__dot--r"></span>
+          <span class="wp__dot wp__dot--y"></span>
+          <span class="wp__dot wp__dot--g"></span>
+          <span class="wp__url">brew-and-co.uk</span>
+        </div>
+        <div class="wp__body">
+          <div class="wp__nav">
+            <span class="wp__brand">Brew &amp; Co.</span>
+            <span class="wp__menu">Menu · Visit · Book</span>
+          </div>
+          <div class="wp__hero">
+            <h3>Slow coffee.<br/>Faster mornings.</h3>
+            <p>Open till 4 · 12 High St, Witney</p>
+            <span class="wp__cta">Reserve a table →</span>
+          </div>
+          <div class="wp__row">
+            <div class="wp__card wp__card--a"></div>
+            <div class="wp__card wp__card--b"></div>
+            <div class="wp__card wp__card--c"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="hero-pin__vignette" aria-hidden="true"></div>
     <div class="hero-pin__copy">
       <p class="hero-pin__caption">A one-person web studio in Witney, Oxfordshire — designing the kind of websites local businesses ought to have.</p>
@@ -1166,7 +1287,18 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   (function pinnedHeroVideo() {
     const section = document.querySelector('.hero-pin');
     const video   = section && section.querySelector('.hero-pin__video');
+    const preview = section && section.querySelector('.hero-pin__preview');
     if (!video) return;
+
+    /* Tuneable: how strongly the playhead lerps toward the scroll target.
+       Higher = snappier (closer to direct mapping). Lower = more "trailing"
+       feel as the timeline glides into position. Set to 1 for instant. */
+    const SCRUB_DAMPING = 0.22;
+
+    /* When (during the 0..1 hero scroll) the web preview should start
+       fading in / be fully shown. */
+    const PREVIEW_FADE_IN_START = 0.78;
+    const PREVIEW_FADE_IN_END   = 0.95;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile     = window.matchMedia('(max-width: 720px)').matches;
@@ -1175,6 +1307,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     if (reduceMotion) {
       video.addEventListener('loadedmetadata', () => {
         try { video.currentTime = Math.max(0, video.duration - 0.05); } catch (e) {}
+        if (preview) preview.classList.add('show');
       }, { once: true });
       return;
     }
@@ -1187,16 +1320,18 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       const tryPlay = () => video.play().catch(() => {});
       if (video.readyState >= 2) tryPlay();
       else video.addEventListener('loadeddata', tryPlay, { once: true });
-      /* Collapse the section to one viewport so there is no extra
-         scroll length when we are not actually scrubbing. */
       section.style.height = '100vh';
       return;
     }
 
     /* ── Desktop / tablet: scroll-scrub. ── */
-    let duration   = 0;
-    let scrubReady = false;
+    let duration    = 0;
+    let scrubReady  = false;
     let scrubFailed = false;
+    let target      = 0;     // scroll-driven target time
+    let current     = 0;     // damped, smoothed playhead
+    let progress    = 0;     // 0..1 scroll progress through the hero
+    let rafId       = 0;
 
     function fallbackAutoplay() {
       if (scrubFailed) return;
@@ -1204,45 +1339,66 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       video.loop  = true;
       video.muted = true;
       video.play().catch(() => {});
+      if (preview) preview.classList.add('show');
     }
 
     video.addEventListener('loadedmetadata', () => {
       duration = video.duration || 0;
       if (!duration) { fallbackAutoplay(); return; }
-      /* Warm-up seek; if it never resolves, drop to autoplay. */
-      const warm = setTimeout(() => fallbackAutoplay(), 1200);
+      const warm = setTimeout(fallbackAutoplay, 1200);
       video.addEventListener('seeked', () => {
         clearTimeout(warm);
         scrubReady = true;
-        onScroll(); /* paint the right frame for the current scroll */
+        readScroll();
+        kick();
       }, { once: true });
       try { video.currentTime = 0.001; } catch (e) { fallbackAutoplay(); }
     }, { once: true });
 
-    /* rAF-throttled scrub. */
-    let target = 0;
-    let scheduled = false;
-    function onScroll() {
+    function readScroll() {
       const r = section.getBoundingClientRect();
       const total = section.offsetHeight - window.innerHeight;
       if (total <= 0) return;
-      /* progress 0 → top of hero at top of viewport
-         progress 1 → hero fully scrolled past */
-      const p = Math.max(0, Math.min(1, -r.top / total));
-      target = p * duration;
-      if (!scheduled) {
-        scheduled = true;
-        requestAnimationFrame(apply);
+      progress = Math.max(0, Math.min(1, -r.top / total));
+      target = progress * duration;
+
+      /* Toggle the preview overlay between the configured progress range. */
+      if (preview) {
+        const show = progress >= PREVIEW_FADE_IN_START;
+        if (show && !preview.classList.contains('show')) preview.classList.add('show');
+        else if (!show && preview.classList.contains('show')) preview.classList.remove('show');
+        /* Set the preview's actual fade level — gives a smooth crossfade
+           rather than a hard CSS class flip. */
+        const t = (progress - PREVIEW_FADE_IN_START) /
+                  (PREVIEW_FADE_IN_END - PREVIEW_FADE_IN_START);
+        const fade = Math.max(0, Math.min(1, t));
+        preview.style.opacity = String(fade);
       }
     }
-    function apply() {
-      scheduled = false;
+
+    /* Continuous rAF loop. Lerps the playhead toward the target so the
+       timeline glides into position rather than snapping per scroll
+       event. With an all-keyframe video each seek is cheap, so we can
+       afford to seek every frame while the playhead is in motion. */
+    function loop() {
+      rafId = 0;
       if (!scrubReady) return;
-      /* Only seek if we have moved meaningfully — saves work on idle scrolls. */
-      if (Math.abs(video.currentTime - target) > 0.02) {
-        try { video.currentTime = target; } catch (e) { fallbackAutoplay(); }
+      const delta = target - current;
+      if (Math.abs(delta) < 0.002) {
+        /* Settled — stop the rAF loop until scroll moves again. */
+        current = target;
+        try { video.currentTime = current; } catch (e) { fallbackAutoplay(); }
+        return;
       }
+      current += delta * SCRUB_DAMPING;
+      try { video.currentTime = current; } catch (e) { fallbackAutoplay(); return; }
+      rafId = requestAnimationFrame(loop);
     }
+    function kick() {
+      if (!rafId) rafId = requestAnimationFrame(loop);
+    }
+
+    function onScroll() { readScroll(); kick(); }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
   })();
