@@ -357,7 +357,10 @@ img,svg{display:block;max-width:100%}
   position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
 }
 .scrolly-phone-wrap .phone{
-  transform:scale(calc(.92 + var(--p,0) * .08));
+  transform:
+    scale(calc(.92 + var(--p,0) * .08))
+    translateX(calc((var(--sp,.5) - .5) * 22px))
+    rotate(calc((var(--sp,.5) - .5) * 2.4deg));
   transition:transform .25s linear;
 }
 .scrolly-screen{position:absolute;inset:0;opacity:0;transition:opacity .7s var(--ease)}
@@ -365,6 +368,56 @@ img,svg{display:block;max-width:100%}
 .scrolly[data-step="1"] .scrolly-screen[data-step="1"],
 .scrolly[data-step="2"] .scrolly-screen[data-step="2"],
 .scrolly[data-step="3"] .scrolly-screen[data-step="3"]{opacity:1}
+
+/* Phone screen contents: staggered slide-in (alternating left/right) + scroll-driven pan-up. */
+.scrolly-screen .phone-h,
+.scrolly-screen .phone-msg,
+.scrolly-screen .phone-reply,
+.scrolly-screen .phone-input{
+  opacity:0;will-change:transform,opacity;
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+}
+.scrolly-screen .phone-h    {transform:translateX(-70px)}
+.scrolly-screen .phone-msg  {transform:translateX( 70px)}
+.scrolly-screen .phone-reply{transform:translateX(-70px)}
+.scrolly-screen .phone-input{transform:translateY( 32px)}
+.scrolly-screen .phone-h    {transition-delay:.05s}
+.scrolly-screen .phone-msg  {transition-delay:.18s}
+.scrolly-screen .phone-reply{transition-delay:.32s}
+.scrolly-screen .phone-input{transition-delay:.46s}
+
+.scrolly[data-step="0"] .scrolly-screen[data-step="0"] .phone-h,
+.scrolly[data-step="1"] .scrolly-screen[data-step="1"] .phone-h,
+.scrolly[data-step="2"] .scrolly-screen[data-step="2"] .phone-h,
+.scrolly[data-step="3"] .scrolly-screen[data-step="3"] .phone-h,
+.scrolly[data-step="0"] .scrolly-screen[data-step="0"] .phone-msg,
+.scrolly[data-step="1"] .scrolly-screen[data-step="1"] .phone-msg,
+.scrolly[data-step="2"] .scrolly-screen[data-step="2"] .phone-msg,
+.scrolly[data-step="3"] .scrolly-screen[data-step="3"] .phone-msg,
+.scrolly[data-step="0"] .scrolly-screen[data-step="0"] .phone-reply,
+.scrolly[data-step="1"] .scrolly-screen[data-step="1"] .phone-reply,
+.scrolly[data-step="2"] .scrolly-screen[data-step="2"] .phone-reply,
+.scrolly[data-step="3"] .scrolly-screen[data-step="3"] .phone-reply,
+.scrolly[data-step="0"] .scrolly-screen[data-step="0"] .phone-input,
+.scrolly[data-step="1"] .scrolly-screen[data-step="1"] .phone-input,
+.scrolly[data-step="2"] .scrolly-screen[data-step="2"] .phone-input,
+.scrolly[data-step="3"] .scrolly-screen[data-step="3"] .phone-input{
+  opacity:1;transform:translate(0,0);
+}
+
+/* Continuous pan-up of the active phone body driven by sub-progress within a step. */
+.scrolly[data-step="0"] .scrolly-screen[data-step="0"] .phone-body,
+.scrolly[data-step="1"] .scrolly-screen[data-step="1"] .phone-body,
+.scrolly[data-step="2"] .scrolly-screen[data-step="2"] .phone-body,
+.scrolly[data-step="3"] .scrolly-screen[data-step="3"] .phone-body{
+  transform:translateY(calc((0.5 - var(--sp,.5)) * 56px));
+  will-change:transform;
+}
+
+/* Subtle parallax on the screen tint as you scroll within a step. */
+.scrolly-screen .phone-screen{
+  background-position:center calc(50% + (var(--sp,.5) - .5) * 18px);
+}
 
 .scrolly-dots{
   position:absolute;bottom:42px;left:50%;transform:translateX(-50%);
@@ -535,6 +588,11 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
   .hero-scroll::after{animation:none}
+  .scrolly-screen .phone-h,
+  .scrolly-screen .phone-msg,
+  .scrolly-screen .phone-reply,
+  .scrolly-screen .phone-input,
+  .scrolly-screen .phone-body{opacity:1!important;transform:none!important}
 }
 
 /* RESPONSIVE */
@@ -565,6 +623,11 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .scrolly-phone-wrap{margin:36px auto 0}
   .scrolly-screen{opacity:1;position:relative}
   .scrolly-screen:not(:first-child){display:none}
+  .scrolly-screen .phone-h,
+  .scrolly-screen .phone-msg,
+  .scrolly-screen .phone-reply,
+  .scrolly-screen .phone-input,
+  .scrolly-screen .phone-body{opacity:1!important;transform:none!important}
   .gallery{padding:80px 0}
   .gallery-card{transform:rotate(0)!important}
   .tariff{grid-template-columns:1fr}
@@ -1204,6 +1267,8 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       const step = Math.min(steps - 1, Math.floor(progress * steps));
       if (scrolly.dataset.step !== String(step)) scrolly.dataset.step = String(step);
       scrolly.style.setProperty('--p', progress.toFixed(3));
+      const sub = Math.max(0, Math.min(1, progress * steps - step));
+      scrolly.style.setProperty('--sp', sub.toFixed(3));
     }
     window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
     window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
