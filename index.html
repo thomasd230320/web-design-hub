@@ -51,7 +51,7 @@
   "contactPoint": {
     "@type": "ContactPoint",
     "telephone": "+447827332393",
-    "email": "hello@webdesignhub.net",
+    "email": "thomassmithdonald@gmail.com",
     "contactType": "customer service",
     "areaServed": "GB",
     "availableLanguage": ["English"]
@@ -68,7 +68,7 @@
   "description": "Bespoke web design for premium wellness, beauty and aesthetics brands. Based in Witney, Oxfordshire — serving the United Kingdom.",
   "url": "https://webdesignhub.net/",
   "telephone": "+447827332393",
-  "email": "hello@webdesignhub.net",
+  "email": "thomassmithdonald@gmail.com",
   "priceRange": "Bespoke — consultation",
   "image": "https://webdesignhub.net/social-banner.svg",
   "address": { "@type": "PostalAddress", "addressLocality": "Witney", "addressRegion": "Oxfordshire", "addressCountry": "GB" },
@@ -375,6 +375,63 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ink)}
   letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.5);
 }
 
+/* Consultation form — editorial: just labels and underlines, no boxes */
+.consult-form{
+  max-width:520px;margin:0 auto;text-align:left;
+}
+.consult-form .field{margin-bottom:30px}
+.consult-form label{
+  display:block;
+  font-family:var(--sans);font-size:.72rem;font-weight:500;
+  letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(245,242,235,.6);margin-bottom:11px;
+}
+.consult-form label .opt{
+  color:rgba(245,242,235,.34);
+  letter-spacing:.04em;text-transform:none;
+  font-size:.76rem;font-weight:400;margin-left:6px;
+}
+.consult-form input,
+.consult-form textarea{
+  display:block;width:100%;
+  background:transparent;color:var(--beige);
+  border:0;border-bottom:1px solid rgba(245,242,235,.20);
+  border-radius:0;padding:12px 0;
+  font-family:var(--sans);font-size:1.05rem;line-height:1.5;
+  transition:border-color .25s var(--ease);
+}
+.consult-form input::placeholder,
+.consult-form textarea::placeholder{color:rgba(245,242,235,.35)}
+.consult-form input:hover,
+.consult-form textarea:hover{border-bottom-color:rgba(245,242,235,.36)}
+.consult-form input:focus,
+.consult-form textarea:focus{outline:none;border-bottom-color:var(--terra)}
+.consult-form textarea{resize:vertical;min-height:96px;font-family:var(--sans)}
+.consult-form button[type="submit"]{margin-top:18px}
+.consult-form button:disabled{opacity:.6;cursor:wait}
+.form-status{
+  margin-top:18px;font-family:var(--sans);font-size:.94rem;
+  color:rgba(245,242,235,.78);
+}
+.form-status[data-state="error"]{color:#FFB39A}
+.form-success{
+  text-align:center;
+  font-family:var(--serif);font-style:italic;font-weight:500;
+  font-size:clamp(1.6rem,3.4vw,2.4rem);line-height:1.35;letter-spacing:-.01em;
+  color:var(--beige);max-width:24ch;margin:0 auto;
+}
+.form-fallback{
+  max-width:520px;margin:36px auto 0;
+  font-family:var(--sans);font-size:.86rem;text-align:center;
+  color:rgba(245,242,235,.55);
+}
+.form-fallback a{
+  color:rgba(245,242,235,.85);
+  border-bottom:1px solid rgba(245,242,235,.32);
+  transition:color .2s var(--ease),border-color .2s var(--ease);
+}
+.form-fallback a:hover{color:var(--terra);border-bottom-color:var(--terra)}
+
 /* Footer */
 footer{padding:48px 0 36px;background:var(--beige)}
 .foot{
@@ -535,11 +592,35 @@ footer{padding:48px 0 36px;background:var(--beige)}
   <div class="wrap">
     <span class="label reveal">Book a consultation</span>
     <h2 id="consult-title" class="reveal">Book a <em>private</em> consultation.</h2>
-    <p class="reveal">Send a note about your brand and what you'd like to build. We respond within a working day — with thoughts, a timeline, and an honest answer on whether we're the right web design studio for you.</p>
-    <div class="consult-actions reveal">
-      <a href="mailto:thomassmithdonald@gmail.com?subject=Web%20design%20enquiry&amp;body=Hi%20Thomas%2C%0A%0A" class="btn btn-primary">Email the studio <span class="ar" aria-hidden="true">→</span></a>
-      <a href="tel:+447827332393" class="btn btn-light">+44 7827 332393</a>
-    </div>
+    <p class="reveal">Send a note about your brand and what you'd like to build. I respond within a working day — with thoughts, a timeline, and an honest answer on whether I'm the right web design studio for you.</p>
+
+    <form class="consult-form reveal" id="lead-form" novalidate>
+      <div class="field">
+        <label for="lf-name">Your name</label>
+        <input id="lf-name" name="name" type="text" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="lf-email">Email</label>
+        <input id="lf-email" name="email" type="email" required autocomplete="email" inputmode="email" />
+      </div>
+      <div class="field">
+        <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
+        <input id="lf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" />
+      </div>
+      <div class="field">
+        <label for="lf-brand">Your brand <span class="opt">(optional)</span></label>
+        <input id="lf-brand" name="brand" type="text" autocomplete="organization" />
+      </div>
+      <div class="field">
+        <label for="lf-message">About your project</label>
+        <textarea id="lf-message" name="message" rows="4" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send enquiry <span class="ar" aria-hidden="true">→</span></button>
+      <p class="form-status" role="status" aria-live="polite" hidden></p>
+    </form>
+
+    <p class="form-fallback reveal">Or write directly — <a href="mailto:thomassmithdonald@gmail.com?subject=Web%20design%20enquiry&amp;body=Hi%20Thomas%2C%0A%0A">thomassmithdonald@gmail.com</a> · <a href="tel:+447827332393">+44 7827 332393</a></p>
+
     <p class="consult-meta reveal">Witney, Oxfordshire · serving the United Kingdom</p>
   </div>
 </section>
@@ -549,14 +630,14 @@ footer{padding:48px 0 36px;background:var(--beige)}
   <div class="wrap foot">
     <a href="#top" class="brand">web<em>design</em>hub</a>
     <span>© 2026 · Hand-coded by Thomas in Witney</span>
-    <a href="mailto:thomassmithdonald@gmail.com?subject=Web%20design%20enquiry&amp;body=Hi%20Thomas%2C%0A%0A">hello@webdesignhub.net</a>
+    <a href="mailto:thomassmithdonald@gmail.com?subject=Web%20design%20enquiry&amp;body=Hi%20Thomas%2C%0A%0A">thomassmithdonald@gmail.com</a>
   </div>
 </footer>
 
 <script>
   /* For anyone reading the source */
   console.log('%cWebDesignHub','font:500 28px/1.2 "Cormorant Garamond",serif;color:#1A1612');
-  console.log('%cBespoke web design for premium wellness and aesthetics brands. Hand-coded in Witney.\nOne file. No framework, no page builder, no template.\nhello@webdesignhub.net','color:#7A7165;font:400 13px/1.65 "Plus Jakarta Sans",sans-serif');
+  console.log('%cBespoke web design for premium wellness and aesthetics brands. Hand-coded in Witney.\nOne file. No framework, no page builder, no template.\nthomassmithdonald@gmail.com','color:#7A7165;font:400 13px/1.65 "Plus Jakarta Sans",sans-serif');
 
   /* Nav: solid bg once you've moved off the hero */
   const nav = document.getElementById('nav');
@@ -580,6 +661,52 @@ footer{padding:48px 0 36px;background:var(--beige)}
     });
   }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  /* ── Consultation form → n8n webhook ─────────────────────
+     Production endpoint. Swap to /webhook-test/... only while
+     listening from the n8n editor for a test event.
+  ──────────────────────────────────────────────────────── */
+  const N8N_WEBHOOK = 'https://tomdonald03.app.n8n.cloud/webhook/webdesignhub-lead';
+
+  const leadForm = document.getElementById('lead-form');
+  if (leadForm) {
+    const statusEl = leadForm.querySelector('.form-status');
+    const submitBtn = leadForm.querySelector('button[type="submit"]');
+    const originalBtn = submitBtn.innerHTML;
+
+    leadForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!leadForm.checkValidity()) { leadForm.reportValidity(); return; }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Sending…';
+      statusEl.hidden = true;
+      statusEl.removeAttribute('data-state');
+
+      const data = Object.fromEntries(new FormData(leadForm));
+      data.source = 'webdesignhub.net';
+      data.submitted_at = new Date().toISOString();
+      data.user_agent = navigator.userAgent;
+
+      try {
+        const res = await fetch(N8N_WEBHOOK, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+
+        // Success — replace form with a quiet confirmation
+        leadForm.innerHTML = '<p class="form-success">Thank you — your note is with me. I will reply within a working day.</p>';
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtn;
+        statusEl.hidden = false;
+        statusEl.setAttribute('data-state', 'error');
+        statusEl.textContent = 'Sorry — something went wrong sending the form. Please email thomassmithdonald@gmail.com directly.';
+      }
+    });
+  }
 </script>
 </body>
 </html>
