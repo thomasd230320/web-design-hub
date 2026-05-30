@@ -5,10 +5,11 @@
   Hand-coded by Thomas in Witney, Oxfordshire. One file.
   Set in Cormorant Garamond + Plus Jakarta Sans.
 -->
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script>document.documentElement.classList.add('js')</script>
 
 <title>Bespoke Web Design for Wellness &amp; Aesthetics | WebDesignHub</title>
 <meta name="description" content="Bespoke web design for premium wellness and aesthetics brands across the UK. Considered, mobile-first sites — hand-coded in Witney. Book a consultation." />
@@ -114,7 +115,7 @@
       "name": "Who do you build websites for?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We design and build bespoke websites for premium clinics, wellness practices, beauty studios and aesthetics brands across the United Kingdom — though good websites are good websites, so we'll consider any business that values craft."
+        "text": "I design and build bespoke websites for premium clinics, wellness practices, beauty studios and aesthetics brands across the United Kingdom — though good websites are good websites, so I'll consider any business that values craft."
       }
     },
     {
@@ -130,7 +131,7 @@
       "name": "How much does a bespoke website cost?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Every commission is quoted bespoke after the consultation, because no two brands need the same site. Prices start in the high hundreds for a focused single-page site and rise from there. We send a fixed written quote within a working day of our first call."
+        "text": "Every commission is quoted bespoke after the consultation, because no two brands need the same site. Prices start in the high hundreds for a focused single-page site and rise from there. I send a fixed written quote within a working day of our first call."
       }
     }
   ]
@@ -139,7 +140,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
 
 <style>
 /* ════════════════════════════════════════════════════
@@ -168,7 +169,7 @@ button{font-family:inherit;cursor:pointer;background:none;border:none;color:inhe
   --beige-2:  #EFEAE0;
   --ink:      #1A1612;
   --ink-2:    #4A4239;
-  --ink-3:    #7A7165;
+  --ink-3:    #6E665A;
   --terra:    #C87A53;
   --terra-d:  #A95C37;
   --line:     rgba(26,22,18,.10);
@@ -200,12 +201,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ink)}
 }
 .btn .ar{transition:transform .25s var(--ease);display:inline-block}
 .btn:hover .ar{transform:translateX(5px)}
-.btn-primary{background:var(--terra);color:#fff;border-color:var(--terra)}
-.btn-primary:hover{background:var(--terra-d);border-color:var(--terra-d)}
-.btn-quiet{background:transparent;color:var(--ink);border-color:var(--ink)}
-.btn-quiet:hover{background:var(--ink);color:var(--beige)}
-.btn-light{background:transparent;color:var(--beige);border-color:rgba(245,242,235,.36)}
-.btn-light:hover{background:var(--beige);color:var(--ink);border-color:var(--beige)}
+/* terra-d (not terra) so white label clears WCAG AA at 4.9:1 */
+.btn-primary{background:var(--terra-d);color:#fff;border-color:var(--terra-d)}
+.btn-primary:hover{background:var(--ink);border-color:var(--ink)}
 
 /* Nav */
 .nav{
@@ -369,7 +367,6 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ink)}
   font-family:var(--sans);font-size:1.1rem;line-height:1.65;
   color:rgba(245,242,235,.78);
 }
-.consult-actions{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
 .consult-meta{
   margin-top:48px;font-family:var(--sans);font-size:.78rem;
   letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,235,.5);
@@ -409,6 +406,8 @@ h1,h2,h3{font-family:var(--serif);font-weight:500;color:var(--ink)}
 .consult-form textarea{resize:vertical;min-height:96px;font-family:var(--sans)}
 .consult-form button[type="submit"]{margin-top:18px}
 .consult-form button:disabled{opacity:.6;cursor:wait}
+/* honeypot — off-screen, out of tab order and a11y tree */
+.hp{position:absolute!important;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
 .form-status{
   margin-top:18px;font-family:var(--sans);font-size:.94rem;
   color:rgba(245,242,235,.78);
@@ -443,13 +442,15 @@ footer{padding:48px 0 36px;background:var(--beige)}
 .foot a:hover{color:var(--terra-d)}
 .foot .brand{font-size:1.1rem}
 
-/* Motion — purposeful only */
-.reveal{opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
-.reveal.in{opacity:1;transform:none}
+/* Motion — purposeful only.
+   Guarded by .js so a script failure never leaves content hidden. */
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none}
+  /* match .js specificity so content shows immediately, no scroll dependency */
+  .js .reveal{opacity:1;transform:none}
 }
 
 /* Responsive */
@@ -465,7 +466,8 @@ footer{padding:48px 0 36px;background:var(--beige)}
   .wrap{padding:0 22px}
   .hero{padding:140px 0 80px}
   .hero-sub{margin:32px auto 40px}
-  .hero-actions .btn,.consult-actions .btn{flex:1 1 100%}
+  .hero-actions .btn{flex:1 1 100%}
+  .consult-form button[type="submit"]{width:100%;justify-content:center}
   .pull{padding:90px 0}
   .principles,.faq{padding:110px 0 120px}
   .process{padding:110px 0 120px}
@@ -547,8 +549,8 @@ footer{padding:48px 0 36px;background:var(--beige)}
     <article class="stage reveal">
       <div class="stage-no">Stage ii.</div>
       <div>
-        <h3>We design.</h3>
-        <p>Editorial layouts refined together over a few short rounds. You see real, browseable drafts of your website — never flat PDFs — and we polish until it reads exactly the way your treatments feel.</p>
+        <h3>I design.</h3>
+        <p>Editorial layouts refined together over a few short rounds. You see real, browseable drafts of your website — never flat PDFs — and I polish until it reads exactly the way your treatments feel.</p>
         <div class="stage-meta">Days 1–9 · unlimited rounds in scope</div>
       </div>
     </article>
@@ -556,8 +558,8 @@ footer{padding:48px 0 36px;background:var(--beige)}
     <article class="stage reveal">
       <div class="stage-no">Stage iii.</div>
       <div>
-        <h3>We build &amp; you launch.</h3>
-        <p>Hand-coded, fast, mobile-first. We connect your booking system, set the analytics, walk you through the website — and you press the launch button yourself.</p>
+        <h3>I build. You launch.</h3>
+        <p>Hand-coded, fast, mobile-first. I connect your booking system, set the analytics and walk you through the website — and you press the launch button yourself.</p>
         <div class="stage-meta">Days 10–14 · you own everything</div>
       </div>
     </article>
@@ -574,7 +576,7 @@ footer{padding:48px 0 36px;background:var(--beige)}
   <div class="qa-list">
     <article class="qa reveal">
       <h3>Who do you build websites for?</h3>
-      <p>We design and build bespoke websites for premium clinics, wellness practices, beauty studios and aesthetics brands across the United Kingdom — though good websites are good websites, so we'll consider any business that values craft.</p>
+      <p>I design and build bespoke websites for premium clinics, wellness practices, beauty studios and aesthetics brands across the United Kingdom — though good websites are good websites, so I'll consider any business that values craft.</p>
     </article>
     <article class="qa reveal">
       <h3>How long does a web design project take?</h3>
@@ -582,7 +584,7 @@ footer{padding:48px 0 36px;background:var(--beige)}
     </article>
     <article class="qa reveal">
       <h3>How much does a bespoke website cost?</h3>
-      <p>Every commission is quoted bespoke after the consultation, because no two brands need the same site. Prices start in the high hundreds for a focused single-page site and rise from there. We send a fixed written quote within a working day of our first call.</p>
+      <p>Every commission is quoted bespoke after the consultation, because no two brands need the same site. Prices start in the high hundreds for a focused single-page site and rise from there. I send a fixed written quote within a working day of our first call.</p>
     </article>
   </div>
 </section>
@@ -601,7 +603,7 @@ footer{padding:48px 0 36px;background:var(--beige)}
       </div>
       <div class="field">
         <label for="lf-email">Email</label>
-        <input id="lf-email" name="email" type="email" required autocomplete="email" inputmode="email" />
+        <input id="lf-email" name="email" type="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" />
       </div>
       <div class="field">
         <label for="lf-phone">Phone <span class="opt">(optional)</span></label>
@@ -614,6 +616,9 @@ footer{padding:48px 0 36px;background:var(--beige)}
       <div class="field">
         <label for="lf-message">About your project</label>
         <textarea id="lf-message" name="message" rows="4" required></textarea>
+      </div>
+      <div class="hp" aria-hidden="true">
+        <label>Leave this field empty<input type="text" name="company_url" tabindex="-1" autocomplete="off" /></label>
       </div>
       <button type="submit" class="btn btn-primary">Send enquiry <span class="ar" aria-hidden="true">→</span></button>
       <p class="form-status" role="status" aria-live="polite" hidden></p>
@@ -651,16 +656,21 @@ footer{padding:48px 0 36px;background:var(--beige)}
     });
   }, { passive: true });
 
-  /* Reveal-on-scroll */
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  /* Reveal-on-scroll. Failsafe: if IO is unsupported, show everything. */
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('in'));
+  }
 
   /* ── Consultation form → n8n webhook ─────────────────────
      Production endpoint. Swap to /webhook-test/... only while
@@ -674,16 +684,28 @@ footer{padding:48px 0 36px;background:var(--beige)}
     const submitBtn = leadForm.querySelector('button[type="submit"]');
     const originalBtn = submitBtn.innerHTML;
 
+    function showSuccess() {
+      // Replace the form with a confirmation that screen readers announce + focus.
+      leadForm.innerHTML = '<p class="form-success" tabindex="-1" role="status">Thank you — your note is with me. I will reply within a working day.</p>';
+      const msg = leadForm.querySelector('.form-success');
+      if (msg) msg.focus();
+    }
+
     leadForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!leadForm.checkValidity()) { leadForm.reportValidity(); return; }
+
+      const data = Object.fromEntries(new FormData(leadForm));
+
+      // Honeypot: a bot filled the hidden field — pretend success, send nothing.
+      if (data.company_url) { showSuccess(); return; }
+      delete data.company_url;
 
       submitBtn.disabled = true;
       submitBtn.innerHTML = 'Sending…';
       statusEl.hidden = true;
       statusEl.removeAttribute('data-state');
 
-      const data = Object.fromEntries(new FormData(leadForm));
       data.source = 'webdesignhub.net';
       data.submitted_at = new Date().toISOString();
       data.user_agent = navigator.userAgent;
@@ -695,9 +717,7 @@ footer{padding:48px 0 36px;background:var(--beige)}
           body: JSON.stringify(data),
         });
         if (!res.ok) throw new Error('HTTP ' + res.status);
-
-        // Success — replace form with a quiet confirmation
-        leadForm.innerHTML = '<p class="form-success">Thank you — your note is with me. I will reply within a working day.</p>';
+        showSuccess();
       } catch (err) {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtn;
