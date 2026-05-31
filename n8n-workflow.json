@@ -1,0 +1,184 @@
+{
+  "name": "WebDesignHub — Lead Capture",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "webdesignhub-lead",
+        "responseMode": "onReceived",
+        "responseData": "noData",
+        "options": {}
+      },
+      "id": "n1",
+      "name": "Webhook (lead form)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [200, 400],
+      "webhookId": "webdesignhub-lead-prod"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ─── Spam scoring + field normalisation ───\n// Reads the form data, scores it 0–10, attaches metadata for later branches.\nconst raw = $input.first().json;\nconst body = raw.body || raw;\n\nconst msg   = String(body.message || '').toLowerCase();\nconst name  = String(body.name    || '').toLowerCase();\nconst email = String(body.email   || '').toLowerCase();\n\nlet score = 0;\nconst reasons = [];\n\n// Honeypot (should never be filled by humans — form strips it client-side)\nif (body.company_url) { score += 10; reasons.push('honeypot-filled'); }\n\n// Spam keywords\nconst SPAM_WORDS = [\n  'viagra', 'casino', 'crypto', 'bitcoin', 'investment opportunity',\n  'seo services', 'rank #1', 'click here', 'free money', 'lottery',\n  'inheritance', 'urgent reply', 'congratulations you have won',\n  'cheap loan', 'work from home', 'make money fast'\n];\nfor (const w of SPAM_WORDS) {\n  if (msg.includes(w)) { score += 3; reasons.push(`keyword:${w}`); }\n}\n\n// Excessive URLs\nconst urlCount = (msg.match(/https?:\\/\\//g) || []).length;\nif (urlCount > 1) { score += urlCount * 2; reasons.push(`urls:${urlCount}`); }\nif (urlCount > 5) { score += 10; reasons.push('too-many-urls'); }\n\n// Disposable email domains\nconst BAD_DOMAINS = ['mailinator.com', 'tempmail', '10minute', 'guerrillamail', 'sharklasers'];\nfor (const d of BAD_DOMAINS) {\n  if (email.includes(d)) { score += 5; reasons.push(`disposable:${d}`); }\n}\n\n// Trivially short message\nif (msg.trim().length < 10) { score += 3; reasons.push('too-short'); }\n\n// ALL CAPS SHOUTING\nconst upper = msg.match(/[A-Z]/g) || [];\nif (msg.length > 30 && upper.length / msg.length > 0.4) {\n  score += 2; reasons.push('all-caps');\n}\n\n// Gibberish name (no vowels)\nif (name && /^[a-z]+$/.test(name) && !/[aeiou]/.test(name)) {\n  score += 2; reasons.push('gibberish-name');\n}\n\nreturn [{\n  json: {\n    name:    body.name    || '',\n    email:   body.email   || '',\n    phone:   body.phone   || '',\n    brand:   body.brand   || '',\n    message: body.message || '',\n    source:  body.source  || 'webdesignhub.net',\n    submitted_at: body.submitted_at || new Date().toISOString(),\n    _spam_score: score,\n    _is_spam: score >= 5,\n    _reasons: reasons.join(', ') || 'clean'\n  }\n}];"
+      },
+      "id": "n2",
+      "name": "Score (spam filter)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [420, 400]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "isClean",
+              "leftValue": "={{ $json._is_spam }}",
+              "rightValue": false,
+              "operator": { "type": "boolean", "operation": "equals" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "n3",
+      "name": "Is clean?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [640, 400]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "YOUR_GOOGLE_SHEET_ID",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Leads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $json.submitted_at }}",
+            "Name": "={{ $json.name }}",
+            "Email": "={{ $json.email }}",
+            "Phone": "={{ $json.phone }}",
+            "Brand": "={{ $json.brand }}",
+            "Message": "={{ $json.message }}",
+            "Source": "={{ $json.source }}",
+            "Spam score": "={{ $json._spam_score }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "n4",
+      "name": "Log to Google Sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.4,
+      "position": [880, 280],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "REPLACE_WITH_YOUR_GS_CRED_ID",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=🆕 *New lead — {{ $json.name }}*\n\n*Email:* `{{ $json.email }}`\n*Phone:* `{{ $json.phone || '—' }}`\n*Brand:* {{ $json.brand || '—' }}\n\n*Message:*\n{{ $json.message }}\n\n_Source: {{ $json.source }} · Score: {{ $json._spam_score }}_",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "n5",
+      "name": "Telegram (notify phone)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [880, 400],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_WITH_YOUR_TELEGRAM_CRED_ID",
+          "name": "Telegram bot"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.email }}",
+        "subject": "Thanks — your enquiry has reached me",
+        "emailType": "text",
+        "message": "=Hi {{ $json.name.split(' ')[0] || 'there' }},\n\nThanks for getting in touch about your project — I've got your note safely and I'll reply properly within a working day with thoughts, a likely timeline, and an honest take on whether I'm the right fit.\n\nIf you want to send anything else over in the meantime — brand references, an existing site, a quick voice note — just reply to this email.\n\nThomas\nWebDesignHub\n+44 7827 332393\nwebdesignhub.net",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "n6",
+      "name": "Auto-reply (Gmail)",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [880, 520],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "REPLACE_WITH_YOUR_GMAIL_CRED_ID",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "YOUR_TELEGRAM_CHAT_ID",
+        "text": "=🚫 *Spam blocked* — score {{ $json._spam_score }}\n\nFrom: `{{ $json.email }}`\nName: {{ $json.name }}\nReasons: _{{ $json._reasons }}_\n\nMessage: {{ $json.message.substring(0, 200) }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "n7",
+      "name": "Telegram (spam log)",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [880, 660],
+      "credentials": {
+        "telegramApi": {
+          "id": "REPLACE_WITH_YOUR_TELEGRAM_CRED_ID",
+          "name": "Telegram bot"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook (lead form)": {
+      "main": [[{ "node": "Score (spam filter)", "type": "main", "index": 0 }]]
+    },
+    "Score (spam filter)": {
+      "main": [[{ "node": "Is clean?", "type": "main", "index": 0 }]]
+    },
+    "Is clean?": {
+      "main": [
+        [
+          { "node": "Log to Google Sheet", "type": "main", "index": 0 },
+          { "node": "Telegram (notify phone)", "type": "main", "index": 0 },
+          { "node": "Auto-reply (Gmail)", "type": "main", "index": 0 }
+        ],
+        [{ "node": "Telegram (spam log)", "type": "main", "index": 0 }]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    { "name": "webdesignhub" },
+    { "name": "leads" }
+  ]
+}
