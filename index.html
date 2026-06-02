@@ -402,7 +402,9 @@ img,svg{display:block;max-width:100%}
   display:flex;flex-direction:column;gap:16px;
   transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .35s var(--ease);
   overflow:hidden;
+  text-decoration:none;color:inherit;cursor:pointer;
 }
+.svc:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .svc::before{
   /* teal underline wipes in on hover — sales-pull */
   content:'';position:absolute;left:0;right:0;bottom:0;height:2px;
@@ -888,24 +890,24 @@ footer{
     </div>
 
     <div class="svc-grid">
-      <article class="svc reveal">
+      <a class="svc reveal" href="/services/seo">
         <span class="svc-num">01 — Found</span>
         <h3>Found by the <i>right people</i>.</h3>
         <p>On-page SEO, clean semantic HTML and structured data — so when someone searches with real intent, you're the answer, not the eighth result.</p>
-        <span class="svc-arrow">See the approach →</span>
-      </article>
-      <article class="svc reveal" data-d="1">
-        <span class="svc-num">02 — Local</span>
-        <h3>Known by the <i>right neighbours</i>.</h3>
-        <p>Local schema, Google Business signals and Witney-specific keyword work. The "near me" searches that turn into bookings, calls and walk-ins.</p>
-        <span class="svc-arrow">See the difference →</span>
-      </article>
-      <article class="svc reveal" data-d="2">
+        <span class="svc-arrow">SEO for small business →</span>
+      </a>
+      <a class="svc reveal" data-d="1" href="/services/design">
+        <span class="svc-num">02 — Trusted</span>
+        <h3>Trusted at <i>first glance</i>.</h3>
+        <p>Bespoke design, professional typography and considered detail. The credibility cues that turn a search result into a click — and a click into an enquiry.</p>
+        <span class="svc-arrow">Bespoke web design →</span>
+      </a>
+      <a class="svc reveal" data-d="2" href="/services/speed">
         <span class="svc-num">03 — Fast</span>
         <h3>Ranked for the <i>right reasons</i>.</h3>
         <p>Core Web Vitals are a ranking signal — and a bounce signal. Hand-coded, sub-100&nbsp;KB pages mean Google rewards you and visitors stay.</p>
-        <span class="svc-arrow">See the proof →</span>
-      </article>
+        <span class="svc-arrow">Fast-loading websites →</span>
+      </a>
     </div>
   </div>
 </section>
