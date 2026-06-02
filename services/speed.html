@@ -105,6 +105,19 @@ a:hover{color:var(--accent-l)}
 .crumb a{color:var(--ink-3)}
 .crumb a:hover{color:var(--accent)}
 .crumb span{margin:0 8px;color:var(--line-2)}
+.back-bar{padding:22px 0 0}
+.back-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:11px 20px 11px 16px;
+  border:1px solid var(--line-2);border-radius:999px;
+  font-family:var(--sans);font-size:14px;font-weight:500;
+  color:var(--ink-2);background:transparent;
+  transition:color .25s var(--ease),border-color .25s var(--ease),background .25s var(--ease);
+}
+.back-btn:hover{color:var(--accent);border-color:var(--accent);background:rgba(56,232,200,.06)}
+.back-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.back-btn .arr{font-size:16px;line-height:1;display:inline-block;transition:transform .25s var(--ease)}
+.back-btn:hover .arr{transform:translateX(-3px)}
 .hero{padding:80px 0 60px;border-bottom:1px solid var(--line)}
 .eyebrow{display:inline-block;font-family:var(--mono);font-size:13px;letter-spacing:.08em;color:var(--accent);text-transform:uppercase;margin-bottom:18px}
 h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;max-width:18ch;margin-bottom:24px}
@@ -170,10 +183,8 @@ footer{padding:60px 0 40px;background:var(--bg);color:var(--ink-2)}
   </div>
 </nav>
 
-<div class="wrap">
-  <nav class="crumb" aria-label="Breadcrumb">
-    <a href="/">Home</a> <span>/</span> <a href="/#services">Services</a> <span>/</span> Fast-loading websites
-  </nav>
+<div class="wrap back-bar">
+  <a href="/" class="back-btn"><span class="arr" aria-hidden="true">←</span> Back to webdesignhub.net</a>
 </div>
 
 <header class="hero">
