@@ -491,57 +491,17 @@ img,svg{display:block;max-width:100%}
 }
 .mockup-live i{width:5px;height:5px;border-radius:50%;background:#3ea25b;animation:livePulse 2.2s ease-in-out infinite}
 
-/* Burford fake preview — Cotswolds editorial feel */
+/* Burford screenshot preview */
 .mockup-body.burford{
-  position:relative;aspect-ratio:4/3;
-  padding:46px 40px 42px;
-  background:
-    radial-gradient(ellipse 60% 40% at 80% 20%, rgba(180,140,100,.16) 0%, transparent 60%),
-    linear-gradient(170deg,#F4ECDD 0%,#E5D6BD 100%);
-  color:#2a2520;
-  display:flex;flex-direction:column;justify-content:flex-end;gap:14px;
+  position:relative;aspect-ratio:1831/943;
+  background:#0e1015;
   overflow:hidden;
 }
-.mockup-body.burford::before{
-  /* slow stone-coloured wash, evokes Cotswold limestone */
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 90% 60% at 10% 100%, rgba(180,160,130,.32) 0%, transparent 65%);
+.mockup-body.burford img{
+  display:block;width:100%;height:100%;object-fit:cover;object-position:top center;
+  transition:transform .6s var(--ease);
 }
-.burford-eyebrow{
-  position:absolute;top:30px;left:40px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(42,37,32,.62);
-}
-.burford-eyebrow::before{
-  content:'— ';color:#9a7e58;
-}
-.burford-h{
-  position:relative;
-  font-family:var(--serif);font-weight:400;
-  font-size:clamp(2.4rem,5vw,4.2rem);line-height:.96;letter-spacing:-.025em;
-  color:#1a1612;
-}
-.burford-h i{font-style:italic;color:#9a7e58}
-.burford-lede{
-  position:relative;
-  font-family:var(--sans);font-size:.92rem;line-height:1.55;
-  color:rgba(42,37,32,.78);max-width:34ch;
-}
-.burford-cta{
-  position:relative;align-self:flex-start;
-  font-family:var(--sans);font-weight:600;font-size:12px;
-  padding:9px 18px;border-radius:9999px;
-  background:#1a1612;color:#F4ECDD;letter-spacing:.02em;
-  margin-top:4px;
-}
-.burford-tags{
-  position:absolute;top:28px;right:40px;display:flex;gap:6px;
-}
-.burford-tags span{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
-  padding:4px 9px;border-radius:9999px;
-  border:1px solid rgba(42,37,32,.18);color:rgba(42,37,32,.62);
-}
+.mockup:hover .mockup-body.burford img{transform:scale(1.02)}
 
 .mockup-hover-cta{
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.92);
@@ -934,13 +894,7 @@ footer{
           <span class="mockup-live" aria-hidden="true"><i></i>Live</span>
         </div>
         <div class="mockup-body burford">
-          <span class="burford-eyebrow">A Cotswolds Guide</span>
-          <div class="burford-h">Burford,<br/><i>slowly</i>.</div>
-          <p class="burford-lede">Where to stay, where to eat, and what to do in one of England's most beautiful market towns.</p>
-          <div class="burford-cta">Explore →</div>
-          <div class="burford-tags">
-            <span>STAY</span><span>EAT</span><span>DO</span>
-          </div>
+          <img src="/burford-preview.jpg" alt="Burford &amp; Beyond — homepage hero: a vintage double-decker bus rolling through the Cotswolds countryside, with the headline 'A restaurant that rolls through the English countryside' overlaid." width="1600" height="824" loading="lazy" decoding="async" />
         </div>
         <div class="mockup-hover-cta" aria-hidden="true">View live ↗</div>
       </div>
