@@ -2,7 +2,7 @@
 <!--
   WebDesignHub — webdesignhub.net
   Hand-coded by Thomas in Witney, Oxfordshire. One file.
-  No page builder, no theme, no framework. hello@webdesignhub.net
+  No page builder, no theme, no framework. tdonald4646@gmail.com
 -->
 <html lang="en-GB">
 <head>
@@ -56,7 +56,7 @@
   "description": "Hand-coded, conversion-led websites for small businesses in Witney, Oxford and across Oxfordshire. Designed and built by one person, never templated.",
   "url": "https://webdesignhub.net/",
   "telephone": "+447827332393",
-  "email": "hello@webdesignhub.net",
+  "email": "tdonald4646@gmail.com",
   "priceRange": "From £395",
   "currenciesAccepted": "GBP",
   "paymentAccepted": "Bank transfer, Card",
@@ -547,7 +547,7 @@ img,svg{display:block;max-width:100%}
 }
 .scrolly-bg-0{background-color:#2d281a;background-image:url('/img/bg-cafe.webp')}
 .scrolly-bg-1{background-color:#1a2030;background-image:url('/img/bg-night.webp')}
-.scrolly-bg-2{background-color:#332a1a;background-image:url('/img/bg-field.webp')}
+.scrolly-bg-2{background-color:#241a12;background-image:url('/img/bg-trade.webp')}
 .scrolly-bg-3{background-color:#3a2218;background-image:url('/img/bg-forest.webp')}
 .scrolly[data-step="0"] .scrolly-bg-0,
 .scrolly[data-step="1"] .scrolly-bg-1,
@@ -735,20 +735,28 @@ img,svg{display:block;max-width:100%}
 /* ════════════════════════════════════════════════════
    TESTIMONIALS — dark band
 ═══════════════════════════════════════════════════ */
-.quotes{padding:120px 0;background:var(--bar);color:#F5EFE6}
-.quotes-inner{max-width:1140px;margin:0 auto;padding:0 24px}
-.quotes-head{margin-bottom:50px;max-width:60ch}
-.quotes-head .eyebrow{background:rgba(255,211,181,.16);color:var(--peach)}
-.quotes-head h2{color:#fff;font-weight:500;font-size:clamp(2rem,4.2vw,3.2rem);letter-spacing:-.025em;line-height:1.08}
-.quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.quote{
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  border-radius:24px;padding:32px;display:flex;flex-direction:column;
+.apps{padding:120px 0;background:var(--bar);color:#F5EFE6}
+.apps-inner{max-width:1140px;margin:0 auto;padding:0 24px}
+.apps-head{margin-bottom:50px;max-width:62ch}
+.apps-head .eyebrow{background:rgba(255,211,181,.16);color:var(--peach)}
+.apps-head h2{color:#fff;font-weight:500;font-size:clamp(2rem,4.2vw,3.2rem);letter-spacing:-.025em;line-height:1.08}
+.apps-head h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
+.apps-head p{margin-top:18px;color:rgba(245,239,230,.78);font-size:1.08rem;line-height:1.6;max-width:56ch}
+.apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.app-card{
+  display:flex;gap:18px;padding:26px 24px;border-radius:20px;
+  background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.10);
+  transition:background-color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease);
 }
-.quote-stars{color:var(--peach);font-size:.95rem;letter-spacing:2px;margin-bottom:16px}
-.quote p{font-family:var(--serif);font-size:1.12rem;line-height:1.5;color:#F5EFE6;flex:1}
-.quote-by{margin-top:22px;font-size:.86rem;color:rgba(245,239,230,.6)}
-.quote-by b{display:block;color:#fff;font-weight:600;font-size:.95rem;margin-bottom:2px}
+.app-card:hover{background:rgba(255,255,255,.10);border-color:rgba(255,211,181,.38);transform:translateY(-3px)}
+.app-icon{width:72px;height:72px;border-radius:17px;flex-shrink:0;box-shadow:0 8px 20px -8px rgba(0,0,0,.6)}
+.app-body{display:flex;flex-direction:column;min-width:0}
+.app-body b{font-weight:600;font-size:1.08rem;color:#fff;letter-spacing:-.01em}
+.app-meta{margin-top:3px;font-size:.8rem;color:rgba(245,239,230,.55);letter-spacing:.02em}
+.app-body p{margin-top:12px;font-size:.94rem;line-height:1.5;color:rgba(245,239,230,.82);flex:1}
+.app-link{margin-top:16px;font-size:.86rem;font-weight:600;color:var(--peach)}
+.app-card:hover .app-link{color:#fff}
+.apps-note{margin-top:44px;font-family:var(--serif);font-style:italic;text-align:center;font-size:1.05rem;color:rgba(245,239,230,.62)}
 
 /* ════════════════════════════════════════════════════
    FAQ — soft peach pill cards
@@ -815,7 +823,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .scrolly-text p{margin-left:auto;margin-right:auto}
   .studio-points{grid-template-columns:repeat(3,1fr);gap:22px}
   .work-grid{grid-template-columns:1fr 1fr}
-  .quotes-grid{grid-template-columns:1fr 1fr}
+  .apps-grid{grid-template-columns:1fr 1fr}
   .tariff{grid-template-columns:repeat(2,1fr)}
   .foot-top{grid-template-columns:1fr 1fr;gap:32px}
 }
@@ -823,13 +831,13 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .studio-points{grid-template-columns:1fr;gap:20px}
   .work-grid{grid-template-columns:1fr}
   .work-card:first-child .browser-shot{aspect-ratio:16/10}
-  .quotes-grid{grid-template-columns:1fr}
+  .apps-grid{grid-template-columns:1fr}
 }
 @media (max-width:680px){
   .hero-bg{background-image:url('/img/bg-cafe-m.webp')}
   .scrolly-bg-0{background-image:url('/img/bg-cafe-m.webp')}
   .scrolly-bg-1{background-image:url('/img/bg-night-m.webp')}
-  .scrolly-bg-2{background-image:url('/img/bg-field-m.webp')}
+  .scrolly-bg-2{background-image:url('/img/bg-trade-m.webp')}
   .scrolly-bg-3{background-image:url('/img/bg-forest-m.webp')}
   .stat-bg{background-image:url('/img/bg-forest-m.webp')}
   .cta-bg{background-image:url('/img/bg-cta-m.webp')}
@@ -857,7 +865,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .rates{padding:90px 0}
   .tariff{grid-template-columns:1fr}
   .tier-pro{order:-1}
-  .quotes{padding:84px 0}
+  .apps{padding:84px 0}
   .faq{padding:80px 0}
   .faq-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr;gap:30px}
@@ -890,7 +898,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 </head>
 <body>
 
-<div class="bar">Booking new website projects for summer 2026. <a href="#contact">Get a quote →</a></div>
+<div class="bar">Booking new projects now — I only take on a few at a time. <a href="#contact">Get a quote →</a></div>
 
 <header class="header">
   <a href="#top" class="brand">web<b>design</b>hub</a>
@@ -990,7 +998,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 </section>
 
 <!-- ░░ SCROLLY ░░ -->
-<section class="scrolly" id="work" data-step="0" data-steps="4" aria-label="The kinds of businesses I build for">
+<section class="scrolly" id="work" data-step="0" data-steps="4" aria-label="Concept designs for four kinds of local business">
   <div class="scrolly-bg scrolly-bg-0" data-step="0" aria-hidden="true"></div>
   <div class="scrolly-bg scrolly-bg-1" data-step="1" aria-hidden="true"></div>
   <div class="scrolly-bg scrolly-bg-2" data-step="2" aria-hidden="true"></div>
@@ -1197,9 +1205,9 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <section class="work" id="work-showcase">
   <div class="work-inner">
     <div class="work-head reveal">
-      <span class="eyebrow">Selected work</span>
-      <h2>A look at the kind of sites <em>I build.</em></h2>
-      <p>Three examples across very different trades. Different photography, different tone, same goal: a site that loads fast, looks like the business, and makes the next step obvious.</p>
+      <span class="eyebrow">Concept designs</span>
+      <h2>The kind of site <em>I’d build you.</em></h2>
+      <p>Straight up: these are concepts I designed to show how I work, not past clients. WebDesignHub is new, and I’d rather show you honest work than invent a client list. Three very different trades, one goal each — load fast, look like the business, make the next step obvious.</p>
     </div>
 
     <div class="work-grid">
@@ -1208,7 +1216,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
         <div class="browser">
           <div class="browser-bar" aria-hidden="true">
             <div class="browser-dots"><i></i><i></i><i></i></div>
-            <div class="browser-url">bridgehousecoffee.co.uk</div>
+            <div class="browser-url">Concept · café &amp; brunch</div>
           </div>
           <div class="browser-shot" style="background-image:url('/img/work-coffee.webp')" role="img" aria-label="Example café website design: Bridge House Coffee">
             <div class="shot-nav">
@@ -1222,7 +1230,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             </div>
           </div>
         </div>
-        <div class="work-cap"><b>Bridge House Coffee</b><span>Café &amp; brunch · Witney</span></div>
+        <div class="work-cap"><b>Café &amp; brunch</b><span>Concept design</span></div>
       </div>
 
       <!-- Two-up -->
@@ -1230,7 +1238,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
         <div class="browser">
           <div class="browser-bar" aria-hidden="true">
             <div class="browser-dots"><i></i><i></i><i></i></div>
-            <div class="browser-url">elmgrovebarn.co.uk</div>
+            <div class="browser-url">Concept · wedding venue</div>
           </div>
           <div class="browser-shot" style="background-image:url('/img/work-wedding.webp')" role="img" aria-label="Example wedding venue website design: Elmgrove Barn">
             <div class="shot-nav">
@@ -1244,14 +1252,14 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             </div>
           </div>
         </div>
-        <div class="work-cap"><b>Elmgrove Barn</b><span>Wedding venue · West Oxfordshire</span></div>
+        <div class="work-cap"><b>Wedding venue</b><span>Concept design</span></div>
       </div>
 
       <div class="work-card reveal">
         <div class="browser">
           <div class="browser-bar" aria-hidden="true">
             <div class="browser-dots"><i></i><i></i><i></i></div>
-            <div class="browser-url">greenacregardens.co.uk</div>
+            <div class="browser-url">Concept · landscaping</div>
           </div>
           <div class="browser-shot" style="background-image:url('/img/work-landscape.webp')" role="img" aria-label="Example landscaping website design: Greenacre Gardens">
             <div class="shot-nav">
@@ -1265,11 +1273,11 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             </div>
           </div>
         </div>
-        <div class="work-cap"><b>Greenacre Gardens</b><span>Landscaping · Oxfordshire</span></div>
+        <div class="work-cap"><b>Landscaping</b><span>Concept design</span></div>
       </div>
     </div>
 
-    <p class="work-note reveal">Got a project in mind? Yours could be next.</p>
+    <p class="work-note reveal">Yours would be the real one. Let’s make it the first.</p>
   </div>
 </section>
 
@@ -1380,31 +1388,48 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   </div>
 </section>
 
-<!-- ░░ TESTIMONIALS ░░ -->
-<!-- NOTE: These are placeholder testimonials for layout. Replace with real, verifiable client quotes before launch. -->
-<section class="quotes" id="reviews">
-  <div class="quotes-inner">
-    <div class="quotes-head reveal">
-      <span class="eyebrow">In their words</span>
-      <h2>What it's like to work with me.</h2>
+<!-- ░░ MY APPS ░░ -->
+<section class="apps" id="apps">
+  <div class="apps-inner">
+    <div class="apps-head reveal">
+      <span class="eyebrow">Also built by me</span>
+      <h2>Three apps of my own, <em>live on the App Store.</em></h2>
+      <p>I don't only build websites. These are my own iOS apps — designed, built and shipped by me, through Apple's review process and out in the world. Free, no adverts, nothing to buy inside them.</p>
     </div>
-    <div class="quotes-grid">
-      <div class="quote reveal">
-        <div class="quote-stars" aria-hidden="true">★★★★★</div>
-        <p>"Thomas understood what my café needed before I could put it into words. The new site looks brilliant on a phone and we've had bookings through it every week since."</p>
-        <div class="quote-by"><b>Hannah</b>Café owner, Witney</div>
-      </div>
-      <div class="quote reveal">
-        <div class="quote-stars" aria-hidden="true">★★★★★</div>
-        <p>"Quick, clear and no jargon. I had a working site in under a week and the quote requests started coming in almost straight away."</p>
-        <div class="quote-by"><b>Dave</b>Electrician, Carterton</div>
-      </div>
-      <div class="quote reveal">
-        <div class="quote-stars" aria-hidden="true">★★★★★</div>
-        <p>"Honestly the easiest part of starting my business. He sorted the lot, domain, design, everything, and it actually looks like us."</p>
-        <div class="quote-by"><b>Priya</b>Florist, Oxford</div>
-      </div>
+
+    <div class="apps-grid">
+      <a class="app-card reveal" href="https://apps.apple.com/gb/app/my-recipe-booklet/id6801676531" target="_blank" rel="noopener">
+        <img class="app-icon" src="/img/apps/booklet-icon.png" width="72" height="72" loading="lazy" decoding="async" alt="My Recipe Booklet app icon" />
+        <div class="app-body">
+          <b>My Recipe Booklet</b>
+          <span class="app-meta">Food &amp; Drink · Free</span>
+          <p>For the recipes that live on index cards and the backs of envelopes. Photograph them, keep them, and never lose your mum's handwriting.</p>
+          <span class="app-link">View on the App Store →</span>
+        </div>
+      </a>
+
+      <a class="app-card reveal" href="https://apps.apple.com/gb/app/meal-maker/id6806764728" target="_blank" rel="noopener">
+        <img class="app-icon" src="/img/apps/mealmaker-icon.png" width="72" height="72" loading="lazy" decoding="async" alt="Meal Maker app icon" />
+        <div class="app-body">
+          <b>Meal Maker</b>
+          <span class="app-meta">Food &amp; Drink · Free</span>
+          <p>Plans the week's meals, works out what the shopping will actually cost, and walks you through the cooking. The family can vote on what lands on the table.</p>
+          <span class="app-link">View on the App Store →</span>
+        </div>
+      </a>
+
+      <a class="app-card reveal" href="https://apps.apple.com/gb/app/weanwell-baby-weaning/id6801144104" target="_blank" rel="noopener">
+        <img class="app-icon" src="/img/apps/weanwell-icon.png" width="72" height="72" loading="lazy" decoding="async" alt="Weanwell app icon" />
+        <div class="app-body">
+          <b>Weanwell</b>
+          <span class="app-meta">Health &amp; Fitness · Free</span>
+          <p>A calm companion for weaning a baby — first purées through to family meals, with allergen tracking and NHS-aligned guidance.</p>
+          <span class="app-link">View on the App Store →</span>
+        </div>
+      </a>
     </div>
+
+    <p class="apps-note reveal">If I'll sweat the details on something I give away, you can guess how I'll treat the site your customers judge you by.</p>
   </div>
 </section>
 
@@ -1454,7 +1479,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     <h2>Let's build <em>yours.</em></h2>
     <p>A short, honest email is all it takes. I'll get back to you within a few hours with a straight answer on whether I'm the right person for the job.</p>
     <div class="cta-actions">
-      <a href="mailto:hello@webdesignhub.net" class="pill pill-brand pill-lg">Write to me →</a>
+      <a href="mailto:tdonald4646@gmail.com" class="pill pill-brand pill-lg">Write to me →</a>
       <a href="tel:+447827332393" class="pill pill-lg">Call · +44 7827 332393</a>
     </div>
   </div>
@@ -1480,7 +1505,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       <div>
         <p class="foot-h">Common</p>
         <ul>
-          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#apps">My apps</a></li>
           <li><a href="#faq">FAQs</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="#areas">Areas covered</a></li>
@@ -1489,7 +1514,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       <div>
         <p class="foot-h">Get in touch</p>
         <ul>
-          <li><a href="mailto:hello@webdesignhub.net">hello@webdesignhub.net</a></li>
+          <li><a href="mailto:tdonald4646@gmail.com">tdonald4646@gmail.com</a></li>
           <li><a href="tel:+447827332393">+44 7827 332393</a></li>
           <li>Witney, Oxfordshire · UK</li>
         </ul>
@@ -1653,11 +1678,27 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     size();
     window.addEventListener('resize', size, { passive: true });
 
+    /* Pointer tracking, in normalised device coords so it can be projected into
+       the scene each frame and used to push the embers around. */
+    const pointer = { x: 0, y: 0, wx: 1e9, wy: 1e9, active: false };
     section.addEventListener('pointermove', (e) => {
       const r = section.getBoundingClientRect();
-      state.targetX = ((e.clientX - r.left) / r.width  - 0.5) * 0.8;
-      state.targetY = ((e.clientY - r.top)  / r.height - 0.5) * 0.6;
+      const nx = (e.clientX - r.left) / r.width;
+      const ny = (e.clientY - r.top)  / r.height;
+      state.targetX = (nx - 0.5) * 0.8;
+      state.targetY = (ny - 0.5) * 0.6;
+      pointer.x = nx * 2 - 1;
+      pointer.y = -(ny * 2 - 1);
+      pointer.active = true;
     });
+    section.addEventListener('pointerleave', () => { pointer.active = false; });
+
+    /* Per-ember velocity, so a nudge from the cursor decays instead of snapping back. */
+    const velX = new Float32Array(COUNT);
+    const velY = new Float32Array(COUNT);
+    const ray = new THREE.Vector3();
+    const PUSH_RADIUS = 3.6;
+    const PUSH_FORCE  = 70;
 
     const io = new IntersectionObserver(([entry]) => {
       state.visible = entry.isIntersecting;
@@ -1673,14 +1714,48 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     scenes.push(function tick(dt, t) {
       if (!state.visible) return;
 
+      /* Where the cursor lands on the z=0 plane, in world units. */
+      if (pointer.active) {
+        ray.set(pointer.x, pointer.y, 0.5).unproject(camera).sub(camera.position).normalize();
+        const travel = ray.z !== 0 ? -camera.position.z / ray.z : 0;
+        pointer.wx = camera.position.x + ray.x * travel;
+        pointer.wy = camera.position.y + ray.y * travel;
+      }
+
       for (let i = 0; i < COUNT; i++) {
         const i3 = i * 3;
+
+        /* Embers near the cursor get shoved aside, with a little swirl so it reads
+           as something alive scattering rather than a physics demo. */
+        if (pointer.active) {
+          const dx = positions[i3]     - pointer.wx;
+          const dy = positions[i3 + 1] - pointer.wy;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < PUSH_RADIUS * PUSH_RADIUS && d2 > 1e-4) {
+            const d = Math.sqrt(d2);
+            const falloff = (1 - d / PUSH_RADIUS);
+            const f = falloff * falloff * PUSH_FORCE * dt;
+            velX[i] += (dx / d) * f - (dy / d) * f * 0.35;
+            velY[i] += (dy / d) * f + (dx / d) * f * 0.35;
+          }
+        }
+
+        velX[i] *= 0.94;
+        velY[i] *= 0.94;
+
+        positions[i3]     += velX[i] * dt;
+        positions[i3 + 1] += velY[i] * dt;
+
         positions[i3 + 1] += drift[i] * dt * motionScale;
         positions[i3]     += Math.sin(t * 0.35 + phase[i]) * 0.002 * wobble[i] * motionScale;
         if (positions[i3 + 1] > 7) {
           positions[i3 + 1] = -7.5;
           positions[i3]     = (Math.random() - 0.5) * 22;
+          velX[i] = velY[i] = 0;
         }
+        /* Keep strays from being flung out of frame for good. */
+        if (positions[i3] > 13)  positions[i3] = 13;
+        if (positions[i3] < -13) positions[i3] = -13;
       }
       posAttr.needsUpdate = true;
 
@@ -1717,7 +1792,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <script>
   /* For anyone reading the source */
   console.log('%cWebDesignHub','font:700 26px/1.2 "Plus Jakarta Sans",sans-serif;color:#C44B1F');
-  console.log('%cHand-written HTML, CSS & JS. One file. No framework.\nLike what you see? hello@webdesignhub.net','color:#7A6353;font:400 13px/1.6 system-ui');
+  console.log('%cHand-written HTML, CSS & JS. One file. No framework.\nLike what you see? tdonald4646@gmail.com','color:#7A6353;font:400 13px/1.6 system-ui');
 
   /* Quiet scroll reveals */
   const io = new IntersectionObserver((entries) => {
