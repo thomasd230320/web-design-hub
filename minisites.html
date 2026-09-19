@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mini-sites preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#141210;
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  padding:60px 40px;
+}
+.rig{
+  display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start;justify-content:center;
+}
+.rig-item{display:flex;flex-direction:column;align-items:center;gap:16px}
+.rig-item h2{color:#eee;font-size:.85rem;font-weight:600;letter-spacing:.02em;opacity:.7}
+
+/* ═══ PHONE FRAME (Part 4) ═══ */
+.phone{
+  --w:300px;
+  position:relative;width:var(--w);aspect-ratio:9/19.5;
+  background:#0F0B0A;border-radius:52px;padding:11px;
+  box-shadow:
+    0 0 0 1.5px #2A2321,
+    0 0 0 3px #0A0807,
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 60px 120px -30px rgba(0,0,0,.65),
+    0 30px 60px -30px rgba(0,0,0,.5);
+  transform-style:preserve-3d;will-change:transform;
+}
+.phone::before{
+  content:'';position:absolute;left:-3px;top:22%;width:3px;height:9%;
+  background:#1B1614;border-radius:2px 0 0 2px;
+  box-shadow:0 60px 0 0 #1B1614, 0 108px 0 0 #1B1614;
+}
+.phone::after{
+  content:'';position:absolute;right:-3px;top:26%;width:3px;height:13%;
+  background:#1B1614;border-radius:0 2px 2px 0;
+}
+.phone-screen{
+  position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;
+  background:#000;
+}
+.phone-island{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:86px;height:26px;border-radius:14px;background:#000;z-index:5;
+}
+.phone-screen::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:6;
+  background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 32%);
+  border-radius:inherit;
+}
+
+/* ═══ SHARED MINI-SITE SCAFFOLD ═══ */
+.ms{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+.ms-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 22px 4px;font-size:.72rem;font-weight:600;letter-spacing:.02em;
+  position:relative;z-index:4;flex-shrink:0;
+}
+.ms-status .ms-sig{width:18px;height:10px;border-radius:2px;background:currentColor;opacity:.7}
+.ms-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 20px 14px;flex-shrink:0;position:relative;z-index:4;
+}
+.ms-logo{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.ms-burger{width:22px;height:14px;position:relative}
+.ms-burger::before,.ms-burger::after{
+  content:'';position:absolute;left:0;right:0;height:2px;background:currentColor;border-radius:1px;
+}
+.ms-burger::before{top:0}
+.ms-burger::after{bottom:0}
+.ms-burger{opacity:.85}
+.ms-burger > span{position:absolute;top:6px;left:0;right:0;height:2px;background:currentColor;border-radius:1px}
+
+.ms-page{
+  flex:1;overflow-y:auto;position:relative;
+  scrollbar-width:none;
+}
+.ms-page::-webkit-scrollbar{display:none}
+.ms-home{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;border-radius:2px;background:rgba(0,0,0,.35);z-index:6}
+
+.ms-sec{padding:34px 20px}
+.ms-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 24px;border-radius:999px;
+  font-size:.92rem;font-weight:700;letter-spacing:.01em;
+  cursor:pointer;
+}
+.ms-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.65;display:block;margin-bottom:8px}
+.ms-icon{width:20px;height:20px;flex-shrink:0}
+.ms-foot{padding:26px 20px 34px;font-size:.78rem;text-align:center;opacity:.55}
+
+/* ═══ 0 · CAFÉ ═══ */
+.ms-cafe{background:#FFF6EC;color:#2A1A12;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-cafe h3,.ms-cafe h4,.ms-cafe .ms-serif{font-family:'Newsreader',Georgia,serif}
+.ms-cafe .ms-status,.ms-cafe .ms-nav{color:#2A1A12}
+.ms-cafe .ms-hero{
+  background-size:cover;background-position:center;
+  height:340px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-cafe .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,5,.05) 0%,rgba(20,10,5,.72) 100%)}
+.ms-cafe .ms-hero h3{position:relative;color:#FFF6EC;font-size:2rem;line-height:1.12;font-weight:500;margin-bottom:16px}
+.ms-cafe .ms-hero .ms-btn{position:relative;background:#C44B1F;color:#FFF6EC;width:fit-content}
+.ms-cafe .ms-sec h4{font-size:1.4rem;font-weight:500;margin-bottom:18px;color:#2A1A12}
+.ms-menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(42,26,18,.1)}
+.ms-menu-item:last-child{border-bottom:none}
+.ms-menu-item .mi-name{font-weight:600;font-size:.98rem}
+.ms-menu-item .mi-desc{font-size:.8rem;opacity:.6;margin-top:3px}
+.ms-menu-item .mi-price{font-weight:700;color:#C44B1F;font-size:.95rem;white-space:nowrap;padding-left:12px}
+.ms-hours{background:#F4E9DA}
+.ms-hours-grid{display:grid;grid-template-columns:1fr auto;row-gap:10px;font-size:.9rem}
+.ms-hours-grid .hd{opacity:.65}
+.ms-hours-grid .ht{font-weight:600;text-align:right}
+.ms-map{padding-top:0}
+.ms-map-tile{
+  height:140px;border-radius:16px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#E7D9C4 0%,#D8C4A6 100%);
+}
+.ms-map-tile::before,.ms-map-tile::after{content:'';position:absolute;background:rgba(42,26,18,.14)}
+.ms-map-tile::before{top:0;bottom:0;left:38%;width:2px}
+.ms-map-tile::after{left:0;right:0;top:62%;height:2px}
+.ms-pin{position:absolute;top:44%;left:56%;width:26px;height:26px;transform:translate(-50%,-100%)}
+.ms-cafe .ms-cta{margin:6px 20px 0;background:#2A1A12;color:#FFF6EC;border-radius:18px;padding:26px 22px;text-align:center}
+.ms-cafe .ms-cta h5{font-family:'Newsreader',serif;font-size:1.3rem;font-weight:500;margin-bottom:14px}
+.ms-cafe .ms-cta .ms-btn{background:#FFD3B5;color:#2A1A12;width:100%}
+.ms-cafe .ms-foot{color:#2A1A12}
+
+/* ═══ 1 · BARBER ═══ */
+.ms-barber{background:#141414;color:#F2EDE6;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-barber .ms-status,.ms-barber .ms-nav{color:#F2EDE6}
+.ms-barber .ms-logo{color:#C9A25C;letter-spacing:.02em}
+.ms-barber .ms-hero{
+  background-size:cover;background-position:center 25%;
+  height:320px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-barber .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.15) 0%,rgba(10,10,10,.88) 100%)}
+.ms-barber .ms-hero .ms-eyebrow{position:relative;color:#C9A25C}
+.ms-barber .ms-hero h3{position:relative;font-size:1.9rem;font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.01em}
+.ms-barber .ms-hero .ms-btn{position:relative;background:#C9A25C;color:#141414;width:fit-content}
+.ms-barber .ms-sec h4{font-size:1.2rem;font-weight:800;margin-bottom:16px;letter-spacing:-.01em}
+.ms-barber .ms-sec{background:#141414}
+.barber-card{
+  display:flex;align-items:center;gap:14px;padding:16px;
+  background:#1D1D1D;border-radius:14px;margin-bottom:12px;
+  border:1px solid rgba(201,162,92,.15);
+}
+.barber-avatar{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#C9A25C,#8A6B36);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#141414;font-size:.95rem;
+}
+.barber-info b{display:block;font-size:.95rem;font-weight:700}
+.barber-info span{font-size:.78rem;opacity:.6}
+.slot-row{display:flex;gap:8px;margin-top:12px}
+.slot-pill{
+  flex:1;text-align:center;padding:8px 0;border-radius:999px;font-size:.78rem;font-weight:600;
+  background:rgba(201,162,92,.1);border:1px solid rgba(201,162,92,.3);color:#E8D2A6;
+}
+.price-list{background:#1D1D1D;border-radius:14px;padding:6px 16px;margin-top:6px}
+.price-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem}
+.price-row:last-child{border-bottom:none}
+.price-row .pr-price{color:#C9A25C;font-weight:700}
+.ms-barber .ms-cta{margin:6px 20px 0;text-align:center}
+.ms-barber .ms-cta .ms-btn{background:#C9A25C;color:#141414;width:100%;font-size:1rem}
+.ms-barber .ms-foot{color:#F2EDE6}
+
+/* ═══ 2 · ELECTRICIAN ═══ */
+.ms-trade{background:#F7F7F5;color:#14243D;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-trade .ms-status,.ms-trade .ms-nav{color:#14243D}
+.ms-trade .ms-logo{color:#14243D}
+.ms-trade .ms-hero{
+  background-size:cover;background-position:center;
+  height:300px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-trade .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,36,61,.1) 0%,rgba(20,36,61,.82) 100%)}
+.ms-trade .ms-hero .ms-eyebrow{position:relative;color:#F2C14E}
+.ms-trade .ms-hero h3{position:relative;color:#fff;font-size:1.85rem;font-weight:800;line-height:1.14;margin-bottom:16px}
+.ms-trade .ms-hero .ms-btn{position:relative;background:#F2C14E;color:#14243D;width:fit-content}
+.ms-trade .ms-sec h4{font-size:1.2rem;font-weight:800;margin-bottom:16px;color:#14243D}
+.trade-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(20,36,61,.08)}
+.trade-row:last-child{border-bottom:none}
+.trade-ic{
+  width:40px;height:40px;border-radius:10px;background:#14243D;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:#F2C14E;
+}
+.trade-row b{display:block;font-size:.95rem;font-weight:700;margin-bottom:2px}
+.trade-row span{font-size:.82rem;opacity:.65;line-height:1.35}
+.ms-trade .ms-sec.trust{background:#14243D;color:#fff}
+.ms-trade .trust h4{color:#fff}
+.trust-row{display:flex;align-items:center;gap:12px;padding:11px 0}
+.trust-row .tick{width:22px;height:22px;border-radius:50%;background:#F2C14E;color:#14243D;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.trust-row span{font-size:.9rem;font-weight:600}
+.trade-form{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 14px rgba(20,36,61,.08)}
+.trade-form label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
+.trade-input{
+  width:100%;height:46px;border-radius:10px;border:1.5px solid rgba(20,36,61,.15);
+  padding:0 14px;font-size:.95rem;font-family:inherit;color:#14243D;margin-bottom:14px;
+}
+.trade-form .ms-btn{width:100%;background:#F2C14E;color:#14243D}
+.ms-trade .ms-foot{color:#14243D}
+
+/* ═══ 3 · WEDDING VENUE ═══ */
+.ms-venue{background:#FBEDE9;color:#3B2230;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-venue h3,.ms-venue h4,.ms-venue .ms-serif{font-family:'Newsreader',Georgia,serif}
+.ms-venue .ms-status,.ms-venue .ms-nav{color:#3B2230}
+.ms-venue .ms-logo{font-family:'Newsreader',serif;font-style:italic;font-size:1.15rem}
+.ms-venue .ms-hero{
+  background-size:cover;background-position:center;
+  height:400px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  padding:34px 22px;position:relative;text-align:center;
+}
+.ms-venue .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(59,34,48,.05) 0%,rgba(59,34,48,.7) 100%)}
+.ms-venue .ms-hero .ms-eyebrow{position:relative;color:#F0C7B8;letter-spacing:.22em}
+.ms-venue .ms-hero h3{position:relative;color:#FBEDE9;font-size:2.1rem;font-weight:500;line-height:1.18;margin-bottom:18px;font-style:italic}
+.ms-venue .ms-hero .ms-btn{position:relative;background:#FBEDE9;color:#3B2230;width:fit-content}
+.ms-venue .ms-sec h4{font-size:1.5rem;font-weight:500;margin-bottom:18px;text-align:center}
+.date-row{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:#fff;border-radius:12px;margin-bottom:10px}
+.date-row .dr-date{font-weight:700;font-size:.95rem}
+.date-row .dr-tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:#3B2230;color:#FBEDE9}
+.date-row .dr-tag.avail{background:#E8B4A0;color:#3B2230}
+.venue-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.venue-gallery div{aspect-ratio:1;border-radius:12px;background-size:cover;background-position:center}
+.venue-quote{
+  margin:8px 20px 0;padding:28px 24px;background:#3B2230;color:#FBEDE9;border-radius:18px;text-align:center;
+}
+.venue-quote p{font-family:'Newsreader',serif;font-style:italic;font-size:1.15rem;line-height:1.5;margin-bottom:14px}
+.venue-quote span{font-size:.8rem;opacity:.7;letter-spacing:.03em}
+.ms-venue .ms-cta{margin:22px 20px 0;text-align:center}
+.ms-venue .ms-cta .ms-btn{background:#3B2230;color:#FBEDE9;width:100%}
+.ms-venue .ms-foot{color:#3B2230}
+</style>
+</head>
+<body>
+<div class="rig">
+
+  <!-- 0 · CAFÉ -->
+  <div class="rig-item">
+    <h2>Bridge House Coffee</h2>
+    <div class="phone"><div class="phone-screen"><div class="phone-island"></div>
+      <div class="ms ms-cafe">
+        <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+        <div class="ms-nav"><span class="ms-logo">Bridge House</span><span class="ms-burger"><span></span></span></div>
+        <div class="ms-page" id="page-cafe">
+          <div class="ms-hero" style="background-image:url(img/ph-cafe.webp)">
+            <h3>Slow coffee.<br>Faster mornings.</h3>
+            <a class="ms-btn">See the menu</a>
+          </div>
+          <section class="ms-sec">
+            <h4>Today's menu</h4>
+            <div class="ms-menu-item"><div><div class="mi-name">Flat white</div><div class="mi-desc">Double shot, oat or whole milk</div></div><div class="mi-price">£3.40</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Sourdough toastie</div><div class="mi-desc">Cheddar, chutney, rocket</div></div><div class="mi-price">£6.50</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Cinnamon bun</div><div class="mi-desc">Baked fresh every morning</div></div><div class="mi-price">£3.80</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Bircher muesli</div><div class="mi-desc">Apple, oats, honey, yoghurt</div></div><div class="mi-price">£5.20</div></div>
+          </section>
+          <section class="ms-sec ms-hours">
+            <h4>Opening hours</h4>
+            <div class="ms-hours-grid">
+              <span class="hd">Mon – Fri</span><span class="ht">7:30 – 17:00</span>
+              <span class="hd">Saturday</span><span class="ht">8:00 – 17:00</span>
+              <span class="hd">Sunday</span><span class="ht">9:00 – 15:00</span>
+            </div>
+          </section>
+          <section class="ms-sec ms-map">
+            <h4>Find us</h4>
+            <div class="ms-map-tile">
+              <svg class="ms-pin" viewBox="0 0 24 24" fill="none" stroke="#C44B1F" stroke-width="1.75"><path d="M12 22s7-7.4 7-13a7 7 0 1 0-14 0c0 5.6 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+          </section>
+          <div class="ms-cta">
+            <h5>Order ahead</h5>
+            <a class="ms-btn">Order ahead</a>
+          </div>
+          <div class="ms-foot">Bridge House Coffee · Witney</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 1 · BARBER -->
+  <div class="rig-item">
+    <h2>Fade &amp; Co</h2>
+    <div class="phone"><div class="phone-screen"><div class="phone-island"></div>
+      <div class="ms ms-barber">
+        <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+        <div class="ms-nav"><span class="ms-logo">FADE &amp; CO</span><span class="ms-burger"><span></span></span></div>
+        <div class="ms-page" id="page-barber">
+          <div class="ms-hero" style="background-image:url(img/ph-barber.webp)">
+            <span class="ms-eyebrow">Witney's chair since 2018</span>
+            <h3>Precision cuts.<br>No rush.</h3>
+            <a class="ms-btn">Book now</a>
+          </div>
+          <section class="ms-sec">
+            <h4>Book a chair</h4>
+            <div class="barber-card"><div class="barber-avatar">JM</div><div class="barber-info"><b>Jamal M.</b><span>Skin fades &amp; beard work</span></div></div>
+            <div class="barber-card"><div class="barber-avatar">RT</div><div class="barber-info"><b>Ryan T.</b><span>Classic cuts &amp; scissor work</span></div></div>
+            <div class="barber-card"><div class="barber-avatar">OS</div><div class="barber-info"><b>Ola S.</b><span>Modern styles, kids welcome</span></div></div>
+            <div class="slot-row">
+              <span class="slot-pill">11:30</span>
+              <span class="slot-pill">14:00</span>
+              <span class="slot-pill">16:15</span>
+            </div>
+          </section>
+          <section class="ms-sec">
+            <h4>Price list</h4>
+            <div class="price-list">
+              <div class="price-row"><span>Skin fade</span><span class="pr-price">£24</span></div>
+              <div class="price-row"><span>Cut &amp; beard trim</span><span class="pr-price">£32</span></div>
+              <div class="price-row"><span>Classic scissor cut</span><span class="pr-price">£22</span></div>
+              <div class="price-row"><span>Kids cut (under 12)</span><span class="pr-price">£15</span></div>
+            </div>
+          </section>
+          <div class="ms-cta"><a class="ms-btn">Book now</a></div>
+          <div class="ms-foot">Fade &amp; Co · High Street, Witney</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 2 · ELECTRICIAN -->
+  <div class="rig-item">
+    <h2>Spark Electrical</h2>
+    <div class="phone"><div class="phone-screen"><div class="phone-island"></div>
+      <div class="ms ms-trade">
+        <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+        <div class="ms-nav"><span class="ms-logo">Spark Electrical</span><span class="ms-burger"><span></span></span></div>
+        <div class="ms-page" id="page-trade">
+          <div class="ms-hero" style="background-image:url(img/ph-trade.webp)">
+            <span class="ms-eyebrow">NICEIC registered</span>
+            <h3>Electricians you<br>can rely on.</h3>
+            <a class="ms-btn">Request a quote</a>
+          </div>
+          <section class="ms-sec">
+            <h4>What we do</h4>
+            <div class="trade-row">
+              <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+              <div><b>Rewires &amp; upgrades</b><span>Full and partial house rewires, consumer unit upgrades</span></div>
+            </div>
+            <div class="trade-row">
+              <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+              <div><b>Emergency call-outs</b><span>Same-day response, 7 days a week</span></div>
+            </div>
+            <div class="trade-row">
+              <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 12h6M9 17h2"/></svg></div>
+              <div><b>EICR &amp; certification</b><span>Landlord safety certificates, fully documented</span></div>
+            </div>
+          </section>
+          <section class="ms-sec trust">
+            <h4>Why homeowners choose us</h4>
+            <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>NICEIC approved contractor</span></div>
+            <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>5-star rated on Google (200+ reviews)</span></div>
+            <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>Fully insured, £2m public liability</span></div>
+          </section>
+          <section class="ms-sec">
+            <h4>Get a quote</h4>
+            <div class="trade-form">
+              <label>Postcode</label>
+              <div class="trade-input" style="display:flex;align-items:center;color:#14243D;opacity:.55">OX28 4BH</div>
+              <label>What do you need?</label>
+              <div class="trade-input" style="display:flex;align-items:center;color:#14243D;opacity:.55">Rewire / fault / EICR…</div>
+              <a class="ms-btn">Request a quote</a>
+            </div>
+          </section>
+          <div class="ms-foot">Spark Electrical · Serving Oxfordshire</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 3 · WEDDING VENUE -->
+  <div class="rig-item">
+    <h2>Elmgrove Barn</h2>
+    <div class="phone"><div class="phone-screen"><div class="phone-island"></div>
+      <div class="ms ms-venue">
+        <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+        <div class="ms-nav"><span class="ms-logo">Elmgrove Barn</span><span class="ms-burger"><span></span></span></div>
+        <div class="ms-page" id="page-venue">
+          <div class="ms-hero" style="background-image:url(img/ph-venue.webp)">
+            <span class="ms-eyebrow">Weddings &amp; celebrations</span>
+            <h3>Your day,<br>under our beams.</h3>
+            <a class="ms-btn">Enquire about a date</a>
+          </div>
+          <section class="ms-sec">
+            <h4>Available dates</h4>
+            <div class="date-row"><span class="dr-date">14 June 2027</span><span class="dr-tag avail">Available</span></div>
+            <div class="date-row"><span class="dr-date">2 August 2027</span><span class="dr-tag">Booked</span></div>
+            <div class="date-row"><span class="dr-date">19 September 2027</span><span class="dr-tag avail">Available</span></div>
+          </section>
+          <section class="ms-sec">
+            <h4>The barn</h4>
+            <div class="venue-gallery">
+              <div style="background-image:url(img/ph-venue-d.webp)"></div>
+              <div style="background-image:url(img/ph-venue-a.webp)"></div>
+              <div style="background-image:url(img/ph-venue-c.webp)"></div>
+              <div style="background-image:url(img/ph-venue-b.webp)"></div>
+            </div>
+          </section>
+          <div class="venue-quote">
+            <p>"We couldn't have dreamed of a more beautiful setting. Every guest mentioned it."</p>
+            <span>— Hannah &amp; James, June 2026</span>
+          </div>
+          <div class="ms-cta"><a class="ms-btn">Enquire about a date</a></div>
+          <div class="ms-foot">Elmgrove Barn · Near Burford</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 4 · CAFÉ (repeat) -->
+  <div class="rig-item">
+    <h2>Bridge House Coffee (repeat)</h2>
+    <div class="phone"><div class="phone-screen"><div class="phone-island"></div>
+      <div class="ms ms-cafe">
+        <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+        <div class="ms-nav"><span class="ms-logo">Bridge House</span><span class="ms-burger"><span></span></span></div>
+        <div class="ms-page" id="page-cafe2">
+          <div class="ms-hero" style="background-image:url(img/ph-cafe.webp)">
+            <h3>Slow coffee.<br>Faster mornings.</h3>
+            <a class="ms-btn">See the menu</a>
+          </div>
+          <section class="ms-sec">
+            <h4>Today's menu</h4>
+            <div class="ms-menu-item"><div><div class="mi-name">Flat white</div><div class="mi-desc">Double shot, oat or whole milk</div></div><div class="mi-price">£3.40</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Sourdough toastie</div><div class="mi-desc">Cheddar, chutney, rocket</div></div><div class="mi-price">£6.50</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Cinnamon bun</div><div class="mi-desc">Baked fresh every morning</div></div><div class="mi-price">£3.80</div></div>
+            <div class="ms-menu-item"><div><div class="mi-name">Bircher muesli</div><div class="mi-desc">Apple, oats, honey, yoghurt</div></div><div class="mi-price">£5.20</div></div>
+          </section>
+          <section class="ms-sec ms-hours">
+            <h4>Opening hours</h4>
+            <div class="ms-hours-grid">
+              <span class="hd">Mon – Fri</span><span class="ht">7:30 – 17:00</span>
+              <span class="hd">Saturday</span><span class="ht">8:00 – 17:00</span>
+              <span class="hd">Sunday</span><span class="ht">9:00 – 15:00</span>
+            </div>
+          </section>
+          <section class="ms-sec ms-map">
+            <h4>Find us</h4>
+            <div class="ms-map-tile">
+              <svg class="ms-pin" viewBox="0 0 24 24" fill="none" stroke="#C44B1F" stroke-width="1.75"><path d="M12 22s7-7.4 7-13a7 7 0 1 0-14 0c0 5.6 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            </div>
+          </section>
+          <div class="ms-cta">
+            <h5>Order ahead</h5>
+            <a class="ms-btn">Order ahead</a>
+          </div>
+          <div class="ms-foot">Bridge House Coffee · Witney</div>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+</div>
+</body>
+</html>
