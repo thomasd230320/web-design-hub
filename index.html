@@ -111,8 +111,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preconnect" href="https://images.unsplash.com" />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="/img/bg-cafe.webp" fetchpriority="high" />
 
 <style>
 /* ════════════════════════════════════════════════════
@@ -236,7 +236,7 @@ img,svg{display:block;max-width:100%}
 
 /* HERO */
 .hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px}
-.hero-bg{background-color:#3a2e1d;background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&q=80&auto=format&fit=crop')}
+.hero-bg{background-color:#3a2e1d;background-image:url('/img/bg-cafe.webp')}
 .hero-canvas{
   position:absolute;inset:0;width:100%;height:100%;
   pointer-events:none;z-index:0;
@@ -326,7 +326,7 @@ img,svg{display:block;max-width:100%}
   max-width:20ch;
 }
 .head-scene h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
-.head-scene-bg{background-color:#152033;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=2400&q=80&auto=format&fit=crop')}
+.head-scene-bg{background-color:#152033;background-image:url('/img/bg-night.webp')}
 .head-canvas{
   position:absolute;inset:0;width:100%;height:100%;
   pointer-events:none;z-index:0;
@@ -370,10 +370,10 @@ img,svg{display:block;max-width:100%}
   content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(15,10,5,.38) 0%,rgba(15,10,5,.18) 50%,rgba(15,10,5,.48) 100%);
 }
-.scrolly-bg-0{background-color:#2d281a;background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=2400&q=80&auto=format&fit=crop')}
-.scrolly-bg-1{background-color:#1a2030;background-image:url('https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=2400&q=80&auto=format&fit=crop')}
-.scrolly-bg-2{background-color:#332a1a;background-image:url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=2400&q=80&auto=format&fit=crop')}
-.scrolly-bg-3{background-color:#3a2218;background-image:url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=80&auto=format&fit=crop')}
+.scrolly-bg-0{background-color:#2d281a;background-image:url('/img/bg-cafe.webp')}
+.scrolly-bg-1{background-color:#1a2030;background-image:url('/img/bg-night.webp')}
+.scrolly-bg-2{background-color:#332a1a;background-image:url('/img/bg-field.webp')}
+.scrolly-bg-3{background-color:#3a2218;background-image:url('/img/bg-forest.webp')}
 .scrolly[data-step="0"] .scrolly-bg-0,
 .scrolly[data-step="1"] .scrolly-bg-1,
 .scrolly[data-step="2"] .scrolly-bg-2,
@@ -486,7 +486,7 @@ img,svg{display:block;max-width:100%}
    STAT MOMENT
 ═══════════════════════════════════════════════════ */
 .stat{min-height:80vh;display:flex;align-items:center;justify-content:center;padding:120px 24px;text-align:center}
-.stat-bg{background-color:#2a1810;background-image:url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=2400&q=80&auto=format&fit=crop')}
+.stat-bg{background-color:#2a1810;background-image:url('/img/bg-forest.webp')}
 .stat h2{
   color:#fff;font-weight:500;
   font-size:clamp(2.6rem,8vw,7rem);line-height:1.0;letter-spacing:-.03em;
@@ -595,7 +595,7 @@ img,svg{display:block;max-width:100%}
    CLOSING CTA
 ═══════════════════════════════════════════════════ */
 .cta-scene{min-height:80vh;display:flex;align-items:center;justify-content:center;padding:120px 24px;text-align:center}
-.cta-bg{background-color:#1a2520;background-image:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=2400&q=80&auto=format&fit=crop')}
+.cta-bg{background-color:#1a2520;background-image:url('/img/bg-cta.webp')}
 .cta-inner{display:flex;flex-direction:column;align-items:center;gap:30px;max-width:760px}
 .cta-inner h2{color:#fff;font-weight:500;font-size:clamp(2.4rem,7vw,5.6rem);line-height:1.0;letter-spacing:-.025em;max-width:14ch}
 .cta-inner h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
@@ -650,6 +650,13 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .quotes-grid{grid-template-columns:1fr}
 }
 @media (max-width:680px){
+  .hero-bg{background-image:url('/img/bg-cafe-m.webp')}
+  .scrolly-bg-0{background-image:url('/img/bg-cafe-m.webp')}
+  .scrolly-bg-1{background-image:url('/img/bg-night-m.webp')}
+  .scrolly-bg-2{background-image:url('/img/bg-field-m.webp')}
+  .scrolly-bg-3{background-image:url('/img/bg-forest-m.webp')}
+  .stat-bg{background-image:url('/img/bg-forest-m.webp')}
+  .cta-bg{background-image:url('/img/bg-cta-m.webp')}
   .header{padding:0 16px;top:46px}
   .pill{font-size:.86rem;padding:10px 16px;min-height:42px}
   .nav-link{display:none}
@@ -863,7 +870,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url">bridgehousecoffee.co.uk</div>
           </div>
-          <div class="browser-shot" style="background-image:url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1900&q=80&auto=format&fit=crop')" role="img" aria-label="Example café website design: Bridge House Coffee">
+          <div class="browser-shot" style="background-image:url('/img/work-coffee.webp')" role="img" aria-label="Example café website design: Bridge House Coffee">
             <div class="shot-nav">
               <span class="shot-brand">Bridge House Coffee</span>
               <span class="shot-links"><span>Menu</span><span>Visit</span><span>Order</span></span>
@@ -885,7 +892,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url">elmgrovebarn.co.uk</div>
           </div>
-          <div class="browser-shot" style="background-image:url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1400&q=80&auto=format&fit=crop')" role="img" aria-label="Example wedding venue website design: Elmgrove Barn">
+          <div class="browser-shot" style="background-image:url('/img/work-wedding.webp')" role="img" aria-label="Example wedding venue website design: Elmgrove Barn">
             <div class="shot-nav">
               <span class="shot-brand">Elmgrove Barn</span>
               <span class="shot-links"><span>Dates</span><span>Gallery</span></span>
@@ -906,7 +913,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url">greenacregardens.co.uk</div>
           </div>
-          <div class="browser-shot" style="background-image:url('https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?w=1400&q=80&auto=format&fit=crop')" role="img" aria-label="Example landscaping website design: Greenacre Gardens">
+          <div class="browser-shot" style="background-image:url('/img/work-landscape.webp')" role="img" aria-label="Example landscaping website design: Greenacre Gardens">
             <div class="shot-nav">
               <span class="shot-brand">Greenacre Gardens</span>
               <span class="shot-links"><span>Services</span><span>Quote</span></span>
