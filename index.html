@@ -737,11 +737,22 @@ img,svg{display:block;max-width:100%}
 ═══════════════════════════════════════════════════ */
 .apps{padding:120px 0;background:var(--bar);color:#F5EFE6}
 .apps-inner{max-width:1140px;margin:0 auto;padding:0 24px}
-.apps-head{margin-bottom:50px;max-width:62ch}
+.apps-head{max-width:62ch}
 .apps-head .eyebrow{background:rgba(255,211,181,.16);color:var(--peach)}
 .apps-head h2{color:#fff;font-weight:500;font-size:clamp(2rem,4.2vw,3.2rem);letter-spacing:-.025em;line-height:1.08}
 .apps-head h2 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
 .apps-head p{margin-top:18px;color:rgba(245,239,230,.78);font-size:1.08rem;line-height:1.6;max-width:56ch}
+/* Real screens from the shipped apps, sat in the same phone frame the rest
+   of the page uses. */
+.apps-top{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;margin-bottom:56px}
+.app-phones{display:flex;justify-content:center;align-items:flex-end;gap:30px}
+.app-phone{display:flex;flex-direction:column;align-items:center;gap:16px}
+.app-phone .phone{--w:210px}
+.app-phone:first-child .phone{transform:rotate(-5deg)}
+.app-phone:last-child .phone{transform:rotate(5deg)}
+.app-phone .phone-island{display:none}
+.app-phone .phone-screen img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.app-phone figcaption{font-size:.84rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(245,239,230,.6)}
 .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .app-card{
   display:flex;gap:18px;padding:26px 24px;border-radius:20px;
@@ -832,6 +843,10 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .work-grid{grid-template-columns:1fr}
   .work-card:first-child .browser-shot{aspect-ratio:16/10}
   .apps-grid{grid-template-columns:1fr}
+  .apps-top{grid-template-columns:1fr;gap:34px;margin-bottom:40px}
+  .app-phones{gap:18px}
+  .app-phone .phone{--w:min(150px,40vw)}
+  .app-phone figcaption{font-size:.72rem}
 }
 @media (max-width:680px){
   .hero-bg{background-image:url('/img/bg-cafe-m.webp')}
@@ -1391,10 +1406,31 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 <!-- ░░ MY APPS ░░ -->
 <section class="apps" id="apps">
   <div class="apps-inner">
+    <div class="apps-top">
     <div class="apps-head reveal">
       <span class="eyebrow">Also built by me</span>
       <h2>Three apps of my own, <em>live on the App Store.</em></h2>
       <p>I don't only build websites. These are my own iOS apps — designed, built and shipped by me, through Apple's review process and out in the world. Free, no adverts, nothing to buy inside them.</p>
+    </div>
+
+    <div class="app-phones reveal">
+      <figure class="app-phone">
+        <div class="phone">
+          <div class="phone-screen">
+            <img src="/img/apps/shot-weanwell.webp" alt="The Weanwell app showing meal ideas for a seven-month-old" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <figcaption>Weanwell</figcaption>
+      </figure>
+      <figure class="app-phone">
+        <div class="phone">
+          <div class="phone-screen">
+            <img src="/img/apps/shot-booklet.webp" alt="My Recipe Booklet showing a saved recipe list" loading="lazy" decoding="async" />
+          </div>
+        </div>
+        <figcaption>My Recipe Booklet</figcaption>
+      </figure>
+    </div>
     </div>
 
     <div class="apps-grid">
