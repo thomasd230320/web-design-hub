@@ -8,7 +8,7 @@
 2. **The hero has no headline, no offer, no CTA.** First screen is a phone + one italic caption. The actual `<h1>` is on the *second* screen (`.head-scene`). For lead gen, the pitch must be above the fold.
 3. **Mobile is the weakest experience, and it's where local-business owners will look.** At `max-width:680px` the scrolly is dismantled (lines ~661–670): four text blocks stack into a wall, then one static phone appears at the bottom. The signature interaction doesn't exist on the device the site is about.
 4. **Every image is a hotlink to `images.unsplash.com` at `w=2400`** (12 references). Slow LCP, third-party dependency, and no `<img>` elements so nothing is lazy-loaded or preloaded.
-5. **No lead capture.** Contact is `mailto:` and `tel:` only. No form, no sticky mobile CTA.
+5. **No lead capture.** Contact is `mailto:` and `tel:` only. (Deferred — see Part 6.)
 6. The step change is a hard 4-way switch (`Math.floor(progress*steps)`) with opacity crossfades. It works but feels like a slideshow, not a scroll-driven scene.
 
 ## What "done" looks like
@@ -17,7 +17,7 @@ A visitor on a phone or a laptop sees, in order:
 
 1. **Hero** — headline + subhead + two CTAs on the left (stacked above on mobile), and a phone on the right showing a *complete café website* whose content slowly auto-scrolls inside the frame. Ambient three.js embers behind it on desktop only.
 2. **Scrolly ("Built for businesses like yours")** — the phone pins to the viewport. As the visitor scrolls, four full mini-websites (café → barber → electrician → wedding venue) slide through the phone, and *within* each step the mini-site's own page scrolls under the visitor's thumb. Text captions change alongside. The phone tilts a few degrees in 3D as it goes. Works identically on mobile with the phone pinned at the top and captions beneath.
-3. Everything else on the page stays, with images self-hosted and a real enquiry form at the bottom plus a sticky Call / Quote bar on mobile.
+3. Everything else on the page stays, with images self-hosted.
 
 Target: Lighthouse mobile Performance ≥ 90, CLS < 0.05, and it must look like something a paying client would want.
 
@@ -237,13 +237,15 @@ Remove the `!isSmall` guard in the JS so the scroll driver runs on mobile too. K
 
 ---
 
-## Part 6 — Conversion fixes (required — the point of the site is leads)
+## Part 6 — Deferred (do NOT build in this pass)
 
-1. **Enquiry form** in `#contact`, replacing the `mailto:` pill (keep the phone pill). Fields: name, business, phone/email, "what do you need?" select (Starter / Pro / Premium / Shop / Not sure), message. Post to **Formspree** (`action="https://formspree.io/f/FORM_ID" method="POST"`) — leave `FORM_ID` as a clearly-marked placeholder and note it in the PR; the owner fills it in. Add a `_gotcha` honeypot input, `_subject`, and a `_next` redirect to `/?sent=1` with a small JS check that shows a thank-you state. Style it on the dark scene: frosted inputs matching `.pill`.
-2. **Sticky mobile CTA bar** — `≤680px` only: fixed bottom, two buttons: "Call" (`tel:`) and "Get a quote" (`#contact`), 56px tall, `env(safe-area-inset-bottom)` padding, hidden while the hero is on screen (IntersectionObserver on `.hero`). Give `body` matching `padding-bottom` so the footer isn't covered.
-3. Track clicks: `va('event', {name:'cta_click', data:{where:'hero'}})` on the hero CTA, sticky bar, and form submit — the Vercel Analytics snippet is already at the bottom of the file.
+The owner wants the core styling and phone showcase finished first. Leave these for a later PR:
 
----
+- Enquiry form / Formspree
+- Sticky mobile Call / Quote bar
+- Analytics click events
+
+Keep the existing `mailto:` and `tel:` pills in `#contact` exactly as they are.
 
 ## Part 7 — Performance and loading order
 
@@ -261,7 +263,7 @@ Playwright is available (`playwright-core` + `/opt/pw-browsers/chromium-*`). Ser
 | Viewport | Positions |
 |---|---|
 | 1440×900 | top; `#work` at 5%, 30%, 55%, 80%, 98% of its scroll range |
-| 390×844 (isMobile, hasTouch) | top; the same five `#work` positions; `#contact` |
+| 390×844 (isMobile, hasTouch) | top; the same five `#work` positions |
 | 390×844 with `reducedMotion:'reduce'` | top; `#work` at 50% |
 
 Look at every screenshot. Specifically confirm:
@@ -269,11 +271,10 @@ Look at every screenshot. Specifically confirm:
 - scrolly mobile: phone pinned, caption readable beneath, no overlap with the header
 - each of the four mini-sites at its 55% point shows *mid-page* content (i.e. internal scroll is working)
 - no horizontal scrollbar at 390 (`document.documentElement.scrollWidth === 390`)
-- contact form renders and the honeypot is visually hidden
 
 Then run Lighthouse in the same Chromium (`npx lighthouse http://localhost:8765/ --preset=mobile --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--no-sandbox --headless"`) and paste the four scores in the PR body. Performance must be ≥ 90 on mobile. If it isn't, the usual culprits are image bytes (re-check the `-m` variants are used) and three.js loading too early.
 
-Commit in logical steps (images → hero → mini-sites → scrolly → conversion → perf), push, open a draft PR with before/after screenshots attached.
+Commit in logical steps (images → hero → mini-sites → scrolly → perf), push, open a draft PR with before/after screenshots attached.
 
 ## Things not to do
 
