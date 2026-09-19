@@ -111,8 +111,12 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
-<link rel="preload" as="image" href="/img/bg-cafe.webp" fetchpriority="high" />
+<!-- Fonts load without blocking the first paint; display=swap means text shows in the
+     fallback face first and reflows once the web fonts arrive. -->
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+<noscript><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" /></noscript>
+<link rel="preload" as="image" href="/img/bg-cafe.webp" fetchpriority="high" media="(min-width:681px)" />
+<link rel="preload" as="image" href="/img/bg-cafe-m.webp" fetchpriority="high" media="(max-width:680px)" />
 
 <style>
 /* ════════════════════════════════════════════════════
@@ -235,7 +239,7 @@ img,svg{display:block;max-width:100%}
 .scene > .inner{position:relative;z-index:1}
 
 /* HERO */
-.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:120px 24px 80px}
+.hero{min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:150px 24px 80px}
 .hero-bg{background-color:#3a2e1d;background-image:url('/img/bg-cafe.webp')}
 .hero-canvas{
   position:absolute;inset:0;width:100%;height:100%;
@@ -243,97 +247,266 @@ img,svg{display:block;max-width:100%}
   opacity:0;transition:opacity 1.4s var(--ease);
 }
 .hero-canvas.in{opacity:1}
-.hero-inner{display:flex;flex-direction:column;align-items:center;gap:36px;text-align:center}
-.hero-caption{
-  color:rgba(255,255,255,.88);
-  font-family:var(--serif);font-style:italic;font-weight:400;
-  font-size:clamp(1.05rem,1.6vw,1.4rem);letter-spacing:-.01em;
-  max-width:32ch;line-height:1.4;
+.hero-inner{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:60px;
+  max-width:1240px;margin:0 auto;width:100%;text-align:left;
 }
-.hero-scroll{
-  margin-top:14px;display:inline-flex;align-items:center;gap:9px;
-  color:rgba(255,255,255,.72);font-size:.85rem;font-weight:500;letter-spacing:.02em;
+.hero-copy{color:#fff}
+.hero-copy h1{
+  color:#fff;font-weight:500;
+  font-size:clamp(2.1rem,4.6vw,3.6rem);line-height:1.08;letter-spacing:-.025em;
+  max-width:15ch;margin-top:16px;
 }
-.hero-scroll::after{
-  content:'';width:1px;height:28px;background:rgba(255,255,255,.65);
-  animation:scroll-tick 1.6s infinite var(--ease);
+.hero-copy h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
+.hero-sub{
+  margin-top:20px;color:rgba(255,255,255,.86);
+  font-size:1.12rem;line-height:1.55;max-width:44ch;
 }
-@keyframes scroll-tick{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero-ctas{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.hero-proof{
+  margin-top:22px;color:rgba(255,255,255,.82);
+  text-shadow:0 1px 12px rgba(0,0,0,.45);
+  font-size:.88rem;font-weight:500;letter-spacing:.01em;
+}
+.hero-phone{display:flex;align-items:center;justify-content:center}
+.hero-phone .phone{
+  transform:rotate(-4deg) translateY(10px);
+  animation:hero-float 7s ease-in-out infinite;
+}
+@keyframes hero-float{0%,100%{transform:rotate(-4deg) translateY(10px)}50%{transform:rotate(-4deg) translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.hero-phone .phone{animation:none}}
 
 /* ════════════════════════════════════════════════════
-   PHONE FRAME — pure CSS
+   PHONE FRAME — pure CSS (from minisites.html)
 ═══════════════════════════════════════════════════ */
 .phone{
-  position:relative;width:min(340px,80vw);aspect-ratio:9/19.5;
-  background:#1B0F0A;border-radius:42px;padding:9px;
+  --w:340px;
+  position:relative;width:min(var(--w),80vw);aspect-ratio:9/19.5;
+  background:#0F0B0A;border-radius:52px;padding:11px;
   box-shadow:
-    0 50px 100px -20px rgba(0,0,0,.55),
-    0 25px 50px -25px rgba(0,0,0,.4),
-    inset 0 0 0 1.5px rgba(255,255,255,.06);
+    0 0 0 1.5px #2A2321,
+    0 0 0 3px #0A0807,
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    0 60px 120px -30px rgba(0,0,0,.65),
+    0 30px 60px -30px rgba(0,0,0,.5);
+  transform-style:preserve-3d;will-change:transform;
+}
+.phone::before{
+  content:'';position:absolute;left:-3px;top:22%;width:3px;height:9%;
+  background:#1B1614;border-radius:2px 0 0 2px;
+  box-shadow:0 60px 0 0 #1B1614, 0 108px 0 0 #1B1614;
+}
+.phone::after{
+  content:'';position:absolute;right:-3px;top:26%;width:3px;height:13%;
+  background:#1B1614;border-radius:0 2px 2px 0;
 }
 .phone-screen{
-  position:relative;width:100%;height:100%;
-  border-radius:34px;overflow:hidden;
-  background:#FFE6D2;display:flex;flex-direction:column;
+  position:relative;width:100%;height:100%;border-radius:42px;overflow:hidden;
+  background:#000;
 }
-.phone-notch{
-  position:absolute;top:9px;left:50%;transform:translateX(-50%);
-  width:96px;height:30px;background:#1B0F0A;border-radius:18px;z-index:5;
+.phone-island{
+  position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:86px;height:26px;border-radius:14px;background:#000;z-index:5;
 }
-.phone-status{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 26px 0;font-size:.78rem;font-weight:600;color:var(--ink);
-}
-.phone-body{flex:1;padding:30px 22px 14px;display:flex;flex-direction:column;gap:14px}
-.phone-h{
-  font-family:var(--serif);font-weight:500;font-size:2.1rem;line-height:1.05;
-  letter-spacing:-.02em;color:var(--ink);margin-top:6px;
-}
-.phone-msg{
-  align-self:flex-end;background:#fff;padding:10px 16px;border-radius:22px 22px 4px 22px;
-  font-family:var(--serif);font-size:.94rem;line-height:1.3;color:var(--ink);
-  max-width:78%;box-shadow:0 1px 2px rgba(0,0,0,.04);
-}
-.phone-reply{
-  font-family:var(--serif);font-size:.94rem;line-height:1.4;color:var(--ink);
-  max-width:88%;
-}
-.phone-footer{
-  margin-top:auto;padding:12px 16px 18px;
-  background:rgba(255,255,255,.55);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  border-top:1px solid rgba(0,0,0,.05);
-}
-.phone-input{
-  background:#fff;border-radius:9999px;padding:12px 16px;
-  font-size:.86rem;color:var(--ink-3);
-  display:flex;justify-content:space-between;align-items:center;
+.phone-screen::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:6;
+  background:linear-gradient(115deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,0) 32%);
+  border-radius:inherit;
 }
 
-/* concept-specific phone-screen tints */
-.ps-cafe{background:linear-gradient(170deg,#FFE6D2 0%,#F8C8A8 100%)}
-.ps-barber{background:linear-gradient(170deg,#E5DCC9 0%,#C5B795 100%)}
-.ps-trade{background:linear-gradient(170deg,#F1E4D3 0%,#E0CBA8 100%)}
-.ps-venue{background:linear-gradient(170deg,#FFE0E0 0%,#FFC9B5 100%)}
+/* ═══ SHARED MINI-SITE SCAFFOLD ═══ */
+.ms{
+  position:absolute;top:0;left:0;
+  width:var(--ms-w,100%);height:var(--ms-h,100%);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform-origin:top left;
+  transform:scale(var(--ms-scale,1));
+}
+.ms-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 22px 4px;font-size:.72rem;font-weight:600;letter-spacing:.02em;
+  position:relative;z-index:5;flex-shrink:0;
+  background:var(--ms-chrome,#fff);
+}
+.ms-status .ms-sig{width:18px;height:10px;border-radius:2px;background:currentColor;opacity:.7}
+.ms-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 20px 14px;flex-shrink:0;position:relative;z-index:5;
+  background:var(--ms-chrome,#fff);
+}
+.ms-logo{font-size:1.05rem;font-weight:700;letter-spacing:-.01em}
+.ms-burger{width:22px;height:14px;position:relative;opacity:.85}
+.ms-burger > span{position:absolute;top:6px;left:0;right:0;height:2px;background:currentColor;border-radius:1px}
 
-/* ════════════════════════════════════════════════════
-   HEADLINE SCENE
-═══════════════════════════════════════════════════ */
-.head-scene{min-height:90vh;display:flex;align-items:center;justify-content:center;padding:120px 24px;text-align:center}
-.head-scene h1{
-  color:#fff;font-weight:500;
-  font-size:clamp(2.2rem,5.6vw,5rem);line-height:1.06;letter-spacing:-.025em;
-  max-width:20ch;
+.ms-page{
+  flex:1;overflow-y:auto;position:relative;
+  scrollbar-width:none;
 }
-.head-scene h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--peach)}
-.head-scene-bg{background-color:#152033;background-image:url('/img/bg-night.webp')}
-.head-canvas{
-  position:absolute;inset:0;width:100%;height:100%;
-  pointer-events:none;z-index:0;
-  opacity:0;transition:opacity 1.6s var(--ease);
-  mix-blend-mode:screen;
+.ms-page::-webkit-scrollbar{display:none}
+.ms-home{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:110px;height:4px;border-radius:2px;background:rgba(0,0,0,.35);z-index:6}
+
+.ms-sec{padding:34px 20px}
+.ms-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:0 24px;border-radius:999px;
+  font-size:.92rem;font-weight:700;letter-spacing:.01em;
+  cursor:pointer;
 }
-.head-canvas.in{opacity:.85}
+.ms-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.65;display:block;margin-bottom:8px}
+.ms-icon{width:20px;height:20px;flex-shrink:0}
+.ms-foot{padding:26px 20px 34px;font-size:.78rem;text-align:center;opacity:.55}
+
+/* ═══ 0 · CAFÉ ═══ */
+.ms-cafe{--ms-chrome:#FFF6EC;background:#FFF6EC;color:#2A1A12;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-cafe .ms-h3,.ms-cafe .ms-h4,.ms-cafe .ms-h5,.ms-cafe .ms-serif{font-family:'Newsreader',Georgia,serif}
+.ms-cafe .ms-status,.ms-cafe .ms-nav{color:#2A1A12}
+.ms-cafe .ms-hero{
+  background-size:cover;background-position:center;
+  height:340px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-cafe .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,5,.05) 0%,rgba(20,10,5,.72) 100%)}
+.ms-cafe .ms-hero .ms-h3{position:relative;color:#FFF6EC;font-size:2rem;line-height:1.12;font-weight:500;margin-bottom:16px}
+.ms-cafe .ms-hero .ms-btn{position:relative;background:#C44B1F;color:#FFF6EC;width:fit-content}
+.ms-cafe .ms-sec .ms-h4{font-size:1.4rem;font-weight:500;margin-bottom:18px;color:#2A1A12}
+.ms-menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0;border-bottom:1px solid rgba(42,26,18,.1)}
+.ms-menu-item:last-child{border-bottom:none}
+.ms-menu-item .mi-name{font-weight:600;font-size:.98rem}
+.ms-menu-item .mi-desc{font-size:.8rem;opacity:.6;margin-top:3px}
+.ms-menu-item .mi-price{font-weight:700;color:#C44B1F;font-size:.95rem;white-space:nowrap;padding-left:12px}
+.ms-hours{background:#F4E9DA}
+.ms-hours-grid{display:grid;grid-template-columns:1fr auto;row-gap:10px;font-size:.9rem}
+.ms-hours-grid .hd{opacity:.65}
+.ms-hours-grid .ht{font-weight:600;text-align:right}
+.ms-map{padding-top:0}
+.ms-map-tile{
+  height:140px;border-radius:16px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#E7D9C4 0%,#D8C4A6 100%);
+}
+.ms-map-tile::before,.ms-map-tile::after{content:'';position:absolute;background:rgba(42,26,18,.14)}
+.ms-map-tile::before{top:0;bottom:0;left:38%;width:2px}
+.ms-map-tile::after{left:0;right:0;top:62%;height:2px}
+.ms-pin{position:absolute;top:44%;left:56%;width:26px;height:26px;transform:translate(-50%,-100%)}
+.ms-cafe .ms-cta{margin:6px 20px 0;background:#2A1A12;color:#FFF6EC;border-radius:18px;padding:26px 22px;text-align:center}
+.ms-cafe .ms-cta .ms-h5{font-family:'Newsreader',serif;font-size:1.3rem;font-weight:500;margin-bottom:14px}
+.ms-cafe .ms-cta .ms-btn{background:#FFD3B5;color:#2A1A12;width:100%}
+.ms-cafe .ms-foot{color:#2A1A12}
+
+/* ═══ 1 · BARBER ═══ */
+.ms-barber{--ms-chrome:#141414;background:#141414;color:#F2EDE6;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-barber .ms-status,.ms-barber .ms-nav{color:#F2EDE6}
+.ms-barber .ms-logo{color:#C9A25C;letter-spacing:.02em}
+.ms-barber .ms-hero{
+  background-size:cover;background-position:center 25%;
+  height:320px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-barber .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.15) 0%,rgba(10,10,10,.88) 100%)}
+.ms-barber .ms-hero .ms-eyebrow{position:relative;color:#C9A25C}
+.ms-barber .ms-hero .ms-h3{position:relative;font-size:1.9rem;font-weight:800;line-height:1.1;margin-bottom:16px;letter-spacing:-.01em}
+.ms-barber .ms-hero .ms-btn{position:relative;background:#C9A25C;color:#141414;width:fit-content}
+.ms-barber .ms-sec .ms-h4{font-size:1.2rem;font-weight:800;margin-bottom:16px;letter-spacing:-.01em}
+.ms-barber .ms-sec{background:#141414}
+.barber-card{
+  display:flex;align-items:center;gap:14px;padding:16px;
+  background:#1D1D1D;border-radius:14px;margin-bottom:12px;
+  border:1px solid rgba(201,162,92,.15);
+}
+.barber-avatar{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#C9A25C,#8A6B36);
+  display:flex;align-items:center;justify-content:center;font-weight:800;color:#141414;font-size:.95rem;
+}
+.barber-info b{display:block;font-size:.95rem;font-weight:700}
+.barber-info span{font-size:.78rem;opacity:.6}
+.slot-row{display:flex;gap:8px;margin-top:12px}
+.slot-pill{
+  flex:1;text-align:center;padding:8px 0;border-radius:999px;font-size:.78rem;font-weight:600;
+  background:rgba(201,162,92,.1);border:1px solid rgba(201,162,92,.3);color:#E8D2A6;
+}
+.price-list{background:#1D1D1D;border-radius:14px;padding:6px 16px;margin-top:6px}
+.price-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:.9rem}
+.price-row:last-child{border-bottom:none}
+.price-row .pr-price{color:#C9A25C;font-weight:700}
+.ms-barber .ms-cta{margin:6px 20px 0;text-align:center}
+.ms-barber .ms-cta .ms-btn{background:#C9A25C;color:#141414;width:100%;font-size:1rem}
+.ms-barber .ms-foot{color:#F2EDE6}
+
+/* ═══ 2 · ELECTRICIAN ═══ */
+.ms-trade{--ms-chrome:#F7F7F5;background:#F7F7F5;color:#14243D;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-trade .ms-status,.ms-trade .ms-nav{color:#14243D}
+.ms-trade .ms-logo{color:#14243D}
+.ms-trade .ms-hero{
+  background-size:cover;background-position:center;
+  height:300px;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:26px 22px;position:relative;
+}
+.ms-trade .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,36,61,.1) 0%,rgba(20,36,61,.82) 100%)}
+.ms-trade .ms-hero .ms-eyebrow{position:relative;color:#F2C14E}
+.ms-trade .ms-hero .ms-h3{position:relative;color:#fff;font-size:1.85rem;font-weight:800;line-height:1.14;margin-bottom:16px}
+.ms-trade .ms-hero .ms-btn{position:relative;background:#F2C14E;color:#14243D;width:fit-content}
+.ms-trade .ms-sec .ms-h4{font-size:1.2rem;font-weight:800;margin-bottom:16px;color:#14243D}
+.trade-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(20,36,61,.08)}
+.trade-row:last-child{border-bottom:none}
+.trade-ic{
+  width:40px;height:40px;border-radius:10px;background:#14243D;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;color:#F2C14E;
+}
+.trade-row b{display:block;font-size:.95rem;font-weight:700;margin-bottom:2px}
+.trade-row span{font-size:.82rem;opacity:.65;line-height:1.35}
+.ms-trade .ms-sec.trust{background:#14243D;color:#fff}
+.ms-trade .trust h4{color:#fff}
+.trust-row{display:flex;align-items:center;gap:12px;padding:11px 0}
+.trust-row .tick{width:22px;height:22px;border-radius:50%;background:#F2C14E;color:#14243D;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.trust-row span{font-size:.9rem;font-weight:600}
+.trade-form{background:#fff;border-radius:16px;padding:22px;box-shadow:0 2px 14px rgba(20,36,61,.08)}
+.trade-form label{display:block;font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.55;margin-bottom:8px}
+.trade-input{
+  width:100%;height:46px;border-radius:10px;border:1.5px solid rgba(20,36,61,.15);
+  padding:0 14px;font-size:.95rem;font-family:inherit;color:#14243D;margin-bottom:14px;
+}
+.trade-form .ms-btn{width:100%;background:#F2C14E;color:#14243D}
+.ms-trade .ms-foot{color:#14243D}
+
+/* ═══ 3 · WEDDING VENUE ═══ */
+.ms-venue{--ms-chrome:#FBEDE9;background:#FBEDE9;color:#3B2230;font-family:'Plus Jakarta Sans',sans-serif}
+.ms-venue .ms-h3,.ms-venue .ms-h4,.ms-venue .ms-h5,.ms-venue .ms-serif{font-family:'Newsreader',Georgia,serif}
+.ms-venue .ms-status,.ms-venue .ms-nav{color:#3B2230}
+.ms-venue .ms-logo{font-family:'Newsreader',serif;font-style:italic;font-size:1.15rem}
+.ms-venue .ms-hero{
+  background-size:cover;background-position:center;
+  height:400px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;
+  padding:34px 22px;position:relative;text-align:center;
+}
+.ms-venue .ms-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(59,34,48,.05) 0%,rgba(59,34,48,.7) 100%)}
+.ms-venue .ms-hero .ms-eyebrow{position:relative;color:#F0C7B8;letter-spacing:.22em}
+.ms-venue .ms-hero .ms-h3{position:relative;color:#FBEDE9;font-size:2.1rem;font-weight:500;line-height:1.18;margin-bottom:18px;font-style:italic}
+.ms-venue .ms-hero .ms-btn{position:relative;background:#FBEDE9;color:#3B2230;width:fit-content}
+.ms-venue .ms-sec .ms-h4{font-size:1.5rem;font-weight:500;margin-bottom:18px;text-align:center}
+.date-row{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:#fff;border-radius:12px;margin-bottom:10px}
+.date-row .dr-date{font-weight:700;font-size:.95rem}
+.date-row .dr-tag{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:#3B2230;color:#FBEDE9}
+.date-row .dr-tag.avail{background:#E8B4A0;color:#3B2230}
+.venue-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.venue-gallery div{aspect-ratio:1;border-radius:12px;background-size:cover;background-position:center}
+.venue-quote{
+  margin:8px 20px 0;padding:28px 24px;background:#3B2230;color:#FBEDE9;border-radius:18px;text-align:center;
+}
+.venue-quote p{font-family:'Newsreader',serif;font-style:italic;font-size:1.15rem;line-height:1.5;margin-bottom:14px}
+.venue-quote span{font-size:.8rem;opacity:.7;letter-spacing:.03em}
+.ms-venue .ms-cta{margin:22px 20px 0;text-align:center}
+.ms-venue .ms-cta .ms-btn{background:#3B2230;color:#FBEDE9;width:100%}
+.ms-venue .ms-foot{color:#3B2230}
+
+/* hero phone auto-scroll (paused on hover / reduced motion) */
+@keyframes ms-drift{from{transform:translateY(0)}to{transform:translateY(-52%)}}
+.hero-phone .ms-page{overflow:visible}
+@media (prefers-reduced-motion: no-preference){
+  .hero-phone .ms-page{animation:ms-drift 16s ease-in-out infinite alternate}
+  .hero-phone .phone:hover .ms-page{animation-play-state:paused}
+}
 
 /* ════════════════════════════════════════════════════
    STUDIO INTRO — left-aligned editorial, human voice
@@ -365,7 +538,9 @@ img,svg{display:block;max-width:100%}
   position:absolute;inset:0;z-index:0;
   background-size:cover;background-position:center;
   opacity:0;transition:opacity 1s var(--ease);
+  transform:scale(calc(1 + var(--inner,0) * .08));
 }
+@media (max-width:680px){ .scrolly-bg{transform:none} }
 .scrolly-bg::after{
   content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(15,10,5,.38) 0%,rgba(15,10,5,.18) 50%,rgba(15,10,5,.48) 100%);
@@ -407,14 +582,16 @@ img,svg{display:block;max-width:100%}
   position:relative;z-index:2;display:flex;align-items:center;justify-content:center;
 }
 .scrolly-phone-wrap .phone{
-  transform:scale(calc(.92 + var(--p,0) * .08));
-  transition:transform .25s linear;
+  transform:perspective(1400px) rotateY(calc(var(--tilt-y,0) * 1deg)) rotateX(calc(var(--tilt-x,0) * 1deg));
 }
-.scrolly-screen{position:absolute;inset:0;opacity:0;transition:opacity .7s var(--ease)}
-.scrolly[data-step="0"] .scrolly-screen[data-step="0"],
-.scrolly[data-step="1"] .scrolly-screen[data-step="1"],
-.scrolly[data-step="2"] .scrolly-screen[data-step="2"],
-.scrolly[data-step="3"] .scrolly-screen[data-step="3"]{opacity:1}
+.scrolly-screen{
+  position:absolute;inset:0;opacity:0;
+  transform:translateX(18%) scale(.96);
+  transition:opacity .55s var(--ease),transform .55s var(--ease);
+}
+.scrolly-screen.is-active{opacity:1;transform:none;z-index:2}
+.scrolly-screen.is-prev{opacity:0;transform:translateX(-18%) scale(.96)}
+.scrolly-screen .ms-page{overflow:visible;transform:translateY(calc(var(--inner,0) * var(--page-h,0px) * -1))}
 
 .scrolly-dots{
   position:absolute;bottom:42px;left:50%;transform:translateX(-50%);
@@ -468,7 +645,7 @@ img,svg{display:block;max-width:100%}
 .shot-brand{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1.05rem;text-shadow:0 1px 10px rgba(0,0,0,.4)}
 .shot-links{display:flex;gap:18px;font-size:.8rem;font-weight:500;opacity:.92}
 .shot-hero{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;color:#fff}
-.shot-hero h4{
+.shot-hero .shot-h{
   font-family:var(--serif);font-weight:500;letter-spacing:-.02em;line-height:1.04;
   font-size:clamp(1.5rem,3.2vw,2.6rem);text-shadow:0 2px 24px rgba(0,0,0,.45);
 }
@@ -553,7 +730,7 @@ img,svg{display:block;max-width:100%}
 .tier li{font-size:.94rem;line-height:1.4;color:var(--ink-2);display:flex;gap:9px;align-items:flex-start}
 .tier li::before{content:'›';color:var(--brand);font-weight:600;flex-shrink:0}
 .tier .pill{width:100%}
-.rates-note{margin-top:28px;font-family:var(--serif);font-style:italic;text-align:center;font-size:1rem;color:var(--ink-3)}
+.rates-note{margin-top:28px;font-family:var(--serif);font-style:italic;text-align:center;font-size:1rem;color:var(--ink-2)}
 
 /* ════════════════════════════════════════════════════
    TESTIMONIALS — dark band
@@ -626,7 +803,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .reveal{opacity:1;transform:none}
-  .hero-scroll::after{animation:none}
 }
 
 /* ════════════════════════════════════════════════════
@@ -661,20 +837,16 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .pill{font-size:.86rem;padding:10px 16px;min-height:42px}
   .nav-link{display:none}
   .brand{font-size:.96rem;padding:8px 16px}
-  .phone{width:min(280px,72vw)}
-  .phone-h{font-size:1.7rem}
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:34px}
+  .hero-copy{text-align:center}
+  .hero-copy h1{font-size:clamp(2.1rem,9vw,2.8rem);max-width:none;margin-left:auto;margin-right:auto}
+  .hero-sub{margin-left:auto;margin-right:auto}
+  .hero-ctas{justify-content:center}
+  .hero-ctas .pill{flex:1 1 100%}
+  .hero-phone{margin-top:8px}
+  .hero-phone .phone{--w:min(270px,68vw)}
   .studio{padding:80px 0}
   .studio-lead{font-size:1.08rem}
-  .scrolly{height:auto}
-  .scrolly-stage{position:relative;height:auto;min-height:auto;padding:80px 20px;overflow:visible;display:block}
-  .scrolly-text > div{position:relative;opacity:1!important;transform:none!important;padding-bottom:30px}
-  .scrolly-bg{position:absolute;height:100%;opacity:.18}
-  .scrolly-bg.scrolly-bg-0{opacity:1}
-  .scrolly-bg-1,.scrolly-bg-2,.scrolly-bg-3{display:none}
-  .scrolly-dots{display:none}
-  .scrolly-phone-wrap{margin:36px auto 0}
-  .scrolly-screen{opacity:1;position:relative}
-  .scrolly-screen:not(:first-child){display:none}
   .work{padding:84px 0}
   .work-head{margin-bottom:38px}
   .shot-links{display:none}
@@ -689,7 +861,30 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   .faq{padding:80px 0}
   .faq-grid{grid-template-columns:1fr}
   .foot-top{grid-template-columns:1fr;gap:30px}
-  .stat,.head-scene,.cta-scene,.hero{padding:80px 20px}
+  .stat,.cta-scene{padding:80px 20px}
+  .hero{padding:150px 20px 60px}
+}
+@media (max-width:680px){
+  .scrolly{height:360vh}
+  .scrolly-stage{
+    grid-template-columns:1fr;grid-template-rows:auto 1fr;
+    padding:calc(env(safe-area-inset-top) + 88px) 20px 90px;gap:18px;align-content:start;
+  }
+  .scrolly-phone-wrap{order:1}
+  .phone{--w:230px}
+  .scrolly-text{order:2;min-height:150px;text-align:center}
+  .scrolly-text > div{display:none}
+  .scrolly[data-step="0"] .scrolly-text > div[data-step="0"],
+  .scrolly[data-step="1"] .scrolly-text > div[data-step="1"],
+  .scrolly[data-step="2"] .scrolly-text > div[data-step="2"],
+  .scrolly[data-step="3"] .scrolly-text > div[data-step="3"]{display:block}
+  .scrolly-text h2{font-size:1.55rem}
+  .scrolly-text p{font-size:.98rem;max-width:32ch;margin:10px auto 0}
+  .scrolly-dots{bottom:22px}
+}
+@media (max-width:680px) and (max-height:700px){
+  .phone{--w:190px}
+  .scrolly-text p{display:none}
 }
 </style>
 </head>
@@ -713,33 +908,59 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   <div class="scene-bg hero-bg" aria-hidden="true"></div>
   <canvas class="hero-canvas" aria-hidden="true"></canvas>
   <div class="inner hero-inner">
-    <div class="phone reveal" aria-label="Mobile website concept for a UK local business">
-      <div class="phone-notch" aria-hidden="true"></div>
-      <div class="phone-screen ps-cafe">
-        <div class="phone-status">
-          <span>9:41</span>
-        </div>
-        <div class="phone-body">
-          <div class="phone-h">Hey<br/>neighbour</div>
-          <div class="phone-msg">My website is, frankly, embarrassing.</div>
-          <div class="phone-reply">Then let's fix it. I'll design you something that actually wins customers, and it can be live within five days.</div>
-        </div>
-        <div class="phone-footer">
-          <div class="phone-input"><span>Ask me anything…</span></div>
+    <div class="hero-copy">
+      <span class="scrolly-eyebrow reveal">Witney · Oxfordshire</span>
+      <h1 class="reveal">Small-business websites, <em>built by hand</em> in Oxfordshire.</h1>
+      <p class="hero-sub reveal">Hand-coded, mobile-first sites that turn Google searches into phone calls. From £395, usually live in about five days.</p>
+      <div class="hero-ctas reveal">
+        <a href="#contact" class="pill pill-brand pill-lg">Get a free quote</a>
+        <a href="#work" class="pill pill-lg">See example sites</a>
+      </div>
+      <p class="hero-proof reveal">One person, every line of code. No templates, no agencies, no retainers.</p>
+    </div>
+    <div class="hero-phone reveal" aria-label="Example café website on a phone">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="phone-island" aria-hidden="true"></div>
+          <div class="ms ms-cafe">
+            <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+            <div class="ms-nav"><span class="ms-logo">Bridge House</span><span class="ms-burger"><span></span></span></div>
+            <div class="ms-page">
+              <div class="ms-hero" style="background-image:url(/img/ph-cafe.webp)">
+                <p class="ms-h3">Slow coffee.<br>Faster mornings.</p>
+                <a class="ms-btn">See the menu</a>
+              </div>
+              <section class="ms-sec">
+                <p class="ms-h4">Today's menu</p>
+                <div class="ms-menu-item"><div><div class="mi-name">Flat white</div><div class="mi-desc">Double shot, oat or whole milk</div></div><div class="mi-price">£3.40</div></div>
+                <div class="ms-menu-item"><div><div class="mi-name">Sourdough toastie</div><div class="mi-desc">Cheddar, chutney, rocket</div></div><div class="mi-price">£6.50</div></div>
+                <div class="ms-menu-item"><div><div class="mi-name">Cinnamon bun</div><div class="mi-desc">Baked fresh every morning</div></div><div class="mi-price">£3.80</div></div>
+                <div class="ms-menu-item"><div><div class="mi-name">Bircher muesli</div><div class="mi-desc">Apple, oats, honey, yoghurt</div></div><div class="mi-price">£5.20</div></div>
+              </section>
+              <section class="ms-sec ms-hours">
+                <p class="ms-h4">Opening hours</p>
+                <div class="ms-hours-grid">
+                  <span class="hd">Mon – Fri</span><span class="ht">7:30 – 17:00</span>
+                  <span class="hd">Saturday</span><span class="ht">8:00 – 17:00</span>
+                  <span class="hd">Sunday</span><span class="ht">9:00 – 15:00</span>
+                </div>
+              </section>
+              <section class="ms-sec ms-map">
+                <p class="ms-h4">Find us</p>
+                <div class="ms-map-tile">
+                  <svg class="ms-pin" viewBox="0 0 24 24" fill="none" stroke="#C44B1F" stroke-width="1.75"><path d="M12 22s7-7.4 7-13a7 7 0 1 0-14 0c0 5.6 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                </div>
+              </section>
+              <div class="ms-cta">
+                <p class="ms-h5">Order ahead</p>
+                <a class="ms-btn">Order ahead</a>
+              </div>
+              <div class="ms-foot">Bridge House Coffee · Witney</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <p class="hero-caption reveal">A one-person web studio in Witney, Oxfordshire, building the kind of websites local businesses ought to have.</p>
-    <span class="hero-scroll" aria-hidden="true">Scroll</span>
-  </div>
-</section>
-
-<!-- ░░ BIG HEADLINE SCENE ░░ -->
-<section class="scene head-scene">
-  <div class="scene-bg head-scene-bg" aria-hidden="true"></div>
-  <canvas class="head-canvas" aria-hidden="true"></canvas>
-  <div class="inner">
-    <h1 class="reveal">Small-business websites, <em>built by hand</em> in Oxfordshire.</h1>
   </div>
 </section>
 
@@ -801,50 +1022,169 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 
     <div class="scrolly-phone-wrap">
       <div class="phone">
-        <div class="phone-notch" aria-hidden="true"></div>
-        <div class="scrolly-screen" data-step="0">
-          <div class="phone-screen ps-cafe">
-            <div class="phone-status"><span>9:41</span></div>
-            <div class="phone-body">
-              <div class="phone-h">Slow coffee.<br/>Faster mornings.</div>
-              <div class="phone-msg">Where are you open till?</div>
-              <div class="phone-reply">Mon to Fri till 4pm, weekends till 5pm. Last orders fifteen minutes before close.</div>
+        <div class="phone-screen">
+          <div class="phone-island" aria-hidden="true"></div>
+
+          <!-- 0 · CAFÉ -->
+          <div class="scrolly-screen" data-step="0">
+            <div class="ms ms-cafe">
+              <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+              <div class="ms-nav"><span class="ms-logo">Bridge House</span><span class="ms-burger"><span></span></span></div>
+              <div class="ms-page" data-ms-page>
+                <div class="ms-hero" style="background-image:url(/img/ph-cafe.webp)">
+                  <p class="ms-h3">Slow coffee.<br>Faster mornings.</p>
+                  <a class="ms-btn">See the menu</a>
+                </div>
+                <section class="ms-sec">
+                  <p class="ms-h4">Today's menu</p>
+                  <div class="ms-menu-item"><div><div class="mi-name">Flat white</div><div class="mi-desc">Double shot, oat or whole milk</div></div><div class="mi-price">£3.40</div></div>
+                  <div class="ms-menu-item"><div><div class="mi-name">Sourdough toastie</div><div class="mi-desc">Cheddar, chutney, rocket</div></div><div class="mi-price">£6.50</div></div>
+                  <div class="ms-menu-item"><div><div class="mi-name">Cinnamon bun</div><div class="mi-desc">Baked fresh every morning</div></div><div class="mi-price">£3.80</div></div>
+                  <div class="ms-menu-item"><div><div class="mi-name">Bircher muesli</div><div class="mi-desc">Apple, oats, honey, yoghurt</div></div><div class="mi-price">£5.20</div></div>
+                </section>
+                <section class="ms-sec ms-hours">
+                  <p class="ms-h4">Opening hours</p>
+                  <div class="ms-hours-grid">
+                    <span class="hd">Mon – Fri</span><span class="ht">7:30 – 17:00</span>
+                    <span class="hd">Saturday</span><span class="ht">8:00 – 17:00</span>
+                    <span class="hd">Sunday</span><span class="ht">9:00 – 15:00</span>
+                  </div>
+                </section>
+                <section class="ms-sec ms-map">
+                  <p class="ms-h4">Find us</p>
+                  <div class="ms-map-tile">
+                    <svg class="ms-pin" viewBox="0 0 24 24" fill="none" stroke="#C44B1F" stroke-width="1.75"><path d="M12 22s7-7.4 7-13a7 7 0 1 0-14 0c0 5.6 7 13 7 13Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+                  </div>
+                </section>
+                <div class="ms-cta">
+                  <p class="ms-h5">Order ahead</p>
+                  <a class="ms-btn">Order ahead</a>
+                </div>
+                <div class="ms-foot">Bridge House Coffee · Witney</div>
+              </div>
             </div>
-            <div class="phone-footer"><div class="phone-input"><span>Order ahead…</span></div></div>
           </div>
-        </div>
-        <div class="scrolly-screen" data-step="1">
-          <div class="phone-screen ps-barber">
-            <div class="phone-status"><span>9:41</span></div>
-            <div class="phone-body">
-              <div class="phone-h">Sharp cuts.<br/>Sharper service.</div>
-              <div class="phone-msg">Got anything Saturday?</div>
-              <div class="phone-reply">11:30 with Sam, or 2:00 with Joel. Tap one and you're booked.</div>
+
+          <!-- 1 · BARBER -->
+          <div class="scrolly-screen" data-step="1">
+            <div class="ms ms-barber">
+              <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+              <div class="ms-nav"><span class="ms-logo">FADE &amp; CO</span><span class="ms-burger"><span></span></span></div>
+              <div class="ms-page" data-ms-page>
+                <div class="ms-hero" style="background-image:url(/img/ph-barber.webp)">
+                  <span class="ms-eyebrow">Witney's chair since 2018</span>
+                  <p class="ms-h3">Precision cuts.<br>No rush.</p>
+                  <a class="ms-btn">Book now</a>
+                </div>
+                <section class="ms-sec">
+                  <p class="ms-h4">Book a chair</p>
+                  <div class="barber-card"><div class="barber-avatar">JM</div><div class="barber-info"><b>Jamal M.</b><span>Skin fades &amp; beard work</span></div></div>
+                  <div class="barber-card"><div class="barber-avatar">RT</div><div class="barber-info"><b>Ryan T.</b><span>Classic cuts &amp; scissor work</span></div></div>
+                  <div class="barber-card"><div class="barber-avatar">OS</div><div class="barber-info"><b>Ola S.</b><span>Modern styles, kids welcome</span></div></div>
+                  <div class="slot-row">
+                    <span class="slot-pill">11:30</span>
+                    <span class="slot-pill">14:00</span>
+                    <span class="slot-pill">16:15</span>
+                  </div>
+                </section>
+                <section class="ms-sec">
+                  <p class="ms-h4">Price list</p>
+                  <div class="price-list">
+                    <div class="price-row"><span>Skin fade</span><span class="pr-price">£24</span></div>
+                    <div class="price-row"><span>Cut &amp; beard trim</span><span class="pr-price">£32</span></div>
+                    <div class="price-row"><span>Classic scissor cut</span><span class="pr-price">£22</span></div>
+                    <div class="price-row"><span>Kids cut (under 12)</span><span class="pr-price">£15</span></div>
+                  </div>
+                </section>
+                <div class="ms-cta"><a class="ms-btn">Book now</a></div>
+                <div class="ms-foot">Fade &amp; Co · High Street, Witney</div>
+              </div>
             </div>
-            <div class="phone-footer"><div class="phone-input"><span>Book now…</span></div></div>
           </div>
-        </div>
-        <div class="scrolly-screen" data-step="2">
-          <div class="phone-screen ps-trade">
-            <div class="phone-status"><span>9:41</span></div>
-            <div class="phone-body">
-              <div class="phone-h">Wired right<br/>the first time.</div>
-              <div class="phone-msg">Quote for a new EV charger?</div>
-              <div class="phone-reply">Of course. Pop your postcode in below and I'll come out for a free survey this week.</div>
+
+          <!-- 2 · ELECTRICIAN -->
+          <div class="scrolly-screen" data-step="2">
+            <div class="ms ms-trade">
+              <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+              <div class="ms-nav"><span class="ms-logo">Spark Electrical</span><span class="ms-burger"><span></span></span></div>
+              <div class="ms-page" data-ms-page>
+                <div class="ms-hero" style="background-image:url(/img/ph-trade.webp)">
+                  <span class="ms-eyebrow">NICEIC registered</span>
+                  <p class="ms-h3">Electricians you<br>can rely on.</p>
+                  <a class="ms-btn">Request a quote</a>
+                </div>
+                <section class="ms-sec">
+                  <p class="ms-h4">What we do</p>
+                  <div class="trade-row">
+                    <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+                    <div><b>Rewires &amp; upgrades</b><span>Full and partial house rewires, consumer unit upgrades</span></div>
+                  </div>
+                  <div class="trade-row">
+                    <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+                    <div><b>Emergency call-outs</b><span>Same-day response, 7 days a week</span></div>
+                  </div>
+                  <div class="trade-row">
+                    <div class="trade-ic"><svg class="ms-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 7h6M9 12h6M9 17h2"/></svg></div>
+                    <div><b>EICR &amp; certification</b><span>Landlord safety certificates, fully documented</span></div>
+                  </div>
+                </section>
+                <section class="ms-sec trust">
+                  <p class="ms-h4">Why homeowners choose us</p>
+                  <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>NICEIC approved contractor</span></div>
+                  <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>5-star rated on Google (200+ reviews)</span></div>
+                  <div class="trust-row"><span class="tick"><svg class="ms-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span><span>Fully insured, £2m public liability</span></div>
+                </section>
+                <section class="ms-sec">
+                  <p class="ms-h4">Get a quote</p>
+                  <div class="trade-form">
+                    <label>Postcode</label>
+                    <div class="trade-input" style="display:flex;align-items:center;color:#14243D;opacity:.55">OX28 4BH</div>
+                    <label>What do you need?</label>
+                    <div class="trade-input" style="display:flex;align-items:center;color:#14243D;opacity:.55">Rewire / fault / EICR…</div>
+                    <a class="ms-btn">Request a quote</a>
+                  </div>
+                </section>
+                <div class="ms-foot">Spark Electrical · Serving Oxfordshire</div>
+              </div>
             </div>
-            <div class="phone-footer"><div class="phone-input"><span>Request a quote…</span></div></div>
           </div>
-        </div>
-        <div class="scrolly-screen" data-step="3">
-          <div class="phone-screen ps-venue">
-            <div class="phone-status"><span>9:41</span></div>
-            <div class="phone-body">
-              <div class="phone-h">Where stories<br/>begin.</div>
-              <div class="phone-msg">Any open dates in September?</div>
-              <div class="phone-reply">The 14th, 21st and 28th are free. I'll send the brochure across right now.</div>
+
+          <!-- 3 · WEDDING VENUE -->
+          <div class="scrolly-screen" data-step="3">
+            <div class="ms ms-venue">
+              <div class="ms-status"><span>9:41</span><span class="ms-sig"></span></div>
+              <div class="ms-nav"><span class="ms-logo">Elmgrove Barn</span><span class="ms-burger"><span></span></span></div>
+              <div class="ms-page" data-ms-page>
+                <div class="ms-hero" style="background-image:url(/img/ph-venue.webp)">
+                  <span class="ms-eyebrow">Weddings &amp; celebrations</span>
+                  <p class="ms-h3">Your day,<br>under our beams.</p>
+                  <a class="ms-btn">Enquire about a date</a>
+                </div>
+                <section class="ms-sec">
+                  <p class="ms-h4">Available dates</p>
+                  <div class="date-row"><span class="dr-date">14 June 2027</span><span class="dr-tag avail">Available</span></div>
+                  <div class="date-row"><span class="dr-date">2 August 2027</span><span class="dr-tag">Booked</span></div>
+                  <div class="date-row"><span class="dr-date">19 September 2027</span><span class="dr-tag avail">Available</span></div>
+                </section>
+                <section class="ms-sec">
+                  <p class="ms-h4">The barn</p>
+                  <div class="venue-gallery">
+                    <div style="background-image:url(/img/ph-venue-d.webp)"></div>
+                    <div style="background-image:url(/img/ph-venue-a.webp)"></div>
+                    <div style="background-image:url(/img/ph-venue-c.webp)"></div>
+                    <div style="background-image:url(/img/ph-venue-b.webp)"></div>
+                  </div>
+                </section>
+                <div class="venue-quote">
+                  <p>"We couldn't have dreamed of a more beautiful setting. Every guest mentioned it."</p>
+                  <span>— Hannah &amp; James, June 2026</span>
+                </div>
+                <div class="ms-cta"><a class="ms-btn">Enquire about a date</a></div>
+                <div class="ms-foot">Elmgrove Barn · Near Burford</div>
+              </div>
             </div>
-            <div class="phone-footer"><div class="phone-input"><span>Enquire about a date…</span></div></div>
           </div>
+
         </div>
       </div>
     </div>
@@ -876,7 +1216,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
               <span class="shot-links"><span>Menu</span><span>Visit</span><span>Order</span></span>
             </div>
             <div class="shot-hero">
-              <h4>Mornings, sorted.</h4>
+              <p class="shot-h">Mornings, sorted.</p>
               <p>Freshly roasted, five minutes from the high street.</p>
               <span class="shot-btn">See the menu</span>
             </div>
@@ -898,7 +1238,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
               <span class="shot-links"><span>Dates</span><span>Gallery</span></span>
             </div>
             <div class="shot-hero">
-              <h4>Where the day begins.</h4>
+              <p class="shot-h">Where the day begins.</p>
               <p>A restored barn for weddings in west Oxfordshire.</p>
               <span class="shot-btn">Check available dates</span>
             </div>
@@ -919,7 +1259,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
               <span class="shot-links"><span>Services</span><span>Quote</span></span>
             </div>
             <div class="shot-hero">
-              <h4>Gardens, properly looked after.</h4>
+              <p class="shot-h">Gardens, properly looked after.</p>
               <p>Design, planting and upkeep across Oxfordshire.</p>
               <span class="shot-btn">Get a free quote</span>
             </div>
@@ -1172,13 +1512,24 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
 
 <script type="module">
   /* ════════════════════════════════════════════════════
-     AMBIENT THREE.JS — warm dust motes (hero)
-                      + slow gradient field (head-scene)
-     One render loop drives both canvases.
+     AMBIENT THREE.JS — warm dust motes (hero only)
+     Loaded lazily: only on wide, fine-pointer devices,
+     without reduced motion, and only once the browser is idle.
   ═══════════════════════════════════════════════════ */
-  import * as THREE from 'three';
-
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const wantsEmbers = window.matchMedia('(min-width:900px) and (pointer:fine)').matches && !reduceMotion;
+
+  function idle(cb) {
+    if ('requestIdleCallback' in window) requestIdleCallback(cb, { timeout: 2000 });
+    else setTimeout(cb, 1);
+  }
+
+  if (wantsEmbers) {
+    idle(() => { initEmbers(); });
+  }
+
+  async function initEmbers() {
+  const THREE = await import('three');
 
   /* Reused soft-disc texture for points — radial gradient on a 2D canvas. */
   function makeDiscTexture() {
@@ -1214,7 +1565,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
     camera.position.set(0, 0, 8);
 
-    const COUNT = 260;
+    const COUNT = 200;
     const positions = new Float32Array(COUNT * 3);
     const colors    = new Float32Array(COUNT * 3);
     const drift     = new Float32Array(COUNT);
@@ -1349,81 +1700,6 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
     });
   })();
 
-  /* ── Head scene: slow rotating warm gradient field behind big headline ── */
-  (function buildHeadScene() {
-    const section = document.querySelector('.head-scene');
-    const canvas = section && section.querySelector('.head-canvas');
-    if (!canvas) return;
-
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 0, 5);
-
-    /* A subtly-displaced icosahedron rendered with additive points along its
-       vertices — reads as a slow constellation, not a recognisable shape. */
-    const baseGeo = new THREE.IcosahedronGeometry(2.2, 4);
-    const positions = baseGeo.attributes.position.array;
-    const count = positions.length / 3;
-    const colors = new Float32Array(count * 3);
-    const palette = [
-      new THREE.Color('#FFD3B5'),
-      new THREE.Color('#F4B797'),
-      new THREE.Color('#C44B1F'),
-      new THREE.Color('#FFE6D2'),
-    ];
-    for (let i = 0; i < count; i++) {
-      const c = palette[(Math.random() * palette.length) | 0];
-      colors[i*3]   = c.r;
-      colors[i*3+1] = c.g;
-      colors[i*3+2] = c.b;
-    }
-    baseGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const mat = new THREE.PointsMaterial({
-      map: discTex,
-      size: 0.18,
-      sizeAttenuation: true,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.85,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-    });
-    const cloud = new THREE.Points(baseGeo, mat);
-    scene.add(cloud);
-
-    const state = { visible: true };
-
-    function size() {
-      const w = section.clientWidth, h = section.clientHeight;
-      renderer.setSize(w, h, false);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
-    size();
-    window.addEventListener('resize', size, { passive: true });
-
-    const io = new IntersectionObserver(([entry]) => {
-      state.visible = entry.isIntersecting;
-    }, { threshold: 0 });
-    io.observe(section);
-
-    requestAnimationFrame(() => canvas.classList.add('in'));
-
-    const motionScale = reduceMotion ? 0.2 : 1;
-
-    scenes.push(function tick(dt, t) {
-      if (!state.visible) return;
-      cloud.rotation.y += dt * 0.06 * motionScale;
-      cloud.rotation.x  = Math.sin(t * 0.15) * 0.25 * motionScale;
-      cloud.scale.setScalar(1 + Math.sin(t * 0.4) * 0.04 * motionScale);
-      renderer.render(scene, camera);
-    });
-  })();
-
   /* ── Single shared render loop ── */
   if (scenes.length) {
     const clock = new THREE.Clock();
@@ -1434,6 +1710,7 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
       for (let i = 0; i < scenes.length; i++) scenes[i](dt, t);
     }
     loop();
+  }
   }
 </script>
 
@@ -1450,26 +1727,129 @@ footer{background:var(--ink);color:rgba(243,235,224,.72);padding:64px 0 32px}
   }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  /* Scrolly — sticky-phone with step-based photo/screen swap */
-  const scrolly = document.querySelector('.scrolly');
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isSmall = window.matchMedia('(max-width:680px)').matches;
-  if (scrolly && !reduceMotion && !isSmall) {
+  /* The mini-sites are authored at a fixed 320px design width. Rather than let them
+     reflow inside a narrower phone frame — which wrecks the line breaks they were
+     designed around — lay them out at 320 and scale the whole screen to fit. */
+  const MS_DESIGN_W = 320;
+  function fitMiniSites() {
+    document.querySelectorAll('.phone-screen').forEach(screen => {
+      const w = screen.clientWidth, h = screen.clientHeight;
+      if (!w || !h) return;
+      if (w >= MS_DESIGN_W) {
+        screen.style.removeProperty('--ms-scale');
+        screen.style.removeProperty('--ms-w');
+        screen.style.removeProperty('--ms-h');
+        return;
+      }
+      const scale = w / MS_DESIGN_W;
+      screen.style.setProperty('--ms-scale', scale);
+      screen.style.setProperty('--ms-w', MS_DESIGN_W + 'px');
+      screen.style.setProperty('--ms-h', (h / scale) + 'px');
+    });
+  }
+  fitMiniSites();
+  window.addEventListener('resize', fitMiniSites, { passive: true });
+  /* Web fonts change metrics, so re-fit once they land. */
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitMiniSites);
+
+  /* Scrolly — sticky-phone, mini-sites slide through, each scrolls internally */
+  (function () {
+    const scrolly = document.querySelector('.scrolly');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!scrolly) return;
+
+    const screens = Array.from(scrolly.querySelectorAll('.scrolly-screen'));
+    const pages = screens.map(s => s.querySelector('[data-ms-page]'));
+    const steps = parseInt(scrolly.dataset.steps, 10) || 4;
+
+    if (reduceMotion) {
+      /* Static fallback: show step 0, no sticky, no measuring. */
+      scrolly.dataset.step = '0';
+      screens.forEach((s, i) => s.classList.toggle('is-active', i === 0));
+      return;
+    }
+
+    function smoothstep(edge0, edge1, x) {
+      const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+      return t * t * (3 - 2 * t);
+    }
+
+    /* Measure each mini-site's scrollable px range so --inner can be a plain px translate.
+       The mini-sites are laid out at a fixed 320px design width and scaled to fit whatever
+       frame they sit in, so their typography keeps the proportions it was designed with
+       instead of reflowing inside a narrow phone. */
+    function measure() {
+      fitMiniSites();
+      pages.forEach(p => {
+        if (!p) return;
+        const h = Math.max(0, p.scrollHeight - p.parentElement.clientHeight);
+        p.style.setProperty('--page-h', h + 'px');
+      });
+    }
+    measure();
+    window.addEventListener('resize', () => { if (!rMeasure) rMeasure = requestAnimationFrame(measure); }, { passive: true });
+    let rMeasure = null;
+
+    const target = { p: 0, inner: 0, tiltX: 0, tiltY: 0 };
+    const shown  = { p: 0, inner: 0, tiltX: 0, tiltY: 0 };
+    let currentStep = -1;
     let raf = null;
-    function tick() {
-      raf = null;
+    let visible = true;
+
+    const io = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }, { threshold: 0 });
+    io.observe(scrolly);
+
+    function computeTargets() {
       const rect = scrolly.getBoundingClientRect();
       const total = Math.max(1, rect.height - window.innerHeight);
       const progress = Math.max(0, Math.min(1, -rect.top / total));
-      const steps = parseInt(scrolly.dataset.steps, 10) || 4;
-      const step = Math.min(steps - 1, Math.floor(progress * steps));
-      if (scrolly.dataset.step !== String(step)) scrolly.dataset.step = String(step);
-      scrolly.style.setProperty('--p', progress.toFixed(3));
+
+      const rawStep = Math.min(steps - 1, Math.floor(progress * steps));
+      const local = (progress * steps) - rawStep;
+      const inner = smoothstep(0.12, 0.88, local);
+      const tiltY = (progress - 0.5) * -10;
+      const tiltX = Math.sin(progress * Math.PI) * 3;
+
+      target.p = progress;
+      target.inner = inner;
+      target.tiltX = tiltX;
+      target.tiltY = tiltY;
+
+      if (rawStep !== currentStep) {
+        currentStep = rawStep;
+        scrolly.dataset.step = String(rawStep);
+        screens.forEach((s, i) => {
+          s.classList.toggle('is-active', i === rawStep);
+          s.classList.toggle('is-prev', i < rawStep);
+        });
+      }
     }
-    window.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
-    window.addEventListener('resize', () => { if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
-    tick();
-  }
+
+    function loop() {
+      raf = null;
+      if (!visible) return;
+      computeTargets();
+
+      shown.p     += (target.p - shown.p) * 0.12;
+      shown.inner += (target.inner - shown.inner) * 0.12;
+      shown.tiltX += (target.tiltX - shown.tiltX) * 0.12;
+      shown.tiltY += (target.tiltY - shown.tiltY) * 0.12;
+
+      scrolly.style.setProperty('--p', shown.p.toFixed(4));
+      scrolly.style.setProperty('--inner', shown.inner.toFixed(4));
+      scrolly.style.setProperty('--tilt-x', shown.tiltX.toFixed(3));
+      scrolly.style.setProperty('--tilt-y', shown.tiltY.toFixed(3));
+
+      raf = requestAnimationFrame(loop);
+    }
+
+    function kick() { if (!raf) raf = requestAnimationFrame(loop); }
+    window.addEventListener('scroll', kick, { passive: true });
+    window.addEventListener('resize', () => { measure(); kick(); }, { passive: true });
+    computeTargets();
+    screens.forEach((s, i) => s.classList.toggle('is-active', i === 0));
+    kick();
+  })();
 </script>
 
 <!-- Vercel Web Analytics -->
