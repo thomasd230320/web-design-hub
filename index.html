@@ -9,7 +9,7 @@
     rule   #A7C0AE  hairlines
     forest #073911  text, dark bands
     forest-2 #22502C secondary text
-    clay   #993D00  burnt orange for text and lines; orange #EF8630 for button fills
+    clay   #3A5560  deep dusty blue for text and lines; dusty blue #6F8790 for button fills
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
@@ -29,10 +29,11 @@
   --rule:#A7C0AE;
   --forest:#073911;
   --forest-2:#22502C;
-  --clay:#993D00;
-  --orange:#EF8630;
-  --orange-hover:#F4A25A;
-  --tint:#F5B36B;
+  --clay:#3A5560;
+  --orange:#6F8790;
+  --orange-hover:#86A0A8;
+  --tint:#A9C0C8;
+  --ink:#031B09;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --wrap:1120px;
@@ -62,11 +63,11 @@ svg{display:block;max-width:100%}
   background:transparent;color:var(--forest);
 }
 .btn:hover{background:var(--forest);color:var(--pale)}
-.btn-clay{background:var(--orange);border-color:var(--clay);color:var(--forest)}
-.btn-clay:hover{background:var(--orange-hover);border-color:var(--clay);color:var(--forest)}
+.btn-clay{background:var(--orange);border-color:var(--clay);color:var(--ink)}
+.btn-clay:hover{background:var(--orange-hover);border-color:var(--clay);color:var(--ink)}
 .on-dark .btn{border-color:var(--pale);color:var(--pale)}
 .on-dark .btn:hover{background:var(--pale);color:var(--forest)}
-.on-dark .btn-clay{background:var(--orange);border-color:var(--orange);color:var(--forest)}
+.on-dark .btn-clay{background:var(--orange);border-color:var(--orange);color:var(--ink)}
 .on-dark .btn-clay:hover{background:var(--pale);border-color:var(--pale);color:var(--forest)}
 
 /* Draft bar: delete when the content is final */
@@ -113,7 +114,7 @@ svg{display:block;max-width:100%}
 .bw-txt b.t3.short{width:60%;margin-top:5px}
 .bw-txt em{display:block;margin-top:12px;width:44%;height:16px;border-radius:99px;background:var(--orange);border:1.5px solid var(--clay)}
 .bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6FA27C,#22502C)}
-.bw-img::before{content:"";position:absolute;right:16%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tint);box-shadow:0 0 22px 8px rgba(245,179,107,.5)}
+.bw-img::before{content:"";position:absolute;right:16%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tint);box-shadow:0 0 22px 8px rgba(169,192,200,.55)}
 .bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#073911;opacity:.55}
 .bw-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:4%;padding:1% 5% 0}
 .bw-cards i{display:block;height:44px;border-radius:10px;background:linear-gradient(var(--forest-2) 0 34%,var(--pale-2) 0)}
@@ -226,10 +227,10 @@ svg{display:block;max-width:100%}
 @media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
-.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.30),transparent)}
+.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.34),transparent)}
 .glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
 .hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
-.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.26),transparent)}
+.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.30),transparent)}
 
 /* Phones */
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start;justify-items:center}
@@ -506,7 +507,7 @@ svg{display:block;max-width:100%}
 .js .panel.on{display:block}
 .panel h3{font-size:1.9rem}
 .panel h3 small{font:600 1rem/1 var(--sans);color:var(--forest-2);margin-left:8px}
-.panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--orange);color:var(--forest);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+.panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--orange);color:var(--ink);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
 .panel ul{margin-top:14px}
 .panel li{padding:5px 0 5px 26px;position:relative}
 .panel li::before{content:"";position:absolute;left:2px;top:.85em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
@@ -652,15 +653,15 @@ footer nav a{margin-left:20px}
           <path d="M44 172 C120 170 190 174 262 171" stroke-width="2"/>
           <path d="M44 200 C150 197 250 202 336 199 L337 300 C240 303 140 298 45 301 Z"/>
           <path d="M45 201 L336 300 M336 199 L46 300" stroke-width="1.4" opacity=".55"/>
-          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#993D00" stroke-width="2.6"/>
-          <path d="M62 345 l104 0" stroke="#993D00" stroke-width="2.6"/>
+          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#3A5560" stroke-width="2.6"/>
+          <path d="M62 345 l104 0" stroke="#3A5560" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
         <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#22502C">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
-          <text x="200" y="352" font-size="18" fill="#993D00" font-weight="bold">one clear step</text>
+          <text x="200" y="352" font-size="18" fill="#3A5560" font-weight="bold">one clear step</text>
         </g>
       </svg>
         </div>
