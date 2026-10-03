@@ -4,9 +4,9 @@
   One file. No framework, no CSS library, no build step.
 
   Palette (all text pairings checked against WCAG 2.2 AA)
-    pale   #D5E2D9  primary: page background, and the "light" text on dark bands
-    pale-2 #C4D7CA  panels
-    rule   #A7C0AE  hairlines
+    pale   #F3EFE7  primary warm white: page background, and the "light" text on dark bands
+    pale-2 #E7E1D4  panels
+    rule   #C2B9A5  hairlines
     forest #073911  text, dark bands
     forest-2 #22502C secondary text
     clay   #3A5560  deep dusty blue for text and lines; dusty blue #6F8790 for button fills
@@ -16,7 +16,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#D5E2D9" />
+<meta name="theme-color" content="#F3EFE7" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Hand-built websites</title>
 <script>document.documentElement.className+=" js"</script>
@@ -24,9 +24,9 @@
 
 <style>
 :root{
-  --pale:#D5E2D9;
-  --pale-2:#C4D7CA;
-  --rule:#A7C0AE;
+  --pale:#F3EFE7;
+  --pale-2:#E7E1D4;
+  --rule:#C2B9A5;
   --forest:#073911;
   --forest-2:#22502C;
   --clay:#3A5560;
@@ -74,7 +74,7 @@ svg{display:block;max-width:100%}
 .draft{background:var(--pale-2);color:var(--forest);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center;border-bottom:1px solid var(--rule)}
 
 /* Header */
-.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(213,226,217,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(243,239,231,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
@@ -99,7 +99,7 @@ svg{display:block;max-width:100%}
 .rl{position:absolute;inset:0}
 .s1{opacity:0}
 .s1 svg{width:100%;height:100%}
-.bw{position:absolute;left:4%;top:9%;width:76%;height:78%;background:#E4EDE6;border:1.5px solid var(--forest);border-radius:14px;overflow:hidden;box-shadow:0 22px 34px -22px rgba(7,57,17,.6)}
+.bw{position:absolute;left:4%;top:9%;width:76%;height:78%;background:#F8F5EE;border:1.5px solid var(--forest);border-radius:14px;overflow:hidden;box-shadow:0 22px 34px -22px rgba(7,57,17,.6)}
 .bw-bar{height:9%;background:var(--forest);display:flex;align-items:center;gap:4px;padding:0 3%}
 .bw-bar i{width:6px;height:6px;border-radius:50%;background:var(--tint)}
 .bw-bar i:nth-child(2){background:var(--orange)}.bw-bar i:nth-child(3){background:var(--rule)}
@@ -175,7 +175,7 @@ svg{display:block;max-width:100%}
 .nm-split{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
 .nm-bars{display:grid;gap:12px}
 .nm-track{height:38px;border-radius:99px;background:var(--pale)}
-.nm-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 16px;font:600 .95rem/1 var(--sans);font-style:normal;white-space:nowrap;background:#A9BBAF;color:var(--forest)}
+.nm-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 16px;font:600 .95rem/1 var(--sans);font-style:normal;white-space:nowrap;background:#BDB6A6;color:var(--forest)}
 .nm-track i.nm-good{background:var(--forest);color:var(--pale)}
 .nm-rise{display:flex;align-items:flex-end;gap:8px;height:84px}
 .nm-rise i{flex:1;border-radius:8px 8px 3px 3px;background:var(--rule)}
@@ -223,13 +223,13 @@ svg{display:block;max-width:100%}
 .cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
 .cmp-row .nm-track{height:22px}
 .cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
-.cmp-row .new .nm-track{background:rgba(213,226,217,.2)}
+.cmp-row .new .nm-track{background:rgba(243,239,231,.2)}
 @media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
 .glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.34),transparent)}
-.glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
-.hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
+.glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(231,225,212,.95),transparent)}
+.hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(231,225,212,.95),transparent)}
 .hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.30),transparent)}
 
 /* Phones */
