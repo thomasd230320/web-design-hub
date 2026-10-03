@@ -210,8 +210,9 @@ svg{display:block;max-width:100%}
 .cmp-head .old{color:var(--clay)}.cmp-head .new{color:var(--forest)}
 .cmp-row>*{border-radius:20px;padding:16px 18px}
 .cmp-row .what{background:transparent;padding-left:6px;display:flex;flex-direction:column;justify-content:center}
-.cmp-row .what b{font:600 1.15rem/1.2 var(--serif)}
-.cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:3px}
+.cmp-row .what b{font:600 1.35rem/1.15 var(--serif)}
+.cmp-row .what p{font-size:1rem;line-height:1.4;margin-top:6px}
+.cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:6px}
 .cmp-row .what small a{color:var(--forest-2)}
 .cmp-row .old,.cmp-row .new{display:flex;flex-direction:column;justify-content:center;gap:8px;font-weight:600;font-size:1rem;line-height:1.25}
 .cmp-row .old{background:var(--pale-2);border:2px dashed var(--rule)}
@@ -472,6 +473,14 @@ svg{display:block;max-width:100%}
 .steps li::before{content:counter(s);display:block;font:italic 500 1.5rem/1 var(--serif);color:var(--tint);margin-bottom:10px}
 .steps h3{font-size:1.5rem}
 .steps p{margin-top:6px}
+.steps h3 button{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;letter-spacing:inherit;color:inherit;text-align:left;display:inline-flex;align-items:center;gap:10px}
+.js .steps h3 button{cursor:pointer}
+.js .steps h3 button::after{content:"+";display:inline-grid;place-items:center;width:24px;height:24px;border:1.5px solid var(--tint);border-radius:50%;color:var(--tint);font:500 1rem/1 var(--sans);transition:transform .2s ease}
+.js .steps h3 button[aria-expanded="true"]::after{transform:rotate(45deg)}
+.steps li{transition:border-color .2s ease}
+.steps li:hover,.steps li.open{border-top-color:var(--pale)}
+.steps .more{color:var(--tint);font-size:1rem}
+.steps .more[hidden]{display:none}
 
 /* Prices: slider + phone */
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
@@ -736,53 +745,33 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
-<!-- TRAFFIC -->
-<section class="block" id="traffic" aria-labelledby="traffic-h">
-  <div class="wrap">
-    <div class="head">
-      <span class="num">02</span>
-      <h2 id="traffic-h">A better site brings more visitors.</h2>
-    </div>
-    <article class="nm-card nm-full">
-      <div class="nm-split">
-        <p class="nm-big" aria-hidden="true">+28%</p>
-        <div class="nm-bars" aria-hidden="true">
-          <div class="nm-track"><i style="width:78%">Before</i></div>
-          <div class="nm-track"><i class="nm-good" style="width:100%">40% faster</i></div>
-        </div>
-      </div>
-      <p class="nm-cap"><span class="sr-only">Plus 28%. </span>more search traffic after the site loaded 40% faster.</p>
-      <p class="nm-src">One retailer's result (Nykaa, India). <a href="https://web.dev/case-studies/vitals-business-impact">Google web.dev</a>. Results vary.</p>
-    </article>
-  </div>
-</section>
-
 <!-- OLD VS NEW -->
 <section class="block" id="compare" aria-labelledby="compare-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">03</span>
+      <span class="num">02</span>
       <h2 id="compare-h">Old site, new site.</h2>
+      <p>Here is how each part brings more people to your site, and keeps them there.</p>
     </div>
     <div class="cmp">
       <div class="cmp-head" aria-hidden="true"><span></span><span class="old">Outdated site</span><span class="new">Hand-built by me</span></div>
       <div class="cmp-row">
-        <div class="what"><b>Speed</b><small>1 s sites get about 3&times; the enquiries of 5 s sites. <a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></small></div>
+        <div class="what"><b>Quick pages</b><p>Quick pages get found more. People wait a little, then leave. One shop made its pages 40% faster and got 28% more visitors from search.</p><small><a href="https://web.dev/case-studies/vitals-business-impact">Google web.dev (Nykaa, India)</a></small></div>
         <div class="old"><div class="nm-track" aria-hidden="true"><i class="nm-bad" style="width:100%">5 s</i></div>Slow to load</div>
         <div class="new"><div class="nm-track" aria-hidden="true"><i class="nm-good" style="width:20%;background:var(--tint);color:var(--forest)">1 s</i></div>Fast, plain code</div>
       </div>
       <div class="cmp-row">
-        <div class="what"><b>On a phone</b><small>+8.4% sales for every 0.1 s faster on mobile. <a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></small></div>
+        <div class="what"><b>Works on a phone</b><p>People hold phones. If a page fits the phone, they stay and buy. Every 0.1 seconds faster gave 8.4% more sales.</p><small><a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></small></div>
         <div class="old">Pinch, zoom and scroll sideways</div>
         <div class="new">Designed for mobile first</div>
       </div>
       <div class="cmp-row">
-        <div class="what"><b>Easy to use</b><small>69% of disabled shoppers leave a site that is hard to use. <a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></small></div>
+        <div class="what"><b>Easy to use</b><p>If a page is hard to use, people go away. 69% of disabled shoppers leave a page they find hard.</p><small><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></small></div>
         <div class="old">Hard to navigate, poor contrast</div>
         <div class="new">Clear, accessible by design</div>
       </div>
       <div class="cmp-row">
-        <div class="what"><b>Found by search and AI</b><small>Clicks fall from 15% to 8% when AI answers the search. <a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, 2025</a></small></div>
+        <div class="what"><b>Found by search and AI</b><p>Search and AI read your page to find answers. When AI answers, fewer people click: 15 in 100 before, 8 in 100 now. Clear pages are the ones they pick.</p><small><a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, 2025</a></small></div>
         <div class="old">Built for search as it was</div>
         <div class="new">Built for SEO and GEO</div>
       </div>
@@ -794,7 +783,7 @@ footer nav a{margin-left:20px}
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">04</span>
+      <span class="num">03</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Every site gets the same care and design. The price follows the size.</p>
     </div>
@@ -906,12 +895,19 @@ footer nav a{margin-left:20px}
           <details><summary>Cloudflare</summary><p>A free layer that sits in front of your site. It helps pages load faster around the world and blocks a lot of harmful traffic.</p></details>
           <details><summary>Google Analytics</summary><p>Shows how many people visit, where they come from and which pages they read, so you can see what is working.</p></details>
           <details><summary>Google Business Profile</summary><p>Your free listing on Google Search and Maps, with opening hours, photos, reviews and directions. I help set it up and link it to your site.</p></details>
-          <details><summary>And so on</summary><p>Other basic extras are added when your site needs them. I agree them with you first. [Confirm this wording.]</p></details>
+          <details><summary>Google Search Console</summary><p>A free Google tool that shows whether your pages are found and what people searched for before they visited.</p></details>
+          <details><summary>Secure connection (HTTPS)</summary><p>The padlock in the browser. It keeps what visitors type private and stops the warnings that scare people away.</p></details>
+          <details><summary>Contact form with spam protection</summary><p>Enquiries go straight to your inbox, with checks that block spam.</p></details>
+          <details><summary>Sitemap</summary><p>A list of all your pages for search engines, so none are missed.</p></details>
+          <details><summary>Structured data</summary><p>Hidden labels that tell search engines and AI what your business is, where it is and what you offer.</p></details>
+          <details><summary>Social sharing previews</summary><p>The picture and title that appear when your page is shared on WhatsApp, Facebook or LinkedIn.</p></details>
+          <details><summary>Cookie notice</summary><p>A simple banner asking permission for tracking cookies, added where your site needs one.</p></details>
+          <details><summary>Browser and phone icons</summary><p>The small icon in the browser tab and on a phone&rsquo;s home screen.</p></details>
         </div>
       </div>
       <div class="care on-dark">
         <h3>Care plan</h3>
-        <p class="fee">&pound;50 to &pound;145 a month</p>
+        <p class="fee">&pound;20+ a month</p>
         <ul>
           <li>Hosting and security</li>
           <li>Small content changes</li>
@@ -920,7 +916,7 @@ footer nav a{margin-left:20px}
         </ul>
       </div>
     </div>
-    <p class="pricing-note">Prices are proposals. 50% to start, 50% on delivery. [Confirm before publishing.]</p>
+    <p class="pricing-note">20% upfront. 80% before the DNS change. [Confirm this split.]</p>
   </div>
 </section>
 
@@ -928,14 +924,14 @@ footer nav a{margin-left:20px}
 <section class="block dark on-dark" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">05</span>
+      <span class="num">04</span>
       <h2 id="process-h">How it works.</h2>
     </div>
     <ol class="steps">
-      <li><h3>Talk</h3><p>A free call.</p></li>
-      <li><h3>Agree</h3><p>A fixed price in writing.</p></li>
-      <li><h3>Build</h3><p>A preview you can click through.</p></li>
-      <li><h3>Launch</h3><p>Tested and handed over.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st1">Talk</button></h3><p>A free call.</p><p class="more" id="st1">Tell me what the site is for and who it is for.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st2">Agree</button></h3><p>A fixed price in writing.</p><p class="more" id="st2">You get the pages and the price in writing. The first 20% starts the build.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st3">Build</button></h3><p>A preview you can click through.</p><p class="more" id="st3">I build it by hand and send you a link to look around and ask for changes.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st4">Launch</button></h3><p>Tested and handed over.</p><p class="more" id="st4">I test it on phones and computers. The final 80% is due before the DNS change, which points your domain at the new site.</p></li>
     </ol>
   </div>
 </section>
@@ -989,6 +985,17 @@ footer nav a{margin-left:20px}
   range.addEventListener('input',function(){set(+range.value);});
   stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
   set(0);
+})();
+(function(){
+  var bs=[].slice.call(document.querySelectorAll('.steps h3 button'));
+  bs.forEach(function(b){
+    var p=document.getElementById(b.getAttribute('aria-controls')); if(!p) return;
+    p.hidden=true;
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded',String(!open)); p.hidden=open; b.closest('li').classList.toggle('open',!open);
+    });
+  });
 })();
 (function(){
   var b=document.getElementById('reel-pause'), r=document.querySelector('.reel');
