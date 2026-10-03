@@ -9,7 +9,7 @@
     rule   #A7C0AE  hairlines
     forest #073911  text, dark bands
     forest-2 #22502C secondary text
-    clay   #9A3C19  contrasting colour: buttons, small accents
+    clay   #993D00  burnt orange for text and lines; orange #EF8630 for button fills
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
@@ -29,9 +29,10 @@
   --rule:#A7C0AE;
   --forest:#073911;
   --forest-2:#22502C;
-  --clay:#9A3C19;
-  --clay-dark:#7F3013;
-  --tint:#F2B08F;
+  --clay:#993D00;
+  --orange:#EF8630;
+  --orange-hover:#F4A25A;
+  --tint:#F5B36B;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --wrap:1120px;
@@ -61,11 +62,11 @@ svg{display:block;max-width:100%}
   background:transparent;color:var(--forest);
 }
 .btn:hover{background:var(--forest);color:var(--pale)}
-.btn-clay{background:var(--clay);border-color:var(--clay);color:var(--pale)}
-.btn-clay:hover{background:var(--clay-dark);border-color:var(--clay-dark);color:var(--pale)}
+.btn-clay{background:var(--orange);border-color:var(--clay);color:var(--forest)}
+.btn-clay:hover{background:var(--orange-hover);border-color:var(--clay);color:var(--forest)}
 .on-dark .btn{border-color:var(--pale);color:var(--pale)}
 .on-dark .btn:hover{background:var(--pale);color:var(--forest)}
-.on-dark .btn-clay{background:var(--clay);border-color:var(--clay);color:var(--pale)}
+.on-dark .btn-clay{background:var(--orange);border-color:var(--orange);color:var(--forest)}
 .on-dark .btn-clay:hover{background:var(--pale);border-color:var(--pale);color:var(--forest)}
 
 /* Draft bar: delete when the content is final */
@@ -108,11 +109,29 @@ svg{display:block;max-width:100%}
 .dark .num{color:var(--tint)}
 .dark .head p{color:var(--pale)}
 
+/* NUMBERS */
+.nm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.nm-card{background:var(--pale-2);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:10px}
+.nm-wide{grid-column:span 2}
+.nm-card h3{font-size:1.4rem}
+.nm-big{font:500 3.2rem/1 var(--serif);color:var(--clay)}
+.nm-txt{color:var(--forest-2);font-size:1.02rem}
+.nm-src{margin-top:auto;font-size:.88rem;color:var(--forest-2)}
+.nm-src a{color:var(--forest);text-underline-offset:3px}
+.nm-bars{display:grid;gap:12px;margin:8px 0}
+.nm-row{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;font-size:.95rem}
+.nm-track{height:30px;border-radius:99px;background:var(--pale)}
+.nm-track i{display:block;height:100%;border-radius:99px;background:#7D8C82}
+.nm-track i.nm-good{background:var(--forest)}
+.nm-note{margin-top:22px;font-size:.95rem;color:var(--forest-2)}
+@media (max-width:980px){.nm-grid{grid-template-columns:1fr}.nm-wide{grid-column:auto}}
+@media (max-width:560px){.nm-row{grid-template-columns:1fr;gap:6px}.nm-card{padding:22px}}
+
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
-.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(242,176,143,.30),transparent)}
+.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.30),transparent)}
 .glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
 .hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
-.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(242,176,143,.26),transparent)}
+.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.26),transparent)}
 
 /* Phones */
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start;justify-items:center}
@@ -360,7 +379,7 @@ svg{display:block;max-width:100%}
 .js .panel.on{display:block}
 .panel h3{font-size:1.9rem}
 .panel h3 small{font:600 1rem/1 var(--sans);color:var(--forest-2);margin-left:8px}
-.panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--clay);color:var(--pale);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+.panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--orange);color:var(--forest);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
 .panel ul{margin-top:14px}
 .panel li{padding:5px 0 5px 26px;position:relative}
 .panel li::before{content:"";position:absolute;left:2px;top:.85em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
@@ -454,6 +473,7 @@ footer nav a{margin-left:20px}
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#looks">Styles</a>
       <a href="#why">Why</a>
+      <a href="#numbers">Numbers</a>
       <a href="#process">Process</a>
       <a href="#pricing">Prices</a>
       <a class="btn btn-clay" href="#contact">Get a quote</a>
@@ -490,15 +510,15 @@ footer nav a{margin-left:20px}
           <path d="M44 172 C120 170 190 174 262 171" stroke-width="2"/>
           <path d="M44 200 C150 197 250 202 336 199 L337 300 C240 303 140 298 45 301 Z"/>
           <path d="M45 201 L336 300 M336 199 L46 300" stroke-width="1.4" opacity=".55"/>
-          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#9A3C19" stroke-width="2.6"/>
-          <path d="M62 345 l104 0" stroke="#9A3C19" stroke-width="2.6"/>
+          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#993D00" stroke-width="2.6"/>
+          <path d="M62 345 l104 0" stroke="#993D00" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
         <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#22502C">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
-          <text x="200" y="352" font-size="18" fill="#9A3C19" font-weight="bold">one clear step</text>
+          <text x="200" y="352" font-size="18" fill="#993D00" font-weight="bold">one clear step</text>
         </g>
       </svg>
       </div>
@@ -590,11 +610,54 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
+<!-- NUMBERS -->
+<section class="block" id="numbers" aria-labelledby="numbers-h">
+  <div class="wrap">
+    <div class="head">
+      <span class="num">03</span>
+      <h2 id="numbers-h">Good site, bad site.</h2>
+      <p>What research says a good website is worth. Every figure links to its source.</p>
+    </div>
+    <div class="nm-grid">
+      <article class="nm-card nm-wide">
+        <h3>A fast site converts more</h3>
+        <div class="nm-bars" aria-hidden="true">
+          <div class="nm-row"><span>Slow: loads in 5 seconds</span><div class="nm-track"><i style="width:33.3%"></i></div></div>
+          <div class="nm-row"><span>Fast: loads in 1 second</span><div class="nm-track"><i class="nm-good" style="width:100%"></i></div></div>
+        </div>
+        <p class="nm-txt">Visitors to the 1-second site were about 3 times as likely to enquire on lead-generation sites, and 2.5 times as likely to buy on online shops, as visitors to the 5-second site.</p>
+        <p class="nm-src">Source: <a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a> (20 websites, over 100 million page views)</p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">+8.4%</p>
+        <p class="nm-txt">more retail conversions for every 0.1 second a mobile site gets faster.</p>
+        <p class="nm-src">Source: <a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a> (Europe and the US)</p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">46.1%</p>
+        <p class="nm-txt">of the comments people made about whether a site is credible were about how it looks.</p>
+        <p class="nm-src">Source: <a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002</a> (2,684 people). An older study.</p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">69%</p>
+        <p class="nm-txt">of disabled online shoppers leave a site they find hard to use. UK retailers could be losing an estimated &pound;17.1 billion a year.</p>
+        <p class="nm-src">Source: <a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">95.9%</p>
+        <p class="nm-txt">of the top million home pages fail basic accessibility checks. A site built to the standard stands apart.</p>
+        <p class="nm-src">Source: <a href="https://webaim.org/projects/million/">WebAIM, 2026</a> (automated checks only)</p>
+      </article>
+    </div>
+    <p class="nm-note">These studies look at other businesses&rsquo; sites, not mine, and results vary. They show what tends to happen.</p>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section class="block dark on-dark" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">03</span>
+      <span class="num">04</span>
       <h2 id="process-h">How it works.</h2>
     </div>
     <ol class="steps">
@@ -610,7 +673,7 @@ footer nav a{margin-left:20px}
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">04</span>
+      <span class="num">05</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Each package says what it leaves out.</p>
     </div>
