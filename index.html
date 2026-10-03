@@ -468,6 +468,31 @@ svg{display:block;max-width:100%}
 .htb2{background:linear-gradient(135deg,#1B3550,#0F1F30)}
 .htk .gb2{background:linear-gradient(135deg,#D3B070,#A9843F)}
 
+/* Pro polish v2: intricate, price-appropriate detail */
+.hire::after{content:"9:41";position:absolute;left:24px;top:9px;z-index:3;font:700 9px/1 system-ui,sans-serif;color:#1D1F24}
+.dgt{display:flex;gap:6px;padding:10px 16px 0}
+.dgt span{display:inline-flex;align-items:center;gap:4px;font:600 7.5px/1 system-ui,sans-serif;color:#3B4C41;border:1px solid #CFC6B0;border-radius:99px;padding:4px 8px}
+.dgt span::before{content:"\2713";color:#8A6F3A;font-weight:700}
+.dgd{zoom:1.12}
+.slh2{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;padding:8px 16px 0;align-items:center}
+.slt em{display:block;font:600 6px/1 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#9A5B70;margin-bottom:6px}
+.slh2 .slh{padding:0;font-size:23px}
+.slh2 .slg{padding:9px 0 0}
+.slh2 .slg span{white-space:nowrap;padding:6px 10px;font-size:9px}
+.slh2 .slg .o{padding:4.5px 9px}
+.slimg{position:relative;height:108px;border-radius:60px 60px 14px 14px;overflow:hidden;background:linear-gradient(160deg,#F4C3CE,#B5546C);box-shadow:0 12px 18px -12px rgba(59,34,51,.6)}
+.slimg i{position:absolute;display:block}
+.slimg .a{left:50%;top:26px;width:34px;height:40px;margin-left:-17px;border-radius:50%;background:#F6D9CF}
+.slimg .a::before{content:"";position:absolute;left:-5px;right:-5px;top:-7px;height:26px;border-radius:50% 50% 35% 35%;background:#3B2233}
+.slimg .b{left:12px;right:12px;bottom:0;height:46px;border-radius:40px 40px 0 0;background:#3B2233}
+.slt2{margin:9px 14px 0}
+.slt2 small{display:block;font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#7A5568;margin-bottom:6px}
+.slt2 div{display:flex;gap:12px}
+.slt2 span{display:flex;flex-direction:column;align-items:center;gap:3px;font:500 7.5px/1 system-ui,sans-serif}
+.slt2 i{display:block;width:26px;height:26px;border-radius:50%;box-shadow:0 5px 8px -4px rgba(59,34,51,.6)}
+.ctf{display:flex;justify-content:space-between;padding:8px 12px 0;font:600 7px/1 system-ui,sans-serif;color:#5F665F}
+.ctf span:last-child{color:#7A5200}
+
 /* Site-size graphic under the slider phone */
 .sitemap{margin-top:16px}
 .sm-label{display:block;font:600 .75rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--forest-2);text-align:center;margin-bottom:8px}
@@ -521,8 +546,16 @@ svg{display:block;max-width:100%}
 .extras h3{font-size:1.4rem;margin-bottom:12px}
 .basics h3{font-size:1.4rem;margin-bottom:12px}
 .basics p{max-width:36ch}
-.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.pills li{background:var(--pale-2);border:1px solid var(--rule);border-radius:999px;padding:7px 16px;font-size:.98rem;font-weight:500}
+.addons{display:grid;gap:8px;margin-top:18px}
+.addons details{background:var(--pale-2);border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.addons summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;min-height:48px;font-weight:600}
+.addons summary::-webkit-details-marker{display:none}
+.addons summary::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid var(--clay);border-bottom:2.5px solid var(--clay);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
+.addons details[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.addons summary:focus-visible{outline-offset:-3px;border-radius:18px}
+.basics .addons p{max-width:none;padding:0 18px 16px;font-size:1rem;color:var(--forest-2)}
+.care{align-self:start}
+.nm-full{max-width:none}
 .care{background:var(--forest);color:var(--pale);padding:28px 30px;border-radius:26px}
 .care h3{color:var(--pale)}
 .care .fee{font:600 1.9rem/1.1 var(--serif);margin-bottom:12px}
@@ -608,10 +641,9 @@ footer nav a{margin-left:20px}
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#looks">Styles</a>
-      <a href="#why">Why a site</a>
       <a href="#compare">Old vs new</a>
-      <a href="#process">Process</a>
       <a href="#pricing">Prices</a>
+      <a href="#process">Process</a>
       <a class="btn btn-clay" href="#contact">Get a quote</a>
     </nav>
   </div>
@@ -740,33 +772,24 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
-<!-- WHY A SITE -->
-<section class="block" id="why" aria-labelledby="why-h">
+<!-- TRAFFIC -->
+<section class="block" id="traffic" aria-labelledby="traffic-h">
   <div class="wrap">
     <div class="head">
       <span class="num">02</span>
-      <h2 id="why-h">A website or no website.</h2>
-      <p>Your customers are online. Many businesses are not.</p>
+      <h2 id="traffic-h">A better site brings more visitors.</h2>
     </div>
-    <div class="nm-grid">
-      <article class="nm-card">
-        <div class="nm-ring" style="--p:95" aria-hidden="true"><b>95%</b></div>
-        <p class="nm-cap"><span class="sr-only">95%. </span>of UK adults have internet at home.</p>
-        <p class="nm-src"><a href="https://www.ispreview.co.uk/index.php/2025/12/ofcom-finds-uk-adults-now-spend-over-4-5-hours-online-each-day.html">Ofcom, 2025</a></p>
-      </article>
-      <article class="nm-card">
-        <p class="nm-big">4&frac12; hrs</p>
-        <div class="nm-day" aria-hidden="true"><i></i></div>
-        <p class="nm-cap">online every day, on average (outside work).</p>
-        <p class="nm-src"><a href="https://www.ispreview.co.uk/index.php/2025/12/ofcom-finds-uk-adults-now-spend-over-4-5-hours-online-each-day.html">Ofcom, 2025</a></p>
-      </article>
-      <article class="nm-card">
-        <p class="nm-big">1 in 3</p>
-        <div class="nm-three" aria-hidden="true"><i></i><i></i><i></i></div>
-        <p class="nm-cap">of UK businesses have no website at all.</p>
-        <p class="nm-src"><a href="https://workplacejournal.co.uk/2025/09/a-third-of-uk-businesses-remain-offline-despite-digital-growth/">UK Business Data Survey, 2024</a></p>
-      </article>
-    </div>
+    <article class="nm-card nm-full">
+      <div class="nm-split">
+        <p class="nm-big" aria-hidden="true">+28%</p>
+        <div class="nm-bars" aria-hidden="true">
+          <div class="nm-track"><i style="width:78%">Before</i></div>
+          <div class="nm-track"><i class="nm-good" style="width:100%">40% faster</i></div>
+        </div>
+      </div>
+      <p class="nm-cap"><span class="sr-only">Plus 28%. </span>more search traffic after the site loaded 40% faster.</p>
+      <p class="nm-src">One retailer's result (Nykaa, India). <a href="https://web.dev/case-studies/vitals-business-impact">Google web.dev</a>. Results vary.</p>
+    </article>
   </div>
 </section>
 
@@ -803,78 +826,11 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
-<!-- COST -->
-<section class="block" id="cost" aria-labelledby="cost-h">
-  <div class="wrap">
-    <div class="head">
-      <span class="num">04</span>
-      <h2 id="cost-h">What a hard-to-use site costs.</h2>
-    </div>
-    <div class="nm-grid">
-      <article class="nm-card">
-        <div class="nm-ring" style="--p:69" aria-hidden="true"><b>69%</b></div>
-        <p class="nm-cap"><span class="sr-only">69%. </span>of disabled shoppers leave a site that is hard to use.</p>
-        <p class="nm-src"><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
-      </article>
-      <article class="nm-card">
-        <p class="nm-big">&pound;17.1bn</p>
-        <div class="nm-rise" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <p class="nm-cap">a year UK retailers could be losing (estimate).</p>
-        <p class="nm-src"><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
-      </article>
-      <article class="nm-card">
-        <div class="nm-dots" aria-hidden="true"></div>
-        <p class="nm-cap"><span class="sr-only">95.9%. </span>of home pages fail basic accessibility checks.</p>
-        <p class="nm-src"><a href="https://webaim.org/projects/million/">WebAIM, 2026</a></p>
-      </article>
-      <article class="nm-card">
-        <div class="nm-pair" aria-hidden="true">
-          <div class="nm-track"><i class="nm-good" style="width:100%">15%</i></div>
-          <div class="nm-track"><i class="nm-bad" style="width:53%">8%</i></div>
-        </div>
-        <p class="nm-cap">of visits click a result: 15% normally, 8% when an AI summary shows.</p>
-        <p class="nm-src"><a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, US, 2025</a></p>
-      </article>
-      <article class="nm-card">
-        <div class="nm-ring" style="--p:46.1" aria-hidden="true"><b>46%</b></div>
-        <p class="nm-cap"><span class="sr-only">46.1%. </span>of trust comments are about how a site looks.</p>
-        <p class="nm-src"><a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002 (older study)</a></p>
-      </article>
-      <article class="nm-card">
-        <p class="nm-big">3&times;</p>
-        <div class="nm-pair" aria-hidden="true">
-          <div class="nm-track"><i class="nm-bad" style="width:34%">5 s</i></div>
-          <div class="nm-track"><i class="nm-good" style="width:100%">1 s</i></div>
-        </div>
-        <p class="nm-cap">the enquiries for a 1-second site.</p>
-        <p class="nm-src"><a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></p>
-      </article>
-    </div>
-    <p class="nm-note">Studies of other sites. Results vary.</p>
-  </div>
-</section>
-
-<!-- PROCESS -->
-<section class="block dark on-dark" id="process" aria-labelledby="process-h">
-  <div class="wrap">
-    <div class="head">
-      <span class="num">05</span>
-      <h2 id="process-h">How it works.</h2>
-    </div>
-    <ol class="steps">
-      <li><h3>Talk</h3><p>A free call.</p></li>
-      <li><h3>Agree</h3><p>A fixed price in writing.</p></li>
-      <li><h3>Build</h3><p>A preview you can click through.</p></li>
-      <li><h3>Launch</h3><p>Tested and handed over.</p></li>
-    </ol>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">06</span>
+      <span class="num">04</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Every site gets the same care and design. The price follows the size.</p>
     </div>
@@ -922,22 +878,26 @@ footer nav a{margin-left:20px}
             <span class="dgh">Calm, careful grooming.</span>
             <span class="dgs">Gentle care for dogs of every size.</span>
             <span class="dgc">Book a groom</span>
+            <div class="dgt"><span>Fully insured</span><span>Gentle handling</span></div>
             <div class="dgd"><i class="ea e1"></i><i class="ea e2"></i><i class="fc"></i><i class="sn"></i><i class="ns"></i><i class="ey y1"></i><i class="ey y2"></i><i class="tg"></i><i class="bb b1"></i><i class="bb b2"></i><i class="bb b3"></i></div>
-            <div class="dgr"><div><span>Full groom</span><i>&rarr;</i></div><div><span>Bath &amp; brush</span><i>&rarr;</i></div></div>
+            <div class="dgr"><div><span>Full groom</span><i>&rarr;</i></div><div><span>Bath &amp; brush</span><i>&rarr;</i></div><div><span>Puppy intro</span><i>&rarr;</i></div></div>
           </div>
           <div class="layer sl" data-i="1">
             <div class="slb"><span class="sll">Studio Nine</span><span class="slm">Menu</span></div>
-            <span class="slh">Hair, done right.</span>
-            <div class="slg"><span class="p">Book now</span><span class="o">Prices</span></div>
+            <div class="slh2">
+              <div class="slt"><em>Hair salon &middot; Witney</em><span class="slh">Hair, done right.</span><div class="slg"><span class="p">Book now</span><span class="o">Prices</span></div></div>
+              <div class="slimg"><i class="a"></i><i class="b"></i></div>
+            </div>
             <div class="sls"><div><span>Cut &amp; finish</span><b>&pound;35</b></div><div><span>Colour</span><b>&pound;65</b></div><div><span>Blow dry</span><b>&pound;25</b></div></div>
             <div class="slc"><em>Book online</em><div class="slf"><span>Fri 11 Oct</span><span>2:30pm</span><span class="w">Any stylist &#9662;</span></div><span class="slk">Confirm booking</span></div>
-            <div class="slx"><small>On Instagram</small><div><i style="background:#D9778C"></i><i style="background:#3B2233"></i><i style="background:#EBC4C0"></i><i style="background:#B5546C"></i></div></div>
+            <div class="slt2"><small>Your stylists</small><div><span><i style="background:linear-gradient(135deg,#F4C3CE,#B5546C)"></i>Ava</span><span><i style="background:linear-gradient(135deg,#E8CBB8,#9A6A52)"></i>Mia</span><span><i style="background:linear-gradient(135deg,#D9C3E0,#7A5568)"></i>Jo</span></div></div>
             <div class="slv"><span>Gift vouchers</span><span>Mon&ndash;Sat 9&ndash;6</span></div>
           </div>
           <div class="layer ct" data-i="2">
             <div class="ctb"><span class="ctl"><i></i>GREENFIELD</span><span class="ctn">3</span></div>
             <div class="cth"><em>Plant &amp; tool hire</em><b>The right kit, ready when you are.</b><div class="cts">Search 262 products</div></div>
             <div class="ctc"><span class="on">All</span><span>Diggers</span><span>Power</span><span>Access</span></div>
+            <div class="ctf"><span>262 products</span><span>Filter &middot; Sort</span></div>
             <div class="ctg">
               <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#F2C14E,#D99A12)"><u>In stock</u></span><b>Mini digger</b><small>1.8 tonne &middot; 4 hr min</small><span class="q">Request a quote &rarr;</span></div>
               <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#B9C2BB,#7F8B83)"><u>In stock</u></span><b>Breaker</b><small>Petrol &middot; 25 kg</small><span class="q">Request a quote &rarr;</span></div>
@@ -981,12 +941,12 @@ footer nav a{margin-left:20px}
       <div class="basics">
         <h3>Add-ons</h3>
         <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website, so every site comes with a selection of them, chosen to suit it.</p>
-        <ul class="pills">
-          <li>Cloudflare</li>
-          <li>Google Analytics</li>
-          <li>Google Business Profile</li>
-          <li>and so on</li>
-        </ul>
+        <div class="addons">
+          <details><summary>Cloudflare</summary><p>A free layer that sits in front of your site. It helps pages load faster around the world and blocks a lot of harmful traffic.</p></details>
+          <details><summary>Google Analytics</summary><p>Shows how many people visit, where they come from and which pages they read, so you can see what is working.</p></details>
+          <details><summary>Google Business Profile</summary><p>Your free listing on Google Search and Maps, with opening hours, photos, reviews and directions. I help set it up and link it to your site.</p></details>
+          <details><summary>And so on</summary><p>Other basic extras are added when your site needs them. I agree them with you first. [Confirm this wording.]</p></details>
+        </div>
       </div>
       <div class="care on-dark">
         <h3>Care plan</h3>
@@ -1000,6 +960,22 @@ footer nav a{margin-left:20px}
       </div>
     </div>
     <p class="pricing-note">Prices are proposals. 50% to start, 50% on delivery. [Confirm before publishing.]</p>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block dark on-dark" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="head">
+      <span class="num">05</span>
+      <h2 id="process-h">How it works.</h2>
+    </div>
+    <ol class="steps">
+      <li><h3>Talk</h3><p>A free call.</p></li>
+      <li><h3>Agree</h3><p>A fixed price in writing.</p></li>
+      <li><h3>Build</h3><p>A preview you can click through.</p></li>
+      <li><h3>Launch</h3><p>Tested and handed over.</p></li>
+    </ol>
   </div>
 </section>
 
