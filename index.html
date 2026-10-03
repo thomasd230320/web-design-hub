@@ -68,21 +68,22 @@ svg{display:block;max-width:100%}
 .on-dark .btn-clay:hover{background:var(--pale);border-color:var(--pale);color:var(--forest)}
 
 /* Draft bar: delete when the content is final */
-.draft{background:var(--forest);color:var(--pale);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center}
+.draft{background:var(--pale-2);color:var(--forest);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center;border-bottom:1px solid var(--rule)}
 
 /* Header */
-.header{background:var(--pale);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:50}
-.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(213,226,217,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
 .nav{display:flex;align-items:center;gap:4px}
 .nav a:not(.btn){padding:10px 14px;font-weight:500;font-size:1rem;text-decoration:none;border-bottom:2px solid transparent}
 .nav a:not(.btn):hover{border-bottom-color:var(--forest)}
-.nav .btn{margin-left:14px;min-height:44px;padding:10px 20px}
+.nav .btn{margin-left:10px;min-height:44px;padding:10px 22px}
 .menu-btn{display:none}
 
 /* Hero */
-.hero{padding:80px 0 90px}
+.hero{padding:64px 0 70px;position:relative;isolation:isolate;overflow-x:clip}
+
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
 .kicker{font:600 .85rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
 .hero h1{font-size:clamp(2.8rem,6vw,4.8rem);max-width:11ch}
@@ -94,16 +95,23 @@ svg{display:block;max-width:100%}
 .sketch figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
 
 /* Sections */
-.block{padding:92px 0}
+.block{padding:84px 0;position:relative;isolation:isolate;overflow-x:clip}
 .head{margin-bottom:44px;max-width:760px}
 .head .num{font:italic 500 1.1rem/1 var(--serif);color:var(--clay);display:block;margin-bottom:12px}
 .head h2{font-size:clamp(2rem,4vw,3rem)}
 .head p{margin-top:12px;font-size:1.2rem;color:var(--forest-2)}
 .head p.small{margin-top:10px;font-size:.95rem}
-.alt{background:var(--pale-2)}
 .dark{background:var(--forest);color:var(--pale)}
+.block.dark{width:min(1240px,calc(100% - 24px));margin:14px auto;border-radius:44px;padding:76px 0}
+.block.dark .wrap{padding:0 56px}
 .dark .num{color:var(--tint)}
 .dark .head p{color:var(--pale)}
+
+.glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
+.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(242,176,143,.30),transparent)}
+.glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
+.hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
+.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(242,176,143,.26),transparent)}
 
 /* Phones */
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start;justify-items:center}
@@ -116,7 +124,7 @@ svg{display:block;max-width:100%}
 .look figcaption p{margin-top:4px;font-size:1rem;color:var(--forest-2)}
 .note{margin-top:36px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
 
-/* Phone 1: colourful */
+/* Mid-range phone (.s1): colourful cafe */
 .s1{background:#FFD23F;color:#2B1B3D;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
 .s1 .bar{display:flex;justify-content:space-between;align-items:center;padding:34px 14px 8px}
 .s1 .brand{font-weight:900;font-size:15px;letter-spacing:-.02em;color:#E63946}
@@ -133,7 +141,7 @@ svg{display:block;max-width:100%}
 .s1 .strip{margin-top:auto;background:#2B1B3D;color:#FFD23F;padding:14px;font-weight:800;font-size:12px}
 .s1 .strip small{display:block;margin-top:2px;font-weight:400;color:#F4E9FF}
 
-/* Phone 2: simple */
+/* Simple phone (.s2): one clear page */
 .s2{background:#E9E5DC;color:#1F1F1F;font-family:Georgia,"Times New Roman",serif}
 .s2 .bar{display:flex;justify-content:space-between;align-items:baseline;padding:36px 20px 10px;font-size:13px}
 .s2 .bar span:last-child{font-family:system-ui,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
@@ -145,30 +153,39 @@ svg{display:block;max-width:100%}
 .s2 .row i{font-style:normal;font-family:system-ui,sans-serif;color:#777}
 .s2 .rows{margin-top:auto;padding-bottom:18px}
 
-/* Phone 3: bold */
-.s3{background:#14213D;color:#E8E4D8;font-family:Impact,"Arial Narrow Bold","Helvetica Neue",Arial,sans-serif}
-.s3 .bar{display:flex;justify-content:space-between;align-items:center;padding:34px 14px 8px;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
-.s3 .bar span:last-child{color:#FCA311}
-.s3 .hero3{padding:20px 14px 14px}
-.s3 .hero3 b{display:block;font-size:44px;line-height:.95;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
-.s3 .hero3 b em{font-style:normal;color:#FCA311}
-.s3 .hero3 span{display:block;margin-top:10px;font-family:system-ui,sans-serif;font-size:11px;color:#B9B6AA}
-.s3 .hero3 .go{display:inline-block;margin-top:14px;background:#FCA311;color:#14213D;font-family:system-ui,sans-serif;font-weight:800;font-size:12px;padding:10px 16px;text-transform:uppercase;letter-spacing:.05em}
-.s3 .sched{margin:6px 0 0}
-.s3 .sched div{display:flex;justify-content:space-between;padding:10px 14px;border-top:1px solid #2B3A5F;font-family:system-ui,sans-serif;font-size:11px;color:#E8E4D8}
-.s3 .sched i{font-style:normal;color:#FCA311;font-weight:700}
-.s3 .stats{margin-top:auto;display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid #FCA311}
-.s3 .stats div{padding:12px 10px;border-right:1px solid #2B3A5F;font-size:20px;line-height:1}
-.s3 .stats div:last-child{border-right:0}
-.s3 .stats small{display:block;margin-top:5px;font-family:system-ui,sans-serif;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#B9B6AA}
+/* Complex phone (.s3): booking interface */
+.s3{background:#14213D;color:#E8E4D8;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.s3 .bar{display:flex;justify-content:space-between;align-items:center;padding:32px 12px 6px;font:400 15px/1 Impact,"Arial Narrow Bold","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.s3 .ico{display:flex;gap:6px;align-items:center}
+.s3 .ico i{width:16px;height:16px;border:2px solid #E8E4D8;border-radius:50%}
+.s3 .ico .av{background:#FCA311;border-color:#FCA311}
+.s3 .days{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:8px 12px 4px}
+.s3 .days div{background:#1E2F55;border-radius:10px;padding:6px 0;text-align:center;font-weight:700;font-size:13px;line-height:1.2}
+.s3 .days small{display:block;font-size:8px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#B9B6AA}
+.s3 .days .on{background:#FCA311;color:#14213D}.s3 .days .on small{color:#14213D}
+.s3 .chips{display:flex;gap:5px;padding:6px 12px}
+.s3 .chips span{border:1px solid #3A4C78;border-radius:99px;padding:3px 8px;font-size:9px}
+.s3 .chips .on{background:#E8E4D8;color:#14213D;border-color:#E8E4D8;font-weight:700}
+.s3 .c3{position:relative;background:#1B2B50;border-radius:12px;margin:5px 12px;padding:9px 10px}
+.s3 .c3 .top{display:flex;justify-content:space-between;align-items:baseline}
+.s3 .c3 b{font:400 17px/1 Impact,"Arial Narrow Bold","Helvetica Neue",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em}
+.s3 .c3 em{font-style:normal;font-weight:700;color:#FCA311;font-size:12px}
+.s3 .c3 .meta{margin-top:3px;font-size:9px;color:#B9B6AA}
+.s3 .cap{height:4px;border-radius:9px;background:#2B3E6B;margin:8px 0 28px;overflow:hidden}
+.s3 .cap i{display:block;height:100%;background:#FCA311;border-radius:9px}
+.s3 .book{position:absolute;right:10px;bottom:9px;background:#FCA311;color:#14213D;border-radius:99px;padding:5px 12px;font-size:10px;font-weight:800}
+.s3 .book.ghost{background:transparent;color:#E8E4D8;border:1px solid #3A4C78}
+.s3 .tabs{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);background:#0F1A31;padding:9px 6px 12px;text-align:center;font-size:9px;color:#B9B6AA}
+.s3 .tabs .on{color:#FCA311;font-weight:700}
+.s3 .tabs span::before{content:"";display:block;width:14px;height:14px;border-radius:5px;background:currentColor;opacity:.55;margin:0 auto 4px}
 
 /* Why */
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--rule)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
 .why div{padding:28px 28px 8px 0}
 .why div+div{padding-left:28px;border-left:1px solid var(--rule)}
 .why h3{font-size:1.5rem}
 .why p{margin-top:8px;color:var(--forest-2)}
-.proof{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;border-top:1px solid var(--rule);padding-top:32px}
+.proof{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding-top:8px}
 .proof dt{font:600 3rem/1 var(--serif)}
 .proof dd{margin-top:6px;font-size:1rem;color:var(--forest-2)}
 .proof-note{margin-top:20px;font-size:.98rem;color:var(--forest-2)}
@@ -210,7 +227,7 @@ svg{display:block;max-width:100%}
 .contact .lines{margin-top:28px;display:grid;gap:6px;font-size:1.2rem}
 .contact .lines a{font-weight:600}
 
-footer{background:var(--forest);color:var(--pale);border-top:1px solid var(--forest-2);padding:28px 0 36px;font-size:.98rem}
+footer{color:var(--forest);padding:36px 0 48px;font-size:.98rem}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px}
 footer nav a{margin-left:20px}
 
@@ -232,7 +249,10 @@ footer nav a{margin-left:20px}
   .hero{padding:52px 0 60px}
   .hero .wrap{grid-template-columns:1fr;gap:44px}
   .sketch{max-width:520px}
-  .block{padding:68px 0}
+  .block{padding:60px 0}
+  .block.dark{padding:56px 0;border-radius:34px}
+  .block.dark .wrap{padding:0 28px}
+  .header .wrap{padding:0 10px 0 22px}
   .phones{grid-template-columns:1fr;gap:44px}
   .why,.proof,.steps{grid-template-columns:1fr}
   .why div,.why div+div{padding:22px 0 6px;border-left:0}
@@ -242,7 +262,7 @@ footer nav a{margin-left:20px}
   .pick{margin:0 -16px;padding-left:16px;padding-right:16px}
   .extras{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest-2);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:999px}
-  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--pale);border-bottom:1px solid var(--rule);flex-direction:column;align-items:stretch;padding:8px 28px 22px}
+  .nav{display:none;position:absolute;left:0;right:0;top:calc(100% + 10px);background:var(--pale);border:1px solid var(--rule);border-radius:28px;box-shadow:0 22px 44px -26px rgba(7,57,17,.55);flex-direction:column;align-items:stretch;padding:8px 24px 22px}
   .nav.open{display:flex}
   .nav a:not(.btn){padding:15px 0;border-bottom:1px solid var(--rule);font-size:1.1rem}
   .nav .btn{margin:16px 0 0}
@@ -250,6 +270,7 @@ footer nav a{margin-left:20px}
 @media (max-width:620px){
   body{font-size:1.0625rem}
   .wrap{padding:0 20px}
+  .block.dark .wrap{padding:0 22px}
   .hero .actions .btn,.contact .actions .btn{width:100%}
 }
 @media (forced-colors:active){
@@ -323,7 +344,7 @@ footer nav a{margin-left:20px}
 </section>
 
 <!-- STYLES -->
-<section class="block alt" id="looks" aria-labelledby="looks-h">
+<section class="block glow" id="looks" aria-labelledby="looks-h">
   <div class="wrap">
     <div class="head">
       <span class="num">01</span>
@@ -332,17 +353,6 @@ footer nav a{margin-left:20px}
     </div>
 
     <div class="phones">
-      <figure class="look">
-        <div class="phone"><div class="screen s1" aria-hidden="true">
-          <div class="bar"><span class="brand">Bramble Caf&eacute;</span><span class="burger"></span></div>
-          <div class="hero1"><b>Coffee, cake &amp; good company</b><span>Open every day</span><span class="pill">See the menu</span></div>
-          <div class="tiles"><div class="tile t1">Cakes</div><div class="tile t2">Coffee</div></div>
-          <div class="tiles"><div class="tile t3">Lunch</div><div class="tile t4">Kids</div></div>
-          <div class="strip">Today&rsquo;s special<small>Lemon drizzle</small></div>
-        </div></div>
-        <figcaption><h3>Colourful</h3><p>Lively and friendly. Good for caf&eacute;s and shops.</p></figcaption>
-      </figure>
-
       <figure class="look">
         <div class="phone"><div class="screen s2" aria-hidden="true">
           <div class="bar"><span>Hale Plumbing</span><span>Menu</span></div>
@@ -353,17 +363,31 @@ footer nav a{margin-left:20px}
             <div class="row"><span>Bathrooms</span><i>&rarr;</i></div>
           </div>
         </div></div>
-        <figcaption><h3>Simple</h3><p>Calm and clear. Good for trades and professionals.</p></figcaption>
+        <figcaption><h3>Simple</h3><p>One clear page. Good for trades and sole traders.</p></figcaption>
+      </figure>
+
+      <figure class="look">
+        <div class="phone"><div class="screen s1" aria-hidden="true">
+          <div class="bar"><span class="brand">Bramble Caf&eacute;</span><span class="burger"></span></div>
+          <div class="hero1"><b>Coffee, cake &amp; good company</b><span>Open every day</span><span class="pill">See the menu</span></div>
+          <div class="tiles"><div class="tile t1">Cakes</div><div class="tile t2">Coffee</div></div>
+          <div class="tiles"><div class="tile t3">Lunch</div><div class="tile t4">Kids</div></div>
+          <div class="strip">Today&rsquo;s special<small>Lemon drizzle</small></div>
+        </div></div>
+        <figcaption><h3>Mid-range</h3><p>More pages and personality. Good for caf&eacute;s and shops.</p></figcaption>
       </figure>
 
       <figure class="look">
         <div class="phone"><div class="screen s3" aria-hidden="true">
-          <div class="bar"><span>Northside</span><span>Join</span></div>
-          <div class="hero3"><b>Train <em>harder.</em></b><span>Classes for every level.</span><span class="go">Book a class</span></div>
-          <div class="sched"><div><span>Mon 6.30</span><i>Spin</i></div><div><span>Tue 7.00</span><i>Strength</i></div><div><span>Wed 6.30</span><i>Boxing</i></div></div>
-          <div class="stats"><div>6am<small>Opens</small></div><div>40<small>Classes</small></div><div>7<small>Days</small></div></div>
+          <div class="bar"><span>Northside</span><span class="ico"><i></i><i class="av"></i></span></div>
+          <div class="days"><div><small>Mon</small>6</div><div class="on"><small>Tue</small>7</div><div><small>Wed</small>8</div><div><small>Thu</small>9</div><div><small>Fri</small>10</div></div>
+          <div class="chips"><span class="on">All</span><span>Spin</span><span>Strength</span><span>Boxing</span></div>
+          <div class="c3"><div class="top"><b>Strength</b><em>7.00</em></div><div class="meta">45 min &middot; 6 spaces left</div><div class="cap"><i style="width:76%"></i></div><span class="book">Book</span></div>
+          <div class="c3"><div class="top"><b>Spin</b><em>18.30</em></div><div class="meta">Full &middot; join the waitlist</div><div class="cap"><i style="width:100%"></i></div><span class="book ghost">Waitlist</span></div>
+          <div class="c3"><div class="top"><b>Boxing</b><em>19.30</em></div><div class="meta">60 min &middot; 3 spaces left</div><div class="cap"><i style="width:88%"></i></div><span class="book">Book</span></div>
+          <div class="tabs"><span class="on">Classes</span><span>Plans</span><span>Shop</span><span>Me</span></div>
         </div></div>
-        <figcaption><h3>Bold</h3><p>Strong and dark. Good for gyms and venues.</p></figcaption>
+        <figcaption><h3>Complex</h3><p>Booking, filters and live details. Good for gyms and venues.</p></figcaption>
       </figure>
     </div>
     <p class="note">Example designs only. Not real clients.</p>
