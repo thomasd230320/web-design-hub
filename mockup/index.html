@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<!--
+  MOCKUP — a hand-built site that sells hand-built sites.
+  Design preview only. Not linked from the main site, not in the sitemap, noindex.
+  One file, no framework, no CSS library, no build step.
+
+  Palette
+    --mist   #D5E2D9   primary    (page background, light surfaces)
+    --forest #073911   secondary  (text, dark bands, headings)
+    --clay   #B4502A   secondary 2 (calls to action, accents) — warm complement to the
+                                    forest green; white text on it is 5.1:1, forest on mist is 9.8:1
+-->
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Hand-Built Websites | Mockup</title>
+<meta name="description" content="Design mockup: a hand-built website that sells hand-built websites." />
+
+<style>
+:root{
+  --mist:#D5E2D9;
+  --mist-2:#E6EEE8;          /* lighter tint of the primary, for cards */
+  --mist-3:#C2D3C7;          /* slightly deeper tint, for borders and hovers */
+  --forest:#073911;
+  --forest-2:#27502E;        /* softened forest for secondary text (7:1 on mist) */
+  --clay:#B4502A;
+  --clay-dark:#99421F;       /* hover */
+  --clay-tint:#F0B89B;       /* clay, lightened, for accents on dark forest bands */
+  --white:#FFFFFF;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --radius:18px;
+  --wrap:1120px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--mist);color:var(--forest);font-family:var(--sans);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.1;letter-spacing:-.02em;margin:0}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:6px}
+.band-dark :focus-visible{outline-color:var(--clay-tint)}
+
+.skip{position:absolute;left:12px;top:-60px;background:var(--forest);color:var(--mist);padding:10px 16px;border-radius:10px;z-index:100;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+
+/* ── Buttons ── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:12px 24px;border-radius:999px;
+  font:600 1rem/1 var(--sans);text-decoration:none;border:2px solid transparent;cursor:pointer;
+  transition:background .2s,color .2s,border-color .2s,transform .2s;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--clay);color:var(--white)}
+.btn-primary:hover{background:var(--clay-dark)}
+.btn-ghost{border-color:var(--forest);color:var(--forest);background:transparent}
+.btn-ghost:hover{background:var(--forest);color:var(--mist)}
+.band-dark .btn-ghost{border-color:var(--mist);color:var(--mist)}
+.band-dark .btn-ghost:hover{background:var(--mist);color:var(--forest)}
+
+/* ── Header: five links and one button, always visible ── */
+.header{position:sticky;top:0;z-index:50;background:rgba(213,226,217,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--mist-3)}
+.header-in{display:flex;align-items:center;justify-content:space-between;gap:20px;height:72px}
+.logo{font-family:var(--serif);font-size:1.4rem;font-weight:600;letter-spacing:-.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo-mark{width:30px;height:30px;border-radius:9px;background:var(--forest);display:grid;place-items:center}
+.logo-mark::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--clay)}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a{padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:500;font-size:.98rem}
+.nav a:hover{background:var(--mist-3)}
+.nav .btn{margin-left:8px;padding:12px 20px;min-height:44px;font-size:.96rem}
+.nav .btn:hover{background:var(--clay-dark)}
+.menu-btn{display:none}
+
+/* ── Hero ── */
+.hero{padding:88px 0 96px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+.eyebrow{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
+.hero h1{font-size:clamp(2.5rem,5.6vw,4.4rem)}
+.hero h1 em{font-style:italic;font-weight:400;color:var(--clay)}
+.hero-sub{margin-top:24px;font-size:1.2rem;color:var(--forest-2);max-width:46ch}
+.hero-ctas{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+.hero-note{margin-top:20px;font-size:.92rem;color:var(--forest-2)}
+
+/* hero visual: a drawn "browser" — no stock images, nothing invented */
+.browser{background:var(--mist-2);border:1px solid var(--mist-3);border-radius:22px;box-shadow:0 30px 60px -30px rgba(7,57,17,.35);overflow:hidden}
+.browser-bar{display:flex;align-items:center;gap:7px;padding:14px 16px;background:var(--mist-3)}
+.browser-bar i{width:11px;height:11px;border-radius:50%;background:var(--forest);opacity:.25}
+.browser-url{margin-left:10px;flex:1;background:var(--mist-2);border-radius:999px;padding:5px 14px;font-size:.78rem;color:var(--forest-2)}
+.browser-body{padding:28px}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.84rem;line-height:1.75;color:var(--forest)}
+.code .tag{color:var(--clay)}
+.code .dim{color:var(--forest-2)}
+.code .hl{background:rgba(180,80,42,.14);border-radius:4px;padding:0 4px}
+
+/* ── Sections ── */
+section{padding:96px 0}
+.section-head{max-width:640px;margin-bottom:48px}
+.section-head h2{font-size:clamp(2rem,4vw,3rem)}
+.section-head p{margin-top:16px;color:var(--forest-2);font-size:1.1rem}
+.band-light{background:var(--mist-2)}
+.band-dark{background:var(--forest);color:var(--mist)}
+.band-dark .eyebrow{color:var(--clay-tint)}
+.band-dark .section-head p{color:rgba(213,226,217,.82)}
+
+/* Why hand-built — three plain reasons */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.reason{background:var(--mist-2);border:1px solid var(--mist-3);border-radius:var(--radius);padding:30px 28px}
+.reason-num{font-family:var(--serif);font-size:2.4rem;color:var(--clay);line-height:1}
+.reason h3{font-size:1.45rem;margin:16px 0 10px}
+.reason p{color:var(--forest-2);font-size:1rem}
+
+/* Comparison */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.col{border-radius:var(--radius);padding:32px 30px}
+.col h3{font-size:1.5rem;margin-bottom:20px}
+.col li{display:flex;gap:12px;padding:11px 0;border-top:1px solid;font-size:1rem}
+.col li:first-child{border-top:0}
+.col-hand{background:var(--forest);color:var(--mist)}
+.col-hand li{border-color:rgba(213,226,217,.2)}
+.col-hand li::before{content:"✓";color:var(--clay-tint);font-weight:700;flex-shrink:0}
+.col-tpl{background:var(--mist);border:2px solid var(--forest);color:var(--forest)}
+.col-tpl li{border-color:var(--mist-3)}
+.col-tpl li::before{content:"–";color:var(--forest-2);font-weight:700;flex-shrink:0}
+.compare-note{margin-top:18px;font-size:.92rem;color:var(--forest-2)}
+
+/* Work */
+.case{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+.case-shot{background:var(--mist-2);border:1px solid var(--mist-3);border-radius:22px;padding:24px;min-height:340px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+.case-shot .ph{border:2px dashed var(--forest-2);border-radius:14px;flex:1;display:grid;place-items:center;text-align:center;padding:20px;color:var(--forest-2);font-size:.95rem}
+.case-shot small{color:var(--forest-2);font-size:.82rem}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0}
+.stat{background:var(--forest);color:var(--mist);border-radius:14px;padding:18px 16px}
+.stat b{display:block;font-family:var(--serif);font-size:2rem;font-weight:500;line-height:1;color:var(--white)}
+.stat span{display:block;margin-top:8px;font-size:.85rem;line-height:1.35;color:rgba(213,226,217,.85)}
+.case ul.ticks li{display:flex;gap:10px;padding:5px 0}
+.case ul.ticks li::before{content:"✓";color:var(--clay);font-weight:700}
+
+/* Process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:step}
+.step{counter-increment:step;border-top:3px solid var(--clay-tint);padding-top:20px}
+.step::before{content:"0" counter(step);font-family:var(--serif);font-size:1.2rem;color:var(--clay-tint)}
+.step h3{font-size:1.35rem;margin:10px 0 8px;color:var(--white)}
+.step p{color:rgba(213,226,217,.82);font-size:.98rem}
+
+/* Pricing */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tier{background:var(--mist-2);border:1px solid var(--mist-3);border-radius:var(--radius);padding:28px 24px;display:flex;flex-direction:column}
+.tier.feat{background:var(--forest);color:var(--mist);border-color:var(--forest)}
+.tier-badge{align-self:flex-start;background:var(--clay);color:var(--white);font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.tier h3{font-size:1.4rem}
+.tier-price{font-family:var(--serif);font-size:2.2rem;margin:12px 0 4px;line-height:1.05}
+.tier-price small{display:block;font-family:var(--sans);font-size:.82rem;color:var(--forest-2);margin-bottom:2px}
+.tier.feat .tier-price small{color:rgba(213,226,217,.8)}
+.tier p.for{margin:12px 0 18px;font-size:.96rem;color:var(--forest-2);flex:1}
+.tier.feat p.for{color:rgba(213,226,217,.88)}
+.tier .btn{width:100%}
+.tier.feat .btn-ghost{border-color:var(--mist);color:var(--mist)}
+.tier.feat .btn-ghost:hover{background:var(--mist);color:var(--forest)}
+.pricing-foot{margin-top:22px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:.95rem;color:var(--forest-2)}
+.pricing-foot a{font-weight:600;color:var(--clay)}
+
+/* FAQ — native details, works without JS */
+.faq{max-width:760px}
+.faq details{background:var(--mist-2);border:1px solid var(--mist-3);border-radius:14px;margin-bottom:10px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 24px;font-weight:600;font-size:1.05rem;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--clay);flex-shrink:0}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding:0 24px 22px;color:var(--forest-2)}
+
+/* Contact */
+.contact{text-align:center}
+.contact h2{font-size:clamp(2.2rem,5vw,3.6rem);max-width:18ch;margin:0 auto}
+.contact p{margin:20px auto 0;max-width:46ch;color:rgba(213,226,217,.85);font-size:1.15rem}
+.contact .hero-ctas{justify-content:center}
+.contact-line{margin-top:22px;font-size:.95rem;color:rgba(213,226,217,.8)}
+
+footer{background:var(--forest);color:rgba(213,226,217,.8);padding:34px 0;border-top:1px solid rgba(213,226,217,.16);font-size:.92rem}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px}
+.foot a{text-decoration:none;margin-left:18px}
+.foot a:first-child{margin-left:0}
+.foot a:hover{text-decoration:underline}
+
+/* ── Responsive ── */
+@media (max-width:1020px){
+  .tiers{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr;gap:28px}
+}
+@media (max-width:860px){
+  .hero{padding:56px 0 64px}
+  .hero-grid,.case,.compare{grid-template-columns:1fr;gap:36px}
+  .reasons{grid-template-columns:1fr}
+  section{padding:68px 0}
+  .menu-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:999px;border:2px solid var(--forest);background:transparent;color:var(--forest);font:600 .95rem var(--sans);cursor:pointer}
+  .nav{display:none;position:absolute;left:0;right:0;top:72px;background:var(--mist);flex-direction:column;align-items:stretch;gap:2px;padding:12px 16px 20px;border-bottom:1px solid var(--mist-3);box-shadow:0 24px 40px -24px rgba(7,57,17,.4)}
+  .nav.open{display:flex}
+  .nav a{padding:14px 12px;font-size:1.05rem}
+  .nav .btn{margin:10px 0 0;justify-content:center}
+}
+@media (max-width:560px){
+  .wrap{padding:0 18px}
+  .tiers,.steps,.stats{grid-template-columns:1fr}
+  .hero-ctas .btn{width:100%}
+  .foot a{margin:0 16px 0 0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .btn{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a class="logo" href="#top" aria-label="Home"><span class="logo-mark" aria-hidden="true"></span>[Your brand]</a>
+
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#why">Why hand-built</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn btn-primary" href="#contact">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<div class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Hand-built websites</span>
+      <h1>A website written for <em>your</em> business, not a template.</h1>
+      <p class="hero-sub">Every page is designed and coded by hand. No page builder, no theme, no plugins to keep patching &mdash; just a fast, tidy site you can own.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#contact">Get a free quote</a>
+        <a class="btn btn-ghost" href="#pricing">See pricing</a>
+      </div>
+      <p class="hero-note">Prices shown plainly. Not VAT registered.</p>
+    </div>
+
+    <div class="browser" aria-hidden="true">
+      <div class="browser-bar"><i></i><i></i><i></i><span class="browser-url">yourbusiness.co.uk</span></div>
+      <div class="browser-body">
+<pre class="code" style="margin:0;white-space:pre-wrap"><span class="tag">&lt;header&gt;</span>
+  <span class="tag">&lt;h1&gt;</span>Your business,<span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span>written by hand.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="dim">/* no theme. no builder. */</span>
+<span class="hl">.site { weight: light; }</span>
+<span class="hl">.site { owner: you; }</span></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section class="band-light" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why hand-built</span>
+      <h2>Three reasons it&rsquo;s worth doing properly.</h2>
+    </div>
+    <div class="reasons">
+      <div class="reason">
+        <div class="reason-num">1</div>
+        <h3>Built around you</h3>
+        <p>The layout follows what your customers need to do &mdash; call, book, ask for a quote &mdash; rather than whatever a template had room for.</p>
+      </div>
+      <div class="reason">
+        <div class="reason-num">2</div>
+        <h3>Nothing to keep patching</h3>
+        <p>No plugin stack and no theme to fall out of date. Fewer moving parts means fewer things that can quietly break.</p>
+      </div>
+      <div class="reason">
+        <div class="reason-num">3</div>
+        <h3>Yours to keep</h3>
+        <p>You get the code. It&rsquo;s plain files you can host anywhere, so you&rsquo;re never locked into one platform or one person.</p>
+      </div>
+    </div>
+
+    <div class="compare" style="margin-top:56px">
+      <div class="col col-hand">
+        <h3>Hand-built</h3>
+        <ul>
+          <li>Designed around your business and your customers</li>
+          <li>Plain files &mdash; no builder or theme underneath</li>
+          <li>Accessibility checked, not assumed</li>
+          <li>You can take the code and host it anywhere</li>
+        </ul>
+      </div>
+      <div class="col col-tpl">
+        <h3>Template or page builder</h3>
+        <ul>
+          <li>Starts from a layout built for everyone</li>
+          <li>Depends on a theme and plugins staying up to date</li>
+          <li>Accessibility depends on the template you pick</li>
+          <li>Often tied to the platform it was built on</li>
+        </ul>
+      </div>
+    </div>
+    <p class="compare-note">Templates are a perfectly good choice for some projects. This is about what you get, not a claim that one is wrong.</p>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Recent work</span>
+      <h2>A dead legacy site, rebuilt without losing a single page.</h2>
+    </div>
+    <div class="case">
+      <div class="case-shot">
+        <div class="ph">[ Screenshot of the plant &amp; tool hire site goes here ]</div>
+        <small>Image placeholder &mdash; add a real screenshot and the client&rsquo;s permission to name them.</small>
+      </div>
+      <div>
+        <p style="color:var(--forest-2);font-size:1.1rem">A plant and tool hire company needed their catalogue rebuilt from a site that no longer worked, without losing what search engines had already indexed.</p>
+        <div class="stats">
+          <div class="stat"><b>262</b><span>products rebuilt, specs parsed and normalised</span></div>
+          <div class="stat"><b>332</b><span>legacy URLs migrated &mdash; every one still resolves</span></div>
+          <div class="stat"><b>AA</b><span>WCAG 2.2, verified by audit</span></div>
+        </div>
+        <ul class="ticks">
+          <li>Git-based CMS, so the owner edits content without touching code</li>
+          <li>Custom quote-request and booking flows</li>
+          <li>Statically prerendered, no server to maintain</li>
+        </ul>
+        <div class="hero-ctas"><a class="btn btn-ghost" href="#contact">Talk about a project like this</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="band-dark" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Four steps, and you always know which one you&rsquo;re on.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><h3>Talk</h3><p>A free call about what the site needs to do, who it&rsquo;s for, and what&rsquo;s out of scope.</p></div>
+      <div class="step"><h3>Agree</h3><p>A written scope and a fixed price. Anything outside it is quoted separately, not absorbed.</p></div>
+      <div class="step"><h3>Build</h3><p>Designed and coded by hand, with a working preview you can click through along the way.</p></div>
+      <div class="step"><h3>Launch</h3><p>Checked, tested and handed over &mdash; with a care plan if you want one, and none if you don&rsquo;t.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Pricing</span>
+      <h2>Plain prices. Clear boundaries.</h2>
+      <p>Every package says what it covers and what it doesn&rsquo;t. Add-ons and the monthly care plan are priced separately.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier">
+        <h3>Starter</h3>
+        <div class="tier-price"><small>from</small>£395</div>
+        <p class="for">One credible page set for sole traders and new businesses &mdash; up to 3 pages.</p>
+        <a class="btn btn-ghost" href="#contact">Ask about Starter</a>
+      </div>
+      <div class="tier">
+        <h3>Business</h3>
+        <div class="tier-price"><small>from</small>£1,500</div>
+        <p class="for">An established business with several services and a booking or quote flow that has to work.</p>
+        <a class="btn btn-ghost" href="#contact">Ask about Business</a>
+      </div>
+      <div class="tier feat">
+        <span class="tier-badge">Most chosen</span>
+        <h3>Content &amp; catalogue</h3>
+        <div class="tier-price"><small>from</small>£3,000</div>
+        <p class="for">A lot to show &mdash; products, a fleet, a long service list &mdash; and a CMS so you can keep it current yourself.</p>
+        <a class="btn btn-primary" href="#contact">Ask about this</a>
+      </div>
+      <div class="tier">
+        <h3>Large builds</h3>
+        <div class="tier-price" style="font-size:1.7rem;margin-top:30px">Custom</div>
+        <p class="for">Replacing a large or dead site without losing what it earned. Quoted after a scoping call.</p>
+        <a class="btn btn-ghost" href="#contact">Book a scoping call</a>
+      </div>
+    </div>
+    <div class="pricing-foot">
+      <span>Add-ons from £150 &middot; Optional care plan £50&ndash;£145 a month</span>
+      <a href="/#pricing">Full rate card, add-ons and care plan &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="band-light" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>The things people usually ask first.</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Do I need any technical knowledge?</summary>
+        <p>None. You tell me about your business; I handle the design, the code and the launch. If you want to edit content yourself later, a Git-based CMS means you never need to touch code.</p>
+      </details>
+      <details>
+        <summary>What if I want to change something after launch?</summary>
+        <p>Small content changes are covered by the optional care plan. Anything larger is quoted separately, so you know the cost before work starts.</p>
+      </details>
+      <details>
+        <summary>Do I have to pay monthly?</summary>
+        <p>No. The care plan is optional on every package. Pay once for the build and host it wherever you like &mdash; the site is plain files with no server to run.</p>
+      </details>
+      <details>
+        <summary>How long will it take?</summary>
+        <p>It depends on how much content is involved. You get a date in writing when the scope is agreed. [Add your typical timeframes here once you&rsquo;re happy to commit to them.]</p>
+      </details>
+      <details>
+        <summary>Can you move my existing site across?</summary>
+        <p>Yes. Content migration is priced by the number of URLs, and every old address is mapped and redirected so links and search rankings survive the move.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="band-dark contact" id="contact">
+  <div class="wrap">
+    <span class="eyebrow">Get in touch</span>
+    <h2>Tell me about your project.</h2>
+    <p>A short message is plenty. You&rsquo;ll get a straight answer on scope and price.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="mailto:[your-email]">Email me</a>
+      <a class="btn btn-ghost" href="tel:[your-number]">Call [your number]</a>
+    </div>
+    <p class="contact-line">[Your name] &middot; [Town], [County] &middot; working with clients across the UK</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; [Year] [Your brand]</span>
+    <nav aria-label="Footer"><a href="#why">Why hand-built</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#contact">Contact</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav');
+  if(!btn||!nav) return;
+  function set(open){nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Close':'Menu';}
+  btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+})();
+</script>
+</body>
+</html>
