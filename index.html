@@ -109,23 +109,36 @@ svg{display:block;max-width:100%}
 .dark .num{color:var(--tint)}
 .dark .head p{color:var(--pale)}
 
-/* NUMBERS */
+/* NUMBERS: graphics first, a few words each */
 .nm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.nm-card{background:var(--pale-2);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:10px}
+.nm-card{background:var(--pale-2);border-radius:26px;padding:26px 28px;display:flex;flex-direction:column;gap:14px}
 .nm-wide{grid-column:span 2}
-.nm-card h3{font-size:1.4rem}
-.nm-big{font:500 3.2rem/1 var(--serif);color:var(--clay)}
-.nm-txt{color:var(--forest-2);font-size:1.02rem}
-.nm-src{margin-top:auto;font-size:.88rem;color:var(--forest-2)}
-.nm-src a{color:var(--forest);text-underline-offset:3px}
-.nm-bars{display:grid;gap:12px;margin:8px 0}
-.nm-row{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;font-size:.95rem}
-.nm-track{height:30px;border-radius:99px;background:var(--pale)}
-.nm-track i{display:block;height:100%;border-radius:99px;background:#7D8C82}
-.nm-track i.nm-good{background:var(--forest)}
+.nm-cap{font-size:1.1rem;line-height:1.35;color:var(--forest)}
+.nm-src{margin-top:auto;font-size:.85rem;color:var(--forest-2)}
+.nm-src a{color:var(--forest-2);text-underline-offset:3px}
+.nm-big{font:500 4rem/1 var(--serif);color:var(--clay)}
+.nm-split{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
+.nm-bars{display:grid;gap:12px}
+.nm-track{height:38px;border-radius:99px;background:var(--pale)}
+.nm-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 16px;font:600 .95rem/1 var(--sans);font-style:normal;white-space:nowrap;background:#A9BBAF;color:var(--forest)}
+.nm-track i.nm-good{background:var(--forest);color:var(--pale)}
+.nm-rise{display:flex;align-items:flex-end;gap:8px;height:84px}
+.nm-rise i{flex:1;border-radius:8px 8px 3px 3px;background:var(--rule)}
+.nm-rise i:nth-child(1){height:30%}.nm-rise i:nth-child(2){height:44%}.nm-rise i:nth-child(3){height:58%}.nm-rise i:nth-child(4){height:78%}
+.nm-rise i:nth-child(5){height:100%;background:var(--clay)}
+.nm-ring{position:relative;width:132px;height:132px;border-radius:50%;background:conic-gradient(var(--clay) calc(var(--p) * 1%),var(--pale) 0);display:grid;place-items:center}
+.nm-ring::before{content:"";position:absolute;inset:16px;border-radius:50%;background:var(--pale-2)}
+.nm-ring b{position:relative;font:500 1.9rem/1 var(--serif);color:var(--clay)}
+.nm-dots{position:relative;width:132px;height:132px;background:radial-gradient(circle,var(--clay) 36%,transparent 40%) 0 0/10% 10%}
+.nm-dots::after{content:"";position:absolute;right:0;bottom:0;width:40%;height:10%;background:radial-gradient(circle,var(--pale) 36%,transparent 40%) 0 0/25% 100%}
+.nm-wide{justify-content:space-between}
+.nm-wide .nm-big{font-size:5.5rem}
+.nm-wide .nm-track{height:54px}
+.nm-wide .nm-bars{gap:16px}
+.nm-wide .nm-track i{font-size:1.1rem}
 .nm-note{margin-top:22px;font-size:.95rem;color:var(--forest-2)}
 @media (max-width:980px){.nm-grid{grid-template-columns:1fr}.nm-wide{grid-column:auto}}
-@media (max-width:560px){.nm-row{grid-template-columns:1fr;gap:6px}.nm-card{padding:22px}}
+@media (max-width:560px){.nm-split{grid-template-columns:1fr;gap:16px}.nm-card{padding:22px}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
 .glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.30),transparent)}
@@ -600,40 +613,42 @@ footer nav a{margin-left:20px}
     <div class="head">
       <span class="num">02</span>
       <h2 id="numbers-h">Good site, bad site.</h2>
-      <p>What research says a good website is worth. Every figure links to its source.</p>
     </div>
     <div class="nm-grid">
       <article class="nm-card nm-wide">
-        <h3>A fast site converts more</h3>
-        <div class="nm-bars" aria-hidden="true">
-          <div class="nm-row"><span>Slow: loads in 5 seconds</span><div class="nm-track"><i style="width:33.3%"></i></div></div>
-          <div class="nm-row"><span>Fast: loads in 1 second</span><div class="nm-track"><i class="nm-good" style="width:100%"></i></div></div>
+        <div class="nm-split">
+          <p class="nm-big" aria-hidden="true">3&times;</p>
+          <div class="nm-bars" aria-hidden="true">
+            <div class="nm-track"><i style="width:34%">5 s</i></div>
+            <div class="nm-track"><i class="nm-good" style="width:100%">1 s</i></div>
+          </div>
         </div>
-        <p class="nm-txt">Visitors to the 1-second site were about 3 times as likely to enquire on lead-generation sites, and 2.5 times as likely to buy on online shops, as visitors to the 5-second site.</p>
-        <p class="nm-src">Source: <a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a> (20 websites, over 100 million page views)</p>
+        <p class="nm-cap">A 1-second site gets about 3&times; the enquiries of a 5-second one.</p>
+        <p class="nm-src"><a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></p>
       </article>
       <article class="nm-card">
         <p class="nm-big">+8.4%</p>
-        <p class="nm-txt">more retail conversions for every 0.1 second a mobile site gets faster.</p>
-        <p class="nm-src">Source: <a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a> (Europe and the US)</p>
+        <div class="nm-rise" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="nm-cap">more sales for every 0.1 s faster.</p>
+        <p class="nm-src"><a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></p>
       </article>
       <article class="nm-card">
-        <p class="nm-big">46.1%</p>
-        <p class="nm-txt">of the comments people made about whether a site is credible were about how it looks.</p>
-        <p class="nm-src">Source: <a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002</a> (2,684 people). An older study.</p>
+        <div class="nm-ring" style="--p:46.1" aria-hidden="true"><b>46%</b></div>
+        <p class="nm-cap"><span class="sr-only">46.1%. </span>Nearly half of trust comments are about looks.</p>
+        <p class="nm-src"><a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002 (older study)</a></p>
       </article>
       <article class="nm-card">
-        <p class="nm-big">69%</p>
-        <p class="nm-txt">of disabled online shoppers leave a site they find hard to use. UK retailers could be losing an estimated &pound;17.1 billion a year.</p>
-        <p class="nm-src">Source: <a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
+        <div class="nm-ring" style="--p:69" aria-hidden="true"><b>69%</b></div>
+        <p class="nm-cap"><span class="sr-only">69%. </span>Disabled shoppers leave a site that is hard to use.</p>
+        <p class="nm-src"><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
       </article>
       <article class="nm-card">
-        <p class="nm-big">95.9%</p>
-        <p class="nm-txt">of the top million home pages fail basic accessibility checks. A site built to the standard stands apart.</p>
-        <p class="nm-src">Source: <a href="https://webaim.org/projects/million/">WebAIM, 2026</a> (automated checks only)</p>
+        <div class="nm-dots" aria-hidden="true"></div>
+        <p class="nm-cap"><span class="sr-only">95.9%. </span>Almost every home page fails basic accessibility checks.</p>
+        <p class="nm-src"><a href="https://webaim.org/projects/million/">WebAIM, 2026</a></p>
       </article>
     </div>
-    <p class="nm-note">These studies look at other businesses&rsquo; sites, not mine, and results vary. They show what tends to happen.</p>
+    <p class="nm-note">Studies of other sites. Results vary.</p>
   </div>
 </section>
 
