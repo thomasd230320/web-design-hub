@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<!--
+  WebDesignHub: design draft.
+  One file. No framework, no CSS library, no build step.
+
+  Palette (all text pairings checked against WCAG 2.2 AA)
+    mint    #EDF8F1  page background
+    mint-2  #DDF0E4  panels
+    mint-3  #C5E2D1  rules
+    forest  #073911  text, dark bands
+    forest-2#2C5A37  secondary text
+    clay    #A9441F  contrasting colour: buttons, small accents
+-->
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#EDF8F1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>WebDesignHub | Hand-built websites for small businesses</title>
+<meta name="description" content="Websites designed and coded by hand for small businesses. Plain prices, plain files, nothing to keep patching." />
+
+<style>
+:root{
+  --mint:#EDF8F1;
+  --mint-2:#DDF0E4;
+  --mint-3:#C5E2D1;
+  --forest:#073911;
+  --forest-2:#2C5A37;
+  --clay:#A9441F;
+  --clay-dark:#8E3818;
+  --white:#fff;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --measure:64ch;
+  --wrap:1120px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--mint);color:var(--forest);font:1.125rem/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em;margin:0;text-wrap:balance}
+p,ul,ol,dl,dd,figure,table{margin:0}
+ul,ol{padding:0;list-style:none}
+a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.2em}
+a:hover{text-decoration-thickness:.16em}
+img,svg{display:block;max-width:100%}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+
+/* Focus: a thick, high-contrast ring that survives on both light and dark bands */
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px;border-radius:3px}
+.on-dark :focus-visible{outline-color:var(--white)}
+
+.skip{position:absolute;left:12px;top:-80px;background:var(--forest);color:var(--white);padding:12px 18px;border-radius:4px;z-index:100;font-weight:600}
+.skip:focus{top:12px}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:12px 26px;border-radius:4px;border:2px solid var(--forest);
+  font:600 1rem/1.2 var(--sans);text-decoration:none;cursor:pointer;
+  background:transparent;color:var(--forest);
+}
+.btn:hover{background:var(--forest);color:var(--mint)}
+.btn-clay{background:var(--clay);border-color:var(--clay);color:var(--white)}
+.btn-clay:hover{background:var(--clay-dark);border-color:var(--clay-dark);color:var(--white)}
+.on-dark .btn{border-color:var(--mint);color:var(--mint)}
+.on-dark .btn:hover{background:var(--mint);color:var(--forest)}
+.on-dark .btn-clay{background:var(--clay);border-color:var(--clay);color:var(--white)}
+
+/* Draft note: delete this bar when the content is final */
+.draft{background:var(--forest);color:var(--mint);font-size:.9rem;line-height:1.4;padding:9px 0;text-align:center}
+.draft p{padding:0 16px}
+
+/* Header */
+.header{background:var(--mint);border-bottom:2px solid var(--forest);position:sticky;top:0;z-index:50}
+.header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
+.logo span{color:var(--clay)}
+.nav{display:flex;align-items:center;gap:4px}
+.nav a:not(.btn){padding:10px 12px;font-weight:500;font-size:1rem;text-decoration:none;border-bottom:2px solid transparent}
+.nav a:not(.btn):hover{border-bottom-color:var(--forest)}
+.nav .btn{margin-left:14px;min-height:44px;padding:10px 20px}
+.menu-btn{display:none}
+
+/* Hero */
+.hero{padding:84px 0 92px}
+.hero .wrap{display:grid;grid-template-columns:1.12fr .88fr;gap:72px;align-items:center}
+.kicker{font:600 .85rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:20px}
+.hero h1{font-size:clamp(2.6rem,5.4vw,4.3rem);max-width:15ch}
+.hero .lead{margin-top:26px;font-size:1.3rem;line-height:1.55;max-width:44ch}
+.hero .actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:14px}
+.hero .fine{margin-top:22px;font-size:.98rem;color:var(--forest-2)}
+.sketch{border:2px solid var(--forest);background:var(--mint-2);padding:20px 20px 14px}
+.sketch figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+
+/* Section pattern: label column + content column, like a printed page */
+.block{padding:96px 0;border-top:2px solid var(--forest)}
+.block .wrap{display:grid;grid-template-columns:260px 1fr;gap:56px}
+.block-head .num{font:italic 500 1.1rem/1 var(--serif);color:var(--clay);display:block;margin-bottom:14px}
+.block-head h2{font-size:clamp(1.9rem,3.2vw,2.6rem)}
+.block-body>*+*{margin-top:28px}
+.block-body .intro{font-size:1.25rem;line-height:1.55;max-width:var(--measure)}
+.alt{background:var(--mint-2)}
+.dark{background:var(--forest);color:var(--mint)}
+.dark .num{color:#F2B08F}
+
+/* Reasons */
+.reasons li{display:grid;grid-template-columns:56px 1fr;gap:6px 18px;padding:26px 0;border-top:1px solid var(--forest)}
+.reasons li:last-child{border-bottom:1px solid var(--forest)}
+.reasons .n{font:italic 500 2rem/1 var(--serif);color:var(--clay)}
+.reasons h3{font-size:1.4rem;margin-bottom:6px}
+.reasons p{max-width:var(--measure)}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;font-size:1.02rem}
+caption{text-align:left;font:italic 1.05rem/1.4 var(--serif);color:var(--forest-2);padding-bottom:12px}
+th,td{text-align:left;vertical-align:top;padding:16px 18px 16px 0;border-top:1px solid var(--forest)}
+thead th{font:600 .85rem/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;border-top:2px solid var(--forest);border-bottom:0;padding-bottom:10px}
+tbody th{font-weight:600}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:2px solid var(--forest)}
+td.price{white-space:nowrap;font-weight:600}
+
+/* Work */
+.case{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.shot{border:2px dashed var(--forest);min-height:300px;display:grid;place-items:center;text-align:center;padding:24px;color:var(--forest-2);background:var(--mint)}
+.shot-cap{margin-top:10px;font-size:.95rem;color:var(--forest-2)}
+.facts{display:grid;gap:0}
+.facts div{display:grid;grid-template-columns:96px 1fr;gap:16px;align-items:baseline;padding:16px 0;border-top:1px solid var(--forest)}
+.facts div:last-child{border-bottom:1px solid var(--forest)}
+.facts dt{font:600 2.3rem/1 var(--serif)}
+.facts dd{font-size:1.02rem;line-height:1.45}
+.checks li{padding:6px 0 6px 28px;position:relative}
+.checks li::before{content:"";position:absolute;left:2px;top:.78em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
+
+/* Process */
+.steps li{display:grid;grid-template-columns:56px 200px 1fr;gap:6px 22px;padding:24px 0;border-top:1px solid var(--mint-3)}
+.steps li:last-child{border-bottom:1px solid var(--mint-3)}
+.steps .n{font:italic 500 2rem/1 var(--serif);color:#F2B08F}
+.steps h3{font-size:1.4rem}
+.steps p{max-width:56ch}
+
+/* Pricing */
+.tier{display:grid;grid-template-columns:1fr 1.3fr;gap:12px 40px;padding:30px 0;border-top:1px solid var(--forest)}
+.tier:last-of-type{border-bottom:2px solid var(--forest)}
+.tier h3{font-size:1.55rem}
+.tier .price{font:600 2rem/1.1 var(--serif);margin-top:8px}
+.tier .price small{font:600 .85rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-right:6px;color:var(--forest-2)}
+.tier .badge{display:inline-block;margin-top:12px;background:var(--clay);color:var(--white);font:600 .8rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:7px 10px}
+.tier p+p{margin-top:12px}
+.tier .label{font-weight:600}
+.tier.pick{background:var(--mint-2);margin:0 -20px;padding-left:20px;padding-right:20px}
+.pricing-note{font-size:.98rem;color:var(--forest-2);max-width:var(--measure)}
+
+/* Care plan */
+.care{background:var(--forest);color:var(--mint);padding:34px 36px;display:grid;grid-template-columns:1fr 1.1fr;gap:28px 48px}
+.care h3{font-size:1.6rem;color:var(--white)}
+.care .fee{font:600 2.2rem/1.1 var(--serif);margin-top:14px;color:var(--white)}
+.care .fee small{display:block;font:400 .98rem/1.4 var(--sans);margin-top:8px;color:var(--mint)}
+.care ul{display:grid;gap:9px}
+.care li{padding-left:26px;position:relative}
+.care li::before{content:"";position:absolute;left:2px;top:.72em;width:12px;height:7px;border-left:3px solid #F2B08F;border-bottom:3px solid #F2B08F;transform:rotate(-45deg)}
+
+/* FAQ */
+details{border-top:1px solid var(--forest)}
+details:last-of-type{border-bottom:1px solid var(--forest)}
+summary{cursor:pointer;list-style:none;padding:20px 40px 20px 0;font:600 1.25rem/1.3 var(--serif);position:relative;min-height:48px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font:400 1.8rem/1 var(--sans);color:var(--clay)}
+details[open] summary::after{content:"\2212"}
+details p{padding:0 40px 24px 0;max-width:var(--measure)}
+
+/* Contact */
+.contact-box{border:2px solid var(--mint);padding:30px;display:grid;gap:18px}
+.contact-box .row{display:grid;gap:4px}
+.contact-box .lab{font:600 .85rem/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:#F2B08F}
+.contact-box a{font:600 1.35rem/1.3 var(--serif)}
+.dark .intro{color:var(--mint)}
+.dark ul.checks li::before{border-color:#F2B08F}
+
+/* Footer */
+footer{background:var(--forest);color:var(--mint);border-top:1px solid var(--forest-2);padding:36px 0 44px;font-size:.98rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 40px}
+footer p{max-width:52ch}
+footer nav a{margin-right:20px}
+
+/* Responsive */
+@media (max-width:980px){
+  .hero{padding:56px 0 64px}
+  .hero .wrap{grid-template-columns:1fr;gap:48px}
+  .sketch{max-width:520px}
+  .block{padding:72px 0}
+  .block .wrap{grid-template-columns:1fr;gap:28px}
+  .case{grid-template-columns:1fr}
+  .care{grid-template-columns:1fr;padding:28px 24px}
+  .tier{grid-template-columns:1fr}
+  .tier.pick{margin:0 -16px;padding-left:16px;padding-right:16px}
+  .steps li{grid-template-columns:44px 1fr}
+  .steps p{grid-column:2}
+  .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:4px}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--mint);border-bottom:2px solid var(--forest);flex-direction:column;align-items:stretch;padding:8px 28px 22px}
+  .nav.open{display:flex}
+  .nav a:not(.btn){padding:15px 0;border-bottom:1px solid var(--mint-3);font-size:1.1rem}
+  .nav .btn{margin:16px 0 0}
+}
+@media (max-width:620px){
+  body{font-size:1.0625rem}
+  .wrap{padding:0 20px}
+  .hero .actions .btn{width:100%}
+  th,td{padding-right:12px}
+  .facts div{grid-template-columns:78px 1fr}
+  .facts dt{font-size:1.9rem}
+}
+@media (forced-colors:active){
+  .btn,.tier .badge{border:2px solid ButtonText}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+
+<div class="draft"><p>Design draft. Anything in [square brackets] still needs your real details. Prices are proposals.</p></div>
+
+<header class="header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="WebDesignHub, home">WebDesign<span>Hub</span></a>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#why">Why hand-built</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">Questions</a>
+      <a class="btn btn-clay" href="#contact">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HERO -->
+<section class="hero" id="top" aria-labelledby="hero-h">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Hand-built websites &middot; Witney, Oxfordshire</p>
+      <h1 id="hero-h">Websites built by hand for small businesses.</h1>
+      <p class="lead">Every page is designed and written in plain code. No page builder, no theme, no plugins to keep patching. You get a fast site you can actually own.</p>
+      <div class="actions">
+        <a class="btn btn-clay" href="#contact">Get a free quote</a>
+        <a class="btn" href="#pricing">See the prices</a>
+      </div>
+      <p class="fine">Prices start at &pound;395. Not VAT registered, so the price you see is the price you pay.</p>
+    </div>
+
+    <figure class="sketch">
+      <svg viewBox="12 10 480 446" role="img" aria-label="A pencil sketch of a website layout with a header, a headline, an image box and a call-to-action button, each labelled." width="480" height="446">
+        <g fill="none" stroke="#073911" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <!-- page -->
+          <path d="M26 22 C120 19 250 24 352 21 L353 440 C250 443 130 439 27 442 Z"/>
+          <!-- header bar -->
+          <path d="M27 70 C130 72 250 69 352 71"/>
+          <path d="M42 46 l56 0"/>
+          <path d="M240 46 l28 0 M284 46 l28 0 M328 46 l12 0" stroke-width="2"/>
+          <!-- headline -->
+          <path d="M44 106 C120 102 200 108 290 104" stroke-width="5"/>
+          <path d="M44 128 C110 125 170 130 232 127" stroke-width="5"/>
+          <path d="M44 156 C140 154 220 158 318 155" stroke-width="2"/>
+          <path d="M44 172 C120 170 190 174 262 171" stroke-width="2"/>
+          <!-- image box -->
+          <path d="M44 200 C150 197 250 202 336 199 L337 300 C240 303 140 298 45 301 Z"/>
+          <path d="M45 201 L336 300 M336 199 L46 300" stroke-width="1.4" opacity=".55"/>
+          <!-- button -->
+          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#A9441F" stroke-width="2.6"/>
+          <path d="M62 345 l104 0" stroke="#A9441F" stroke-width="2.6"/>
+          <!-- footer lines -->
+          <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
+        </g>
+        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#2C5A37">
+          <text x="372" y="52">the header</text>
+          <text x="372" y="122">what you do</text>
+          <text x="372" y="256">your photos</text>
+          <text x="200" y="352" font-size="18" fill="#A9441F" font-weight="bold">one clear next step</text>
+        </g>
+      </svg>
+      <figcaption>Every site starts as a sketch like this, before any code.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="block alt" id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">01</span>
+      <h2 id="why-h">Why hand-built</h2>
+    </div>
+    <div class="block-body">
+      <p class="intro">A template starts from a layout made for everyone. A hand-built site starts from what your customers need to do on it.</p>
+      <ol class="reasons">
+        <li>
+          <span class="n" aria-hidden="true">1</span>
+          <div>
+            <h3>Built around your customers</h3>
+            <p>The page is laid out for the thing people come to do: call you, book, ask for a quote. Nothing is there because a template had room for it.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">2</span>
+          <div>
+            <h3>Fewer parts to go wrong</h3>
+            <p>There is no theme or plugin stack to fall out of date. Fewer moving parts means fewer things that can quietly break.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n" aria-hidden="true">3</span>
+          <div>
+            <h3>It is yours to keep</h3>
+            <p>You receive the code as plain files. You can host it anywhere, so you are never tied to one platform or one person.</p>
+          </div>
+        </li>
+      </ol>
+
+      <table>
+        <caption>Hand-built compared with a template or page builder. Templates suit some projects well.</caption>
+        <thead>
+          <tr><th scope="col">Question</th><th scope="col">Hand-built</th><th scope="col">Template or builder</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Where does the design start?</th><td>With your business and customers</td><td>With a layout made for many</td></tr>
+          <tr><th scope="row">What is underneath?</th><td>Plain files, no theme</td><td>A theme and plugins to keep updated</td></tr>
+          <tr><th scope="row">Accessibility</th><td>Built in and tested</td><td>Depends on the template chosen</td></tr>
+          <tr><th scope="row">Can you take it elsewhere?</th><td>Yes, you own the code</td><td>Often tied to the platform</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="block" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">02</span>
+      <h2 id="work-h">Recent work</h2>
+    </div>
+    <div class="block-body">
+      <p class="intro">A plant and tool hire company had a catalogue on a legacy site that no longer worked. The job was to rebuild it without losing what search engines had already found.</p>
+      <div class="case">
+        <figure>
+          <div class="shot" role="img" aria-label="Placeholder for a screenshot of the plant and tool hire website.">[ Screenshot of the plant and tool hire site ]</div>
+          <figcaption class="shot-cap">[Add a real screenshot, and the client&rsquo;s permission to name them.]</figcaption>
+        </figure>
+        <div>
+          <dl class="facts">
+            <div><dt>262</dt><dd>products rebuilt, with specifications parsed and tidied</dd></div>
+            <div><dt>332</dt><dd>old addresses carried across, so every one still works</dd></div>
+            <div><dt>AA</dt><dd>WCAG 2.2, checked by an audit rather than claimed</dd></div>
+          </dl>
+        </div>
+      </div>
+      <ul class="checks">
+        <li>A Git-based CMS, so the owner edits content without touching code</li>
+        <li>Custom quote-request and booking flows</li>
+        <li>Statically prerendered, so there is no server to maintain</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="block dark on-dark" id="process" aria-labelledby="process-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">03</span>
+      <h2 id="process-h">How it works</h2>
+    </div>
+    <div class="block-body">
+      <p class="intro">Four steps. You always know which one you are on and what happens next.</p>
+      <ol class="steps">
+        <li><span class="n" aria-hidden="true">1</span><h3>Talk</h3><p>A free call about what the site needs to do, who it is for and what is out of scope.</p></li>
+        <li><span class="n" aria-hidden="true">2</span><h3>Agree</h3><p>A written scope and a fixed price. Anything outside it is quoted separately, never quietly absorbed.</p></li>
+        <li><span class="n" aria-hidden="true">3</span><h3>Build</h3><p>Designed and coded by hand, with a working preview you can click through along the way.</p></li>
+        <li><span class="n" aria-hidden="true">4</span><h3>Launch</h3><p>Checked, tested and handed over. A care plan if you want one, and none if you do not.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="block" id="pricing" aria-labelledby="pricing-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">04</span>
+      <h2 id="pricing-h">Prices</h2>
+    </div>
+    <div class="block-body">
+      <p class="intro">Each package says what it covers and what it does not. Extras are priced separately below, so nothing is a surprise halfway through.</p>
+
+      <div>
+        <article class="tier">
+          <div>
+            <h3>Starter</h3>
+            <p class="price"><small>from</small>&pound;395</p>
+          </div>
+          <div>
+            <p><span class="label">Who it is for.</span> Sole traders and new businesses who need one credible page set that people can find, call and trust. Up to 3 pages.</p>
+            <p><span class="label">Not included.</span> A content editing system, a blog, online payments, or moving an old site across.</p>
+          </div>
+        </article>
+
+        <article class="tier">
+          <div>
+            <h3>Business</h3>
+            <p class="price"><small>from</small>&pound;1,500</p>
+          </div>
+          <div>
+            <p><span class="label">Who it is for.</span> An established business with several services to explain and a booking or quote flow that has to work. Up to 8 pages.</p>
+            <p><span class="label">Not included.</span> Product data entry, a content editing system, and migrating pages from an old site.</p>
+          </div>
+        </article>
+
+        <article class="tier pick">
+          <div>
+            <h3>Content &amp; catalogue</h3>
+            <p class="price"><small>from</small>&pound;3,000</p>
+            <span class="badge">Most chosen</span>
+          </div>
+          <div>
+            <p><span class="label">Who it is for.</span> Businesses with a lot to show, such as a product range, a hire fleet or a long service list, who want to keep it up to date themselves. Includes a Git-based CMS and a catalogue of up to 75 items.</p>
+            <p><span class="label">Not included.</span> Items beyond 75, payment checkout, and migrating more than 50 old pages.</p>
+          </div>
+        </article>
+
+        <article class="tier">
+          <div>
+            <h3>Large builds</h3>
+            <p class="price" style="font-size:1.6rem">Quoted per project</p>
+          </div>
+          <div>
+            <p><span class="label">Who it is for.</span> Replacing a large or dead site without losing what it earned. Unlimited catalogue, full address migration and a staff handover.</p>
+            <p><span class="label">Not included.</span> Scope is agreed in writing first. Anything added later is quoted as a change.</p>
+          </div>
+        </article>
+      </div>
+
+      <table>
+        <caption>Add-ons, priced on their own. Add them to any package, or buy them separately.</caption>
+        <thead><tr><th scope="col">Add-on</th><th scope="col">What it covers</th><th scope="col">From</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">GA4 analytics</th><td>Installed and set up to track the enquiries that matter</td><td class="price">&pound;150</td></tr>
+          <tr><th scope="row">Cloudflare setup</th><td>DNS, HTTPS and caching configured</td><td class="price">&pound;150</td></tr>
+          <tr><th scope="row">Google Business Profile</th><td>Claimed or created, completed and linked to the site</td><td class="price">&pound;200</td></tr>
+          <tr><th scope="row">Content migration, up to 50 URLs</th><td>Old pages mapped and redirected</td><td class="price">&pound;300</td></tr>
+          <tr><th scope="row">Content migration, 51 to 150 URLs</th><td>Every old address audited, mapped and checked</td><td class="price">&pound;700</td></tr>
+          <tr><th scope="row">Content migration, 151 to 350 URLs</th><td>Large-scale mapping. Above 350, quoted.</td><td class="price">&pound;1,400</td></tr>
+          <tr><th scope="row">Accessibility audit</th><td>Your existing site tested against WCAG 2.2 AA, with a written report</td><td class="price">&pound;450</td></tr>
+          <tr><th scope="row">Payment checkout</th><td>Stripe or Shopify added to a catalogue build</td><td class="price">&pound;900</td></tr>
+        </tbody>
+      </table>
+
+      <div class="care on-dark">
+        <div>
+          <h3>Care plan</h3>
+          <p class="fee">&pound;50 to &pound;145 a month<small>Depends on the size of the site. Optional on every package. Cancel any time, and the site is yours to take with you.</small></p>
+        </div>
+        <ul>
+          <li>Hosting and SSL managed for you</li>
+          <li>Domain renewals handled, billed at cost</li>
+          <li>Small content changes each month</li>
+          <li>Security and dependency updates</li>
+          <li>Contact and booking forms tested monthly</li>
+          <li>Backups kept off-site, restorable on request</li>
+          <li>A short monthly note on traffic and enquiries</li>
+        </ul>
+      </div>
+
+      <p class="pricing-note">All prices are proposals for this draft. 50% to begin and 50% on delivery. [Confirm payment terms before publishing.]</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block alt" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">05</span>
+      <h2 id="faq-h">Questions</h2>
+    </div>
+    <div class="block-body">
+      <div>
+        <details>
+          <summary>Do I need any technical knowledge?</summary>
+          <p>None. You tell me about your business and I handle the design, the code and the launch. If you want to edit content yourself later, a CMS means you never need to touch code.</p>
+        </details>
+        <details>
+          <summary>What if I want something changed after launch?</summary>
+          <p>Small content changes are covered by the optional care plan. Anything larger is quoted separately, so you know the cost before work starts.</p>
+        </details>
+        <details>
+          <summary>Do I have to pay monthly?</summary>
+          <p>No. The care plan is optional. Pay once for the build and host it wherever you like. The site is plain files with no server to run.</p>
+        </details>
+        <details>
+          <summary>How long will it take?</summary>
+          <p>It depends on how much content is involved. You get a date in writing when the scope is agreed. [Add typical timeframes here once you are happy to commit to them.]</p>
+        </details>
+        <details>
+          <summary>Can you move my existing site across?</summary>
+          <p>Yes. Migration is priced by the number of old addresses, and each one is mapped and redirected so links and search rankings survive the move.</p>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="block dark on-dark" id="contact" aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="block-head">
+      <span class="num">06</span>
+      <h2 id="contact-h">Get in touch</h2>
+    </div>
+    <div class="block-body">
+      <p class="intro">A short message is plenty. You will get a straight answer on scope and price.</p>
+      <div class="contact-box">
+        <div class="row"><span class="lab">Email</span><a href="mailto:[your-email]?subject=Website%20enquiry">[your-email]</a></div>
+        <div class="row"><span class="lab">Phone</span><a href="tel:[your-number]">[your phone number]</a></div>
+        <div class="row"><span class="lab">Based in</span><span>Witney, Oxfordshire. Working with clients across the UK.</span></div>
+      </div>
+      <p>It helps if you say what your business does, roughly how many pages you think you need, and whether you have an existing site.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Written by hand. No page builder, no theme, no framework. &copy; [year] WebDesignHub.</p>
+    <nav aria-label="Footer"><a href="#why">Why hand-built</a><a href="#work">Work</a><a href="#pricing">Prices</a><a href="#contact">Contact</a></nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav');
+  if(!btn||!nav) return;
+  function set(open){nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Close':'Menu';}
+  btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
+  nav.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus();}});
+})();
+</script>
+</body>
+</html>
