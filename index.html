@@ -136,8 +136,8 @@ svg{display:block;max-width:100%}
 /* Phones */
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start;justify-items:center}
 .look{width:100%;max-width:272px}
-.phone{background:var(--forest);border-radius:40px;padding:10px;box-shadow:0 18px 30px -18px rgba(7,57,17,.55)}
-.screen{position:relative;border-radius:31px;overflow:hidden;aspect-ratio:9/18.5;font-size:12px;line-height:1.35;display:flex;flex-direction:column}
+.phone{background:linear-gradient(145deg,#C4C6C9,#8F9297 32%,#B1B3B7 58%,#7E8187);border-radius:40px;padding:10px;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.5),inset 0 0 0 3px rgba(60,63,68,.25),0 18px 30px -18px rgba(7,57,17,.55)}
+.screen{position:relative;border-radius:31px;overflow:hidden;box-shadow:0 0 0 3px #17181a;aspect-ratio:9/18.5;font-size:12px;line-height:1.35;display:flex;flex-direction:column}
 .screen::before{content:"";position:absolute;top:7px;left:50%;width:70px;height:18px;margin-left:-35px;border-radius:12px;background:#0b0b0b;z-index:2}
 .look figcaption{margin-top:20px;text-align:center}
 .look h3{font-size:1.4rem}
@@ -231,29 +231,31 @@ svg{display:block;max-width:100%}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
 .hire .layer.on{opacity:1;visibility:visible}
 
-/* 0. Starter: a simple dog groomer */
-.hire .layer.dg{background:#F7F0E4;color:#2B3A42;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
-.dgb{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 4px}
-.dgl{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12px}
-.dgl i{width:14px;height:14px;border-radius:50%;background:#6BB7D8}
-.dgm{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
-.dgh{display:block;padding:14px 16px 0;font:800 26px/1.05 "Trebuchet MS",system-ui,sans-serif;letter-spacing:-.01em}
-.dgs{display:block;padding:7px 16px 0;font-size:11px;color:#5B6A72}
-.dgc{display:inline-block;margin:11px 16px 0;align-self:flex-start;background:#6BB7D8;color:#17313B;font-weight:800;font-size:11px;padding:8px 16px;border-radius:99px}
-.dgd{position:relative;flex:0 0 100px;width:120px;margin:12px auto 0}
+/* 0. Starter: an elegant dog groomer */
+.hire .layer.dg{background:#F4EFE6;color:#2F3B33;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+.dgb{display:flex;justify-content:space-between;align-items:center;padding:32px 16px 4px}
+.dgl{font:italic 400 15px/1 "Iowan Old Style",Georgia,serif}
+.dgm{font:600 8px/1 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.dge{display:block;padding:16px 16px 0;font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#8A6F3A}
+.dgh{display:block;padding:8px 16px 0;font:400 25px/1.08 "Iowan Old Style",Georgia,serif;letter-spacing:-.01em}
+.dgs{display:block;padding:8px 16px 0;font:400 10.5px/1.45 system-ui,sans-serif;color:#5C6A60}
+.dgc{display:inline-block;margin:12px 16px 0;align-self:flex-start;background:#2F3B33;color:#F4EFE6;font:600 8.5px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:99px}
+.dgd{position:relative;flex:0 0 112px;width:128px;margin:14px auto 0;background:#DCE4D5;border-radius:64px 64px 0 0;overflow:hidden}
 .dgd i{position:absolute;display:block}
-.dgd .ea{top:4px;width:26px;height:46px;border-radius:50%;background:#B07C45}
-.dgd .e1{left:8px;transform:rotate(14deg)}.dgd .e2{right:8px;transform:rotate(-14deg)}
-.dgd .fc{left:50%;top:8px;width:76px;height:74px;margin-left:-38px;border-radius:50% 50% 46% 46%;background:#D9A86C}
-.dgd .sn{left:50%;top:44px;width:38px;height:30px;margin-left:-19px;border-radius:50%;background:#F4DDB6}
-.dgd .ns{left:50%;top:46px;width:13px;height:9px;margin-left:-6px;border-radius:50% 50% 60% 60%;background:#2B3A42}
-.dgd .ey{top:32px;width:7px;height:7px;border-radius:50%;background:#2B3A42}
-.dgd .y1{left:41px}.dgd .y2{left:72px}
-.dgd .tg{left:50%;top:64px;width:12px;height:14px;margin-left:-6px;border-radius:0 0 8px 8px;background:#E78A9A}
-.dgd .bb{border:1.5px solid #6BB7D8;border-radius:50%}
-.dgd .b1{left:0;top:62px;width:12px;height:12px}.dgd .b2{right:2px;top:20px;width:9px;height:9px}.dgd .b3{right:-6px;top:56px;width:14px;height:14px}
-.dgr{margin-top:auto;padding-bottom:20px}
-.dgr div{display:flex;justify-content:space-between;padding:12px 16px;border-top:1px solid #E4D8C3;font-size:12px;font-weight:700}
+.dgd .ea{top:16px;width:24px;height:42px;border-radius:50%;background:#9A7B5C}
+.dgd .e1{left:16px;transform:rotate(14deg)}.dgd .e2{right:16px;transform:rotate(-14deg)}
+.dgd .fc{left:50%;top:22px;width:70px;height:70px;margin-left:-35px;border-radius:50% 50% 46% 46%;background:#C9AE8C}
+.dgd .sn{left:50%;top:56px;width:36px;height:28px;margin-left:-18px;border-radius:50%;background:#EADBC4}
+.dgd .ns{left:50%;top:58px;width:12px;height:8px;margin-left:-6px;border-radius:50% 50% 60% 60%;background:#2F3B33}
+.dgd .ey{top:44px;width:6px;height:6px;border-radius:50%;background:#2F3B33}
+.dgd .y1{left:44px}.dgd .y2{left:76px}
+.dgd .tg{left:50%;top:76px;width:11px;height:13px;margin-left:-5px;border-radius:0 0 7px 7px;background:#D99A8E}
+.dgd .bb{border:1.2px solid #8FA38C;border-radius:50%}
+.dgd .b1{left:10px;top:70px;width:11px;height:11px}.dgd .b2{right:12px;top:30px;width:8px;height:8px}.dgd .b3{right:8px;top:70px;width:13px;height:13px}
+.dgr{margin:auto 16px 18px}
+.dgr div{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-top:1px solid #D8CFBC;font:400 12px/1 "Iowan Old Style",Georgia,serif}
+.dgr div:last-child{border-bottom:1px solid #D8CFBC}
+.dgr i{font:normal 10px/1 system-ui,sans-serif;color:#8A6F3A}
 
 /* 1. Business: a hair salon with online booking */
 .hire .layer.sl{background:#F8EDEA;color:#3B2233;font-family:"Iowan Old Style",Georgia,serif}
@@ -279,21 +281,31 @@ svg{display:block;max-width:100%}
 .slx i{display:block;height:34px;border-radius:7px}
 .slv{margin-top:auto;display:flex;justify-content:space-between;padding:9px 16px 14px;background:#D9778C;color:#2B1220;font:700 8.5px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
 
-/* 2. Content & catalogue: a hire catalogue you edit yourself */
-.hire .hb{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 8px}
-.hire .hl{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12px}
-.hire .hl i{width:13px;height:13px;background:#FFC82E;border-radius:4px}
-.hire .mn{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
-.hire .sf{margin:2px 12px 0;background:#F6F3EC;border-radius:99px;padding:7px 12px;font-size:10px;color:#6F6F66}
-.hire .ch{display:flex;gap:5px;padding:8px 12px 0}
-.hire .ch span{border:1px solid #CFCABD;border-radius:99px;padding:3px 9px;font-size:9.5px}
-.hire .ch .on{background:#1D1F24;color:#EDEAE2;border-color:#1D1F24;font-weight:700}
-.hire .gr{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:9px 12px 0}
-.hire .it{background:#F6F3EC;border-radius:11px;padding:5px}
-.hire .im{display:block;height:40px;border-radius:7px}
-.hire .it b{display:block;font-size:10px;margin-top:4px}
-.hire .it .q{display:block;font-size:8.5px;font-weight:800;margin-top:2px;text-decoration:underline}
-.hire .qb{margin-top:auto;background:#1D1F24;color:#FFC82E;padding:11px 14px;font-weight:800;font-size:11px;display:flex;justify-content:space-between}
+/* 2. Content & catalogue: a polished hire catalogue you edit yourself */
+.hire .layer.ct{background:#F3F1EB;color:#1C2420;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.ctb{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 8px}
+.ctl{display:flex;align-items:center;gap:6px;font:700 8.5px/1 system-ui,sans-serif;letter-spacing:.28em}
+.ctl i{display:block;width:12px;height:12px;border-radius:4px;background:#E9B02C}
+.ctn{width:20px;height:20px;border-radius:50%;background:#1C2420;color:#F3F1EB;font:700 9px/20px system-ui,sans-serif;text-align:center}
+.cth{position:relative;overflow:hidden;margin:0 10px;border-radius:16px;padding:12px;background:linear-gradient(140deg,#1C2822,#324438);color:#F3F1EB}
+.cth::after{content:"";position:absolute;right:-24px;top:-24px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(233,176,44,.55),transparent 70%)}
+.cth em{position:relative;z-index:1;display:block;font:600 5.5px/1 system-ui,sans-serif;letter-spacing:.28em;text-transform:uppercase;color:#E9B02C}
+.cth b{position:relative;z-index:1;display:block;margin-top:6px;font:italic 400 18px/1.1 "Iowan Old Style",Georgia,serif}
+.cts{position:relative;z-index:1;margin-top:10px;background:#F3F1EB;color:#5F665F;border-radius:99px;padding:7px 11px;font:500 8.5px/1 system-ui,sans-serif}
+.ctc{display:flex;gap:4px;padding:9px 10px 0}
+.ctc span{border:1px solid #CFCBBE;border-radius:99px;padding:3.5px 8px;font:600 7.5px/1 system-ui,sans-serif}
+.ctc .on{background:#1C2420;color:#F3F1EB;border-color:#1C2420}
+.ctg{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:9px 10px 0}
+.ctp{background:#FBFAF6;border:1px solid #E4E0D4;border-radius:13px;padding:5px}
+.ctp .ph{position:relative;display:block;height:58px;border-radius:9px;overflow:hidden}
+.ctp .ph::before{content:"";position:absolute;left:14px;bottom:13px;width:26px;height:15px;border-radius:5px 7px 2px 2px;background:rgba(28,36,32,.72)}
+.ctp .ph::after{content:"";position:absolute;left:8px;right:8px;bottom:6px;height:8px;border-radius:99px;background:rgba(28,36,32,.6)}
+.ctp .ph u{position:absolute;left:5px;top:5px;z-index:1;text-decoration:none;background:#F3F1EB;color:#1C2420;border-radius:99px;padding:2.5px 6px;font:700 5.5px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.ctp b{display:block;margin-top:5px;font:700 9.5px/1 system-ui,sans-serif}
+.ctp small{display:block;margin-top:3px;font:500 6.5px/1 system-ui,sans-serif;color:#6A6F68}
+.ctp .q{display:block;margin-top:5px;font:700 7.5px/1 system-ui,sans-serif;color:#7A5200}
+.ctq{margin:auto 10px 12px;display:flex;justify-content:space-between;align-items:center;background:#1C2420;color:#F3F1EB;border-radius:14px;padding:8px 8px 8px 12px;font:600 8px/1 system-ui,sans-serif}
+.ctq i{font-style:normal;background:#E9B02C;color:#1C2420;border-radius:99px;padding:6px 10px;font-weight:700}
 
 /* 3. Large builds: a high-end country hotel */
 .hire .layer.ht{background:#F4EFE6;color:#14263A;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
@@ -336,17 +348,6 @@ svg{display:block;max-width:100%}
 .htb2 i{display:block;width:14px;height:14px;border-radius:50%;background:#B8975A}
 .htc{position:absolute;right:10px;bottom:46px;width:22px;height:22px;border-radius:50%;background:#B8975A;box-shadow:0 4px 12px rgba(20,38,58,.4);z-index:4}
 .kind{margin-top:18px;text-align:center;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
-
-/* Why */
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
-.why div{padding:28px 28px 8px 0}
-.why div+div{padding-left:28px;border-left:1px solid var(--rule)}
-.why h3{font-size:1.5rem}
-.why p{margin-top:8px;color:var(--forest-2)}
-.proof{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;padding-top:8px}
-.proof dt{font:600 3rem/1 var(--serif)}
-.proof dd{margin-top:6px;font-size:1rem;color:var(--forest-2)}
-.proof-note{margin-top:20px;font-size:.98rem;color:var(--forest-2)}
 
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
@@ -438,11 +439,16 @@ footer nav a{margin-left:20px}
   .block.dark .wrap{padding:0 28px}
   .header .wrap{padding:0 10px 0 22px}
   .phones{grid-template-columns:1fr;gap:44px}
-  .why,.proof,.steps{grid-template-columns:1fr}
-  .why div,.why div+div{padding:22px 0 6px;border-left:0}
-  .why div+div{border-top:1px solid var(--rule)}
+  .steps{grid-template-columns:1fr}
   .steps{gap:22px}
-  .pricer{grid-template-columns:1fr;gap:36px}
+  .pricer{grid-template-columns:1fr;gap:18px}
+  .pricer>div:first-child{display:contents}
+  .pricer-ctl{order:1;position:sticky;top:84px;z-index:20;background:var(--pale);padding:10px 0 4px;margin:0 -2px}
+  .pricer-ctl .pricer-label{margin-bottom:8px}
+  .pricer-ctl .slide{margin-bottom:0}
+  .pricer-phone{order:2;max-width:210px}
+  .pricer-phone .kind{margin-top:12px}
+  .panel{order:3}
   .extras{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest-2);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:999px}
   .nav{display:none;position:absolute;left:0;right:0;top:calc(100% + 10px);background:var(--pale);border:1px solid var(--rule);border-radius:28px;box-shadow:0 22px 44px -26px rgba(7,57,17,.55);flex-direction:column;align-items:stretch;padding:8px 24px 22px}
@@ -472,7 +478,6 @@ footer nav a{margin-left:20px}
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#looks">Styles</a>
-      <a href="#why">Why</a>
       <a href="#numbers">Numbers</a>
       <a href="#process">Process</a>
       <a href="#pricing">Prices</a>
@@ -589,32 +594,11 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
-<!-- WHY -->
-<section class="block" id="why" aria-labelledby="why-h">
-  <div class="wrap">
-    <div class="head">
-      <span class="num">02</span>
-      <h2 id="why-h">Why hand-built.</h2>
-    </div>
-    <div class="why">
-      <div><h3>Made for you</h3><p>Designed around what your customers do.</p></div>
-      <div><h3>Nothing to patch</h3><p>No theme or plugins to go out of date.</p></div>
-      <div><h3>Yours to keep</h3><p>Plain files you can host anywhere.</p></div>
-    </div>
-    <dl class="proof">
-      <div><dt>262</dt><dd>products rebuilt for a plant hire company</dd></div>
-      <div><dt>332</dt><dd>old pages kept, so none were lost</dd></div>
-      <div><dt>AA</dt><dd>WCAG 2.2, checked by an audit</dd></div>
-    </dl>
-    <p class="proof-note">[Add the client&rsquo;s name and permission, or keep this anonymous.]</p>
-  </div>
-</section>
-
 <!-- NUMBERS -->
 <section class="block" id="numbers" aria-labelledby="numbers-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">03</span>
+      <span class="num">02</span>
       <h2 id="numbers-h">Good site, bad site.</h2>
       <p>What research says a good website is worth. Every figure links to its source.</p>
     </div>
@@ -657,7 +641,7 @@ footer nav a{margin-left:20px}
 <section class="block dark on-dark" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">04</span>
+      <span class="num">03</span>
       <h2 id="process-h">How it works.</h2>
     </div>
     <ol class="steps">
@@ -673,13 +657,14 @@ footer nav a{margin-left:20px}
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">05</span>
+      <span class="num">04</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Each package says what it leaves out.</p>
     </div>
 
     <div class="pricer">
       <div>
+        <div class="pricer-ctl">
         <span class="pricer-label" id="plan-label">Slide to see what each price adds</span>
         <div class="slide">
           <input id="plan" type="range" min="0" max="3" step="1" value="0" aria-labelledby="plan-label" aria-valuetext="Starter, from £395">
@@ -691,6 +676,7 @@ footer nav a{margin-left:20px}
           </ul>
         </div>
         <p class="sr-only" aria-live="polite" id="plan-status"></p>
+        </div>
 
         <article class="panel on" data-i="0">
           <h3>Starter <small>from &pound;395</small></h3>
@@ -717,12 +703,13 @@ footer nav a{margin-left:20px}
       <div class="pricer-phone">
         <div class="phone"><div class="screen hire" aria-hidden="true">
           <div class="layer dg on" data-i="0">
-            <div class="dgb"><span class="dgl"><i></i>Bubble &amp; Bark</span><span class="dgm">Menu</span></div>
-            <span class="dgh">Happy, clean dogs.</span>
-            <span class="dgs">Friendly grooming in your town.</span>
-            <span class="dgc">Call to book</span>
+            <div class="dgb"><span class="dgl">Bubble &amp; Bark</span><span class="dgm">Menu</span></div>
+            <span class="dge">Dog grooming</span>
+            <span class="dgh">Calm, careful grooming.</span>
+            <span class="dgs">Gentle care for dogs of every size.</span>
+            <span class="dgc">Book a groom</span>
             <div class="dgd"><i class="ea e1"></i><i class="ea e2"></i><i class="fc"></i><i class="sn"></i><i class="ns"></i><i class="ey y1"></i><i class="ey y2"></i><i class="tg"></i><i class="bb b1"></i><i class="bb b2"></i><i class="bb b3"></i></div>
-            <div class="dgr"><div><span>Full groom</span><i>&rarr;</i></div><div><span>Bath &amp; brush</span><i>&rarr;</i></div><div><span>Puppy intro</span><i>&rarr;</i></div></div>
+            <div class="dgr"><div><span>Full groom</span><i>&rarr;</i></div><div><span>Bath &amp; brush</span><i>&rarr;</i></div></div>
           </div>
           <div class="layer sl" data-i="1">
             <div class="slb"><span class="sll">Studio Nine</span><span class="slm">Menu</span></div>
@@ -733,19 +720,17 @@ footer nav a{margin-left:20px}
             <div class="slx"><small>On Instagram</small><div><i style="background:#D9778C"></i><i style="background:#3B2233"></i><i style="background:#EBC4C0"></i><i style="background:#B5546C"></i></div></div>
             <div class="slv"><span>Gift vouchers</span><span>Mon&ndash;Sat 9&ndash;6</span></div>
           </div>
-          <div class="layer" data-i="2">
-            <div class="hb"><span class="hl"><i></i>Greenfield Hire</span><span class="mn">Menu</span></div>
-            <div class="sf">Search the catalogue</div>
-            <div class="ch"><span class="on">All</span><span>Diggers</span><span>Tools</span><span>Access</span></div>
-            <div class="gr">
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#E0A800)"></i><b>Mini digger</b><span class="q">Request a quote</span></div>
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#8E8A7E,#5F5C52)"></i><b>Breaker</b><span class="q">Request a quote</span></div>
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#B8860B)"></i><b>Mixer</b><span class="q">Request a quote</span></div>
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#CFCABD,#9A9585)"></i><b>Tower</b><span class="q">Request a quote</span></div>
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#1D1F24,#4A4D55)"></i><b>Generator</b><span class="q">Request a quote</span></div>
-              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#8E8A7E)"></i><b>Trimmer</b><span class="q">Request a quote</span></div>
+          <div class="layer ct" data-i="2">
+            <div class="ctb"><span class="ctl"><i></i>GREENFIELD</span><span class="ctn">3</span></div>
+            <div class="cth"><em>Plant &amp; tool hire</em><b>The right kit, ready when you are.</b><div class="cts">Search 262 products</div></div>
+            <div class="ctc"><span class="on">All</span><span>Diggers</span><span>Power</span><span>Access</span></div>
+            <div class="ctg">
+              <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#F2C14E,#D99A12)"><u>In stock</u></span><b>Mini digger</b><small>1.8 tonne &middot; 4 hr min</small><span class="q">Request a quote &rarr;</span></div>
+              <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#B9C2BB,#7F8B83)"><u>In stock</u></span><b>Breaker</b><small>Petrol &middot; 25 kg</small><span class="q">Request a quote &rarr;</span></div>
+              <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#E8CE8A,#B8923A)"><u>Popular</u></span><b>Generator</b><small>6 kVA &middot; Silenced</small><span class="q">Request a quote &rarr;</span></div>
+              <div class="ctp"><span class="ph" style="background:linear-gradient(135deg,#C8D3CC,#8A9A90)"><u>In stock</u></span><b>Tower scaffold</b><small>Up to 5 m &middot; Delivered</small><span class="q">Request a quote &rarr;</span></div>
             </div>
-            <div class="qb"><span>Request a quote</span><span>0</span></div>
+            <div class="ctq"><span>3 items selected</span><i>Request quote</i></div>
           </div>
           <div class="layer ht" data-i="3">
             <div class="hth"><i class="h1"></i><i class="h2"></i><i class="hs"></i>
