@@ -194,6 +194,36 @@ svg{display:block;max-width:100%}
 @media (max-width:980px){.nm-grid{grid-template-columns:1fr}.nm-wide{grid-column:auto}}
 @media (max-width:560px){.nm-split{grid-template-columns:1fr;gap:16px}.nm-card{padding:22px}}
 
+/* WHY / COMPARE / COST */
+.nm-day{height:34px;border-radius:99px;background:var(--pale);overflow:hidden}
+.nm-day i{display:block;height:100%;width:18.75%;border-radius:99px;background:var(--clay)}
+.nm-three{display:flex;gap:14px}
+.nm-three i{width:56px;height:56px;border-radius:50%;background:var(--forest)}
+.nm-three i:last-child{background:transparent;border:4px dashed var(--clay)}
+.nm-pair{display:grid;gap:10px}
+.nm-pair .nm-track{height:40px}
+.nm-pair .nm-track i{font-size:.95rem}
+.nm-pair .nm-track i.nm-bad{background:var(--clay);color:var(--pale)}
+.cmp{display:grid;gap:12px}
+.cmp-head,.cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;align-items:stretch}
+.cmp-head span{font:600 .85rem/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:0 6px}
+.cmp-head .old{color:var(--clay)}.cmp-head .new{color:var(--forest)}
+.cmp-row>*{border-radius:20px;padding:16px 18px}
+.cmp-row .what{background:transparent;padding-left:6px;display:flex;flex-direction:column;justify-content:center}
+.cmp-row .what b{font:600 1.15rem/1.2 var(--serif)}
+.cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:3px}
+.cmp-row .what small a{color:var(--forest-2)}
+.cmp-row .old,.cmp-row .new{display:flex;flex-direction:column;justify-content:center;gap:8px;font-weight:600;font-size:1rem;line-height:1.25}
+.cmp-row .old{background:var(--pale-2);border:2px dashed var(--rule)}
+.cmp-row .new{background:var(--forest);color:var(--pale)}
+.cmp-row .old::before,.cmp-row .new::before{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 1rem/1 var(--sans)}
+.cmp-row .old::before{content:"\00D7";background:var(--clay);color:var(--pale)}
+.cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
+.cmp-row .nm-track{height:22px}
+.cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
+.cmp-row .new .nm-track{background:rgba(213,226,217,.2)}
+@media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
+
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
 .glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(245,179,107,.30),transparent)}
 .glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(196,215,202,.95),transparent)}
@@ -307,7 +337,7 @@ svg{display:block;max-width:100%}
 .dgh{display:block;padding:8px 16px 0;font:400 25px/1.08 "Iowan Old Style",Georgia,serif;letter-spacing:-.01em}
 .dgs{display:block;padding:8px 16px 0;font:400 10.5px/1.45 system-ui,sans-serif;color:#5C6A60}
 .dgc{display:inline-block;margin:12px 16px 0;align-self:flex-start;background:#2F3B33;color:#F4EFE6;font:600 8.5px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:9px 16px;border-radius:99px}
-.dgd{position:relative;flex:0 0 112px;width:128px;margin:14px auto 0;background:#DCE4D5;border-radius:64px 64px 0 0;overflow:hidden}
+.dgd{position:relative;flex:0 0 112px;width:128px;zoom:1.3;margin:12px auto 0;background:#DCE4D5;border-radius:64px 64px 0 0;overflow:hidden}
 .dgd i{position:absolute;display:block}
 .dgd .ea{top:16px;width:24px;height:42px;border-radius:50%;background:#9A7B5C}
 .dgd .e1{left:16px;transform:rotate(14deg)}.dgd .e2{right:16px;transform:rotate(-14deg)}
@@ -438,6 +468,15 @@ svg{display:block;max-width:100%}
 .htb2{background:linear-gradient(135deg,#1B3550,#0F1F30)}
 .htk .gb2{background:linear-gradient(135deg,#D3B070,#A9843F)}
 
+/* Site-size graphic under the slider phone */
+.sitemap{margin-top:16px}
+.sm-label{display:block;font:600 .75rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--forest-2);text-align:center;margin-bottom:8px}
+.sm-set{display:none;flex-wrap:wrap;justify-content:center;gap:5px}
+.sm-set.on{display:flex}
+.sm-set i{width:15px;height:19px;border-radius:4px;background:var(--forest-2)}
+.sm-set i.f{opacity:.3}
+.sm-cap{margin-top:8px;text-align:center;font:600 1rem/1.3 var(--serif);color:var(--clay)}
+
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
 .steps li{counter-increment:s;border-top:2px solid var(--tint);padding-top:16px}
@@ -534,8 +573,11 @@ footer nav a{margin-left:20px}
   .pricer-ctl{order:1;position:sticky;top:84px;z-index:20;background:var(--pale);padding:10px 0 4px;margin:0 -2px}
   .pricer-ctl .pricer-label{margin-bottom:8px}
   .pricer-ctl .slide{margin-bottom:0}
-  .pricer-phone{order:2;max-width:210px}
-  .pricer-phone .kind{margin-top:12px}
+  .pricer-phone{order:2;max-width:180px}
+  .pricer-phone .kind{margin-top:6px}
+  .sitemap{margin-top:10px}
+  .sm-set i{width:11px;height:14px;gap:3px}
+  .sm-set{gap:3px}
   .panel{order:3}
   .extras{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest-2);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:999px}
@@ -566,7 +608,8 @@ footer nav a{margin-left:20px}
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#looks">Styles</a>
-      <a href="#numbers">Numbers</a>
+      <a href="#why">Why a site</a>
+      <a href="#compare">Old vs new</a>
       <a href="#process">Process</a>
       <a href="#pricing">Prices</a>
       <a class="btn btn-clay" href="#contact">Get a quote</a>
@@ -697,45 +740,114 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
-<!-- NUMBERS -->
-<section class="block" id="numbers" aria-labelledby="numbers-h">
+<!-- WHY A SITE -->
+<section class="block" id="why" aria-labelledby="why-h">
   <div class="wrap">
     <div class="head">
       <span class="num">02</span>
-      <h2 id="numbers-h">Good site, bad site.</h2>
+      <h2 id="why-h">A website or no website.</h2>
+      <p>Your customers are online. Many businesses are not.</p>
     </div>
     <div class="nm-grid">
-      <article class="nm-card nm-wide">
-        <div class="nm-split">
-          <p class="nm-big" aria-hidden="true">3&times;</p>
-          <div class="nm-bars" aria-hidden="true">
-            <div class="nm-track"><i style="width:34%">5 s</i></div>
-            <div class="nm-track"><i class="nm-good" style="width:100%">1 s</i></div>
-          </div>
-        </div>
-        <p class="nm-cap">A 1-second site gets about 3&times; the enquiries of a 5-second one.</p>
-        <p class="nm-src"><a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></p>
+      <article class="nm-card">
+        <div class="nm-ring" style="--p:95" aria-hidden="true"><b>95%</b></div>
+        <p class="nm-cap"><span class="sr-only">95%. </span>of UK adults have internet at home.</p>
+        <p class="nm-src"><a href="https://www.ispreview.co.uk/index.php/2025/12/ofcom-finds-uk-adults-now-spend-over-4-5-hours-online-each-day.html">Ofcom, 2025</a></p>
       </article>
       <article class="nm-card">
-        <p class="nm-big">+8.4%</p>
-        <div class="nm-rise" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <p class="nm-cap">more sales for every 0.1 s faster.</p>
-        <p class="nm-src"><a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></p>
+        <p class="nm-big">4&frac12; hrs</p>
+        <div class="nm-day" aria-hidden="true"><i></i></div>
+        <p class="nm-cap">online every day, on average (outside work).</p>
+        <p class="nm-src"><a href="https://www.ispreview.co.uk/index.php/2025/12/ofcom-finds-uk-adults-now-spend-over-4-5-hours-online-each-day.html">Ofcom, 2025</a></p>
       </article>
       <article class="nm-card">
-        <div class="nm-ring" style="--p:46.1" aria-hidden="true"><b>46%</b></div>
-        <p class="nm-cap"><span class="sr-only">46.1%. </span>Nearly half of trust comments are about looks.</p>
-        <p class="nm-src"><a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002 (older study)</a></p>
+        <p class="nm-big">1 in 3</p>
+        <div class="nm-three" aria-hidden="true"><i></i><i></i><i></i></div>
+        <p class="nm-cap">of UK businesses have no website at all.</p>
+        <p class="nm-src"><a href="https://workplacejournal.co.uk/2025/09/a-third-of-uk-businesses-remain-offline-despite-digital-growth/">UK Business Data Survey, 2024</a></p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- OLD VS NEW -->
+<section class="block" id="compare" aria-labelledby="compare-h">
+  <div class="wrap">
+    <div class="head">
+      <span class="num">03</span>
+      <h2 id="compare-h">Old site, new site.</h2>
+    </div>
+    <div class="cmp">
+      <div class="cmp-head" aria-hidden="true"><span></span><span class="old">Outdated site</span><span class="new">Hand-built by me</span></div>
+      <div class="cmp-row">
+        <div class="what"><b>Speed</b><small>1 s sites get about 3&times; the enquiries of 5 s sites. <a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></small></div>
+        <div class="old"><div class="nm-track" aria-hidden="true"><i class="nm-bad" style="width:100%">5 s</i></div>Slow to load</div>
+        <div class="new"><div class="nm-track" aria-hidden="true"><i class="nm-good" style="width:20%;background:var(--tint);color:var(--forest)">1 s</i></div>Fast, plain code</div>
+      </div>
+      <div class="cmp-row">
+        <div class="what"><b>On a phone</b><small>+8.4% sales for every 0.1 s faster on mobile. <a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></small></div>
+        <div class="old">Pinch, zoom and scroll sideways</div>
+        <div class="new">Designed for mobile first</div>
+      </div>
+      <div class="cmp-row">
+        <div class="what"><b>Easy to use</b><small>69% of disabled shoppers leave a site that is hard to use. <a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></small></div>
+        <div class="old">Hard to navigate, poor contrast</div>
+        <div class="new">Clear, accessible by design</div>
+      </div>
+      <div class="cmp-row">
+        <div class="what"><b>Found by search and AI</b><small>Clicks fall from 15% to 8% when AI answers the search. <a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, 2025</a></small></div>
+        <div class="old">Built for search as it was</div>
+        <div class="new">Built for SEO and GEO</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST -->
+<section class="block" id="cost" aria-labelledby="cost-h">
+  <div class="wrap">
+    <div class="head">
+      <span class="num">04</span>
+      <h2 id="cost-h">What a hard-to-use site costs.</h2>
+    </div>
+    <div class="nm-grid">
       <article class="nm-card">
         <div class="nm-ring" style="--p:69" aria-hidden="true"><b>69%</b></div>
-        <p class="nm-cap"><span class="sr-only">69%. </span>Disabled shoppers leave a site that is hard to use.</p>
+        <p class="nm-cap"><span class="sr-only">69%. </span>of disabled shoppers leave a site that is hard to use.</p>
+        <p class="nm-src"><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">&pound;17.1bn</p>
+        <div class="nm-rise" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="nm-cap">a year UK retailers could be losing (estimate).</p>
         <p class="nm-src"><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></p>
       </article>
       <article class="nm-card">
         <div class="nm-dots" aria-hidden="true"></div>
-        <p class="nm-cap"><span class="sr-only">95.9%. </span>Almost every home page fails basic accessibility checks.</p>
+        <p class="nm-cap"><span class="sr-only">95.9%. </span>of home pages fail basic accessibility checks.</p>
         <p class="nm-src"><a href="https://webaim.org/projects/million/">WebAIM, 2026</a></p>
+      </article>
+      <article class="nm-card">
+        <div class="nm-pair" aria-hidden="true">
+          <div class="nm-track"><i class="nm-good" style="width:100%">15%</i></div>
+          <div class="nm-track"><i class="nm-bad" style="width:53%">8%</i></div>
+        </div>
+        <p class="nm-cap">of visits click a result: 15% normally, 8% when an AI summary shows.</p>
+        <p class="nm-src"><a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, US, 2025</a></p>
+      </article>
+      <article class="nm-card">
+        <div class="nm-ring" style="--p:46.1" aria-hidden="true"><b>46%</b></div>
+        <p class="nm-cap"><span class="sr-only">46.1%. </span>of trust comments are about how a site looks.</p>
+        <p class="nm-src"><a href="http://credibility.stanford.edu/pdf/How_Do_People_Evaluate_a_Web_Site's_Credibility_v37.pdf">Stanford, 2002 (older study)</a></p>
+      </article>
+      <article class="nm-card">
+        <p class="nm-big">3&times;</p>
+        <div class="nm-pair" aria-hidden="true">
+          <div class="nm-track"><i class="nm-bad" style="width:34%">5 s</i></div>
+          <div class="nm-track"><i class="nm-good" style="width:100%">1 s</i></div>
+        </div>
+        <p class="nm-cap">the enquiries for a 1-second site.</p>
+        <p class="nm-src"><a href="https://portent.com/blog/analytics/research-site-speed-hurting-everyones-revenue.htm">Portent, 2022</a></p>
       </article>
     </div>
     <p class="nm-note">Studies of other sites. Results vary.</p>
@@ -746,7 +858,7 @@ footer nav a{margin-left:20px}
 <section class="block dark on-dark" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">03</span>
+      <span class="num">05</span>
       <h2 id="process-h">How it works.</h2>
     </div>
     <ol class="steps">
@@ -762,9 +874,9 @@ footer nav a{margin-left:20px}
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">04</span>
+      <span class="num">06</span>
       <h2 id="pricing-h">Prices.</h2>
-      <p>Each package says what it leaves out.</p>
+      <p>Every site gets the same care and design. The price follows the size.</p>
     </div>
 
     <div class="pricer">
@@ -786,17 +898,14 @@ footer nav a{margin-left:20px}
         <article class="panel on" data-i="0">
           <h3>Starter <small>from &pound;395</small></h3>
           <ul><li>Up to 3 pages</li><li>Contact form and map</li><li>Mobile-first design</li></ul>
-          <p class="no"><b>Not included:</b> editing system, shop.</p>
         </article>
         <article class="panel" data-i="1">
           <h3>Business <small>from &pound;1,500</small></h3>
           <ul><li>Everything in Starter</li><li>Up to 8 pages</li><li>Booking or quote form</li></ul>
-          <p class="no"><b>Not included:</b> product data, migration.</p>
         </article>
         <article class="panel" data-i="2">
           <h3>Content &amp; catalogue <small>from &pound;3,000</small><span class="tag">Most chosen</span></h3>
           <ul><li>Everything in Business</li><li>Edit it yourself with a CMS</li><li>Catalogue up to 75 items</li><li>Built to WCAG 2.2 AA</li></ul>
-          <p class="no"><b>Not included:</b> checkout, big migrations.</p>
         </article>
         <article class="panel" data-i="3">
           <h3>Large builds <small>quoted per project</small></h3>
@@ -856,6 +965,14 @@ footer nav a{margin-left:20px}
             <span class="htc"></span>
           </div>
         </div></div>
+        <div class="sitemap" aria-hidden="true">
+          <span class="sm-label">Size of site</span>
+          <div class="sm-set on" data-i="0" data-n="3" data-f="0"></div>
+          <div class="sm-set" data-i="1" data-n="8" data-f="0"></div>
+          <div class="sm-set" data-i="2" data-n="26" data-f="0"></div>
+          <div class="sm-set" data-i="3" data-n="44" data-f="12"></div>
+        </div>
+        <p class="sm-cap" id="plan-size"></p>
         <p class="kind" id="plan-kind"></p>
       </div>
     </div>
@@ -917,15 +1034,20 @@ footer nav a{margin-left:20px}
   var panels=[].slice.call(root.querySelectorAll('.panel')), layers=[].slice.call(root.querySelectorAll('.layer')), stops=[].slice.call(root.querySelectorAll('.stops button'));
   var names=['Starter, from £395','Business, from £1,500','Content and catalogue, from £3,000','Large builds, quoted per project'];
   var kinds=['A simple dog groomer’s site','A salon site with online booking','A hire catalogue you edit yourself','A high-end country hotel site'];
-  var kind=document.getElementById('plan-kind');
+  var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
+  var sets=[].slice.call(root.querySelectorAll('.sm-set'));
+  sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
+  var sizes=['3 pages','Up to 8 pages','Catalogue of up to 75 items','Unlimited pages, quoted'];
   function set(i){
     i=Math.max(0,Math.min(3,i));
     range.value=i; slide.style.setProperty('--v',i); range.setAttribute('aria-valuetext',names[i]);
     panels.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     layers.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     stops.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    sets.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    if(size) size.textContent=sizes[i];
     if(kind) kind.textContent='Example: '+kinds[i];
-    if(live) live.textContent=names[i]+'. Example: '+kinds[i];
+    if(live) live.textContent=names[i]+'. '+sizes[i]+'. Example: '+kinds[i];
   }
   range.addEventListener('input',function(){set(+range.value);});
   stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
