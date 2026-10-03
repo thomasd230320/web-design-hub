@@ -4,9 +4,9 @@
   One file. No framework, no CSS library, no build step.
 
   Palette (all text pairings checked against WCAG 2.2 AA)
-    pale   #F3EFE7  primary warm white: page background, and the "light" text on dark bands
-    pale-2 #E7E1D4  panels
-    rule   #C2B9A5  hairlines
+    pale   #F4EBDD  primary warm cream: page background, and the "light" text on dark bands
+    pale-2 #E8DDCB  panels
+    rule   #C9BBA0  hairlines
     forest #073911  text, dark bands
     forest-2 #22502C secondary text
     clay   #3A5560  deep dusty blue for text and lines; dusty blue #6F8790 for button fills
@@ -16,7 +16,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#F3EFE7" />
+<meta name="theme-color" content="#F4EBDD" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Hand-built websites</title>
 <script>document.documentElement.className+=" js"</script>
@@ -24,9 +24,9 @@
 
 <style>
 :root{
-  --pale:#F3EFE7;
-  --pale-2:#E7E1D4;
-  --rule:#C2B9A5;
+  --pale:#F4EBDD;
+  --pale-2:#E8DDCB;
+  --rule:#C9BBA0;
   --forest:#073911;
   --forest-2:#22502C;
   --clay:#3A5560;
@@ -71,10 +71,10 @@ svg{display:block;max-width:100%}
 .on-dark .btn-clay:hover{background:var(--pale);border-color:var(--pale);color:var(--forest)}
 
 /* Draft bar: delete when the content is final */
-.draft{background:var(--pale-2);color:var(--forest);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center;border-bottom:1px solid var(--rule)}
+.draft{background:var(--forest);color:var(--pale);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center}
 
 /* Header */
-.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(243,239,231,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(244,235,221,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
@@ -93,13 +93,13 @@ svg{display:block;max-width:100%}
 .hero .lead{margin-top:22px;font-size:1.4rem;line-height:1.4;max-width:22ch}
 .hero .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
 .hero .fine{margin-top:20px;font-size:1rem;color:var(--forest-2)}
-.reel{border:1px solid var(--rule);border-radius:28px;background:var(--pale-2);padding:20px 20px 16px}
-.reel figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+.reel{border-radius:28px;background:var(--forest);padding:20px 20px 16px}
+.reel figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--pale)}
 .reel-stage{position:relative;aspect-ratio:480/446;border-radius:18px;overflow:hidden;background:var(--pale)}
 .rl{position:absolute;inset:0}
 .s1{opacity:0}
 .s1 svg{width:100%;height:100%}
-.bw{position:absolute;left:4%;top:9%;width:76%;height:78%;background:#F8F5EE;border:1.5px solid var(--forest);border-radius:14px;overflow:hidden;box-shadow:0 22px 34px -22px rgba(7,57,17,.6)}
+.bw{position:absolute;left:4%;top:9%;width:76%;height:78%;background:#FAF3E8;border:1.5px solid var(--forest);border-radius:14px;overflow:hidden;box-shadow:0 22px 34px -22px rgba(7,57,17,.6)}
 .bw-bar{height:9%;background:var(--forest);display:flex;align-items:center;gap:4px;padding:0 3%}
 .bw-bar i{width:6px;height:6px;border-radius:50%;background:var(--tint)}
 .bw-bar i:nth-child(2){background:var(--orange)}.bw-bar i:nth-child(3){background:var(--rule)}
@@ -126,8 +126,9 @@ svg{display:block;max-width:100%}
 .bp-scr i{display:block;margin-top:8px;height:34%;border-radius:40px 40px 0 0;background:linear-gradient(#DCE4D5,#BFD0B8)}
 .bp-scr em{position:absolute;left:10%;right:10%;bottom:7%;height:12px;border-radius:99px;background:var(--orange)}
 .reel-stage{transition:transform .5s ease}
-.reel-pause{display:none;margin-top:10px;appearance:none;border:1.5px solid var(--forest-2);background:transparent;color:var(--forest);font:600 .85rem/1 var(--sans);border-radius:99px;padding:9px 16px;min-height:36px;cursor:pointer}
-.reel-pause:hover{background:var(--forest);color:var(--pale)}
+.reel-pause{display:none;margin-top:10px;appearance:none;border:1.5px solid var(--pale);background:transparent;color:var(--pale);font:600 .85rem/1 var(--sans);border-radius:99px;padding:9px 16px;min-height:36px;cursor:pointer}
+.reel-pause:hover{background:var(--pale);color:var(--forest)}
+.reel :focus-visible{outline-color:var(--pale)}
 @media (prefers-reduced-motion:no-preference){
   .js .reel-pause{display:inline-flex}
   .reel.paused *{animation-play-state:paused!important}
@@ -175,7 +176,7 @@ svg{display:block;max-width:100%}
 .nm-split{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center}
 .nm-bars{display:grid;gap:12px}
 .nm-track{height:38px;border-radius:99px;background:var(--pale)}
-.nm-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 16px;font:600 .95rem/1 var(--sans);font-style:normal;white-space:nowrap;background:#BDB6A6;color:var(--forest)}
+.nm-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 16px;font:600 .95rem/1 var(--sans);font-style:normal;white-space:nowrap;background:#C4B8A0;color:var(--forest)}
 .nm-track i.nm-good{background:var(--forest);color:var(--pale)}
 .nm-rise{display:flex;align-items:flex-end;gap:8px;height:84px}
 .nm-rise i{flex:1;border-radius:8px 8px 3px 3px;background:var(--rule)}
@@ -216,20 +217,20 @@ svg{display:block;max-width:100%}
 .cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:6px}
 .cmp-row .what small a{color:var(--forest-2)}
 .cmp-row .old,.cmp-row .new{display:flex;flex-direction:column;justify-content:center;gap:8px;font-weight:600;font-size:1rem;line-height:1.25}
-.cmp-row .old{background:var(--pale-2);border:2px dashed var(--rule)}
+.cmp-row .old{background:var(--tint);border:2px dashed var(--clay)}
 .cmp-row .new{background:var(--forest);color:var(--pale)}
 .cmp-row .old::before,.cmp-row .new::before{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 1rem/1 var(--sans)}
 .cmp-row .old::before{content:"\00D7";background:var(--clay);color:var(--pale)}
 .cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
 .cmp-row .nm-track{height:22px}
 .cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
-.cmp-row .new .nm-track{background:rgba(243,239,231,.2)}
+.cmp-row .new .nm-track{background:rgba(244,235,221,.2)}
 @media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
 .glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.34),transparent)}
-.glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(231,225,212,.95),transparent)}
-.hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(231,225,212,.95),transparent)}
+.glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(232,221,203,.95),transparent)}
+.hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(232,221,203,.95),transparent)}
 .hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.30),transparent)}
 
 /* Phones */
@@ -521,13 +522,13 @@ svg{display:block;max-width:100%}
 .basics h3{font-size:1.4rem;margin-bottom:12px}
 .basics p{max-width:36ch}
 .addons{display:grid;gap:8px;margin-top:18px}
-.addons details{background:var(--pale-2);border:1px solid var(--rule);border-radius:18px;overflow:hidden}
+.addons details{background:var(--forest);color:var(--pale);border-radius:18px;overflow:hidden}
 .addons summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;min-height:48px;font-weight:600}
 .addons summary::-webkit-details-marker{display:none}
-.addons summary::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid var(--clay);border-bottom:2.5px solid var(--clay);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
+.addons summary::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid var(--tint);border-bottom:2.5px solid var(--tint);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
 .addons details[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
-.addons summary:focus-visible{outline-offset:-3px;border-radius:18px}
-.basics .addons p{max-width:none;padding:0 18px 16px;font-size:1rem;color:var(--forest-2)}
+.addons summary:focus-visible{outline-offset:-3px;outline-color:var(--pale);border-radius:18px}
+.basics .addons p{max-width:none;padding:0 18px 16px;font-size:1rem;color:var(--pale)}
 .care{align-self:start}
 .nm-full{max-width:none}
 .care{background:var(--forest);color:var(--pale);padding:28px 30px;border-radius:26px}
@@ -544,8 +545,9 @@ svg{display:block;max-width:100%}
 .contact .lines{margin-top:28px;display:grid;gap:6px;font-size:1.2rem}
 .contact .lines a{font-weight:600}
 
-footer{color:var(--forest);padding:36px 0 48px;font-size:.98rem}
-footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px}
+footer{background:var(--forest);color:var(--pale);width:min(1240px,calc(100% - 24px));margin:14px auto 14px;border-radius:44px;padding:34px 0;font-size:.98rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 40px;padding:0 56px}
+footer :focus-visible{outline-color:var(--pale)}
 footer nav a{margin-left:20px}
 
 /* Gentle zoom on images and buttons */
@@ -571,6 +573,8 @@ footer nav a{margin-left:20px}
   .block{padding:60px 0}
   .block.dark{padding:56px 0;border-radius:34px}
   .block.dark .wrap{padding:0 28px}
+  footer{border-radius:34px}
+  footer .wrap{padding:0 28px}
   .header .wrap{padding:0 10px 0 22px}
   .phones{grid-template-columns:1fr;gap:44px}
   .steps{grid-template-columns:1fr}
