@@ -92,9 +92,63 @@ svg{display:block;max-width:100%}
 .hero .lead{margin-top:22px;font-size:1.4rem;line-height:1.4;max-width:22ch}
 .hero .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
 .hero .fine{margin-top:20px;font-size:1rem;color:var(--forest-2)}
-.sketch{border:1px solid var(--rule);border-radius:28px;background:var(--pale-2);padding:20px 20px 16px}
-.zoom{overflow:hidden;border-radius:18px}
-.sketch figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+.reel{border:1px solid var(--rule);border-radius:28px;background:var(--pale-2);padding:20px 20px 16px}
+.reel figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+.reel-stage{position:relative;aspect-ratio:480/446;border-radius:18px;overflow:hidden;background:var(--pale)}
+.rl{position:absolute;inset:0}
+.s1{opacity:0}
+.s1 svg{width:100%;height:100%}
+.bw{position:absolute;left:4%;top:9%;width:76%;height:78%;background:#E4EDE6;border:1.5px solid var(--forest);border-radius:14px;overflow:hidden;box-shadow:0 22px 34px -22px rgba(7,57,17,.6)}
+.bw-bar{height:9%;background:var(--forest);display:flex;align-items:center;gap:4px;padding:0 3%}
+.bw-bar i{width:6px;height:6px;border-radius:50%;background:var(--tint)}
+.bw-bar i:nth-child(2){background:var(--orange)}.bw-bar i:nth-child(3){background:var(--rule)}
+.bw-nav{display:flex;align-items:center;gap:5%;padding:3% 5% 1%}
+.bw-nav b{width:18%;height:8px;border-radius:4px;background:var(--forest)}
+.bw-nav span{width:9%;height:5px;border-radius:3px;background:var(--rule)}
+.bw-nav em{margin-left:auto;width:15%;height:14px;border-radius:99px;background:var(--orange);border:1.5px solid var(--clay)}
+.bw-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:5%;padding:4% 5% 3%;align-items:center}
+.bw-txt b{display:block;height:13px;width:92%;border-radius:5px;background:var(--forest);margin-bottom:6px}
+.bw-txt b.t2{width:66%}
+.bw-txt b.t3{height:5px;width:88%;background:var(--forest-2);opacity:.45;margin-top:8px;margin-bottom:0}
+.bw-txt b.t3.short{width:60%;margin-top:5px}
+.bw-txt em{display:block;margin-top:12px;width:44%;height:16px;border-radius:99px;background:var(--orange);border:1.5px solid var(--clay)}
+.bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6FA27C,#22502C)}
+.bw-img::before{content:"";position:absolute;right:16%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tint);box-shadow:0 0 22px 8px rgba(245,179,107,.5)}
+.bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#073911;opacity:.55}
+.bw-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:4%;padding:1% 5% 0}
+.bw-cards i{display:block;height:44px;border-radius:10px;background:linear-gradient(var(--forest-2) 0 34%,var(--pale-2) 0)}
+.bw-cards i:nth-child(2){background:linear-gradient(var(--clay) 0 34%,var(--pale-2) 0)}
+.bp{position:absolute;right:3%;bottom:6%;width:23%;aspect-ratio:9/18;border-radius:16px;padding:3px;background:linear-gradient(145deg,#C4C6C9,#8F9297 40%,#B1B3B7 65%,#7E8187);box-shadow:0 18px 28px -14px rgba(7,57,17,.65)}
+.bp-scr{position:relative;height:100%;border-radius:13px;background:#F4EFE6;overflow:hidden;padding:18% 10% 0}
+.bp-scr b{display:block;height:9px;width:90%;border-radius:4px;background:var(--forest);margin-bottom:5px}
+.bp-scr b.s{width:60%}
+.bp-scr i{display:block;margin-top:8px;height:34%;border-radius:40px 40px 0 0;background:linear-gradient(#DCE4D5,#BFD0B8)}
+.bp-scr em{position:absolute;left:10%;right:10%;bottom:7%;height:12px;border-radius:99px;background:var(--orange)}
+.reel-stage{transition:transform .5s ease}
+.reel-pause{display:none;margin-top:10px;appearance:none;border:1.5px solid var(--forest-2);background:transparent;color:var(--forest);font:600 .85rem/1 var(--sans);border-radius:99px;padding:9px 16px;min-height:36px;cursor:pointer}
+.reel-pause:hover{background:var(--forest);color:var(--pale)}
+@media (prefers-reduced-motion:no-preference){
+  .js .reel-pause{display:inline-flex}
+  .reel.paused *{animation-play-state:paused!important}
+  .s1{animation:sc1 14s infinite}
+  .s2{animation:sc2 14s infinite}
+  .sk g:first-of-type path{stroke-dasharray:700;stroke-dashoffset:700;animation:draw 14s ease-in-out infinite}
+  .sk g:last-of-type{animation:lab 14s infinite}
+  .bw{animation:r1 14s infinite}
+  .bw-txt{animation:r2 14s infinite}
+  .bw-img{animation:r3 14s infinite}
+  .bw-cards{animation:r4 14s infinite}
+  .bp{animation:ph 14s cubic-bezier(.2,.8,.2,1) infinite}
+  @keyframes sc1{0%{opacity:0}3%,34%{opacity:1}40%,100%{opacity:0}}
+  @keyframes sc2{0%,36%{opacity:0}41%,92%{opacity:1}97%,100%{opacity:0}}
+  @keyframes draw{0%{stroke-dashoffset:700}26%,100%{stroke-dashoffset:0}}
+  @keyframes lab{0%,24%{opacity:0}30%,100%{opacity:1}}
+  @keyframes r1{0%,38%{opacity:0;transform:translateY(10px)}44%,100%{opacity:1;transform:none}}
+  @keyframes r2{0%,44%{opacity:0;transform:translateY(8px)}50%,100%{opacity:1;transform:none}}
+  @keyframes r3{0%,50%{opacity:0;transform:scale(.92)}57%,100%{opacity:1;transform:none}}
+  @keyframes r4{0%,56%{opacity:0;transform:translateY(8px)}62%,100%{opacity:1;transform:none}}
+  @keyframes ph{0%,62%{opacity:0;transform:translateY(40px)}72%,100%{opacity:1;transform:none}}
+}
 
 /* Sections */
 .block{padding:84px 0;position:relative;isolation:isolate;overflow-x:clip}
@@ -362,6 +416,28 @@ svg{display:block;max-width:100%}
 .htc{position:absolute;right:10px;bottom:46px;width:22px;height:22px;border-radius:50%;background:#B8975A;box-shadow:0 4px 12px rgba(20,38,58,.4);z-index:4}
 .kind{margin-top:18px;text-align:center;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
 
+/* Polish: soft light, depth and gradients on every slider site */
+.hire .layer.dg{background:radial-gradient(110% 55% at 100% 0%,#E3ECDC,transparent 60%),linear-gradient(#FBF7EF,#EEE5D4)}
+.dgc{background:linear-gradient(135deg,#3E5044,#222E27);box-shadow:0 8px 14px -8px rgba(34,46,39,.7)}
+.dgd{background:linear-gradient(#E6EEDF,#C7D6C0);box-shadow:0 16px 24px -16px rgba(47,59,51,.55)}
+.dgd::before,.dgd::after{content:"✦";position:absolute;color:#B8975A;z-index:1}
+.dgd::before{left:14px;top:26px;font-size:11px}.dgd::after{right:18px;top:52px;font-size:7px}
+.hire .layer.sl{background:radial-gradient(90% 38% at 100% 0%,#F4C3CE,transparent 66%),linear-gradient(#FBF1EE,#F1DDDA)}
+.slg .p{background:linear-gradient(135deg,#5A3249,#2E1626);box-shadow:0 8px 14px -8px rgba(46,22,38,.7)}
+.slc{background:#F6E1DE;box-shadow:0 12px 20px -14px rgba(59,34,51,.55)}
+.slk{background:linear-gradient(135deg,#5A3249,#2E1626)}
+.slx i{box-shadow:inset 0 -16px 18px -12px rgba(0,0,0,.28),0 6px 10px -8px rgba(59,34,51,.5)}
+.slv{background:linear-gradient(135deg,#E48AA0,#C65C7A)}
+.hire .layer.ct{background:radial-gradient(90% 30% at 0% 100%,#EBD9A8,transparent 65%),#F3F1EB}
+.ctp{box-shadow:0 10px 18px -12px rgba(28,36,32,.55)}
+.ctp .ph{box-shadow:inset 0 -20px 26px -18px rgba(0,0,0,.3),inset 0 14px 20px -14px rgba(255,255,255,.45)}
+.ctq{box-shadow:0 12px 20px -10px rgba(28,36,32,.6)}
+.ctq i{background:linear-gradient(135deg,#F2C14E,#D99A12)}
+.htx span::before{background:linear-gradient(135deg,#E8D3A4,#B8975A);border-color:#B8975A}
+.htr i{box-shadow:0 8px 12px -8px rgba(20,38,58,.55)}
+.htb2{background:linear-gradient(135deg,#1B3550,#0F1F30)}
+.htk .gb2{background:linear-gradient(135deg,#D3B070,#A9843F)}
+
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
 .steps li{counter-increment:s;border-top:2px solid var(--tint);padding-top:16px}
@@ -431,7 +507,6 @@ footer nav a{margin-left:20px}
   .btn,.menu-btn{transition:transform .25s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
   .phone{transition:transform .35s ease}
   .hire .layer{transition:opacity .35s ease,visibility .35s}
-  .zoom svg{transition:transform .5s ease}
   .btn:focus-visible,.menu-btn:focus-visible{transform:scale(1.05)}
 }
 @media (prefers-reduced-motion:no-preference) and (hover:hover){
@@ -439,14 +514,14 @@ footer nav a{margin-left:20px}
   .look:hover .phone{transform:scale(1.04)}
   .slide input:hover::-webkit-slider-thumb{transform:scale(1.1)}
   .slide input:hover::-moz-range-thumb{transform:scale(1.1)}
-  .sketch:hover .zoom svg{transform:scale(1.06)}
+  .reel:hover .reel-stage{transform:scale(1.03)}
 }
 
 /* Responsive */
 @media (max-width:980px){
   .hero{padding:52px 0 60px}
   .hero .wrap{grid-template-columns:1fr;gap:44px}
-  .sketch{max-width:520px}
+  .reel{max-width:520px}
   .block{padding:60px 0}
   .block.dark{padding:56px 0;border-radius:34px}
   .block.dark .wrap{padding:0 28px}
@@ -514,9 +589,10 @@ footer nav a{margin-left:20px}
       </div>
       <p class="fine">From &pound;395. Not VAT registered.</p>
     </div>
-    <figure class="sketch">
-      <div class="zoom">
-      <svg viewBox="12 10 480 446" role="img" aria-label="A pencil sketch of a website layout: a header, a headline, an image box and a button." width="480" height="446">
+    <figure class="reel">
+      <div class="reel-stage" role="img" aria-label="A looping animation. A pencil sketch of a website is drawn, then fills with colour to become a finished design on a laptop and a phone.">
+        <div class="rl s1">
+          <svg class="sk" viewBox="12 10 480 446" role="img" aria-label="A pencil sketch of a website layout: a header, a headline, an image box and a button.">
         <g fill="none" stroke="#073911" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M26 22 C120 19 250 24 352 21 L353 440 C250 443 130 439 27 442 Z"/>
           <path d="M27 70 C130 72 250 69 352 71"/>
@@ -539,8 +615,22 @@ footer nav a{margin-left:20px}
           <text x="200" y="352" font-size="18" fill="#993D00" font-weight="bold">one clear step</text>
         </g>
       </svg>
+        </div>
+        <div class="rl s2">
+          <div class="bw">
+            <div class="bw-bar"><i></i><i></i><i></i></div>
+            <div class="bw-nav"><b></b><span></span><span></span><span></span><em></em></div>
+            <div class="bw-hero">
+              <div class="bw-txt"><b class="t1"></b><b class="t2"></b><b class="t3"></b><b class="t3 short"></b><em></em></div>
+              <div class="bw-img"></div>
+            </div>
+            <div class="bw-cards"><i></i><i></i><i></i></div>
+          </div>
+          <div class="bp"><div class="bp-scr"><b></b><b class="s"></b><i></i><em></em></div></div>
+        </div>
       </div>
       <figcaption>Every site starts as a sketch.</figcaption>
+      <button type="button" class="reel-pause" id="reel-pause" aria-pressed="false">Pause animation</button>
     </figure>
   </div>
 </section>
@@ -700,7 +790,7 @@ footer nav a{margin-left:20px}
         </article>
         <article class="panel" data-i="1">
           <h3>Business <small>from &pound;1,500</small></h3>
-          <ul><li>Everything in Starter</li><li>Up to 8 pages</li><li>Booking or quote form</li><li>SEO and GA4 set up</li></ul>
+          <ul><li>Everything in Starter</li><li>Up to 8 pages</li><li>Booking or quote form</li></ul>
           <p class="no"><b>Not included:</b> product data, migration.</p>
         </article>
         <article class="panel" data-i="2">
@@ -773,7 +863,7 @@ footer nav a{margin-left:20px}
     <div class="extras">
       <div class="basics">
         <h3>Add-ons</h3>
-        <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website.</p>
+        <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website, so every site comes with a selection of them, chosen to suit it.</p>
         <ul class="pills">
           <li>Cloudflare</li>
           <li>Google Analytics</li>
@@ -840,6 +930,11 @@ footer nav a{margin-left:20px}
   range.addEventListener('input',function(){set(+range.value);});
   stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
   set(0);
+})();
+(function(){
+  var b=document.getElementById('reel-pause'), r=document.querySelector('.reel');
+  if(!b||!r) return;
+  b.addEventListener('click',function(){var p=r.classList.toggle('paused');b.setAttribute('aria-pressed',String(p));b.textContent=p?'Play animation':'Pause animation';});
 })();
 (function(){
   var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav');
