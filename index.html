@@ -19,6 +19,7 @@
 <meta name="theme-color" content="#D5E2D9" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Hand-built websites</title>
+<script>document.documentElement.className+=" js"</script>
 <meta name="description" content="Websites designed and coded by hand for small businesses. Plain prices, plain files." />
 
 <style>
@@ -124,60 +125,144 @@ svg{display:block;max-width:100%}
 .look figcaption p{margin-top:4px;font-size:1rem;color:var(--forest-2)}
 .note{margin-top:36px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
 
-/* Mid-range phone (.s1): colourful cafe */
-.s1{background:#FFD23F;color:#2B1B3D;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
-.s1 .bar{display:flex;justify-content:space-between;align-items:center;padding:34px 14px 8px}
-.s1 .brand{font-weight:900;font-size:15px;letter-spacing:-.02em;color:#E63946}
-.s1 .burger{width:20px;height:14px;border-top:3px solid #2B1B3D;border-bottom:3px solid #2B1B3D;position:relative}
-.s1 .burger::after{content:"";position:absolute;left:0;right:0;top:3px;border-top:3px solid #2B1B3D}
-.s1 .hero1{background:#E63946;color:#FFF3C4;margin:6px 12px;border-radius:18px;padding:16px 14px 18px}
-.s1 .hero1 b{display:block;font-size:24px;line-height:1.02;font-weight:900;letter-spacing:-.02em}
-.s1 .hero1 span{display:block;margin-top:6px;font-size:11px}
-.s1 .hero1 .pill{display:inline-block;margin-top:12px;background:#2EC4B6;color:#10302D;font-weight:800;font-size:12px;padding:8px 14px;border-radius:99px}
-.s1 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:6px 12px}
-.s1 .tile{border-radius:14px;padding:10px;font-weight:800;font-size:12px;min-height:74px;display:flex;align-items:flex-end}
-.s1 .t1{background:#FF9FB2}.s1 .t2{background:#2EC4B6}.s1 .t3{background:#9B5DE5;color:#F4E9FF}.s1 .t4{background:#FF8C42}
-.s1 .tiles+.tiles{padding-top:0}
-.s1 .strip{margin-top:auto;background:#2B1B3D;color:#FFD23F;padding:14px;font-weight:800;font-size:12px}
-.s1 .strip small{display:block;margin-top:2px;font-weight:400;color:#F4E9FF}
+/* Showcase phone 1 (.e): simple but elegant */
+.e{background:#EFE9DD;color:#2A2622;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;align-items:center;text-align:center}
+.e .bar{width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;padding:34px 18px 0;font:600 8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#6B6258}
+.e .bar span:first-child{text-align:left}.e .bar span:last-child{text-align:right}
+.e .lg2{font:italic 400 16px/1 "Iowan Old Style",Palatino,Georgia,serif;letter-spacing:0;text-transform:none;color:#2A2622}
+.e .arch{width:150px;height:190px;margin:24px auto 0;border-radius:75px 75px 4px 4px;background:radial-gradient(circle at 50% 36%,#F6E3D3 0 20%,transparent 21%),linear-gradient(#E9CDBC,#CBA58D)}
+.e .eb{margin-top:20px;font:600 8px/1 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8A6F45}
+.e .hd{display:block;margin-top:10px;padding:0 24px;font:400 25px/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:-.01em}
+.e .lnk{margin-top:16px;font:600 8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #B08D57;padding-bottom:5px}
+.e .ft{margin-top:auto;padding-bottom:20px;font:500 7.5px/1 system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#8C8378}
 
-/* Simple phone (.s2): one clear page */
-.s2{background:#E9E5DC;color:#1F1F1F;font-family:Georgia,"Times New Roman",serif}
-.s2 .bar{display:flex;justify-content:space-between;align-items:baseline;padding:36px 20px 10px;font-size:13px}
-.s2 .bar span:last-child{font-family:system-ui,sans-serif;font-size:11px;letter-spacing:.08em;text-transform:uppercase}
-.s2 .hero2{padding:34px 20px 24px}
-.s2 .hero2 b{display:block;font-size:30px;line-height:1.05;font-weight:400;letter-spacing:-.02em}
-.s2 .hero2 span{display:block;margin-top:12px;font-family:system-ui,sans-serif;font-size:11px;color:#555}
-.s2 .hero2 .link{display:inline-block;margin-top:20px;font-family:system-ui,sans-serif;font-size:12px;color:#1F1F1F;border-bottom:1px solid #1F1F1F;padding-bottom:2px}
-.s2 .row{display:flex;justify-content:space-between;padding:13px 20px;border-top:1px solid #BDB8AC;font-size:13px}
-.s2 .row i{font-style:normal;font-family:system-ui,sans-serif;color:#777}
-.s2 .rows{margin-top:auto;padding-bottom:18px}
+/* Showcase phone 2 (.m): mid-range restaurant with booking, menu, gallery, newsletter */
+.m{background:#F4E8D8;color:#1F3A34;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
+.m .bar{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 6px}
+.m .brand{font:700 16px/1 Georgia,serif;color:#C8553D}
+.m .burger{width:18px;height:12px;border-top:2.5px solid #1F3A34;border-bottom:2.5px solid #1F3A34;position:relative}
+.m .burger::after{content:"";position:absolute;left:0;right:0;top:2.5px;border-top:2.5px solid #1F3A34}
+.m .hr{margin:4px 12px 0;border-radius:18px;padding:13px 14px;color:#FFF1DC;background:linear-gradient(135deg,#C8553D,#E8944B)}
+.m .hr b{display:block;font:700 21px/1.05 Georgia,serif}
+.m .btns{display:flex;gap:6px;margin-top:10px}
+.m .b1{background:#1F3A34;color:#F4E8D8;border-radius:99px;padding:6px 11px;font-weight:700;font-size:10px}
+.m .b2{border:1.5px solid #FFF1DC;border-radius:99px;padding:4.5px 10px;font-size:10px}
+.m .book{margin:8px 12px 0;background:#FBF3E6;border-radius:14px;padding:9px 10px}
+.m .book .t{font:700 10px/1 system-ui,sans-serif;font-style:normal}
+.m .fields{display:grid;grid-template-columns:1.2fr 1fr .7fr;gap:5px;margin-top:6px}
+.m .fields span{background:#F0DFC8;border-radius:8px;padding:5px 6px;font-size:9px}
+.m .go{display:block;margin-top:6px;background:#2F7D6B;color:#FBF3E6;text-align:center;border-radius:8px;padding:6px;font-weight:700;font-size:10px}
+.m .tabs{display:flex;gap:12px;padding:10px 14px 4px;font-size:10px;font-weight:700}
+.m .tabs .on{color:#C8553D;border-bottom:2px solid #C8553D}
+.m .item{display:flex;justify-content:space-between;padding:4px 14px;font-size:10px;border-bottom:1px dotted #CDB99B}
+.m .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:9px 12px 0}
+.m .gal i{height:34px;border-radius:8px}
+.m .foot{margin-top:auto;background:#1F3A34;color:#F4E8D8;padding:9px 12px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;font-size:8.5px}
+.m .news{background:#F4E8D8;color:#1F3A34;border-radius:99px;padding:5px 9px;font-weight:700}
 
-/* Complex phone (.s3): booking interface */
-.s3{background:#14213D;color:#E8E4D8;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-.s3 .bar{display:flex;justify-content:space-between;align-items:center;padding:32px 12px 6px;font:400 15px/1 Impact,"Arial Narrow Bold","Helvetica Neue",Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase}
-.s3 .ico{display:flex;gap:6px;align-items:center}
-.s3 .ico i{width:16px;height:16px;border:2px solid #E8E4D8;border-radius:50%}
-.s3 .ico .av{background:#FCA311;border-color:#FCA311}
-.s3 .days{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;padding:8px 12px 4px}
-.s3 .days div{background:#1E2F55;border-radius:10px;padding:6px 0;text-align:center;font-weight:700;font-size:13px;line-height:1.2}
-.s3 .days small{display:block;font-size:8px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#B9B6AA}
-.s3 .days .on{background:#FCA311;color:#14213D}.s3 .days .on small{color:#14213D}
-.s3 .chips{display:flex;gap:5px;padding:6px 12px}
-.s3 .chips span{border:1px solid #3A4C78;border-radius:99px;padding:3px 8px;font-size:9px}
-.s3 .chips .on{background:#E8E4D8;color:#14213D;border-color:#E8E4D8;font-weight:700}
-.s3 .c3{position:relative;background:#1B2B50;border-radius:12px;margin:5px 12px;padding:9px 10px}
-.s3 .c3 .top{display:flex;justify-content:space-between;align-items:baseline}
-.s3 .c3 b{font:400 17px/1 Impact,"Arial Narrow Bold","Helvetica Neue",Arial,sans-serif;text-transform:uppercase;letter-spacing:.02em}
-.s3 .c3 em{font-style:normal;font-weight:700;color:#FCA311;font-size:12px}
-.s3 .c3 .meta{margin-top:3px;font-size:9px;color:#B9B6AA}
-.s3 .cap{height:4px;border-radius:9px;background:#2B3E6B;margin:8px 0 28px;overflow:hidden}
-.s3 .cap i{display:block;height:100%;background:#FCA311;border-radius:9px}
-.s3 .book{position:absolute;right:10px;bottom:9px;background:#FCA311;color:#14213D;border-radius:99px;padding:5px 12px;font-size:10px;font-weight:800}
-.s3 .book.ghost{background:transparent;color:#E8E4D8;border:1px solid #3A4C78}
-.s3 .tabs{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);background:#0F1A31;padding:9px 6px 12px;text-align:center;font-size:9px;color:#B9B6AA}
-.s3 .tabs .on{color:#FCA311;font-weight:700}
-.s3 .tabs span::before{content:"";display:block;width:14px;height:14px;border-radius:5px;background:currentColor;opacity:.55;margin:0 auto 4px}
+/* Showcase phone 3 (.x): very complex shop with many features */
+.x{background:#0E1116;color:#E6E7EA;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.x .ann{background:#4C7DFF;color:#0E1116;font-size:7.5px;font-weight:800;letter-spacing:.06em;text-align:center;padding:24px 0 3px}
+.x .hd{display:flex;align-items:center;gap:7px;padding:7px 10px 5px}
+.x .lg{flex:1;font:900 12px/1 system-ui,sans-serif;letter-spacing:.14em}
+.x .ic{width:14px;height:14px;border:1.6px solid #E6E7EA;border-radius:50%;position:relative}
+.x .ic.sq{border-radius:4px}
+.x .bd{position:absolute;top:-6px;right:-7px;min-width:11px;height:11px;border-radius:9px;background:#FF6B6B;color:#0E1116;font:800 7px/11px system-ui,sans-serif;text-align:center;font-style:normal}
+.x .srch{margin:0 10px;background:#171C25;border-radius:99px;padding:6px 10px;font-size:9px;color:#8B93A3}
+.x .cats{display:flex;gap:5px;padding:7px 10px 0;font-size:9px}
+.x .cats span{border:1px solid #2A3242;border-radius:99px;padding:3px 8px}
+.x .cats .on{background:#E6E7EA;color:#0E1116;border-color:#E6E7EA;font-weight:700}
+.x .cats .hot{color:#FF6B6B;border-color:#FF6B6B}
+.x .ban{margin:7px 10px 0;border-radius:12px;padding:9px 10px;background:linear-gradient(120deg,#4C7DFF,#8A5CFF)}
+.x .ban b{display:block;font:900 16px/1 system-ui,sans-serif;letter-spacing:-.01em}
+.x .ban small{display:block;font-size:8px;margin-top:3px}
+.x .dots{display:flex;gap:3px;margin-top:6px}.x .dots i{width:10px;height:3px;border-radius:3px;background:rgba(255,255,255,.4)}.x .dots i:first-child{background:#fff}
+.x .fl{display:flex;justify-content:space-between;padding:6px 10px 3px;font-size:8px;color:#8B93A3}
+.x .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 10px}
+.x .pc{background:#171C25;border-radius:10px;padding:5px;position:relative}
+.x .pi{display:block;height:40px;border-radius:7px}
+.x .heart{position:absolute;top:8px;right:8px;width:11px;height:11px;border-radius:50%;background:rgba(14,17,22,.6)}
+.x .tag{position:absolute;top:8px;left:8px;background:#FF6B6B;color:#0E1116;font-size:6.5px;font-weight:800;padding:1px 4px;border-radius:5px}
+.x .nm{font-size:9px;font-weight:700;margin-top:3px}
+.x .pr{font-size:9px;color:#B6F26B;font-weight:800}.x .pr s{color:#8B93A3;font-weight:400;margin-left:3px}
+.x .sw{display:flex;gap:3px;margin-top:2px}.x .sw i{width:6px;height:6px;border-radius:50%}
+.x .add{margin-top:3px;background:#4C7DFF;color:#0E1116;border-radius:7px;text-align:center;font-size:8px;font-weight:800;padding:3px 0}
+.x .ship{margin:6px 10px 0;font-size:8px;color:#8B93A3}
+.x .ship i{display:block;height:3px;border-radius:3px;background:#222A39;margin-top:3px;overflow:hidden}
+.x .ship i b{display:block;height:100%;width:72%;background:#B6F26B}
+.x .tb{margin-top:auto;display:grid;grid-template-columns:repeat(5,1fr);background:#0A0D12;padding:6px 4px 9px;font-size:7px;text-align:center;color:#8B93A3}
+.x .tb span::before{content:"";display:block;width:11px;height:11px;border-radius:4px;background:currentColor;opacity:.55;margin:0 auto 3px}
+.x .tb .on{color:#4C7DFF}
+.x .chat{position:absolute;right:9px;bottom:44px;width:26px;height:26px;border-radius:50%;background:#B6F26B;box-shadow:0 4px 10px rgba(0,0,0,.5)}
+.x .chat::after{content:"";position:absolute;top:-2px;right:-2px;width:8px;height:8px;border-radius:50%;background:#FF6B6B;border:2px solid #0E1116}
+
+/* Pricing slider phone (.hire): ONE sample business whose site grows with the price */
+.hire{background:#EDEAE2}
+.hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
+.hire .layer.on{opacity:1;visibility:visible}
+.hire .hb{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 8px}
+.hire .hl{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12px}
+.hire .hl i{width:13px;height:13px;background:#FFC82E;border-radius:4px}
+.hire .mn{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.hire .hp{padding:34px 16px 0}
+.hire .hp.s{padding:4px 16px 0}
+.hire .hh{display:block;font:800 27px/1.02 system-ui,sans-serif;letter-spacing:-.02em}
+.hire .hp.s .hh{font-size:19px}
+.hire .hs{display:block;margin-top:8px;font-size:11px;color:#5A5A52}
+.hire .hbtn{display:inline-block;margin-top:14px;background:#FFC82E;color:#1D1F24;font-weight:800;font-size:11px;padding:8px 16px;border-radius:99px}
+.hire .hp.s .hbtn{margin-top:8px;padding:6px 13px;font-size:10px}
+.hire .hbtn.ghost{background:transparent;border:1.5px solid #1D1F24;padding:4.5px 12px;margin-left:5px}
+.hire .hbtn.full{display:block;text-align:center;margin-top:8px;border-radius:9px;padding:7px}
+.hire .hrows{margin-top:auto;padding-bottom:22px}
+.hire .hrows div{display:flex;justify-content:space-between;padding:13px 16px;border-top:1px solid #CFCABD;font-size:13px;font-weight:600}
+.hire .hcard{margin:10px 12px 0;background:#F6F3EC;border-radius:14px;padding:10px}
+.hire .hcard b{font-size:12px}
+.hire .ff{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:7px}
+.hire .ff span{background:#E4E0D4;border-radius:8px;padding:6px 7px;font-size:9.5px;display:flex;justify-content:space-between}
+.hire .seg{display:flex;gap:4px;margin-top:6px}
+.hire .seg span{flex:1;text-align:center;border-radius:8px;padding:5px 0;font-size:9.5px;border:1px solid #CFCABD}
+.hire .seg .on{background:#1D1F24;color:#EDEAE2;border-color:#1D1F24}
+.hire .t3{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:10px 12px 0}
+.hire .t3 span{background:#FFC82E;border-radius:10px;padding:14px 4px 8px;text-align:center;font-size:9.5px;font-weight:800}
+.hire .map{position:relative;margin:10px 12px 0;height:62px;border-radius:12px;background:linear-gradient(90deg,transparent 21px,rgba(29,31,36,.1) 22px) 0 0/23px 100%,linear-gradient(transparent 21px,rgba(29,31,36,.1) 22px) 0 0/100% 23px,#DAD6C8}
+.hire .map i{position:absolute;left:46%;top:16px;width:14px;height:14px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#1D1F24}
+.hire .hrs{margin-top:auto;padding:8px 16px 16px;font-size:9.5px;color:#5A5A52;display:flex;justify-content:space-between}
+.hire .sf{margin:2px 12px 0;background:#F6F3EC;border-radius:99px;padding:7px 12px;font-size:10px;color:#6F6F66}
+.hire .ch{display:flex;gap:5px;padding:8px 12px 0}
+.hire .ch span{border:1px solid #CFCABD;border-radius:99px;padding:3px 9px;font-size:9.5px}
+.hire .ch .on{background:#1D1F24;color:#EDEAE2;border-color:#1D1F24;font-weight:700}
+.hire .gr{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:9px 12px 0}
+.hire .it{background:#F6F3EC;border-radius:11px;padding:5px}
+.hire .im{display:block;height:40px;border-radius:7px}
+.hire .it b{display:block;font-size:10px;margin-top:4px}
+.hire .it .q{display:block;font-size:8.5px;font-weight:800;margin-top:2px;text-decoration:underline}
+.hire .qb{margin-top:auto;background:#1D1F24;color:#FFC82E;padding:11px 14px;font-weight:800;font-size:11px;display:flex;justify-content:space-between}
+.hire .an{background:#1D1F24;color:#FFC82E;font-size:8px;font-weight:700;letter-spacing:.06em;text-align:center;padding:24px 0 4px}
+.hire .h4{display:flex;align-items:center;gap:7px;padding:7px 12px 5px}
+.hire .h4 .hl{flex:1;font-size:11px}
+.hire .ic{width:14px;height:14px;border:1.8px solid #1D1F24;border-radius:50%;position:relative}
+.hire .ic.sq{border-radius:4px}
+.hire .bd{position:absolute;top:-6px;right:-7px;min-width:11px;height:11px;border-radius:9px;background:#C8341F;color:#EDEAE2;font:800 7px/11px system-ui,sans-serif;text-align:center;font-style:normal}
+.hire .st{display:flex;gap:3px;padding:2px 12px 0;align-items:center;font-size:8px;color:#5A5A52}
+.hire .st em{font-style:normal;margin-right:3px}
+.hire .st i{flex:1;height:3px;border-radius:3px;background:#CFCABD}.hire .st i.on{background:#1D1F24}
+.hire .dy{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;padding:7px 12px 0}
+.hire .dy span{background:#F6F3EC;border-radius:8px;text-align:center;padding:4px 0;font-size:10px;font-weight:700;line-height:1.1}
+.hire .dy small{display:block;font-size:7px;font-weight:500;color:#6F6F66}
+.hire .dy .on{background:#FFC82E}.hire .dy .on small{color:#1D1F24}
+.hire .li{display:grid;grid-template-columns:40px 1fr auto;gap:7px;align-items:center;background:#F6F3EC;border-radius:11px;margin:6px 12px 0;padding:6px}
+.hire .li .im{height:34px}
+.hire .li b{font-size:10px;display:block}
+.hire .li small{font-size:8px;color:#2F7D4F;font-weight:700}
+.hire .li small.lo{color:#B5471D}
+.hire .li .ad{background:#FFC82E;border-radius:99px;font-size:8.5px;font-weight:800;padding:4px 9px}
+.hire .pz{display:flex;gap:5px;margin:7px 12px 0}
+.hire .pz span{flex:1;background:#F6F3EC;border-radius:8px;padding:6px 8px;font-size:9px;color:#6F6F66}
+.hire .pz b{background:#1D1F24;color:#FFC82E;border-radius:8px;padding:6px 10px;font-size:9px}
+.hire .tbh{margin-top:auto;display:grid;grid-template-columns:repeat(4,1fr);background:#1D1F24;color:#B8B4A8;font-size:8px;text-align:center;padding:7px 4px 10px}
+.hire .tbh span::before{content:"";display:block;width:11px;height:11px;border-radius:4px;background:currentColor;opacity:.6;margin:0 auto 3px}
+.hire .tbh .on{color:#FFC82E}
+.hire .cb{position:absolute;right:9px;bottom:44px;width:25px;height:25px;border-radius:50%;background:#FFC82E;box-shadow:0 4px 10px rgba(0,0,0,.35)}
 
 /* Why */
 .why{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
@@ -197,22 +282,45 @@ svg{display:block;max-width:100%}
 .steps h3{font-size:1.5rem}
 .steps p{margin-top:6px}
 
-/* Prices */
-.tier{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px 32px;align-items:baseline;padding:24px 0;border-top:1px solid var(--rule)}
-.tier:last-of-type{border-bottom:1px solid var(--rule)}
-.tier h3{font-size:1.55rem}
-.tier .price{font:600 1.9rem/1 var(--serif)}
-.tier .price small{font:600 .8rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;margin-right:6px;color:var(--forest-2)}
-.tier p{font-size:1rem}
-.tier .no{color:var(--forest-2)}
-.tier .no b{color:var(--forest);font-weight:600}
-.pick{background:var(--pale-2);margin:0 -20px;padding-left:20px;padding-right:20px;border-radius:20px;border-top-color:transparent}
-.pick .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--clay);color:var(--pale);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+/* Prices: slider + phone */
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.pricer{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.pricer-label{display:block;font:600 .85rem/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--forest-2);margin-bottom:20px}
+.slide{display:none;--v:0;margin-bottom:26px}
+.js .slide{display:block}
+.slide input{-webkit-appearance:none;appearance:none;display:block;width:calc(75% + 28px);margin:0 0 0 calc(12.5% - 14px);height:28px;background:transparent;cursor:pointer}
+.slide input::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(to right,var(--clay) calc(14px + (100% - 28px) * var(--v) / 3),var(--rule) 0)}
+.slide input::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(to right,var(--clay) calc(14px + (100% - 28px) * var(--v) / 3),var(--rule) 0)}
+.slide input::-webkit-slider-thumb{-webkit-appearance:none;box-sizing:border-box;width:28px;height:28px;margin-top:-10px;border-radius:50%;background:var(--clay);border:3px solid var(--pale);box-shadow:0 0 0 1.5px var(--clay),0 4px 12px rgba(7,57,17,.35)}
+.slide input::-moz-range-thumb{box-sizing:border-box;width:28px;height:28px;border-radius:50%;background:var(--clay);border:3px solid var(--pale);box-shadow:0 0 0 1.5px var(--clay),0 4px 12px rgba(7,57,17,.35)}
+.slide input:focus{outline:none}
+.slide input:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px var(--pale),0 0 0 6px var(--forest)}
+.slide input:focus-visible::-moz-range-thumb{box-shadow:0 0 0 3px var(--pale),0 0 0 6px var(--forest)}
+.stops{display:grid;grid-template-columns:repeat(4,1fr);margin-top:6px}
+.stops button{display:block;width:100%;appearance:none;-webkit-appearance:none;background:none;border:0;font:inherit;color:var(--forest);cursor:pointer;text-align:center;padding:8px 2px;min-height:44px;border-radius:16px}
+.stops b{display:block;font-weight:600;font-size:.95rem}
+.stops span{display:block;font:600 .9rem/1.2 var(--serif);color:var(--forest-2)}
+.stops .on b{color:var(--clay)}
+.panel{padding:22px 0;border-top:1px solid var(--rule)}
+.js .panel{display:none;padding:4px 0 0;border-top:0}
+.js .panel.on{display:block}
+.panel h3{font-size:1.9rem}
+.panel h3 small{font:600 1rem/1 var(--sans);color:var(--forest-2);margin-left:8px}
+.panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--clay);color:var(--pale);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
+.panel ul{margin-top:14px}
+.panel li{padding:5px 0 5px 26px;position:relative}
+.panel li::before{content:"";position:absolute;left:2px;top:.85em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
+.panel .no{margin-top:12px;font-size:1rem;color:var(--forest-2)}
+.panel .no b{color:var(--forest);font-weight:600}
+.pricer-phone{display:none;justify-self:center;width:100%;max-width:272px}
+.js .pricer-phone{display:block}
+
 .extras{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:40px}
 .extras h3{font-size:1.4rem;margin-bottom:12px}
-.list li{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-top:1px solid var(--rule)}
-.list li:last-child{border-bottom:1px solid var(--rule)}
-.list b{font-weight:600;white-space:nowrap}
+.basics h3{font-size:1.4rem;margin-bottom:12px}
+.basics p{max-width:36ch}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pills li{background:var(--pale-2);border:1px solid var(--rule);border-radius:999px;padding:7px 16px;font-size:.98rem;font-weight:500}
 .care{background:var(--forest);color:var(--pale);padding:28px 30px;border-radius:26px}
 .care h3{color:var(--pale)}
 .care .fee{font:600 1.9rem/1.1 var(--serif);margin-bottom:12px}
@@ -235,12 +343,15 @@ footer nav a{margin-left:20px}
 @media (prefers-reduced-motion:no-preference){
   .btn,.menu-btn{transition:transform .25s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
   .phone{transition:transform .35s ease}
+  .hire .layer{transition:opacity .35s ease,visibility .35s}
   .zoom svg{transition:transform .5s ease}
   .btn:focus-visible,.menu-btn:focus-visible{transform:scale(1.05)}
 }
 @media (prefers-reduced-motion:no-preference) and (hover:hover){
   .btn:hover,.menu-btn:hover{transform:scale(1.05)}
   .look:hover .phone{transform:scale(1.04)}
+  .slide input:hover::-webkit-slider-thumb{transform:scale(1.1)}
+  .slide input:hover::-moz-range-thumb{transform:scale(1.1)}
   .sketch:hover .zoom svg{transform:scale(1.06)}
 }
 
@@ -258,8 +369,7 @@ footer nav a{margin-left:20px}
   .why div,.why div+div{padding:22px 0 6px;border-left:0}
   .why div+div{border-top:1px solid var(--rule)}
   .steps{gap:22px}
-  .tier{grid-template-columns:1fr;gap:6px}
-  .pick{margin:0 -16px;padding-left:16px;padding-right:16px}
+  .pricer{grid-template-columns:1fr;gap:36px}
   .extras{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest-2);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:999px}
   .nav{display:none;position:absolute;left:0;right:0;top:calc(100% + 10px);background:var(--pale);border:1px solid var(--rule);border-radius:28px;box-shadow:0 22px 44px -26px rgba(7,57,17,.55);flex-direction:column;align-items:stretch;padding:8px 24px 22px}
@@ -274,7 +384,7 @@ footer nav a{margin-left:20px}
   .hero .actions .btn,.contact .actions .btn{width:100%}
 }
 @media (forced-colors:active){
-  .btn,.pick .tag{border:2px solid ButtonText}
+  .btn,.panel .tag{border:2px solid ButtonText}
   .phone{border:2px solid CanvasText}
 }
 </style>
@@ -354,40 +464,50 @@ footer nav a{margin-left:20px}
 
     <div class="phones">
       <figure class="look">
-        <div class="phone"><div class="screen s2" aria-hidden="true">
-          <div class="bar"><span>Hale Plumbing</span><span>Menu</span></div>
-          <div class="hero2"><b>Plumbing and heating.</b><span>Local. Tidy. Fixed quotes.</span><span class="link">Call us</span></div>
-          <div class="rows">
-            <div class="row"><span>Boilers</span><i>&rarr;</i></div>
-            <div class="row"><span>Repairs</span><i>&rarr;</i></div>
-            <div class="row"><span>Bathrooms</span><i>&rarr;</i></div>
+        <div class="phone"><div class="screen e" aria-hidden="true">
+          <div class="bar"><span>Menu</span><span class="lg2">Linden &amp; Co</span><span>Enquire</span></div>
+          <div class="arch"></div>
+          <span class="eb">Wedding photography</span>
+          <b class="hd">Quiet, considered moments.</b>
+          <span class="lnk">View the portfolio</span>
+          <span class="ft">By appointment</span>
+        </div></div>
+        <figcaption><h3>Simple</h3><p>Calm and elegant. Good for photographers and studios.</p></figcaption>
+      </figure>
+
+      <figure class="look">
+        <div class="phone"><div class="screen m" aria-hidden="true">
+          <div class="bar"><span class="brand">Fernhill</span><span class="burger"></span></div>
+          <div class="hr"><b>Seasonal food, shared.</b><div class="btns"><span class="b1">Book a table</span><span class="b2">Menu</span></div></div>
+          <div class="book"><i class="t">Reserve online</i><div class="fields"><span>Sat 12 Oct</span><span>7:30pm</span><span>2 &#9662;</span></div><span class="go">Check availability</span></div>
+          <div class="tabs"><span class="on">Starters</span><span>Mains</span><span>Dessert</span></div>
+          <div class="item"><span>Soup of the day</span><span>&pound;6</span></div>
+          <div class="item"><span>Whipped goat&rsquo;s cheese</span><span>&pound;8</span></div>
+          <div class="gal"><i style="background:#C8553D"></i><i style="background:#E8B04B"></i><i style="background:#2F7D6B"></i></div>
+          <div class="foot"><span>Open Tue&ndash;Sun &middot; Map &middot; Instagram</span><span class="news">Join the list</span></div>
+        </div></div>
+        <figcaption><h3>Mid-range</h3><p>Booking, menu and gallery. Good for restaurants and venues.</p></figcaption>
+      </figure>
+
+      <figure class="look">
+        <div class="phone"><div class="screen x" aria-hidden="true">
+          <div class="ann">FREE RETURNS &middot; TRACKED DELIVERY</div>
+          <div class="hd"><span class="ic sq"></span><span class="lg">RIDGEWAY</span><span class="ic"></span><span class="ic"></span><span class="ic sq"><i class="bd">3</i></span></div>
+          <div class="srch">Search tents, boots, packs</div>
+          <div class="cats"><span class="on">All</span><span>Tents</span><span>Boots</span><span class="hot">Sale</span></div>
+          <div class="ban"><b>Winter sale</b><small>Up to 40% off selected gear</small><div class="dots"><i></i><i></i><i></i></div></div>
+          <div class="fl"><span>Filters (2)</span><span>Sort: Popular</span></div>
+          <div class="grid">
+            <div class="pc"><i class="pi" style="background:linear-gradient(135deg,#FF6B6B,#FFB36B)"></i><span class="tag">Low stock</span><span class="heart"></span><div class="nm">Alpine tent</div><div class="pr">&pound;180<s>&pound;240</s></div><div class="sw"><i style="background:#FF6B6B"></i><i style="background:#4C7DFF"></i><i style="background:#B6F26B"></i></div><div class="add">Add to basket</div></div>
+            <div class="pc"><i class="pi" style="background:linear-gradient(135deg,#4C7DFF,#7CE3FF)"></i><span class="heart"></span><div class="nm">Trail boot</div><div class="pr">&pound;95<s>&pound;130</s></div><div class="sw"><i style="background:#E6E7EA"></i><i style="background:#8A5CFF"></i></div><div class="add">Add to basket</div></div>
+            <div class="pc"><i class="pi" style="background:linear-gradient(135deg,#8A5CFF,#FF6BD6)"></i><span class="tag">New</span><span class="heart"></span><div class="nm">Down jacket</div><div class="pr">&pound;140</div><div class="sw"><i style="background:#8A5CFF"></i><i style="background:#0E1116;border:1px solid #444"></i></div><div class="add">Add to basket</div></div>
+            <div class="pc"><i class="pi" style="background:linear-gradient(135deg,#B6F26B,#2F9E6B)"></i><span class="heart"></span><div class="nm">Day pack</div><div class="pr">&pound;55<s>&pound;70</s></div><div class="sw"><i style="background:#B6F26B"></i><i style="background:#FF6B6B"></i><i style="background:#4C7DFF"></i></div><div class="add">Add to basket</div></div>
           </div>
+          <div class="ship">&pound;12 to free delivery<i><b></b></i></div>
+          <div class="tb"><span class="on">Home</span><span>Shop</span><span>Saved</span><span>Basket</span><span>Account</span></div>
+          <span class="chat"></span>
         </div></div>
-        <figcaption><h3>Simple</h3><p>One clear page. Good for trades and sole traders.</p></figcaption>
-      </figure>
-
-      <figure class="look">
-        <div class="phone"><div class="screen s1" aria-hidden="true">
-          <div class="bar"><span class="brand">Bramble Caf&eacute;</span><span class="burger"></span></div>
-          <div class="hero1"><b>Coffee, cake &amp; good company</b><span>Open every day</span><span class="pill">See the menu</span></div>
-          <div class="tiles"><div class="tile t1">Cakes</div><div class="tile t2">Coffee</div></div>
-          <div class="tiles"><div class="tile t3">Lunch</div><div class="tile t4">Kids</div></div>
-          <div class="strip">Today&rsquo;s special<small>Lemon drizzle</small></div>
-        </div></div>
-        <figcaption><h3>Mid-range</h3><p>More pages and personality. Good for caf&eacute;s and shops.</p></figcaption>
-      </figure>
-
-      <figure class="look">
-        <div class="phone"><div class="screen s3" aria-hidden="true">
-          <div class="bar"><span>Northside</span><span class="ico"><i></i><i class="av"></i></span></div>
-          <div class="days"><div><small>Mon</small>6</div><div class="on"><small>Tue</small>7</div><div><small>Wed</small>8</div><div><small>Thu</small>9</div><div><small>Fri</small>10</div></div>
-          <div class="chips"><span class="on">All</span><span>Spin</span><span>Strength</span><span>Boxing</span></div>
-          <div class="c3"><div class="top"><b>Strength</b><em>7.00</em></div><div class="meta">45 min &middot; 6 spaces left</div><div class="cap"><i style="width:76%"></i></div><span class="book">Book</span></div>
-          <div class="c3"><div class="top"><b>Spin</b><em>18.30</em></div><div class="meta">Full &middot; join the waitlist</div><div class="cap"><i style="width:100%"></i></div><span class="book ghost">Waitlist</span></div>
-          <div class="c3"><div class="top"><b>Boxing</b><em>19.30</em></div><div class="meta">60 min &middot; 3 spaces left</div><div class="cap"><i style="width:88%"></i></div><span class="book">Book</span></div>
-          <div class="tabs"><span class="on">Classes</span><span>Plans</span><span>Shop</span><span>Me</span></div>
-        </div></div>
-        <figcaption><h3>Complex</h3><p>Booking, filters and live details. Good for gyms and venues.</p></figcaption>
+        <figcaption><h3>Complex</h3><p>Search, filters, basket and live chat. Good for large shops.</p></figcaption>
       </figure>
     </div>
     <p class="note">Example designs only. Not real clients.</p>
@@ -440,41 +560,99 @@ footer nav a{margin-left:20px}
       <p>Each package says what it leaves out.</p>
     </div>
 
-    <div>
-      <article class="tier">
-        <div><h3>Starter</h3></div>
-        <p class="price"><small>from</small>&pound;395</p>
-        <p class="no">Up to 3 pages.<br><b>Not included:</b> editing system, shop.</p>
-      </article>
-      <article class="tier">
-        <div><h3>Business</h3></div>
-        <p class="price"><small>from</small>&pound;1,500</p>
-        <p class="no">Up to 8 pages, booking or quotes.<br><b>Not included:</b> product data, migration.</p>
-      </article>
-      <article class="tier pick">
-        <div><h3>Content &amp; catalogue<span class="tag">Most chosen</span></h3></div>
-        <p class="price"><small>from</small>&pound;3,000</p>
-        <p class="no">Edit it yourself. Up to 75 items.<br><b>Not included:</b> checkout, big migrations.</p>
-      </article>
-      <article class="tier">
-        <div><h3>Large builds</h3></div>
-        <p class="price" style="font-size:1.4rem">Quoted</p>
-        <p class="no">Big catalogues and site moves.<br><b>Scope</b> agreed in writing first.</p>
-      </article>
+    <div class="pricer">
+      <div>
+        <span class="pricer-label" id="plan-label">Slide to see what each price adds</span>
+        <div class="slide">
+          <input id="plan" type="range" min="0" max="3" step="1" value="0" aria-labelledby="plan-label" aria-valuetext="Starter, from £395">
+          <ul class="stops" aria-hidden="true">
+            <li><button type="button" tabindex="-1" data-i="0"><b>Starter</b><span>&pound;395</span></button></li>
+            <li><button type="button" tabindex="-1" data-i="1"><b>Business</b><span>&pound;1,500</span></button></li>
+            <li><button type="button" tabindex="-1" data-i="2"><b>Catalogue</b><span>&pound;3,000</span></button></li>
+            <li><button type="button" tabindex="-1" data-i="3"><b>Large</b><span>Quoted</span></button></li>
+          </ul>
+        </div>
+        <p class="sr-only" aria-live="polite" id="plan-status"></p>
+
+        <article class="panel on" data-i="0">
+          <h3>Starter <small>from &pound;395</small></h3>
+          <ul><li>Up to 3 pages</li><li>Contact form and map</li><li>Mobile-first design</li></ul>
+          <p class="no"><b>Not included:</b> editing system, shop.</p>
+        </article>
+        <article class="panel" data-i="1">
+          <h3>Business <small>from &pound;1,500</small></h3>
+          <ul><li>Everything in Starter</li><li>Up to 8 pages</li><li>Booking or quote form</li><li>SEO and GA4 set up</li></ul>
+          <p class="no"><b>Not included:</b> product data, migration.</p>
+        </article>
+        <article class="panel" data-i="2">
+          <h3>Content &amp; catalogue <small>from &pound;3,000</small><span class="tag">Most chosen</span></h3>
+          <ul><li>Everything in Business</li><li>Edit it yourself with a CMS</li><li>Catalogue up to 75 items</li><li>Built to WCAG 2.2 AA</li></ul>
+          <p class="no"><b>Not included:</b> checkout, big migrations.</p>
+        </article>
+        <article class="panel" data-i="3">
+          <h3>Large builds <small>quoted per project</small></h3>
+          <ul><li>Everything in Content &amp; catalogue</li><li>Unlimited catalogue</li><li>Old pages moved and redirected</li><li>Custom quote and booking flows</li><li>Staff handover</li></ul>
+          <p class="no"><b>Scope</b> is agreed in writing first.</p>
+        </article>
+      </div>
+
+      <div class="pricer-phone">
+        <div class="phone"><div class="screen hire" aria-hidden="true">
+          <div class="layer on" data-i="0">
+            <div class="hb"><span class="hl"><i></i>Greenfield Hire</span><span class="mn">Menu</span></div>
+            <div class="hp"><span class="hh">Plant &amp; tool hire.</span><span class="hs">Local. Fast. Fair.</span><span class="hbtn">Call us</span></div>
+            <div class="hrows"><div><span>Diggers</span><i>&rarr;</i></div><div><span>Tools</span><i>&rarr;</i></div><div><span>Access</span><i>&rarr;</i></div></div>
+          </div>
+          <div class="layer" data-i="1">
+            <div class="hb"><span class="hl"><i></i>Greenfield Hire</span><span class="mn">Menu</span></div>
+            <div class="hp s"><span class="hh">Plant &amp; tool hire.</span><span class="hbtn">Call us</span><span class="hbtn ghost">Get a quote</span></div>
+            <div class="hcard"><b>Request a quote</b><div class="ff"><span>Item<i>&#9662;</i></span><span>Date<i>&#9662;</i></span></div><div class="seg"><span class="on">Delivery</span><span>Collect</span></div><span class="hbtn full">Send request</span></div>
+            <div class="t3"><span>Delivery</span><span>Advice</span><span>Servicing</span></div>
+            <div class="map"><i></i></div>
+            <div class="hrs"><span>Mon&ndash;Sat 7&ndash;5</span><span>Find us</span></div>
+          </div>
+          <div class="layer" data-i="2">
+            <div class="hb"><span class="hl"><i></i>Greenfield Hire</span><span class="mn">Menu</span></div>
+            <div class="sf">Search the catalogue</div>
+            <div class="ch"><span class="on">All</span><span>Diggers</span><span>Tools</span><span>Access</span></div>
+            <div class="gr">
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#E0A800)"></i><b>Mini digger</b><span class="q">Request a quote</span></div>
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#8E8A7E,#5F5C52)"></i><b>Breaker</b><span class="q">Request a quote</span></div>
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#B8860B)"></i><b>Mixer</b><span class="q">Request a quote</span></div>
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#CFCABD,#9A9585)"></i><b>Tower</b><span class="q">Request a quote</span></div>
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#1D1F24,#4A4D55)"></i><b>Generator</b><span class="q">Request a quote</span></div>
+              <div class="it"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#8E8A7E)"></i><b>Trimmer</b><span class="q">Request a quote</span></div>
+            </div>
+            <div class="qb"><span>Request a quote</span><span>0</span></div>
+          </div>
+          <div class="layer" data-i="3">
+            <div class="an">DELIVERY AVAILABLE &middot; TRACK YOUR HIRE</div>
+            <div class="h4"><span class="hl"><i></i>Greenfield</span><span class="ic"></span><span class="ic"></span><span class="ic sq"><i class="bd">2</i></span></div>
+            <div class="st"><em>Quote</em><i class="on"></i><i class="on"></i><i></i><i></i></div>
+            <div class="dy"><span><small>Mon</small>7</span><span class="on"><small>Tue</small>8</span><span><small>Wed</small>9</span><span><small>Thu</small>10</span><span><small>Fri</small>11</span></div>
+            <div class="ch"><span class="on">Available</span><span>Delivery</span><span>Weekly</span></div>
+            <div class="li"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#E0A800)"></i><div><b>Mini digger</b><small>Available</small></div><span class="ad">Add</span></div>
+            <div class="li"><i class="im" style="background:linear-gradient(135deg,#8E8A7E,#5F5C52)"></i><div><b>Breaker</b><small class="lo">2 left</small></div><span class="ad">Add</span></div>
+            <div class="li"><i class="im" style="background:linear-gradient(135deg,#1D1F24,#4A4D55)"></i><div><b>Generator</b><small>Available</small></div><span class="ad">Add</span></div>
+            <div class="li"><i class="im" style="background:linear-gradient(135deg,#FFC82E,#B8860B)"></i><div><b>Concrete mixer</b><small>Available</small></div><span class="ad">Add</span></div>
+            <div class="li"><i class="im" style="background:linear-gradient(135deg,#CFCABD,#9A9585)"></i><div><b>Access tower</b><small class="lo">1 left</small></div><span class="ad">Add</span></div>
+            <div class="pz"><span>Postcode</span><b>Check</b></div>
+            <div class="tbh"><span class="on">Home</span><span>Catalogue</span><span>Quote</span><span>Account</span></div>
+            <span class="cb"></span>
+          </div>
+        </div></div>
+      </div>
     </div>
 
     <div class="extras">
-      <div>
+      <div class="basics">
         <h3>Add-ons</h3>
-        <ul class="list">
-          <li>GA4 analytics <b>from &pound;150</b></li>
-          <li>Cloudflare setup <b>from &pound;150</b></li>
-          <li>Google Business Profile <b>from &pound;200</b></li>
-          <li>Moving an old site, up to 50 pages <b>from &pound;300</b></li>
-          <li>Moving an old site, 51 to 150 pages <b>from &pound;700</b></li>
-          <li>Moving an old site, 151 to 350 pages <b>from &pound;1,400</b></li>
-          <li>Accessibility audit <b>from &pound;450</b></li>
-          <li>Payment checkout <b>from &pound;900</b></li>
+        <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website.</p>
+        <ul class="pills">
+          <li>Cloudflare</li>
+          <li>Google Analytics</li>
+          <li>Google Business Profile</li>
+          <li>and so on</li>
         </ul>
       </div>
       <div class="care on-dark">
@@ -517,6 +695,23 @@ footer nav a{margin-left:20px}
 </footer>
 
 <script>
+(function(){
+  var root=document.querySelector('.pricer'); if(!root) return;
+  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status');
+  var panels=[].slice.call(root.querySelectorAll('.panel')), layers=[].slice.call(root.querySelectorAll('.layer')), stops=[].slice.call(root.querySelectorAll('.stops button'));
+  var names=['Starter, from £395','Business, from £1,500','Content and catalogue, from £3,000','Large builds, quoted per project'];
+  function set(i){
+    i=Math.max(0,Math.min(3,i));
+    range.value=i; slide.style.setProperty('--v',i); range.setAttribute('aria-valuetext',names[i]);
+    panels.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    layers.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    stops.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    if(live) live.textContent=names[i];
+  }
+  range.addEventListener('input',function(){set(+range.value);});
+  stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
+  set(0);
+})();
 (function(){
   var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav');
   if(!btn||!nav) return;
