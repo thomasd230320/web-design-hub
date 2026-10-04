@@ -4,10 +4,10 @@
   One file. No framework, no CSS library, no build step.
 
   Palette (all text pairings checked against WCAG 2.2 AA)
-    primary   #24324A  deep navy: text, dark bands
+    primary   #2B3B57  deep navy: text, dark bands
     secondary #9D7568  dusty terracotta: button fills and accents (near-black text on it)
     background #AEB8B3 soft sage grey: page background, and the "light" text on dark bands
-    supporting: #C2CBC6 panels, #8E9A94 hairlines, #2E3D58 secondary text, #5E3F35 deep terracotta for text and lines
+    supporting: #C2CBC6 panels, #8E9A94 hairlines, #364868 secondary text, #5E3F35 deep terracotta for text and lines
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
@@ -25,8 +25,8 @@
   --pale:#AEB8B3;
   --pale-2:#C2CBC6;
   --rule:#8E9A94;
-  --forest:#24324A;
-  --forest-2:#2E3D58;
+  --forest:#2B3B57;
+  --forest-2:#364868;
   --clay:#5E3F35;
   --orange:#9D7568;
   --orange-hover:#B08A7D;
@@ -111,9 +111,9 @@ svg{display:block;max-width:100%}
 .bw-txt b.t3{height:5px;width:88%;background:var(--forest-2);opacity:.45;margin-top:8px;margin-bottom:0}
 .bw-txt b.t3.short{width:60%;margin-top:5px}
 .bw-txt em{display:block;margin-top:12px;width:44%;height:16px;border-radius:99px;background:var(--orange);border:1.5px solid var(--clay)}
-.bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6F85A8,#24324A)}
+.bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6F85A8,#2B3B57)}
 .bw-img::before{content:"";position:absolute;right:16%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tint);box-shadow:0 0 22px 8px rgba(169,192,200,.55)}
-.bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#24324A;opacity:.55}
+.bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#2B3B57;opacity:.55}
 .bw-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:4%;padding:1% 5% 0}
 .bw-cards i{display:block;height:44px;border-radius:10px;background:linear-gradient(var(--forest-2) 0 34%,var(--pale-2) 0)}
 .bw-cards i:nth-child(2){background:linear-gradient(var(--clay) 0 34%,var(--pale-2) 0)}
@@ -215,7 +215,7 @@ svg{display:block;max-width:100%}
 .cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:6px}
 .cmp-row .what small a{color:var(--forest-2)}
 .cmp-row .old,.cmp-row .new{display:flex;flex-direction:column;justify-content:center;gap:8px;font-weight:600;font-size:1rem;line-height:1.25}
-.cmp-row .old{background:var(--tint);border:2px dashed var(--clay)}
+.cmp-row .old{background:#F4F1EA;border:2px dashed var(--clay)}
 .cmp-row .new{background:var(--forest);color:var(--pale)}
 .cmp-row .old::before,.cmp-row .new::before{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 1rem/1 var(--sans)}
 .cmp-row .old::before{content:"\00D7";background:var(--clay);color:var(--pale)}
@@ -475,8 +475,9 @@ svg{display:block;max-width:100%}
 .steps p{margin-top:6px}
 .steps h3 button{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;letter-spacing:inherit;color:inherit;text-align:left;display:inline-flex;align-items:center;gap:10px}
 .js .steps h3 button{cursor:pointer}
-.js .steps h3 button::after{content:"+";display:inline-grid;place-items:center;width:24px;height:24px;border:1.5px solid var(--tint);border-radius:50%;color:var(--tint);font:500 1rem/1 var(--sans);transition:transform .2s ease}
-.js .steps h3 button[aria-expanded="true"]::after{transform:rotate(45deg)}
+.js .steps h3 button::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid var(--tint);border-bottom:2.5px solid var(--tint);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
+.js .steps h3 button[aria-expanded="true"]::after{transform:rotate(-135deg) translateY(-2px)}
+@media (prefers-reduced-motion:no-preference){.steps .more:not([hidden]){animation:stepin .25s ease}@keyframes stepin{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}}
 .steps li{transition:border-color .2s ease}
 .steps li:hover,.steps li.open{border-top-color:var(--pale)}
 .steps .more{color:var(--tint);font-size:1rem}
@@ -521,6 +522,8 @@ svg{display:block;max-width:100%}
 .basics p{max-width:36ch}
 .addons{display:grid;gap:8px;margin-top:18px}
 .addons details{background:var(--forest);color:var(--pale);border-radius:18px;overflow:hidden}
+.basics .addons .addons-more{border:2px dashed var(--clay);border-radius:18px;padding:12px 18px;font-size:1rem;line-height:1.4;color:var(--forest)}
+.addons-more b{font-weight:700}
 .addons summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;min-height:48px;font-weight:600}
 .addons summary::-webkit-details-marker{display:none}
 .addons summary::after{content:"";flex:none;width:9px;height:9px;border-right:2.5px solid var(--tint);border-bottom:2.5px solid var(--tint);transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}
@@ -644,7 +647,7 @@ footer nav a{margin-left:20px}
       <div class="reel-stage" role="img" aria-label="A looping animation. A pencil sketch of a website is drawn, then fills with colour to become a finished design on a laptop and a phone.">
         <div class="rl s1">
           <svg class="sk" viewBox="12 10 480 446" role="img" aria-label="A pencil sketch of a website layout: a header, a headline, an image box and a button.">
-        <g fill="none" stroke="#24324A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <g fill="none" stroke="#2B3B57" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M26 22 C120 19 250 24 352 21 L353 440 C250 443 130 439 27 442 Z"/>
           <path d="M27 70 C130 72 250 69 352 71"/>
           <path d="M42 46 l56 0"/>
@@ -659,7 +662,7 @@ footer nav a{margin-left:20px}
           <path d="M62 345 l104 0" stroke="#5E3F35" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
-        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#2E3D58">
+        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#364868">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
@@ -893,19 +896,12 @@ footer nav a{margin-left:20px}
     <div class="extras">
       <div class="basics">
         <h3>Add-ons</h3>
-        <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website, so every site comes with a selection of them, chosen to suit it.</p>
+        <p>I don&rsquo;t charge for add-ons. I think they are basic functions of any good website, so every site comes with a selection of them, chosen to suit it. Here are a few examples, but the list is not limited to these.</p>
         <div class="addons">
           <details><summary>Cloudflare</summary><p>A free layer that sits in front of your site. It helps pages load faster around the world and blocks a lot of harmful traffic.</p></details>
           <details><summary>Google Analytics</summary><p>Shows how many people visit, where they come from and which pages they read, so you can see what is working.</p></details>
           <details><summary>Google Business Profile</summary><p>Your free listing on Google Search and Maps, with opening hours, photos, reviews and directions. I help set it up and link it to your site.</p></details>
-          <details><summary>Google Search Console</summary><p>A free Google tool that shows whether your pages are found and what people searched for before they visited.</p></details>
-          <details><summary>Secure connection (HTTPS)</summary><p>The padlock in the browser. It keeps what visitors type private and stops the warnings that scare people away.</p></details>
-          <details><summary>Contact form with spam protection</summary><p>Enquiries go straight to your inbox, with checks that block spam.</p></details>
-          <details><summary>Sitemap</summary><p>A list of all your pages for search engines, so none are missed.</p></details>
-          <details><summary>Structured data</summary><p>Hidden labels that tell search engines and AI what your business is, where it is and what you offer.</p></details>
-          <details><summary>Social sharing previews</summary><p>The picture and title that appear when your page is shared on WhatsApp, Facebook or LinkedIn.</p></details>
-          <details><summary>Cookie notice</summary><p>A simple banner asking permission for tracking cookies, added where your site needs one.</p></details>
-          <details><summary>Browser and phone icons</summary><p>The small icon in the browser tab and on a phone&rsquo;s home screen.</p></details>
+          <p class="addons-more"><b>And more.</b> These three are just examples. Other add-ons are chosen to suit each site.</p>
         </div>
       </div>
       <div class="care on-dark">
@@ -990,14 +986,17 @@ footer nav a{margin-left:20px}
   set(0);
 })();
 (function(){
-  var bs=[].slice.call(document.querySelectorAll('.steps h3 button'));
+  var bs=[].slice.call(document.querySelectorAll('.steps h3 button')), canHover=window.matchMedia&&window.matchMedia('(hover:hover)').matches;
   bs.forEach(function(b){
     var p=document.getElementById(b.getAttribute('aria-controls')); if(!p) return;
+    var li=b.closest('li'), pinned=false;
+    function show(o){b.setAttribute('aria-expanded',String(o)); p.hidden=!o; li.classList.toggle('open',o);}
     p.hidden=true;
-    b.addEventListener('click',function(){
-      var open=b.getAttribute('aria-expanded')==='true';
-      b.setAttribute('aria-expanded',String(!open)); p.hidden=open; b.closest('li').classList.toggle('open',!open);
-    });
+    b.addEventListener('click',function(){pinned=!pinned; show(pinned);});
+    if(canHover){
+      li.addEventListener('mouseenter',function(){show(true);});
+      li.addEventListener('mouseleave',function(){if(!pinned) show(false);});
+    }
   });
 })();
 (function(){
