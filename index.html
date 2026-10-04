@@ -18,7 +18,7 @@
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Websites for small businesses</title>
 <script>document.documentElement.className+=" js"</script>
-<meta name="description" content="Websites for small businesses. Fixed prices, plain files, yours to keep." />
+<meta name="description" content="Websites for small businesses. Flexible prices, plain files, yours to keep." />
 
 <style>
 :root{
@@ -359,9 +359,8 @@ svg{display:block;max-width:100%}
 /* Pricing slider phone (.hire): four completely different websites, one per price */
 .hire{background:#EDEAE2}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
-.hire .layer{transform:translateX(100%);opacity:1;visibility:visible;will-change:transform}
-.hire .layer.before{transform:translateX(-100%)}
-.hire .layer.on{transform:none}
+.hire .layer{transform:translateX(calc((var(--k,0) - var(--v,0)) * 100%));opacity:1;visibility:visible;will-change:transform}
+.hire .layer[data-i="1"]{--k:1}.hire .layer[data-i="2"]{--k:2}.hire .layer[data-i="3"]{--k:3}
 .hire .g-ph::after{opacity:.16}
 .hire img{display:block}
 
@@ -389,8 +388,8 @@ svg{display:block;max-width:100%}
 .dg .acts{display:flex;align-items:center;gap:7px;margin:12px 16px 0}
 .dg .g-btn{background:#26332B;color:#F6F1E7;box-shadow:0 8px 14px -8px rgba(38,51,43,.7)}
 .dg .g-ic{width:27px;height:27px;border-color:#B9B29E;color:#26332B}
-.dg .hero-img{height:128px;margin:14px 12px 0;border-radius:22px;background:radial-gradient(60% 80% at 22% 30%,#EBD6AE,transparent 70%),radial-gradient(70% 90% at 84% 72%,#9DB59A,transparent 72%),linear-gradient(135deg,#DDE6D4,#C9B58B)}
-.dg .hero-img svg{position:absolute;right:-18px;top:-10px;width:130px;height:130px;color:#F6F1E7;opacity:.4}
+.dg .hero-img{height:128px;margin:14px 12px 0;border-radius:22px;background:#C9B58B}
+.dg .hero-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .dg .chip{position:absolute;left:10px;bottom:10px;z-index:1;display:flex;align-items:center;gap:7px;background:rgba(246,241,231,.94);border-radius:14px;padding:7px 10px;box-shadow:0 8px 16px -8px rgba(38,51,43,.5);font:600 7.5px/1.25 system-ui,sans-serif}
 .dg .chip i{width:8px;height:8px;border-radius:50%;background:#5E9A6B;box-shadow:0 0 0 3px rgba(94,154,107,.25)}
 .dg .chip small{display:block;font:500 6.5px/1.2 system-ui,sans-serif;color:#6B776E}
@@ -399,7 +398,7 @@ svg{display:block;max-width:100%}
 .dg .svc div:last-child{border-bottom:1px solid #DDD5C2}
 .dg .svc b{font:400 12px/1 "Iowan Old Style",Georgia,serif;flex:1}
 .dg .svc em{font:500 8px/1 system-ui,sans-serif;font-style:normal;color:#6B776E}
-.dg .svc i{width:20px;height:20px;border-radius:50%;background:#DCE5D3;display:grid;place-items:center;font:700 8px/1 system-ui,sans-serif;color:#26332B;font-style:normal}
+.dg .svc img{width:24px;height:24px;border-radius:50%;object-fit:cover;box-shadow:0 3px 6px -3px rgba(38,51,43,.6)}
 .dg .foot{margin:auto 0 0;display:flex;align-items:center;gap:6px;padding:10px 16px 16px;font:500 7.5px/1 system-ui,sans-serif;color:#6B776E}
 .dg .foot::before{content:"";width:6px;height:6px;border-radius:50%;background:#5E9A6B}
 
@@ -548,8 +547,9 @@ svg{display:block;max-width:100%}
 .stops span{display:block;font:600 .9rem/1.2 var(--serif);color:var(--forest-2)}
 .stops .on b{color:var(--clay)}
 .panel{padding:22px 0;border-top:1px solid var(--rule)}
-.js .panel{display:none;padding:4px 0 0;border-top:0}
-.js .panel.on{display:block}
+.js .panels{display:grid}
+.js .panel{display:block;grid-area:1/1;visibility:hidden;padding:4px 0 0;border-top:0}
+.js .panel.on{visibility:visible}
 .panel h3{font-size:1.9rem}
 .panel h3 small{font:600 1rem/1 var(--sans);color:var(--forest-2);margin-left:8px}
 .panel .tag{display:inline-block;margin-left:10px;vertical-align:middle;background:var(--orange);color:var(--ink);font:600 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:6px 10px;border-radius:999px}
@@ -558,6 +558,20 @@ svg{display:block;max-width:100%}
 .panel li::before{content:"";position:absolute;left:2px;top:.85em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
 .panel .no{margin-top:12px;font-size:1rem;color:var(--forest-2)}
 .panel .no b{color:var(--forest);font-weight:600}
+.pin.on .pin-in{position:sticky;top:96px}
+.pin.on .pricer-ctl{position:static}
+.phone-stage{position:relative}
+.arrow{display:none;position:absolute;top:50%;z-index:5;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:2px solid var(--forest-2);background:var(--pale);color:var(--forest);cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:0 10px 20px -10px rgba(11,16,25,.5);transition:background-color .2s,color .2s,opacity .2s}
+.js .arrow{display:flex}
+.arrow svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.arrow.prev{left:-60px}.arrow.next{right:-60px}
+.arrow:hover:not(:disabled){background:var(--forest);color:var(--pale)}
+.arrow:disabled{opacity:.3;cursor:default}
+.continue{display:none;position:fixed;left:50%;bottom:22px;z-index:60;transform:translate(-50%,16px);align-items:center;gap:8px;min-height:50px;padding:12px 26px;border-radius:999px;border:2px solid var(--pale);background:var(--forest);color:var(--pale);font:700 1rem/1 var(--sans);cursor:pointer;box-shadow:0 18px 30px -14px rgba(11,16,25,.7);opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility .25s}
+.js .continue{display:inline-flex}
+.continue.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.continue svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.continue:hover{background:var(--orange);color:var(--ink);border-color:var(--orange)}
 .pricer-phone{display:none;justify-self:center;width:100%;max-width:272px}
 .js .pricer-phone{display:block}
 
@@ -582,6 +596,7 @@ svg{display:block;max-width:100%}
 .care .fee{font:600 1.9rem/1.1 var(--serif);margin-bottom:12px}
 .care li{padding:6px 0 6px 26px;position:relative}
 .care li::before{content:"";position:absolute;left:2px;top:.9em;width:12px;height:7px;border-left:3px solid var(--tint);border-bottom:3px solid var(--tint);transform:rotate(-45deg)}
+.flex-note{display:inline-block;margin-top:16px!important;background:var(--pale-2);border:1px solid var(--rule);border-left:4px solid var(--orange);border-radius:14px;padding:12px 16px;font-size:1rem!important;color:var(--forest)!important}
 .pricing-note{margin-top:28px;font-size:.98rem;color:var(--forest-2)}
 .pay{margin-top:48px;background:var(--pale-2);border-radius:26px;padding:28px 30px}
 .pay h3{font-size:1.5rem}
@@ -612,7 +627,6 @@ footer nav a{margin-left:20px}
 @media (prefers-reduced-motion:no-preference){
   .btn,.menu-btn{transition:transform .25s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
   .phone{transition:transform .35s ease}
-  .hire .layer{transition:transform .6s cubic-bezier(.22,.8,.2,1)}
   .btn:focus-visible,.menu-btn:focus-visible{transform:scale(1.05)}
 }
 @media (prefers-reduced-motion:no-preference) and (hover:hover){
@@ -642,17 +656,27 @@ footer nav a{margin-left:20px}
   .phones{grid-template-columns:1fr;gap:44px}
   .steps{grid-template-columns:1fr}
   .steps{gap:22px}
-  .pricer{grid-template-columns:1fr;gap:18px}
+  .pricer{grid-template-columns:150px 1fr;gap:12px 18px;align-items:start}
+  .pricer-ctl{grid-column:1/-1}
+  .panel h3{font-size:1.3rem}
+  .panel h3 small{display:block;margin:4px 0 0}
+  .panel .tag{display:inline-block;margin:6px 0 0}
+  .panel li{padding:3px 0 3px 22px;font-size:.95rem}
+  .panel .no{font-size:.9rem}
   .pricer>div:first-child{display:contents}
   .pricer-ctl{order:1;position:sticky;top:84px;z-index:20;background:var(--pale);padding:10px 0 4px;margin:0 -2px}
   .pricer-ctl .pricer-label{margin-bottom:8px}
   .pricer-ctl .slide{margin-bottom:0}
-  .pricer-phone{order:2;max-width:180px}
+  .pricer-phone{order:2;max-width:150px}
+  .phone-stage{width:272px;transform:scale(.55);transform-origin:0 0;margin-bottom:-242px}
+  .arrow{width:60px;height:60px;margin-top:-30px}
+  .arrow svg{width:30px;height:30px}
+  .arrow.prev{left:-10px}.arrow.next{right:-10px}
   .pricer-phone .kind{margin-top:6px}
   .sitemap{margin-top:10px}
   .sm-set i{width:11px;height:14px;gap:3px}
   .sm-set{gap:3px}
-  .panel{order:3}
+  .panels{order:3}
   .extras{grid-template-columns:1fr}
   .menu-btn{display:inline-flex;align-items:center;min-height:44px;padding:10px 18px;border:2px solid var(--forest-2);background:transparent;color:var(--forest);font:600 1rem var(--sans);cursor:pointer;border-radius:999px}
   .nav{display:none;position:absolute;left:0;right:0;top:calc(100% + 10px);background:var(--pale);border:1px solid var(--rule);border-radius:28px;box-shadow:0 22px 44px -26px rgba(7,57,17,.55);flex-direction:column;align-items:stretch;padding:8px 24px 22px}
@@ -706,14 +730,14 @@ footer nav a{margin-left:20px}
     <div>
       <p class="kicker"><span>Witney, Oxfordshire</span></p>
       <h1 id="hero-h">A website that <span class="hl">works as hard</span> as you do.</h1>
-      <p class="lead">Plain code. Fixed prices. Yours to keep.</p>
+      <p class="lead">Plain code. Flexible prices. Yours to keep.</p>
       <div class="actions">
         <a class="btn btn-clay btn-lg" href="#contact">Get a quote</a>
         <a class="btn btn-lg" href="#looks">See styles</a>
       </div>
       <ul class="ticks">
         <li>Designed around your business</li>
-        <li>Fixed prices, from &pound;395</li>
+        <li>Flexible prices, from &pound;395</li>
         <li>Mobile-first and accessible</li>
       </ul>
       <p class="fine">Not VAT registered.</p>
@@ -871,8 +895,10 @@ footer nav a{margin-left:20px}
       <span class="num">03</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Every site gets the same care and design. The price follows the size.</p>
+      <p class="flex-note"><b>Prices can be flexible.</b> Every project is different, so these are starting points. Tell me what you need.</p>
     </div>
 
+    <div class="pin" id="pin"><div class="pin-in">
     <div class="pricer">
       <div>
         <div class="pricer-ctl">
@@ -889,6 +915,7 @@ footer nav a{margin-left:20px}
         <p class="sr-only" aria-live="polite" id="plan-status"></p>
         </div>
 
+        <div class="panels">
         <article class="panel on" data-i="0">
           <h3>Starter <small>from &pound;395</small></h3>
           <ul><li>Up to 3 pages</li><li>Contact form and map</li><li>Mobile-first design</li></ul>
@@ -906,9 +933,13 @@ footer nav a{margin-left:20px}
           <ul><li>Everything in Content &amp; catalogue</li><li>Unlimited catalogue</li><li>Old pages moved and redirected</li><li>Custom quote and booking flows</li><li>Staff handover</li></ul>
           <p class="no"><b>Scope</b> is agreed in writing first.</p>
         </article>
+        </div>
       </div>
 
       <div class="pricer-phone">
+        <div class="phone-stage">
+        <button type="button" class="arrow prev" id="plan-prev" aria-label="Previous example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button type="button" class="arrow next" id="plan-next" aria-label="Next example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         <div class="phone"><div class="screen hire" aria-hidden="true">
           <div class="layer dg on" data-i="0">
             <div class="g-nav"><span class="g-logo"><svg style="color:#9A7536" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.2" cy="9.5" rx="2.1" ry="2.8"/><ellipse cx="10.2" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="14.4" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="18.2" cy="9.5" rx="2.1" ry="2.8"/><path d="M12.2 11c-3 0-5.8 3.4-5.8 6 0 2 1.7 2.8 3.2 2.5 1.2-.3 1.8-.6 2.6-.6s1.4.3 2.6.6c1.5.3 3.2-.5 3.2-2.5 0-2.6-2.8-6-5.8-6z"/></svg>Wagmore</span><span class="g-ic"><i></i></span></div>
@@ -916,8 +947,8 @@ footer nav a{margin-left:20px}
             <h4>Calm, careful grooming.</h4>
             <span class="sub">Gentle care for dogs of every size and temperament.</span>
             <div class="acts"><span class="g-btn">Book a groom</span><span class="g-btn" style="background:none;border:1px solid #B9B29E;color:#26332B;box-shadow:none">Call</span></div>
-            <div class="hero-img g-ph"><svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.2" cy="9.5" rx="2.1" ry="2.8"/><ellipse cx="10.2" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="14.4" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="18.2" cy="9.5" rx="2.1" ry="2.8"/><path d="M12.2 11c-3 0-5.8 3.4-5.8 6 0 2 1.7 2.8 3.2 2.5 1.2-.3 1.8-.6 2.6-.6s1.4.3 2.6.6c1.5.3 3.2-.5 3.2-2.5 0-2.6-2.8-6-5.8-6z"/></svg><div class="chip"><i></i><span>Next appointment<small>Tuesday, 10:00</small></span></div></div>
-            <div class="svc"><div><i>1</i><b>Full groom</b><em>from &pound;45</em></div><div><i>2</i><b>Bath &amp; brush</b><em>from &pound;30</em></div><div><i>3</i><b>Puppy intro</b><em>from &pound;25</em></div></div>
+            <div class="hero-img g-ph"><img src="img/dg-hero.webp" width="460" height="256" alt="" loading="lazy" decoding="async"><div class="chip"><i></i><span>Next appointment<small>Tuesday, 10:00</small></span></div></div>
+            <div class="svc"><div><img src="img/dg-1.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><b>Full groom</b><em>from &pound;45</em></div><div><img src="img/dg-2.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><b>Bath &amp; brush</b><em>from &pound;30</em></div><div><img src="img/dg-3.webp" width="64" height="64" alt="" loading="lazy" decoding="async"><b>Puppy intro</b><em>from &pound;25</em></div></div>
             <div class="foot">Open Mon&ndash;Sat &middot; Fully insured</div>
           </div>
           <div class="layer sl" data-i="1">
@@ -960,6 +991,7 @@ footer nav a{margin-left:20px}
             <div class="foot"></div>
           </div>
         </div></div>
+        </div>
         <div class="sitemap" aria-hidden="true">
           <span class="sm-label">Size of site</span>
           <div class="sm-set on" data-i="0" data-n="3" data-f="0"></div>
@@ -971,6 +1003,7 @@ footer nav a{margin-left:20px}
         <p class="kind" id="plan-kind"></p>
       </div>
     </div>
+    </div></div>
 
     <div class="extras">
       <div class="basics">
@@ -1016,7 +1049,7 @@ footer nav a{margin-left:20px}
     </div>
     <ol class="steps">
       <li><h3><button type="button" aria-expanded="false" aria-controls="st1">Talk</button></h3><p>A free call.</p><p class="more" id="st1">Tell me what the site is for and who it is for.</p></li>
-      <li><h3><button type="button" aria-expanded="false" aria-controls="st2">Agree</button></h3><p>A fixed price in writing.</p><p class="more" id="st2">You get the pages and the price in writing. The first 30% starts the build.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st2">Agree</button></h3><p>A flexible price, agreed in writing.</p><p class="more" id="st2">You get the pages and the price in writing. The first 30% starts the build.</p></li>
       <li><h3><button type="button" aria-expanded="false" aria-controls="st3">Build</button></h3><p>A preview you can click through.</p><p class="more" id="st3">I build it by hand and send you a link to look around and ask for changes.</p></li>
       <li><h3><button type="button" aria-expanded="false" aria-controls="st4">Launch</button></h3><p>Tested and handed over.</p><p class="more" id="st4">I test it on phones and computers. A further 50% is due before the DNS change, which points your domain at the new site. The final 20% is due once the site is live.</p></li>
     </ol>
@@ -1047,34 +1080,85 @@ footer nav a{margin-left:20px}
   </div>
 </footer>
 
+<button type="button" class="continue" id="plan-continue">Continue <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button>
 <script>
 if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
 </script>
 <script>
 (function(){
   var root=document.querySelector('.pricer'); if(!root) return;
-  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status');
-  var panels=[].slice.call(root.querySelectorAll('.panel')), layers=[].slice.call(root.querySelectorAll('.layer')), stops=[].slice.call(root.querySelectorAll('.stops button'));
+  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status'), screen=root.querySelector('.screen.hire');
+  var panels=[].slice.call(root.querySelectorAll('.panel')), stops=[].slice.call(root.querySelectorAll('.stops button')), sets=[].slice.call(root.querySelectorAll('.sm-set'));
+  var prev=document.getElementById('plan-prev'), next=document.getElementById('plan-next'), cont=document.getElementById('plan-continue');
+  var pin=document.getElementById('pin'), pinIn=pin&&pin.querySelector('.pin-in');
   var names=['Starter, from £395','Business, from £1,500','Content and catalogue, from £3,000','Large builds, quoted per project'];
   var kinds=['A simple dog groomer’s site','A salon site with online booking','An event hire catalogue you edit yourself','A boutique hotel site'];
-  var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
-  var sets=[].slice.call(root.querySelectorAll('.sm-set'));
-  sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
   var sizes=['3 pages','Up to 8 pages','Catalogue of up to 75 items','Unlimited pages, quoted'];
-  function set(i){
-    i=Math.max(0,Math.min(3,i));
-    range.value=i; slide.style.setProperty('--v',i); range.setAttribute('aria-valuetext',names[i]);
+  var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
+  sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
+  var PT=96, v=0, idx=-1, dragging=false, pinned=false, anim=0, reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
+  function render(x){
+    v=Math.max(0,Math.min(3,x)); slide.style.setProperty('--v',v); screen.style.setProperty('--v',v);
+    if(!dragging) range.value=v;
+    prev.disabled=v<0.02; next.disabled=v>2.98;
+    var i=Math.round(v); if(i===idx) return; idx=i;
+    range.setAttribute('aria-valuetext',names[i]);
     panels.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
-    layers.forEach(function(el){var k=+el.getAttribute('data-i');el.classList.toggle('on',k===i);el.classList.toggle('before',k<i);});
     stops.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     sets.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     if(size) size.textContent=sizes[i];
     if(kind) kind.textContent='Example: '+kinds[i];
     if(live) live.textContent=names[i]+'. '+sizes[i]+'. Example: '+kinds[i];
   }
-  range.addEventListener('input',function(){set(+range.value);});
-  stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
-  set(0);
+  function tween(to){
+    cancelAnimationFrame(anim);
+    if(reduce.matches){render(to);return;}
+    var from=v,t0=performance.now(),d=420+Math.abs(to-from)*140;
+    (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);render(from+(to-from)*e);if(k<1)anim=requestAnimationFrame(f);})(t0);
+  }
+  function geom(){var top=pin.getBoundingClientRect().top+window.pageYOffset;return{top:top,travel:Math.max(1,pin.offsetHeight-pinIn.offsetHeight)};}
+  function yFor(x){var g=geom();return g.top-PT+g.travel*x/3;}
+  function onScroll(){
+    if(!pinned) return;
+    var g=geom(), p=(window.pageYOffset-(g.top-PT))/g.travel;
+    render(Math.max(0,Math.min(1,p))*3);
+    cont.classList.toggle('show',p>-0.12&&p<0.995);
+  }
+  function goTo(i){
+    i=Math.max(0,Math.min(3,i));
+    if(pinned) window.scrollTo({top:yFor(i),behavior:reduce.matches?'auto':'smooth'}); else tween(i);
+  }
+  function setup(){
+    if(!pin||!pinIn) return;
+    pin.style.height=''; pin.classList.remove('on');
+    var vh=window.innerHeight;
+    pinned=!reduce.matches && vh>=520 && pinIn.offsetHeight<=vh-PT-8;
+    if(pinned){pin.classList.add('on'); pin.style.height=(pinIn.offsetHeight+Math.round(vh*0.7)*3)+'px';}
+    cont.classList.remove('show');
+    onScroll();
+  }
+  range.addEventListener('pointerdown',function(){dragging=true;});
+  range.addEventListener('input',function(){
+    var x=+range.value;
+    if(pinned){window.scrollTo({top:yFor(x),behavior:'instant'});}
+    else cancelAnimationFrame(anim);
+    render(x);
+  });
+  range.addEventListener('change',function(){dragging=false;goTo(Math.round(+range.value));});
+  range.addEventListener('keydown',function(e){
+    var d={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1}[e.key];
+    if(d){e.preventDefault();goTo(Math.round(v)+d);}
+    else if(e.key==='Home'){e.preventDefault();goTo(0);}
+    else if(e.key==='End'){e.preventDefault();goTo(3);}
+  });
+  stops.forEach(function(b){b.addEventListener('click',function(){goTo(+b.getAttribute('data-i'));range.focus({preventScroll:true});});});
+  prev.addEventListener('click',function(){goTo(Math.round(v)-1);});
+  next.addEventListener('click',function(){goTo(Math.round(v)+1);});
+  cont.addEventListener('click',function(){var t=document.querySelector('.extras');if(t)t.scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'start'});});
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',setup);
+  if(reduce.addEventListener) reduce.addEventListener('change',setup);
+  render(0); setup();
 })();
 (function(){
   var cn=navigator.connection||{}, wide=window.matchMedia&&window.matchMedia('(min-width:621px)').matches;
