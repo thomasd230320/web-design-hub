@@ -626,7 +626,16 @@ svg{display:block;max-width:100%}
 .gate-box{display:inline-block;margin-top:20px;background:var(--pale);color:var(--ink);border-radius:18px;padding:16px 18px}
 .gate-box p{margin:0 0 10px;font-size:.95rem;color:var(--forest)}
 .gate-box .gate-err{margin:10px 0 0;color:#8A2D1F;font-weight:600}
-#gate-out .actions{margin-top:0}
+.cards{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:12px;max-width:860px}
+.ccard{display:flex;flex-direction:column;gap:8px;padding:18px 22px;border-radius:20px;border:1.5px solid rgba(213,224,235,.3);color:var(--pale);text-decoration:none;min-width:0;transition:background-color .2s ease,border-color .2s ease,transform .2s ease}
+.ccard span{font:700 .75rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
+.ccard b{font:650 1.2rem/1.25 var(--sans);letter-spacing:-.01em;overflow-wrap:anywhere}
+.ccard:hover{background:rgba(213,224,235,.1);border-color:var(--pale)}
+.ccard.primary{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.ccard.primary span{opacity:.8}
+.ccard.primary:hover{background:var(--orange-hover);border-color:var(--orange-hover)}
+.where{margin:18px 0 0;font-size:1rem;opacity:.8}
+@media (max-width:760px){.cards{grid-template-columns:1fr}.ccard{padding:16px 18px}.ccard b{font-size:1.02rem}}
 .contact .lines{margin-top:28px;display:grid;gap:6px;font-size:1.2rem}
 .contact .lines a{font-weight:600}
 
@@ -1170,8 +1179,11 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   function fmt(n){return n.slice(0,5)+' '+n.slice(5);}
   function show(){
     var e=atob(D.e), a=atob(D.a), b=atob(D.b), ta='+44'+a.slice(1), tb='+44'+b.slice(1);
-    out.innerHTML='<div class="actions"><a class="btn btn-clay" href="mailto:'+e+'?subject=Website%20enquiry">Email me</a><a class="btn" href="tel:'+ta+'">Call the designer</a><a class="btn" href="tel:'+tb+'">Call the developer</a></div>'+
-      '<div class="lines"><a href="mailto:'+e+'">'+e+'</a><span>Designer: <a href="tel:'+ta+'">'+fmt(a)+'</a></span><span>Developer: <a href="tel:'+tb+'">'+fmt(b)+'</a></span><span>Witney, Oxfordshire. Clients across the UK.</span></div>';
+    out.innerHTML='<div class="cards">'+
+      '<a class="ccard primary" href="mailto:'+e+'?subject=Website%20enquiry"><span>Email</span><b>'+e+'</b></a>'+
+      '<a class="ccard" href="tel:'+ta+'"><span>Designer</span><b>'+fmt(a)+'</b></a>'+
+      '<a class="ccard" href="tel:'+tb+'"><span>Developer</span><b>'+fmt(b)+'</b></a></div>'+
+      '<p class="where">Witney, Oxfordshire. Clients across the UK.</p>';
     out.hidden=false; box.hidden=true; btn.hidden=true; btn.setAttribute('aria-expanded','true');
   }
   window.wdhCaptcha=function(){
