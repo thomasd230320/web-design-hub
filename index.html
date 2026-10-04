@@ -505,9 +505,11 @@ svg{display:block;max-width:100%}
 /* Site-size graphic under the slider phone */
 .sitemap{margin-top:16px}
 .sm-label{display:block;font:600 .75rem/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--forest-2);text-align:center;margin-bottom:8px}
-.sm-set{display:none;flex-wrap:wrap;justify-content:center;gap:5px}
-.sm-set.on{display:flex}
-.sm-set i{width:15px;height:19px;border-radius:4px;background:var(--forest-2)}
+.sitemap{display:grid}
+.sm-label{grid-row:1;grid-column:1}
+.sm-set{display:flex;grid-row:2;grid-column:1;visibility:hidden;flex-wrap:wrap;justify-content:center;align-content:flex-start;gap:3px}
+.sm-set.on{visibility:visible}
+.sm-set i{width:10px;height:13px;border-radius:3px;background:var(--forest-2)}
 .sm-set i.f{opacity:.3}
 .sm-cap{margin-top:8px;text-align:center;font:600 1rem/1.3 var(--serif);color:var(--clay)}
 
@@ -561,6 +563,7 @@ svg{display:block;max-width:100%}
 .pin.on{height:310vh;height:310svh}
 .pin.on .pin-in{position:sticky;top:0;height:100vh;height:100svh;padding-top:96px;box-sizing:border-box;display:flex;align-items:center}
 .pin.on .pin-in>.pricer{width:100%}
+@media (min-width:981px){.pin.on .phone-stage{transform:scale(var(--ps,1));transform-origin:50% 0;margin-bottom:calc((var(--ps,1) - 1) * 538px)}}
 @supports (animation-timeline: view()){
   .pin.on{view-timeline-name:--pin;view-timeline-axis:block;view-timeline-inset:0}
   .pin.on .hire .layer{animation-timing-function:linear;animation-fill-mode:both;animation-timeline:--pin;animation-range:contain 0% contain 100%}
@@ -1147,11 +1150,24 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
     i=Math.max(0,Math.min(3,i));
     if(pinned) window.scrollTo({top:yFor(i),behavior:reduce.matches?'auto':'smooth'}); else tween(i);
   }
+  function reserve(){
+    [[size,sizes],[kind,kinds.map(function(k){return 'Example: '+k;})]].forEach(function(p){
+      var el=p[0]; if(!el) return;
+      el.style.minHeight=''; var keep=el.textContent, h=0;
+      p[1].forEach(function(t){el.textContent=t; h=Math.max(h,el.offsetHeight);});
+      el.textContent=keep; el.style.minHeight=h+'px';
+    });
+  }
   function setup(){
     if(!pin||!pinIn) return;
+    reserve();
     pin.classList.remove('on');
     var vh=window.innerHeight;
-    pinned=!reduce.matches && vh>=520 && root.offsetHeight<=vh-PT-16;
+    var avail=vh-PT-16, h=root.offsetHeight, ps=1;
+    root.style.setProperty('--ps',1);
+    if(window.innerWidth>980 && h>avail){var st=root.querySelector('.phone-stage').offsetHeight; ps=(avail-(h-st))/st; h=avail; if(ps<0.55){ps=1;h=Infinity;} else ps=Math.min(1,ps);}
+    root.style.setProperty('--ps',ps);
+    pinned=!reduce.matches && vh>=520 && h<=avail;
     if(pinned) pin.classList.add('on');
     layers.forEach(function(el){el.style.transform='';});
     cont.classList.remove('show');
