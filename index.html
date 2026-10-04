@@ -4,19 +4,17 @@
   One file. No framework, no CSS library, no build step.
 
   Palette (all text pairings checked against WCAG 2.2 AA)
-    pale   #F4EBDD  primary warm cream: page background, and the "light" text on dark bands
-    pale-2 #E8DDCB  panels
-    rule   #C9BBA0  hairlines
-    forest #073911  text, dark bands
-    forest-2 #22502C secondary text
-    clay   #3A5560  deep dusty blue for text and lines; dusty blue #6F8790 for button fills
+    primary   #24324A  deep navy: text, dark bands
+    secondary #9D7568  dusty terracotta: button fills and accents (near-black text on it)
+    background #AEB8B3 soft sage grey: page background, and the "light" text on dark bands
+    supporting: #C2CBC6 panels, #8E9A94 hairlines, #2E3D58 secondary text, #5E3F35 deep terracotta for text and lines
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#F4EBDD" />
+<meta name="theme-color" content="#AEB8B3" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Hand-built websites</title>
 <script>document.documentElement.className+=" js"</script>
@@ -24,16 +22,16 @@
 
 <style>
 :root{
-  --pale:#F4EBDD;
-  --pale-2:#E8DDCB;
-  --rule:#C9BBA0;
-  --forest:#073911;
-  --forest-2:#22502C;
-  --clay:#3A5560;
-  --orange:#6F8790;
-  --orange-hover:#86A0A8;
-  --tint:#A9C0C8;
-  --ink:#031B09;
+  --pale:#AEB8B3;
+  --pale-2:#C2CBC6;
+  --rule:#8E9A94;
+  --forest:#24324A;
+  --forest-2:#2E3D58;
+  --clay:#5E3F35;
+  --orange:#9D7568;
+  --orange-hover:#B08A7D;
+  --tint:#D8C5BD;
+  --ink:#0B1019;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --wrap:1120px;
@@ -74,7 +72,7 @@ svg{display:block;max-width:100%}
 .draft{background:var(--forest);color:var(--pale);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center}
 
 /* Header */
-.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(244,235,221,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(174,184,179,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
@@ -113,9 +111,9 @@ svg{display:block;max-width:100%}
 .bw-txt b.t3{height:5px;width:88%;background:var(--forest-2);opacity:.45;margin-top:8px;margin-bottom:0}
 .bw-txt b.t3.short{width:60%;margin-top:5px}
 .bw-txt em{display:block;margin-top:12px;width:44%;height:16px;border-radius:99px;background:var(--orange);border:1.5px solid var(--clay)}
-.bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6FA27C,#22502C)}
+.bw-img{position:relative;height:0;padding-bottom:88%;border-radius:14px;background:linear-gradient(145deg,#6F85A8,#24324A)}
 .bw-img::before{content:"";position:absolute;right:16%;top:14%;width:26%;aspect-ratio:1;border-radius:50%;background:var(--tint);box-shadow:0 0 22px 8px rgba(169,192,200,.55)}
-.bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#073911;opacity:.55}
+.bw-img::after{content:"";position:absolute;left:-6%;right:-6%;bottom:-22%;height:55%;border-radius:50%;background:#24324A;opacity:.55}
 .bw-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:4%;padding:1% 5% 0}
 .bw-cards i{display:block;height:44px;border-radius:10px;background:linear-gradient(var(--forest-2) 0 34%,var(--pale-2) 0)}
 .bw-cards i:nth-child(2){background:linear-gradient(var(--clay) 0 34%,var(--pale-2) 0)}
@@ -224,14 +222,14 @@ svg{display:block;max-width:100%}
 .cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
 .cmp-row .nm-track{height:22px}
 .cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
-.cmp-row .new .nm-track{background:rgba(244,235,221,.2)}
+.cmp-row .new .nm-track{background:rgba(174,184,179,.2)}
 @media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
-.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.34),transparent)}
+.glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(157,117,104,.34),transparent)}
 .glow::after{width:820px;height:560px;left:-220px;bottom:0;background:radial-gradient(closest-side,rgba(232,221,203,.95),transparent)}
 .hero::before{width:620px;height:460px;right:-100px;top:20px;background:radial-gradient(closest-side,rgba(232,221,203,.95),transparent)}
-.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(111,135,144,.30),transparent)}
+.hero::after{width:460px;height:340px;right:-70px;top:0;background:radial-gradient(closest-side,rgba(157,117,104,.30),transparent)}
 
 /* Phones */
 .phones{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;align-items:start;justify-items:center}
@@ -646,7 +644,7 @@ footer nav a{margin-left:20px}
       <div class="reel-stage" role="img" aria-label="A looping animation. A pencil sketch of a website is drawn, then fills with colour to become a finished design on a laptop and a phone.">
         <div class="rl s1">
           <svg class="sk" viewBox="12 10 480 446" role="img" aria-label="A pencil sketch of a website layout: a header, a headline, an image box and a button.">
-        <g fill="none" stroke="#073911" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <g fill="none" stroke="#24324A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M26 22 C120 19 250 24 352 21 L353 440 C250 443 130 439 27 442 Z"/>
           <path d="M27 70 C130 72 250 69 352 71"/>
           <path d="M42 46 l56 0"/>
@@ -657,15 +655,15 @@ footer nav a{margin-left:20px}
           <path d="M44 172 C120 170 190 174 262 171" stroke-width="2"/>
           <path d="M44 200 C150 197 250 202 336 199 L337 300 C240 303 140 298 45 301 Z"/>
           <path d="M45 201 L336 300 M336 199 L46 300" stroke-width="1.4" opacity=".55"/>
-          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#3A5560" stroke-width="2.6"/>
-          <path d="M62 345 l104 0" stroke="#3A5560" stroke-width="2.6"/>
+          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#5E3F35" stroke-width="2.6"/>
+          <path d="M62 345 l104 0" stroke="#5E3F35" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
-        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#22502C">
+        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#2E3D58">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
-          <text x="200" y="352" font-size="18" fill="#3A5560" font-weight="bold">one clear step</text>
+          <text x="200" y="352" font-size="18" fill="#5E3F35" font-weight="bold">one clear step</text>
         </g>
       </svg>
         </div>
