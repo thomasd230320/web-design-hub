@@ -6,15 +6,15 @@
   Palette (all text pairings checked against WCAG 2.2 AA)
     primary   #2B3B57  deep navy: text, dark bands
     secondary #9D7568  dusty terracotta: button fills and accents (near-black text on it)
-    background #E4EAEE soft sage grey: page background, and the "light" text on dark bands
-    supporting: #F0F3F5 panels, #BAC4CB hairlines, #364868 secondary text, #5E3F35 deep terracotta for text and lines
+    background #EEF4FA soft sage grey: page background, and the "light" text on dark bands
+    supporting: #E0E9F2 panels, #C0CCD9 hairlines, #364868 secondary text, #5E3F35 deep terracotta for text and lines
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#E4EAEE" />
+<meta name="theme-color" content="#EEF4FA" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Hand-built websites</title>
 <script>document.documentElement.className+=" js"</script>
@@ -22,9 +22,9 @@
 
 <style>
 :root{
-  --pale:#E4EAEE;
-  --pale-2:#F0F3F5;
-  --rule:#BAC4CB;
+  --pale:#EEF4FA;
+  --pale-2:#E0E9F2;
+  --rule:#C0CCD9;
   --forest:#2B3B57;
   --forest-2:#364868;
   --clay:#5E3F35;
@@ -72,7 +72,7 @@ svg{display:block;max-width:100%}
 .draft{background:var(--forest);color:var(--pale);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center}
 
 /* Header */
-.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(228,234,238,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(238,244,250,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
@@ -222,7 +222,7 @@ svg{display:block;max-width:100%}
 .cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
 .cmp-row .nm-track{height:22px}
 .cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
-.cmp-row .new .nm-track{background:rgba(228,234,238,.2)}
+.cmp-row .new .nm-track{background:rgba(238,244,250,.2)}
 @media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
