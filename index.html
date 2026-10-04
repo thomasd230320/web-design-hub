@@ -16,9 +16,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#D5E0EB" />
 <meta name="robots" content="noindex, nofollow" />
-<title>WebDesignHub | Hand-built websites</title>
+<title>WebDesignHub | Websites for small businesses</title>
 <script>document.documentElement.className+=" js"</script>
-<meta name="description" content="Websites designed and coded by hand for small businesses. Plain prices, plain files." />
+<meta name="description" content="Websites for small businesses. Fixed prices, plain files, yours to keep." />
 
 <style>
 :root{
@@ -87,8 +87,8 @@ svg{display:block;max-width:100%}
 
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
 .kicker{font:600 .85rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
-.hero h1{font-size:clamp(3rem,6.6vw,5.6rem);max-width:10ch;line-height:1.04}
-.hero .hl{background:linear-gradient(transparent 68%,rgba(157,117,104,.42) 68% 88%,transparent 88%);padding:0 .06em}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.7rem);max-width:13ch;line-height:1.06}
+.hero .hl{-webkit-box-decoration-break:clone;box-decoration-break:clone;background:linear-gradient(transparent 68%,rgba(157,117,104,.42) 68% 88%,transparent 88%);padding:0 .06em}
 .kicker span{display:inline-block;background:var(--pale-2);border:1px solid var(--rule);border-radius:99px;padding:8px 14px}
 .btn-lg{min-height:56px;padding:14px 34px;font-size:1.08rem}
 .ticks{margin-top:26px;display:grid;gap:8px}
@@ -266,7 +266,10 @@ svg{display:block;max-width:100%}
 .e .bar{width:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;padding:34px 18px 0;font:600 8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#6B6258}
 .e .bar span:first-child{text-align:left}.e .bar span:last-child{text-align:right}
 .e .lg2{font:italic 400 16px/1 "Iowan Old Style",Palatino,Georgia,serif;letter-spacing:0;text-transform:none;color:#2A2622}
-.e .arch{width:150px;height:190px;margin:24px auto 0;border-radius:75px 75px 4px 4px;background:radial-gradient(circle at 50% 36%,#F6E3D3 0 20%,transparent 21%),linear-gradient(#E9CDBC,#CBA58D)}
+.e .arch{width:150px;height:166px;margin:20px auto 0;border-radius:75px 75px 4px 4px;overflow:hidden;background:#E9CDBC;box-shadow:0 18px 26px -18px rgba(42,38,34,.55)}
+.e .arch img{display:block;width:100%;height:100%;object-fit:cover}
+.e .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;width:calc(100% - 36px);margin-top:16px}
+.e .strip img{display:block;width:100%;height:46px;object-fit:cover;border-radius:6px}
 .e .eb{margin-top:20px;font:600 8px/1 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8A6F45}
 .e .hd{display:block;margin-top:10px;padding:0 24px;font:400 25px/1.1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;letter-spacing:-.01em}
 .e .lnk{margin-top:16px;font:600 8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #B08D57;padding-bottom:5px}
@@ -357,7 +360,9 @@ svg{display:block;max-width:100%}
 /* Pricing slider phone (.hire): four completely different websites, one per price */
 .hire{background:#EDEAE2}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
-.hire .layer.on{opacity:1;visibility:visible}
+.hire .layer{transform:translateX(100%);opacity:1;visibility:visible;will-change:transform}
+.hire .layer.before{transform:translateX(-100%)}
+.hire .layer.on{transform:none}
 .hire .g-ph::after{opacity:.16}
 .hire img{display:block}
 
@@ -608,7 +613,7 @@ footer nav a{margin-left:20px}
 @media (prefers-reduced-motion:no-preference){
   .btn,.menu-btn{transition:transform .25s ease,background-color .2s ease,color .2s ease,border-color .2s ease}
   .phone{transition:transform .35s ease}
-  .hire .layer{transition:opacity .35s ease,visibility .35s}
+  .hire .layer{transition:transform .6s cubic-bezier(.22,.8,.2,1)}
   .btn:focus-visible,.menu-btn:focus-visible{transform:scale(1.05)}
 }
 @media (prefers-reduced-motion:no-preference) and (hover:hover){
@@ -618,6 +623,8 @@ footer nav a{margin-left:20px}
   .slide input:hover::-moz-range-thumb{transform:scale(1.1)}
   .reel:hover .reel-stage{transform:scale(1.03)}
 }
+
+#compare,#process{content-visibility:auto;contain-intrinsic-size:auto 900px}
 
 /* Responsive */
 @media (max-width:980px){
@@ -658,7 +665,14 @@ footer nav a{margin-left:20px}
   body{font-size:1.0625rem}
   .wrap{padding:0 20px}
   .block.dark .wrap{padding:0 22px}
-  .hero .actions .btn,.contact .actions .btn{width:100%}
+  .contact .actions .btn{width:100%}
+  .hero{padding:26px 0 44px}
+  .hero .wrap{gap:30px}
+  .kicker{margin-bottom:14px}
+  .hero .lead{font-size:1.08rem;margin-top:14px;max-width:none}
+  .hero .actions{margin-top:20px;flex-wrap:nowrap;gap:10px}
+  .hero .actions .btn{flex:1;padding:12px 8px;min-height:52px}
+  .ticks{margin-top:18px;gap:6px}
   .hp{display:none!important}
 }
 @media (forced-colors:active){
@@ -692,14 +706,14 @@ footer nav a{margin-left:20px}
   <div class="wrap">
     <div>
       <p class="kicker"><span>Witney, Oxfordshire</span></p>
-      <h1 id="hero-h">Websites built <span class="hl">by hand.</span></h1>
+      <h1 id="hero-h">A website that <span class="hl">works as hard</span> as you do.</h1>
       <p class="lead">Plain code. Fixed prices. Yours to keep.</p>
       <div class="actions">
         <a class="btn btn-clay btn-lg" href="#contact">Get a quote</a>
         <a class="btn btn-lg" href="#looks">See styles</a>
       </div>
       <ul class="ticks">
-        <li>Designed and coded by hand</li>
+        <li>Designed around your business</li>
         <li>Fixed prices, from &pound;395</li>
         <li>Mobile-first and accessible</li>
       </ul>
@@ -767,24 +781,25 @@ footer nav a{margin-left:20px}
     <div class="phones">
       <figure class="look">
         <div class="phone"><div class="screen e" aria-hidden="true">
-          <div class="bar"><span>Menu</span><span class="lg2">Linden &amp; Co</span><span>Enquire</span></div>
-          <div class="arch"></div>
-          <span class="eb">Wedding photography</span>
-          <b class="hd">Quiet, considered moments.</b>
-          <span class="lnk">View the portfolio</span>
-          <span class="ft">By appointment</span>
+          <div class="bar"><span>Menu</span><span class="lg2">Wren &amp; Willow</span><span>Enquire</span></div>
+          <div class="arch"><img src="img/se-hero.webp" width="300" height="332" alt="" loading="lazy" decoding="async"></div>
+          <span class="eb">Florist &middot; Weddings &amp; events</span>
+          <b class="hd">Flowers, picked with care.</b>
+          <span class="lnk">View the gallery</span>
+          <div class="strip"><img src="img/se-1.webp" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/se-2.webp" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/se-3.webp" width="200" height="150" alt="" loading="lazy" decoding="async"></div>
+          <span class="ft">Made to order</span>
         </div></div>
-        <figcaption><h3>Simple</h3><p>Calm and elegant. Good for photographers and studios.</p></figcaption>
+        <figcaption><h3>Simple</h3><p>Calm and elegant. Good for florists, photographers and studios.</p></figcaption>
       </figure>
 
       <figure class="look">
         <div class="phone"><div class="screen m" aria-hidden="true">
-          <div class="bar"><span class="brand">Oakhaven</span><span class="burger"></span></div>
-          <div class="hr"><img src="img/oak-hero.jpg" width="560" height="520" alt="" loading="lazy" decoding="async"><div class="cp"><span class="eb">Interior design studio</span><b>Rooms that feel like home.</b><div class="btns"><span class="b1">Free consultation</span><span class="b2">Our work</span></div></div></div>
+          <div class="bar"><span class="brand">Hollin &amp; Reed</span><span class="burger"></span></div>
+          <div class="hr"><img src="img/oak-hero.webp" width="560" height="520" alt="" loading="lazy" decoding="async"><div class="cp"><span class="eb">Interior design studio</span><b>Rooms that feel like home.</b><div class="btns"><span class="b1">Free consultation</span><span class="b2">Our work</span></div></div></div>
           <div class="sec"><span>Selected projects</span><span>View all</span></div>
-          <div class="gal"><div><img src="img/oak-1.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-2.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-3.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div></div>
+          <div class="gal"><div><img src="img/oak-1.webp" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-2.webp" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-3.webp" width="280" height="280" alt="" loading="lazy" decoding="async"></div></div>
           <div class="svc"><div><span>Full interior design</span><small>From concept</small></div><div><span>Kitchens &amp; bathrooms</span><small>Fitted</small></div><div><span>Styling &amp; furniture</span><small>Sourced</small></div></div>
-          <div class="quote">&ldquo;They understood the house straight away.&rdquo;<small>Client &middot; Cotswolds</small></div>
+          <div class="quote">&ldquo;They understood the house straight away.&rdquo;<small>Client &middot; Private home</small></div>
           <div class="cta"><span>Start with a free chat</span><span>Book now</span></div>
         </div></div>
         <figcaption><h3>Mid-range</h3><p>Portfolio, services and enquiries. Good for studios, trades and agencies.</p></figcaption>
@@ -792,8 +807,8 @@ footer nav a{margin-left:20px}
 
       <figure class="look">
         <div class="phone"><div class="screen x" aria-hidden="true">
-          <div class="nv"><span class="mb"></span><span class="wm">NORTHBOUND</span><span class="ri"><i></i><i class="bg2"></i></span></div>
-          <div class="st2"><img src="img/nb-hero.jpg" width="560" height="460" alt="" loading="lazy" decoding="async">
+          <div class="nv"><span class="mb"></span><span class="wm">TARNFELL</span><span class="ri"><i></i><i class="bg2"></i></span></div>
+          <div class="st2"><img src="img/nb-hero.webp" width="560" height="460" alt="" loading="lazy" decoding="async">
             <div class="cp"><span class="ey">Guided expeditions</span><b>Go further than the map.</b><div class="bt"><span class="g1">Explore trips</span><span class="g2">Watch the film</span></div></div>
           </div>
           <div class="bk2"><span><small>Where</small>Anywhere</span><span><small>When</small>Any month</span><span><small>Who</small>2</span><span class="go">Search</span></div>
@@ -801,11 +816,11 @@ footer nav a{margin-left:20px}
           <div class="chips"><span class="on">All</span><span>Trekking</span><span>Cycling</span><span>Wildlife</span><span>Family</span></div>
           <div class="sc"><span>Featured trips</span><span class="ga">View all &rarr;</span></div>
           <div class="cr2">
-            <div class="cd"><div class="im"><img src="img/nb-1.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Desert roads</b></div><small>from <em>&pound;1,890</em></small></div><div class="cd"><div class="im"><img src="img/nb-2.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>New</u><b>Above the clouds</b></div><small>from <em>&pound;2,450</em></small></div><div class="cd"><div class="im"><img src="img/nb-3.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Few left</u><b>Mountain trek</b></div><small>from <em>&pound;1,650</em></small></div><div class="cd"><div class="im"><img src="img/nb-4.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Valley wild</b></div><small>from <em>&pound;2,100</em></small></div>
+            <div class="cd"><div class="im"><img src="img/nb-1.webp" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Desert roads</b></div><small>from <em>&pound;1,890</em></small></div><div class="cd"><div class="im"><img src="img/nb-2.webp" width="300" height="360" alt="" loading="lazy" decoding="async"><u>New</u><b>Above the clouds</b></div><small>from <em>&pound;2,450</em></small></div><div class="cd"><div class="im"><img src="img/nb-3.webp" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Few left</u><b>Mountain trek</b></div><small>from <em>&pound;1,650</em></small></div><div class="cd"><div class="im"><img src="img/nb-4.webp" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Valley wild</b></div><small>from <em>&pound;2,100</em></small></div>
           </div>
           <div class="ft3"><span>Small groups</span><span>Local guides</span><span>Flexible booking</span></div>
           <div class="rv"><b>&#9733;&#9733;&#9733;&#9733;&#9733; 4.9</b>&ldquo;Best week of our year. Every detail was thought of.&rdquo;</div>
-          <div class="nl"><img src="img/nb-band.jpg" width="560" height="200" alt="" loading="lazy" decoding="async"><div>Get trip ideas first<small>One email a month. No spam.</small><span>Join</span></div></div>
+          <div class="nl"><img src="img/nb-band.webp" width="560" height="200" alt="" loading="lazy" decoding="async"><div>Get trip ideas first<small>One email a month. No spam.</small><span>Join</span></div></div>
           <div class="sticky"><span>Not sure where to start?</span><i>Plan my trip</i></div>
           <span class="cc"></span>
         </div></div>
@@ -897,8 +912,8 @@ footer nav a{margin-left:20px}
       <div class="pricer-phone">
         <div class="phone"><div class="screen hire" aria-hidden="true">
           <div class="layer dg on" data-i="0">
-            <div class="g-nav"><span class="g-logo"><svg style="color:#9A7536" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.2" cy="9.5" rx="2.1" ry="2.8"/><ellipse cx="10.2" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="14.4" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="18.2" cy="9.5" rx="2.1" ry="2.8"/><path d="M12.2 11c-3 0-5.8 3.4-5.8 6 0 2 1.7 2.8 3.2 2.5 1.2-.3 1.8-.6 2.6-.6s1.4.3 2.6.6c1.5.3 3.2-.5 3.2-2.5 0-2.6-2.8-6-5.8-6z"/></svg>Bubble &amp; Bark</span><span class="g-ic"><i></i></span></div>
-            <span class="g-eb">Dog grooming &middot; Witney</span>
+            <div class="g-nav"><span class="g-logo"><svg style="color:#9A7536" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.2" cy="9.5" rx="2.1" ry="2.8"/><ellipse cx="10.2" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="14.4" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="18.2" cy="9.5" rx="2.1" ry="2.8"/><path d="M12.2 11c-3 0-5.8 3.4-5.8 6 0 2 1.7 2.8 3.2 2.5 1.2-.3 1.8-.6 2.6-.6s1.4.3 2.6.6c1.5.3 3.2-.5 3.2-2.5 0-2.6-2.8-6-5.8-6z"/></svg>Wagmore</span><span class="g-ic"><i></i></span></div>
+            <span class="g-eb">Dog grooming</span>
             <h4>Calm, careful grooming.</h4>
             <span class="sub">Gentle care for dogs of every size and temperament.</span>
             <div class="acts"><span class="g-btn">Book a groom</span><span class="g-btn" style="background:none;border:1px solid #B9B29E;color:#26332B;box-shadow:none">Call</span></div>
@@ -907,42 +922,42 @@ footer nav a{margin-left:20px}
             <div class="foot">Open Mon&ndash;Sat &middot; Fully insured</div>
           </div>
           <div class="layer sl" data-i="1">
-            <div class="g-nav"><span class="g-logo">Studio Nine</span><span class="g-ic"><i></i></span></div>
-            <div class="hero-img g-ph"><img src="img/sl-hero.jpg" width="520" height="340" alt="" loading="lazy" decoding="async"><span class="g-eb">Hair salon &middot; Witney</span><h4>Hair, done right.</h4><span class="g-btn">Book now</span></div>
+            <div class="g-nav"><span class="g-logo">Maison Orla</span><span class="g-ic"><i></i></span></div>
+            <div class="hero-img g-ph"><img src="img/sl-hero.webp" width="520" height="340" alt="" loading="lazy" decoding="async"><span class="g-eb">Hair salon</span><h4>Hair, done right.</h4><span class="g-btn">Book now</span></div>
             <div class="chips"><span>Open today &middot; 9&ndash;6</span><span>Walk-ins welcome</span></div>
             <div class="svc"><div><span>Cut &amp; finish <small>45 min</small></span><b>&pound;35</b></div><div><span>Colour <small>2 hr</small></span><b>&pound;65</b></div><div><span>Blow dry <small>30 min</small></span><b>&pound;25</b></div></div>
             <div class="book"><em>Book online</em><div class="days"><span><small>Fri</small>11</span><span class="on"><small>Sat</small>12</span><span><small>Mon</small>14</span><span><small>Tue</small>15</span></div><div class="times"><span>2:30</span><span class="on">3:00</span><span>4:15</span></div><span class="g-btn">Confirm booking</span></div>
-            <div class="gal3"><span>Inside the salon</span><div><img src="img/sl-g1.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g2.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g3.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"></div></div>
+            <div class="gal3"><span>Inside the salon</span><div><img src="img/sl-g1.webp" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g2.webp" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g3.webp" width="200" height="150" alt="" loading="lazy" decoding="async"></div></div>
             <div class="foot"><span>Gift vouchers</span><span>Mon&ndash;Sat 9&ndash;6</span></div>
           </div>
           <div class="layer ct" data-i="2">
-            <div class="g-nav"><span class="g-logo"><i></i>GREENFIELD</span><span class="nr"><span class="g-ic s"><i></i></span><span class="g-ic bk"><i></i><b>3</b></span></span></div>
-            <div class="hero-card"><img src="img/ct-hero.jpg" width="520" height="300" alt="" loading="lazy" decoding="async"><span class="g-eb">Plant &amp; tool hire</span><b>The right kit, ready when you are.</b><div class="srch">Search 262 products</div></div>
-            <div class="cats"><span><i><svg viewBox="0 0 24 24"><path d="M3 17h13M5 17v-4h6v4M11 13l4-7 4 2M15 6l-1-3M18 8l-2 6h4"/></svg></i>Diggers</span><span><i><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i>Power</span><span><i><svg viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></svg></i>Access</span><span><i><svg viewBox="0 0 24 24"><path d="M15 4l5 5-3 3-5-5z"/><path d="M12.5 8.5 4 17l3 3 8.5-8.5"/></svg></i>Tools</span></div>
+            <div class="g-nav"><span class="g-logo"><i></i>BRINDLE</span><span class="nr"><span class="g-ic s"><i></i></span><span class="g-ic bk"><i></i><b>3</b></span></span></div>
+            <div class="hero-card"><img src="img/ev-hero.webp" width="520" height="300" alt="" loading="lazy" decoding="async"><span class="g-eb">Event hire</span><b>Everything for the big day.</b><div class="srch">Search 262 products</div></div>
+            <div class="cats"><span><i><svg viewBox="0 0 24 24"><path d="M3 8h18M5 8v11M19 8v11"/></svg></i>Tables</span><span><i><svg viewBox="0 0 24 24"><path d="M8 4v9h9M8 13v7M17 13v7M8 4h2"/></svg></i>Chairs</span><span><i><svg viewBox="0 0 24 24"><path d="M4 6c3-2 5 2 8 0s5 2 8 0v12c-3 2-5-2-8 0s-5-2-8 0z"/></svg></i>Linen</span><span><i><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11v2h6v-2a6 6 0 0 0-3-11z"/></svg></i>Lighting</span></div>
             <div class="g-sec"><span>Popular this week</span><span>View all</span></div>
             <div class="grid">
-              <div class="p"><div class="im"><img src="img/ct-p1.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Cordless drill</b><small>18V &middot; Two batteries</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im"><img src="img/ct-p2.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Hammer drill</b><small>18V &middot; Heavy duty</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im"><img src="img/ct-p3.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>Popular</u></div><b>Hammer</b><small>Demolition &middot; 3 lb</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im"><img src="img/ct-p4.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Spanner set</b><small>Metric &middot; 24 piece</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ev-p1.webp" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Dining chairs</b><small>Black &middot; Sets of 8</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ev-p2.webp" width="280" height="200" alt="" loading="lazy" decoding="async"><u>Popular</u></div><b>Trestle tables</b><small>6 ft &middot; Seats 8</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ev-p3.webp" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Glassware</b><small>Per dozen</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ev-p4.webp" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Bistro seating</b><small>Indoor &amp; outdoor</small><span class="q">Request a quote</span></div>
             </div>
             <div class="basket"><span>3 items selected</span><i>Request quote</i></div>
           </div>
           <div class="layer ht" data-i="3">
-            <div class="hero-img g-ph"><img src="img/ht-hero.jpg" width="560" height="420" alt="" loading="lazy" decoding="async">
-              <div class="g-nav"><span class="g-ic"><i></i></span><span class="g-logo">HARTWELL</span><span class="g-btn" style="border:1px solid #F8F2E6;padding:5px 9px;font-size:6px">Book</span></div>
+            <div class="hero-img g-ph"><img src="img/ht-hero.webp" width="560" height="420" alt="" loading="lazy" decoding="async">
+              <div class="g-nav"><span class="g-ic"><i></i></span><span class="g-logo">LARKMOOR</span><span class="g-btn" style="border:1px solid #F8F2E6;padding:5px 9px;font-size:6px">Book</span></div>
               <div class="ttl"><span class="g-eb">Boutique hotel &amp; spa</span><b>A quiet place to stay.</b></div>
             </div>
             <div class="bookbar"><span><small>Check in</small>Fri 11 Oct</span><span><small>Check out</small>Sun 13 Oct</span><span><small>Guests</small>2</span><span class="go">Check availability</span></div>
             <div class="g-sec"><span>Rooms &amp; suites</span><span>View all</span></div>
             <div class="rooms">
-              <div><img src="img/ht-r1.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Deluxe Double</b><small>Sleeps 2 &middot; Garden view</small></div>
-              <div><img src="img/ht-r2.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Classic Twin</b><small>Sleeps 2 &middot; City view</small></div>
-              <div><img src="img/ht-r3.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Loft Suite</b><small>Sleeps 3 &middot; Private terrace</small></div>
+              <div><img src="img/ht-r1.webp" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Deluxe Double</b><small>Sleeps 2 &middot; Garden view</small></div>
+              <div><img src="img/ht-r2.webp" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Classic Twin</b><small>Sleeps 2 &middot; City view</small></div>
+              <div><img src="img/ht-r3.webp" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Loft Suite</b><small>Sleeps 3 &middot; Private terrace</small></div>
             </div>
             <div class="exp"><span><i></i>Spa</span><span><i></i>Dining</span><span><i></i>Walks</span><span><i></i>Events</span></div>
             <div class="rev"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b><span>&ldquo;The quietest night&rsquo;s sleep.&rdquo;</span></div>
-            <div class="offer"><img src="img/ht-offer.jpg" width="120" height="90" alt="" loading="lazy" decoding="async"><div><small>Offer</small><b>Spring escape, two nights</b></div></div>
+            <div class="offer"><img src="img/ht-offer.webp" width="120" height="90" alt="" loading="lazy" decoding="async"><div><small>Offer</small><b>Spring escape, two nights</b></div></div>
             <div class="foot"></div>
           </div>
         </div></div>
@@ -1034,12 +1049,15 @@ footer nav a{margin-left:20px}
 </footer>
 
 <script>
+if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}
+</script>
+<script>
 (function(){
   var root=document.querySelector('.pricer'); if(!root) return;
   var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status');
   var panels=[].slice.call(root.querySelectorAll('.panel')), layers=[].slice.call(root.querySelectorAll('.layer')), stops=[].slice.call(root.querySelectorAll('.stops button'));
   var names=['Starter, from £395','Business, from £1,500','Content and catalogue, from £3,000','Large builds, quoted per project'];
-  var kinds=['A simple dog groomer’s site','A salon site with online booking','A hire catalogue you edit yourself','A high-end country hotel site'];
+  var kinds=['A simple dog groomer’s site','A salon site with online booking','An event hire catalogue you edit yourself','A boutique hotel site'];
   var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
   var sets=[].slice.call(root.querySelectorAll('.sm-set'));
   sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
@@ -1048,7 +1066,7 @@ footer nav a{margin-left:20px}
     i=Math.max(0,Math.min(3,i));
     range.value=i; slide.style.setProperty('--v',i); range.setAttribute('aria-valuetext',names[i]);
     panels.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
-    layers.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
+    layers.forEach(function(el){var k=+el.getAttribute('data-i');el.classList.toggle('on',k===i);el.classList.toggle('before',k<i);});
     stops.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     sets.forEach(function(el){el.classList.toggle('on',+el.getAttribute('data-i')===i);});
     if(size) size.textContent=sizes[i];
@@ -1060,7 +1078,8 @@ footer nav a{margin-left:20px}
   set(0);
 })();
 (function(){
-  [].slice.call(document.querySelectorAll('.hp-in')).forEach(function(d){
+  var cn=navigator.connection||{}, wide=window.matchMedia&&window.matchMedia('(min-width:621px)').matches;
+  if(wide&&!cn.saveData&&!/2g/.test(cn.effectiveType||'')) [].slice.call(document.querySelectorAll('.hp-in')).forEach(function(d){
     var src=document.querySelector('.look '+d.getAttribute('data-src')); if(!src) return;
     var c=src.cloneNode(true); c.removeAttribute('aria-hidden');
     [].slice.call(c.querySelectorAll('img')).forEach(function(i){i.loading='eager';});
