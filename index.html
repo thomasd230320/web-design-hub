@@ -15,12 +15,16 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="theme-color" content="#D5E0EB" />
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="icon" href="favicon.ico" sizes="48x48" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <meta name="robots" content="noindex, nofollow" />
 <title>WebDesignHub | Websites for small businesses</title>
 <script>document.documentElement.className+=" js"</script>
 <meta name="description" content="Websites for small businesses. Flexible prices, plain files, yours to keep." />
 
 <style>
+@font-face{font-family:"Manrope";font-style:normal;font-weight:200 800;font-display:swap;src:url(fonts/manrope-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
   --pale:#D5E0EB;
   --pale-2:#E6EDF4;
@@ -32,15 +36,18 @@
   --orange-hover:#B08A7D;
   --tint:#FAF8F3;
   --ink:#0B1019;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:var(--sans);
   --wrap:1120px;
 }
 *,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-body{margin:0;background:var(--pale);color:var(--forest);font:1.125rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;letter-spacing:-.01em;margin:0;text-wrap:balance}
+body{margin:0;background:var(--pale);color:var(--forest);font:450 1.125rem/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);font-weight:650;line-height:1.14;letter-spacing:-.02em;margin:0;text-wrap:balance}
+h3{font-weight:600}
+button,input{font-family:inherit}
 p,ul,ol,dl,dd,figure{margin:0}
 ul,ol{padding:0;list-style:none}
 a{color:inherit;text-decoration-thickness:.08em;text-underline-offset:.2em}
@@ -79,7 +86,7 @@ svg{display:block;max-width:100%}
 .logo img{display:block;height:52px;width:auto}
 .logo span{color:var(--clay)}
 .nav{display:flex;align-items:center;gap:4px}
-.nav a:not(.btn){padding:10px 14px;font-weight:500;font-size:1rem;text-decoration:none;border-bottom:2px solid transparent}
+.nav a:not(.btn){padding:10px 14px;font-weight:600;font-size:1rem;text-decoration:none;border-bottom:2px solid transparent}
 .nav a:not(.btn):hover{border-bottom-color:var(--forest)}
 .nav .btn{margin-left:10px;min-height:44px;padding:10px 22px}
 .menu-btn{display:none}
@@ -89,7 +96,7 @@ svg{display:block;max-width:100%}
 
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
 .kicker{font:600 .85rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
-.hero h1{font-size:clamp(2.5rem,5.4vw,4.7rem);max-width:13ch;line-height:1.06}
+.hero h1{font-weight:700;letter-spacing:-.03em;font-size:clamp(2.3rem,4.8vw,4.1rem);max-width:14ch;line-height:1.06}
 .kicker span{display:inline-block;background:var(--pale-2);border:1px solid var(--rule);border-radius:99px;padding:8px 14px}
 .btn-lg{min-height:56px;padding:14px 34px;font-size:1.08rem}
 .ticks{margin-top:26px;display:grid;gap:8px}
@@ -112,7 +119,7 @@ svg{display:block;max-width:100%}
 .hero .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
 .hero .fine{margin-top:20px;font-size:1rem;color:var(--forest-2)}
 .reel{border-radius:28px;background:var(--forest);padding:20px 20px 16px}
-.reel figcaption{margin-top:12px;font:italic 1rem/1.4 var(--serif);color:var(--pale)}
+.reel figcaption{margin-top:12px;font:500 1rem/1.45 var(--serif);color:var(--pale)}
 .reel-stage{position:relative;aspect-ratio:480/446;border-radius:18px;overflow:hidden;background:var(--pale)}
 .rl{position:absolute;inset:0}
 .s1{opacity:0}
@@ -173,7 +180,7 @@ svg{display:block;max-width:100%}
 /* Sections */
 .block{padding:84px 0;position:relative;isolation:isolate;overflow-x:clip}
 .head{margin-bottom:44px;max-width:760px}
-.head .num{font:italic 500 1.1rem/1 var(--serif);color:var(--clay);display:block;margin-bottom:12px}
+.head .num{font:700 .95rem/1 var(--sans);letter-spacing:.1em;color:var(--clay);display:block;margin-bottom:12px}
 .head h2{font-size:clamp(2rem,4vw,3rem)}
 .head p{margin-top:12px;font-size:1.2rem;color:var(--forest-2)}
 .head p.small{margin-top:10px;font-size:.95rem}
@@ -260,7 +267,7 @@ svg{display:block;max-width:100%}
 .look figcaption{margin-top:20px;text-align:center}
 .look h3{font-size:1.4rem}
 .look figcaption p{margin-top:4px;font-size:1rem;color:var(--forest-2)}
-.note{margin-top:36px;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+.note{margin-top:36px;font:500 1rem/1.45 var(--serif);color:var(--forest-2)}
 
 /* Showcase phone 1 (.e): simple but elegant */
 .e{background:#EFE9DD;color:#2A2622;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;align-items:center;text-align:center}
@@ -502,7 +509,7 @@ svg{display:block;max-width:100%}
 .ht .offer small{display:block;font:600 5.2px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#E8C98A}
 .ht .offer b{display:block;margin-top:3px;font:italic 400 9px/1.15 "Iowan Old Style",Georgia,serif}
 .ht .foot{margin-top:auto;height:12px}
-.kind{margin-top:18px;text-align:center;font:italic 1rem/1.4 var(--serif);color:var(--forest-2)}
+.kind{margin-top:18px;text-align:center;font:500 1rem/1.45 var(--serif);color:var(--forest-2)}
 
 /* Site-size graphic under the slider phone */
 .sitemap{margin-top:16px}
@@ -518,7 +525,7 @@ svg{display:block;max-width:100%}
 /* Steps */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s}
 .steps li{counter-increment:s;border-top:2px solid var(--tint);padding-top:16px}
-.steps li::before{content:counter(s);display:block;font:italic 500 1.5rem/1 var(--serif);color:var(--tint);margin-bottom:10px}
+.steps li::before{content:counter(s);display:block;font:700 1.35rem/1 var(--serif);color:var(--tint);margin-bottom:10px}
 .steps h3{font-size:1.5rem}
 .steps p{margin-top:6px}
 .steps h3 button{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0;margin:0;font:inherit;letter-spacing:inherit;color:inherit;text-align:left;display:inline-flex;align-items:center;gap:10px}
@@ -614,6 +621,12 @@ svg{display:block;max-width:100%}
 .contact{text-align:left}
 .contact h2{font-size:clamp(2.4rem,5.5vw,4rem);max-width:12ch}
 .contact .actions{margin-top:28px;display:flex;flex-wrap:wrap;gap:14px}
+.contact-gate{margin-top:28px}
+.gate-ns{margin-top:14px}
+.gate-box{display:inline-block;margin-top:20px;background:var(--pale);color:var(--ink);border-radius:18px;padding:16px 18px}
+.gate-box p{margin:0 0 10px;font-size:.95rem;color:var(--forest)}
+.gate-box .gate-err{margin:10px 0 0;color:#8A2D1F;font-weight:600}
+#gate-out .actions{margin-top:0}
 .contact .lines{margin-top:28px;display:grid;gap:6px;font-size:1.2rem}
 .contact .lines a{font-weight:600}
 
@@ -761,7 +774,7 @@ footer nav a{margin-left:20px}
           <path d="M62 345 l104 0" stroke="#5E3F35" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
-        <g font-family="Georgia,serif" font-style="italic" font-size="20" fill="#364868">
+        <g font-family="Manrope,system-ui,sans-serif" font-weight="600" font-size="17" fill="#364868">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
@@ -1057,16 +1070,15 @@ footer nav a{margin-left:20px}
 <section class="block dark on-dark contact" id="contact" aria-labelledby="contact-h">
   <div class="wrap">
     <h2 id="contact-h">Tell me about your project.</h2>
-    <div class="actions">
-      <a class="btn btn-clay" href="mailto:webdesignhub.net@gmail.com?subject=Website%20enquiry">Email me</a>
-      <a class="btn" href="tel:+447780138331">Call the designer</a>
-      <a class="btn" href="tel:+447827332393">Call the developer</a>
-    </div>
-    <div class="lines">
-      <a href="mailto:webdesignhub.net@gmail.com">webdesignhub.net@gmail.com</a>
-      <span>Designer: <a href="tel:+447780138331">07780 138331</a></span>
-      <span>Developer: <a href="tel:+447827332393">07827 332393</a></span>
-      <span>Witney, Oxfordshire. Clients across the UK.</span>
+    <div class="contact-gate">
+      <button type="button" class="btn btn-clay btn-lg" id="reveal" aria-expanded="false" aria-controls="gate-out">Show email and phone</button>
+      <noscript><p class="gate-ns">Please turn on JavaScript to see the contact details.</p></noscript>
+      <div class="gate-box" id="gate-box" hidden>
+        <p>One quick check, to keep spam bots out.</p>
+        <div id="recaptcha" data-sitekey="[recaptcha-site-key]"></div>
+        <p class="gate-err" id="gate-err" role="alert" hidden>The check could not load. Please try again in a moment.</p>
+      </div>
+      <div id="gate-out" hidden></div>
     </div>
   </div>
 </section>
@@ -1148,6 +1160,29 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
     var c=src.cloneNode(true); c.removeAttribute('aria-hidden');
     [].slice.call(c.querySelectorAll('img')).forEach(function(i){i.loading='eager';});
     d.appendChild(c);
+  });
+})();
+(function(){
+  var btn=document.getElementById('reveal'); if(!btn) return;
+  var box=document.getElementById('gate-box'), out=document.getElementById('gate-out'), holder=document.getElementById('recaptcha'), err=document.getElementById('gate-err');
+  var key=holder.getAttribute('data-sitekey')||'', live=key&&key.charAt(0)!=='[';
+  var D={e:'d2ViZGVzaWduaHViLm5ldEBnbWFpbC5jb20=',a:'MDc3ODAxMzgzMzE=',b:'MDc4MjczMzIzOTM='};
+  function fmt(n){return n.slice(0,5)+' '+n.slice(5);}
+  function show(){
+    var e=atob(D.e), a=atob(D.a), b=atob(D.b), ta='+44'+a.slice(1), tb='+44'+b.slice(1);
+    out.innerHTML='<div class="actions"><a class="btn btn-clay" href="mailto:'+e+'?subject=Website%20enquiry">Email me</a><a class="btn" href="tel:'+ta+'">Call the designer</a><a class="btn" href="tel:'+tb+'">Call the developer</a></div>'+
+      '<div class="lines"><a href="mailto:'+e+'">'+e+'</a><span>Designer: <a href="tel:'+ta+'">'+fmt(a)+'</a></span><span>Developer: <a href="tel:'+tb+'">'+fmt(b)+'</a></span><span>Witney, Oxfordshire. Clients across the UK.</span></div>';
+    out.hidden=false; box.hidden=true; btn.hidden=true; btn.setAttribute('aria-expanded','true');
+  }
+  window.wdhCaptcha=function(){
+    try{ grecaptcha.render(holder,{sitekey:key,callback:show}); }catch(x){ err.hidden=false; }
+  };
+  btn.addEventListener('click',function(){
+    if(!live){ show(); return; }
+    btn.disabled=true; box.hidden=false; err.hidden=true;
+    if(window.grecaptcha&&grecaptcha.render){ if(!holder.hasChildNodes()) window.wdhCaptcha(); return; }
+    var sc=document.createElement('script'); sc.src='https://www.google.com/recaptcha/api.js?onload=wdhCaptcha&render=explicit'; sc.async=true; sc.onerror=function(){err.hidden=false;btn.disabled=false;};
+    document.head.appendChild(sc);
   });
 })();
 (function(){
