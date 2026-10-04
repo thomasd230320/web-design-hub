@@ -30,7 +30,7 @@
   --clay:#5E3F35;
   --orange:#9D7568;
   --orange-hover:#B08A7D;
-  --tint:#D8C5BD;
+  --tint:#FAF8F3;
   --ink:#0B1019;
   --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -87,7 +87,26 @@ svg{display:block;max-width:100%}
 
 .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:72px;align-items:center}
 .kicker{font:600 .85rem/1.3 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
-.hero h1{font-size:clamp(2.8rem,6vw,4.8rem);max-width:11ch}
+.hero h1{font-size:clamp(3rem,6.6vw,5.6rem);max-width:10ch;line-height:1.04}
+.hero .hl{background:linear-gradient(transparent 68%,rgba(157,117,104,.42) 68% 88%,transparent 88%);padding:0 .06em}
+.kicker span{display:inline-block;background:var(--pale-2);border:1px solid var(--rule);border-radius:99px;padding:8px 14px}
+.btn-lg{min-height:56px;padding:14px 34px;font-size:1.08rem}
+.ticks{margin-top:26px;display:grid;gap:8px}
+.ticks li{position:relative;padding-left:30px;font-weight:600;font-size:1.02rem}
+.ticks li::before{content:"";position:absolute;left:3px;top:.42em;width:13px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
+.hero-stage{position:relative}
+.hp{display:none;position:absolute;z-index:3;padding:5px;border-radius:24px;background:linear-gradient(145deg,#C4C6C9,#8F9297 40%,#B1B3B7 65%,#7E8187);box-shadow:0 28px 40px -18px rgba(11,16,25,.6),inset 0 0 0 1px rgba(255,255,255,.5)}
+.js .hp{display:block}
+.hp-in{width:126px;height:259px;overflow:hidden;border-radius:19px;background:#000}
+.hp-in .screen{width:252px;transform:scale(.5);transform-origin:0 0;box-shadow:none;border-radius:38px}
+.hp1{left:-58px;bottom:112px;transform:rotate(-6deg)}
+.hp2{right:-34px;top:-104px;transform:rotate(6deg)}
+@media (prefers-reduced-motion:no-preference){
+  .hp1{animation:bob 6s ease-in-out infinite}
+  .hp2{animation:bob 7s ease-in-out -2s infinite}
+  @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+  .hero-stage:has(.reel.paused) .hp{animation-play-state:paused}
+}
 .hero .lead{margin-top:22px;font-size:1.4rem;line-height:1.4;max-width:22ch}
 .hero .actions{margin-top:32px;display:flex;flex-wrap:wrap;gap:14px}
 .hero .fine{margin-top:20px;font-size:1rem;color:var(--forest-2)}
@@ -253,81 +272,94 @@ svg{display:block;max-width:100%}
 .e .lnk{margin-top:16px;font:600 8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #B08D57;padding-bottom:5px}
 .e .ft{margin-top:auto;padding-bottom:20px;font:500 7.5px/1 system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#8C8378}
 
-/* Showcase phone 2 (.m): mid-range restaurant. Primary deep green, secondaries terracotta and sand, on cream */
-.m{background:#F6EEDF;color:#264B3C;font-family:"Trebuchet MS","Segoe UI",system-ui,sans-serif}
-.m .bar{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 6px}
-.m .brand{font:700 16px/1 Georgia,serif;color:#264B3C}
-.m .burger{width:18px;height:12px;border-top:2.5px solid #264B3C;border-bottom:2.5px solid #264B3C;position:relative}
-.m .burger::after{content:"";position:absolute;left:0;right:0;top:2.5px;border-top:2.5px solid #264B3C}
-.m .hr{margin:4px 12px 0;border-radius:18px;padding:13px 14px;color:#F6EEDF;background:#264B3C}
-.m .hr b{display:block;font:700 21px/1.05 Georgia,serif}
-.m .btns{display:flex;gap:6px;margin-top:10px}
-.m .b1{background:#C9633F;color:#FFF6EA;border-radius:99px;padding:6px 11px;font-weight:700;font-size:10px}
-.m .b2{border:1.5px solid #E7D3AE;color:#E7D3AE;border-radius:99px;padding:4.5px 10px;font-size:10px}
-.m .book{margin:8px 12px 0;background:#EFE3CC;border-radius:14px;padding:9px 10px}
-.m .book .t{font:700 10px/1 system-ui,sans-serif;font-style:normal}
-.m .fields{display:grid;grid-template-columns:1.2fr 1fr .7fr;gap:5px;margin-top:6px}
-.m .fields span{background:#F6EEDF;border-radius:8px;padding:5px 6px;font-size:9px}
-.m .go{display:block;margin-top:6px;background:#264B3C;color:#F6EEDF;text-align:center;border-radius:8px;padding:6px;font-weight:700;font-size:10px}
-.m .tabs{display:flex;gap:12px;padding:10px 14px 4px;font-size:10px;font-weight:700}
-.m .tabs .on{color:#C9633F;border-bottom:2px solid #C9633F}
-.m .item{display:flex;justify-content:space-between;padding:4px 14px;font-size:10px;border-bottom:1px dotted #C9B58F}
-.m .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;padding:9px 12px 0}
-.m .gal i{height:34px;border-radius:8px}
-.m .foot{margin-top:auto;background:#264B3C;color:#F6EEDF;padding:9px 12px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;font-size:8.5px}
-.m .news{background:#C9633F;color:#FFF6EA;border-radius:99px;padding:5px 9px;font-weight:700}
+/* Showcase phone 2 (.m): interior design studio. Ivory, espresso, brass and sage; big photography */
+.m{background:#F6F1E9;color:#2B2622;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+.m img{display:block;width:100%;height:100%;object-fit:cover}
+.m .bar{display:flex;justify-content:space-between;align-items:center;padding:32px 14px 9px}
+.m .brand{font:400 11px/1 "Iowan Old Style",Georgia,serif;letter-spacing:.34em;text-transform:uppercase}
+.m .burger{width:16px;height:8px;border-top:1.3px solid #2B2622;border-bottom:1.3px solid #2B2622}
+.m .hr{position:relative;height:192px;margin:0 10px;border-radius:6px;overflow:hidden;background:#8B7B68}
+.m .hr::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(43,38,34,.05) 30%,rgba(43,38,34,.78))}
+.m .hr img{position:absolute;inset:0}
+.m .hr .cp{position:absolute;left:12px;right:12px;bottom:11px;z-index:1;color:#F6F1E9}
+.m .eb{display:block;font:600 5.8px/1 system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#E3C28F}
+.m .hr b{display:block;margin-top:5px;font:italic 400 20px/1.05 "Iowan Old Style",Georgia,serif}
+.m .btns{display:flex;gap:6px;margin-top:9px}
+.m .b1{background:#B08A57;color:#1F1A16;border-radius:99px;padding:6px 11px;font:700 6.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.m .b2{border:1px solid rgba(246,241,233,.6);border-radius:99px;padding:5px 10px;font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.m .sec{display:flex;justify-content:space-between;align-items:baseline;padding:12px 14px 6px;font:600 6px/1 system-ui,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#7A6A55}
+.m .sec span:last-child{color:#B08A57}
+.m .gal{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:42px 42px;gap:5px;padding:0 10px}
+.m .gal div{overflow:hidden;border-radius:5px}
+.m .gal div:first-child{grid-row:span 2}
+.m .svc{margin:9px 14px 0}
+.m .svc div{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-top:1px solid #DDD2C0;font:400 10.5px/1 "Iowan Old Style",Georgia,serif}
+.m .svc div:last-child{border-bottom:1px solid #DDD2C0}
+.m .svc small{font:500 6px/1 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#7C8B78}
+.m .quote{margin:9px 14px 0;font:italic 400 9.5px/1.35 "Iowan Old Style",Georgia,serif;color:#4A4038}
+.m .quote small{display:block;margin-top:3px;font:600 5.8px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:#7C8B78}
+.m .cta{margin:auto 0 0;background:#2B2622;color:#F6F1E9;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;font:italic 400 10px/1.2 "Iowan Old Style",Georgia,serif}
+.m .cta span:last-child{background:#B08A57;color:#1F1A16;border-radius:99px;padding:6px 10px;font:700 6.2px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;font-style:normal;white-space:nowrap}
 
-/* Showcase phone 3 (.x): high-end luxury brand, dark with champagne gold */
-.x{background:#0B0B0D;color:#EDE6D8;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
-.x .nv{display:flex;justify-content:space-between;align-items:center;padding:30px 14px 4px;position:relative;z-index:2}
-.x .mb{width:14px;height:7px;border-top:1.2px solid #EDE6D8;border-bottom:1.2px solid #EDE6D8}
-.x .wm{font:400 12px/1 "Iowan Old Style",Georgia,serif;letter-spacing:.42em;margin-right:-.42em}
+/* Showcase phone 3 (.x): expedition travel brand. Deep navy, ice, signal orange; full-bleed photography and lots of content */
+.x{background:#0A1422;color:#EEF3F8;font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.x img{display:block;width:100%;height:100%;object-fit:cover}
+.x .nv{position:absolute;left:0;right:0;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:30px 14px 4px}
+.x .mb{width:14px;height:8px;border-top:1.4px solid #EEF3F8;border-bottom:1.4px solid #EEF3F8}
+.x .wm{font:800 10px/1 system-ui,sans-serif;letter-spacing:.3em;margin-right:-.3em}
 .x .ri{display:flex;gap:7px}
-.x .ri i{width:11px;height:11px;border:1.2px solid #EDE6D8;border-radius:50%}
+.x .ri i{width:11px;height:11px;border:1.4px solid #EEF3F8;border-radius:50%}
 .x .ri .bg2{border-radius:3px 3px 5px 5px}
-.x .st2{position:relative;height:206px;background:radial-gradient(circle at 50% 42%,rgba(201,169,110,.30),transparent 56%)}
-.x .sp{position:absolute;left:50%;width:44px;margin-left:-22px}
-.x .sp1{top:0;height:44px;background:linear-gradient(#0B0B0D,#2A2420)}
-.x .sp2{top:118px;height:50px;background:linear-gradient(#2A2420,transparent)}
-.x .wt{position:absolute;left:50%;top:20px;width:104px;height:104px;margin-left:-52px;border-radius:50%;padding:5px;background:conic-gradient(from 210deg,#7C6A43,#E3CB92,#8F7849,#F0DDAE,#7C6A43);box-shadow:0 14px 30px rgba(0,0,0,.65),0 0 40px rgba(201,169,110,.28);z-index:1}
-.x .wt::after{content:"";position:absolute;right:-5px;top:50%;width:6px;height:14px;margin-top:-7px;border-radius:2px;background:linear-gradient(#8F7849,#E3CB92,#8F7849)}
-.x .dl{position:absolute;inset:5px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#1B1B20,#0B0B0D 72%)}
-.x .dl::before{content:"";position:absolute;inset:4px;border-radius:50%;background:repeating-conic-gradient(from -1deg,#C9A96E 0 2deg,transparent 2deg 30deg);-webkit-mask:radial-gradient(circle,transparent 68%,#000 69%);mask:radial-gradient(circle,transparent 68%,#000 69%)}
-.x .lb{position:absolute;left:0;right:0;top:28%;text-align:center;font:400 5px/1 "Iowan Old Style",Georgia,serif;letter-spacing:.34em;color:#C9A96E}
-.x .h1,.x .h2{position:absolute;left:50%;top:50%;margin-left:-1px;transform-origin:50% 100%;background:#EDE6D8;border-radius:2px}
-.x .h1{width:2.4px;height:24px;margin-top:-24px;transform:rotate(-38deg)}
-.x .h2{width:1.6px;height:34px;margin-top:-34px;margin-left:-.8px;background:#C9A96E;transform:rotate(64deg)}
-.x .pv{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:#C9A96E}
-.x .cp{position:absolute;left:14px;right:14px;bottom:6px}
-.x .ey{display:block;font:600 6px/1 system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#C9A96E}
-.x .cp b{display:block;margin-top:5px;font:italic 400 22px/1 "Iowan Old Style",Georgia,serif;letter-spacing:-.01em}
+.x .st2{position:relative;height:214px;flex:none}
+.x .st2 img{position:absolute;inset:0}
+.x .st2::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,20,34,.55),rgba(10,20,34,0) 30%,rgba(10,20,34,.92))}
+.x .cp{position:absolute;left:14px;right:14px;bottom:30px;z-index:2}
+.x .ey{display:inline-block;text-shadow:0 1px 6px rgba(0,0,0,.7);font:700 5.8px/1 system-ui,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#FF8A3D}
+.x .cp b{display:block;margin-top:5px;font:800 21px/1.02 system-ui,sans-serif;letter-spacing:-.02em}
 .x .bt{display:flex;gap:6px;margin-top:8px}
-.x .g1{background:#C9A96E;color:#0B0B0D;font:700 6.5px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:6px 11px;border-radius:99px}
-.x .g2{border:1px solid rgba(237,230,216,.4);font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:5px 10px;border-radius:99px}
-.x .sc{display:flex;justify-content:space-between;align-items:baseline;padding:10px 14px 5px;font:600 6px/1 system-ui,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#C9A96E}
-.x .sc .ga{color:#8E887B}
-.x .cr2{display:flex;gap:6px;padding-left:14px;overflow:hidden}
-.x .cd{flex:0 0 90px;background:#141417;border:1px solid #26262B;border-radius:8px;padding:6px}
-.x .cd i{display:block;height:50px;border-radius:5px;background:#1B1B1F}
-.x .cd .v1{background:radial-gradient(circle at 50% 50%,#0B0B0D 0 11px,#E3CB92 12px 15px,transparent 16px),#1B1B1F}
-.x .cd .v2{background:radial-gradient(circle at 50% 50%,#0B0B0D 0 11px,#D9A896 12px 15px,transparent 16px),#1B1B1F}
-.x .cd .v3{background:radial-gradient(circle at 50% 50%,#101A24 0 11px,#BFC7CF 12px 15px,transparent 16px),#1B1B1F}
-.x .cd b{display:block;margin-top:5px;font:400 9px/1 "Iowan Old Style",Georgia,serif}
-.x .cd small{display:block;margin-top:3px;font:500 5.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8E887B}
-.x .ft3{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:10px 14px 0;font:500 6px/1.3 system-ui,sans-serif;color:#8E887B;text-align:center}
-.x .ft3 span::before{content:"";display:block;width:11px;height:11px;margin:0 auto 4px;border:1px solid #C9A96E;border-radius:50%}
-.x .ed{display:grid;grid-template-columns:62px 1fr;gap:9px;align-items:center;margin:10px 14px 0;padding-top:9px;border-top:1px solid #26262B}
-.x .ed i{display:block;height:40px;border-radius:5px;background:linear-gradient(135deg,#3A3226,#1B1B1F 60%,#C9A96E 140%)}
-.x .ed b{display:block;font:italic 400 10px/1.2 "Iowan Old Style",Georgia,serif}
-.x .ed small{display:block;margin-top:3px;font:600 5.5px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C9A96E}
-.x .gb{margin:auto 10px 10px;border-radius:12px;padding:8px 10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);display:flex;justify-content:space-between;align-items:center;font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
-.x .gb i{width:14px;height:14px;border-radius:50%;background:#C9A96E}
-.x .cc{position:absolute;right:10px;bottom:52px;width:22px;height:22px;border-radius:50%;background:#C9A96E;box-shadow:0 4px 12px rgba(0,0,0,.6)}
+.x .g1{background:#FF8A3D;color:#1A0F06;font:800 6.5px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:7px 11px;border-radius:99px}
+.x .g2{border:1px solid rgba(238,243,248,.5);font:700 6.5px/1 system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:99px}
+.x .bk2{position:relative;z-index:3;margin:-20px 10px 0;display:grid;grid-template-columns:1.3fr 1fr .7fr auto;gap:1px;background:rgba(238,243,248,.14);border-radius:12px;overflow:hidden;box-shadow:0 14px 24px -10px rgba(0,0,0,.7);font:600 6.8px/1.2 system-ui,sans-serif}
+.x .bk2 span{background:#12213A;padding:6px 7px}
+.x .bk2 small{display:block;font:500 4.8px/1 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#8FA3BC;margin-bottom:2px}
+.x .bk2 .go{display:grid;place-items:center;background:#FF8A3D;color:#1A0F06;font-weight:800}
+.x .stt{display:grid;grid-template-columns:repeat(3,1fr);margin:8px 10px 0;text-align:center}
+.x .stt span{padding:3px 0;font:500 5.6px/1.2 system-ui,sans-serif;color:#8FA3BC;border-right:1px solid rgba(238,243,248,.12)}
+.x .stt span:last-child{border:0}
+.x .stt b{display:block;font:800 10px/1.1 system-ui,sans-serif;color:#EEF3F8}
+.x .chips{display:flex;gap:4px;padding:8px 10px 0;overflow:hidden}
+.x .chips span{flex:none;border:1px solid rgba(238,243,248,.22);border-radius:99px;padding:4px 8px;font:600 6px/1 system-ui,sans-serif}
+.x .chips .on{background:#EEF3F8;color:#0A1422;border-color:#EEF3F8}
+.x .sc{display:flex;justify-content:space-between;align-items:baseline;padding:9px 10px 5px;font:700 6.2px/1 system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+.x .sc .ga{color:#FF8A3D;letter-spacing:.06em;text-transform:none;font-weight:600}
+.x .cr2{display:flex;gap:6px;padding-left:10px;overflow:hidden}
+.x .cd{flex:0 0 78px}
+.x .cd .im{position:relative;height:96px;border-radius:9px;overflow:hidden}
+.x .cd .im::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(10,20,34,.8))}
+.x .cd .im u{position:absolute;left:5px;top:5px;z-index:1;text-decoration:none;background:#FF8A3D;color:#1A0F06;border-radius:99px;padding:2px 5px;font:800 4.6px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.x .cd .im b{position:absolute;left:6px;right:6px;bottom:6px;z-index:1;font:700 7px/1.15 system-ui,sans-serif}
+.x .cd small{display:block;margin-top:3px;font:500 5.6px/1.2 system-ui,sans-serif;color:#8FA3BC}
+.x .cd small em{font-style:normal;color:#EEF3F8;font-weight:700}
+.x .ft3{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:9px 10px 0;font:600 5.6px/1.3 system-ui,sans-serif;color:#8FA3BC;text-align:center}
+.x .ft3 span::before{content:"";display:block;width:12px;height:12px;margin:0 auto 3px;border:1.3px solid #FF8A3D;border-radius:50%}
+.x .rv{margin:9px 10px 0;background:#12213A;border-radius:10px;padding:7px 9px;font:italic 400 7.4px/1.3 "Iowan Old Style",Georgia,serif}
+.x .rv b{display:block;margin-bottom:2px;font:700 6px/1 system-ui,sans-serif;font-style:normal;letter-spacing:.1em;color:#FF8A3D}
+.x .nl{position:relative;margin:9px 10px 0;height:58px;border-radius:10px;overflow:hidden}
+.x .nl img{position:absolute;inset:0}
+.x .nl::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,20,34,.9),rgba(10,20,34,.35))}
+.x .nl div{position:absolute;inset:0;z-index:1;padding:8px 10px;font:800 9px/1.15 system-ui,sans-serif}
+.x .nl small{display:block;margin-top:2px;font:500 5.6px/1 system-ui,sans-serif;color:#C6D2E0}
+.x .nl span{display:inline-block;margin-top:5px;background:#FF8A3D;color:#1A0F06;border-radius:99px;padding:4px 9px;font:800 5.8px/1 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.x .sticky{position:absolute;left:10px;right:10px;bottom:10px;z-index:4;display:flex;justify-content:space-between;align-items:center;background:rgba(18,33,58,.92);border:1px solid rgba(238,243,248,.14);border-radius:14px;padding:7px 7px 7px 11px;font:700 7px/1 system-ui,sans-serif;box-shadow:0 12px 22px -10px rgba(0,0,0,.8)}
+.x .sticky i{font-style:normal;background:#FF8A3D;color:#1A0F06;border-radius:99px;padding:6px 10px;font-weight:800}
+.x .cc{position:absolute;right:12px;bottom:52px;z-index:4;width:22px;height:22px;border-radius:50%;background:#FF8A3D;box-shadow:0 4px 12px rgba(0,0,0,.6)}
 
 /* Pricing slider phone (.hire): four completely different websites, one per price */
 .hire{background:#EDEAE2}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
 .hire .layer.on{opacity:1;visibility:visible}
+.hire .g-ph::after{opacity:.16}
+.hire img{display:block}
 
 /* Slider sites: one design system, four sizes. Same polish everywhere; only the amount of content grows. */
 .hire{--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
@@ -370,9 +402,10 @@ svg{display:block;max-width:100%}
 /* 1. Business: salon with online booking. A hero, services, booking, team. */
 .hire .layer.sl{background:#FAF1EE;color:#3A2336;font-family:"Iowan Old Style",Georgia,serif}
 .sl .g-nav{padding-bottom:6px}
-.sl .hero-img{position:relative;height:160px;margin:2px 12px 0;border-radius:22px;background:radial-gradient(70% 90% at 85% 15%,#F2B3C2,transparent 65%),radial-gradient(60% 70% at 15% 95%,#7C4262,transparent 70%),linear-gradient(150deg,#C26C88,#3A2336);color:#FAF1EE;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
-.sl .hero-img::before{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;border:1px solid rgba(250,241,238,.35);box-shadow:0 0 0 14px rgba(250,241,238,.06)}
-.sl .hero-img>*{position:relative;z-index:1}
+.sl .hero-img{position:relative;height:138px;margin:2px 12px 0;border-radius:22px;background:#3A2336;color:#FAF1EE;display:flex;flex-direction:column;justify-content:flex-end;padding:14px}
+.sl .hero-img::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(58,35,54,.05) 25%,rgba(58,35,54,.82))}
+.sl .hero-img>*{position:relative;z-index:2}
+.sl .hero-img>img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover}
 .sl .g-eb{color:#F4C3CE}
 .sl h4{margin:6px 0 0;font:400 24px/1.04 "Iowan Old Style",Georgia,serif}
 .sl .hero-img .g-btn{align-self:flex-start;margin-top:10px;background:#FAF1EE;color:#3A2336;padding:7px 12px}
@@ -394,6 +427,10 @@ svg{display:block;max-width:100%}
 .sl .times span{flex:1;text-align:center;border:1px solid #E1BFC4;border-radius:99px;padding:4px 0;font:600 7.5px/1 system-ui,sans-serif}
 .sl .times .on{background:#D98BA0;border-color:#D98BA0;color:#3A2336}
 .sl .book .g-btn{display:flex;margin-top:7px;background:#3A2336;color:#FAF1EE;padding:8px}
+.sl .gal3 span{display:block;margin-bottom:5px;font:600 6.5px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#6B3F55}
+.sl .gal3{margin:9px 12px 0}
+.sl .gal3 div{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.sl .gal3 img{width:100%;height:40px;object-fit:cover;border-radius:9px;box-shadow:0 6px 10px -6px rgba(58,35,54,.6)}
 .sl .team{display:flex;align-items:center;gap:7px;margin:9px 16px 0;font:500 7.5px/1 system-ui,sans-serif;color:#6B3F55}
 .sl .team i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 7.5px/1 system-ui,sans-serif;font-style:normal;color:#FAF1EE;box-shadow:0 5px 8px -4px rgba(58,35,54,.6)}
 .sl .foot{margin-top:auto;display:flex;justify-content:space-between;padding:9px 16px 13px;background:#3A2336;color:#F4C3CE;font:700 7px/1 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase}
@@ -408,6 +445,9 @@ svg{display:block;max-width:100%}
 .ct .hero-card{position:relative;overflow:hidden;margin:0 10px;border-radius:18px;padding:12px;background:radial-gradient(80% 100% at 100% 0%,rgba(228,167,42,.55),transparent 60%),linear-gradient(140deg,#1B2822,#334A3C);color:#F2F0EA}
 .ct .hero-card .g-eb{color:#E4A72A;font-size:5.8px}
 .ct .hero-card b{display:block;margin:6px 0 0;font:italic 400 17px/1.1 "Iowan Old Style",Georgia,serif}
+.ct .hero-card>img{position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover}
+.ct .hero-card::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(18,28,22,.94),rgba(18,28,22,.5))}
+.ct .hero-card>*:not(img){position:relative;z-index:2}
 .ct .srch{margin-top:9px;display:flex;align-items:center;gap:6px;background:#F2F0EA;color:#5F665F;border-radius:99px;padding:6px 10px;font:500 8px/1 system-ui,sans-serif}
 .ct .srch::before{content:"";width:6px;height:6px;border:1.3px solid #5F665F;border-radius:50%}
 .ct .cats{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:9px 10px 0;text-align:center;font:600 6.5px/1.2 system-ui,sans-serif}
@@ -417,7 +457,8 @@ svg{display:block;max-width:100%}
 .ct .g-sec span:last-child{color:#8A5E00}
 .ct .grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:6px 10px 0}
 .ct .p{background:#FBFAF6;border-radius:14px;padding:5px;box-shadow:0 10px 18px -13px rgba(27,36,32,.6),inset 0 0 0 1px #E8E4D8}
-.ct .p .im{position:relative;height:46px;border-radius:10px;display:grid;place-items:center}
+.ct .p .im{position:relative;height:58px;border-radius:10px;overflow:hidden;background:#E8E4D8}
+.ct .p .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ct .p .im svg{width:22px;height:22px;stroke:rgba(27,36,32,.82);stroke-width:1.5;position:relative;z-index:1}
 .ct .p u{position:absolute;left:4px;top:4px;z-index:2;text-decoration:none;background:rgba(242,240,234,.95);border-radius:99px;padding:2px 5px;font:700 5px/1 system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
 .ct .p b{display:block;margin-top:5px;font:700 8.5px/1 system-ui,sans-serif}
@@ -428,10 +469,10 @@ svg{display:block;max-width:100%}
 
 /* 3. Large builds: country house hotel. Most sections, richest content. */
 .hire .layer.ht{background:#F5F0E6;color:#14263A;font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
-.ht .hero-img{position:relative;flex:0 0 196px;background:linear-gradient(180deg,rgba(20,38,58,0) 38%,rgba(20,38,58,.5) 100%),radial-gradient(40% 40% at 72% 28%,#FFF1CF,transparent 70%),linear-gradient(#7FA2C4,#D9C7AA 66%,#E8D6BC);overflow:hidden}
-.ht .hero-img::before{content:"";position:absolute;left:-20%;right:-20%;bottom:-38px;height:100px;border-radius:50%;background:radial-gradient(closest-side,#3F5E57,#2A4540);box-shadow:0 -22px 40px rgba(42,69,64,.35)}
-.ht .hero-img>i{position:absolute;right:-30%;bottom:-54px;width:90%;height:100px;border-radius:50%;background:#223A37;opacity:.85}
-.ht .g-nav{position:absolute;left:0;right:0;top:0;color:#14263A}
+.ht .hero-img{position:relative;flex:0 0 196px;background:#2A3A4A;overflow:hidden}
+.ht .hero-img>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ht .hero-img::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(20,38,58,.45) 0,rgba(20,38,58,0) 32%,rgba(20,38,58,.75) 100%)}
+.ht .g-nav{position:absolute;left:0;right:0;top:0;z-index:3;color:#F8F2E6}
 .ht .g-logo{font:400 10px/1 "Iowan Old Style",Georgia,serif;letter-spacing:.38em;font-style:normal}
 .ht .ttl{position:absolute;left:16px;right:16px;bottom:38px;z-index:2;color:#F8F2E6}
 .ht .ttl .g-eb{color:#EBCF93}
@@ -444,7 +485,7 @@ svg{display:block;max-width:100%}
 .ht .g-sec span:last-child{color:#7A7468}
 .ht .rooms{display:flex;gap:6px;padding:5px 0 0 12px;overflow:hidden}
 .ht .rooms div{flex:0 0 96px}
-.ht .rooms i{display:block;height:44px;border-radius:10px;box-shadow:0 8px 12px -8px rgba(20,38,58,.55)}
+.ht .rooms img{display:block;width:100%;height:48px;object-fit:cover;border-radius:10px;box-shadow:0 8px 12px -8px rgba(20,38,58,.55)}
 .ht .rooms b{display:block;margin-top:4px;font:400 9px/1 "Iowan Old Style",Georgia,serif}
 .ht .rooms small{display:block;margin-top:2px;font:500 6px/1 system-ui,sans-serif;color:#7A7468}
 .ht .exp{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:7px 12px 0;text-align:center;font:600 5.8px/1.2 system-ui,sans-serif;color:#5E584C}
@@ -452,7 +493,7 @@ svg{display:block;max-width:100%}
 .ht .rev{display:flex;align-items:center;gap:8px;margin:8px 12px 0;background:#ECE4D3;border-radius:12px;padding:7px 9px;font:italic 400 8px/1.25 "Iowan Old Style",Georgia,serif}
 .ht .rev b{font:700 7px/1 system-ui,sans-serif;font-style:normal;color:#B8975A;letter-spacing:.1em}
 .ht .offer{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center;margin:7px 12px 0;background:#14263A;color:#F5F0E6;border-radius:12px;padding:6px}
-.ht .offer i{display:block;height:30px;border-radius:7px;background:linear-gradient(135deg,#D9C6A0,#8E7A55)}
+.ht .offer img{display:block;width:100%;height:30px;object-fit:cover;border-radius:7px}
 .ht .offer small{display:block;font:600 5.2px/1 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#E8C98A}
 .ht .offer b{display:block;margin-top:3px;font:italic 400 9px/1.15 "Iowan Old Style",Georgia,serif}
 .ht .foot{margin-top:auto;height:12px}
@@ -583,6 +624,9 @@ footer nav a{margin-left:20px}
   .hero{padding:52px 0 60px}
   .hero .wrap{grid-template-columns:1fr;gap:44px}
   .reel{max-width:520px}
+  .hero-stage{max-width:520px}
+  .hp1{left:-14px}
+  .hp2{right:-14px}
   .block{padding:60px 0}
   .block.dark{padding:56px 0;border-radius:34px}
   .block.dark .wrap{padding:0 28px}
@@ -615,6 +659,7 @@ footer nav a{margin-left:20px}
   .wrap{padding:0 20px}
   .block.dark .wrap{padding:0 22px}
   .hero .actions .btn,.contact .actions .btn{width:100%}
+  .hp{display:none!important}
 }
 @media (forced-colors:active){
   .btn,.panel .tag{border:2px solid ButtonText}
@@ -646,15 +691,23 @@ footer nav a{margin-left:20px}
 <section class="hero" id="top" aria-labelledby="hero-h">
   <div class="wrap">
     <div>
-      <p class="kicker">Witney, Oxfordshire</p>
-      <h1 id="hero-h">Websites built by hand.</h1>
+      <p class="kicker"><span>Witney, Oxfordshire</span></p>
+      <h1 id="hero-h">Websites built <span class="hl">by hand.</span></h1>
       <p class="lead">Plain code. Fixed prices. Yours to keep.</p>
       <div class="actions">
-        <a class="btn btn-clay" href="#contact">Get a quote</a>
-        <a class="btn" href="#looks">See styles</a>
+        <a class="btn btn-clay btn-lg" href="#contact">Get a quote</a>
+        <a class="btn btn-lg" href="#looks">See styles</a>
       </div>
-      <p class="fine">From &pound;395. Not VAT registered.</p>
+      <ul class="ticks">
+        <li>Designed and coded by hand</li>
+        <li>Fixed prices, from &pound;395</li>
+        <li>Mobile-first and accessible</li>
+      </ul>
+      <p class="fine">Not VAT registered.</p>
     </div>
+    <div class="hero-stage">
+    <div class="hp hp1" aria-hidden="true"><div class="hp-in" data-src=".screen.x"></div></div>
+    <div class="hp hp2" aria-hidden="true"><div class="hp-in" data-src=".screen.m"></div></div>
     <figure class="reel">
       <div class="reel-stage" role="img" aria-label="A looping animation. A pencil sketch of a website is drawn, then fills with colour to become a finished design on a laptop and a phone.">
         <div class="rl s1">
@@ -698,6 +751,7 @@ footer nav a{margin-left:20px}
       <figcaption>Every site starts as a sketch.</figcaption>
       <button type="button" class="reel-pause" id="reel-pause" aria-pressed="false">Pause animation</button>
     </figure>
+    </div>
   </div>
 </section>
 
@@ -725,41 +779,40 @@ footer nav a{margin-left:20px}
 
       <figure class="look">
         <div class="phone"><div class="screen m" aria-hidden="true">
-          <div class="bar"><span class="brand">Fernhill</span><span class="burger"></span></div>
-          <div class="hr"><b>Seasonal food, shared.</b><div class="btns"><span class="b1">Book a table</span><span class="b2">Menu</span></div></div>
-          <div class="book"><i class="t">Reserve online</i><div class="fields"><span>Sat 12 Oct</span><span>7:30pm</span><span>2 &#9662;</span></div><span class="go">Check availability</span></div>
-          <div class="tabs"><span class="on">Starters</span><span>Mains</span><span>Dessert</span></div>
-          <div class="item"><span>Soup of the day</span><span>&pound;6</span></div>
-          <div class="item"><span>Whipped goat&rsquo;s cheese</span><span>&pound;8</span></div>
-          <div class="gal"><i style="background:#264B3C"></i><i style="background:#C9633F"></i><i style="background:#E7D3AE"></i></div>
-          <div class="foot"><span>Open Tue&ndash;Sun &middot; Map &middot; Instagram</span><span class="news">Join the list</span></div>
+          <div class="bar"><span class="brand">Oakhaven</span><span class="burger"></span></div>
+          <div class="hr"><img src="img/oak-hero.jpg" width="560" height="520" alt="" loading="lazy" decoding="async"><div class="cp"><span class="eb">Interior design studio</span><b>Rooms that feel like home.</b><div class="btns"><span class="b1">Free consultation</span><span class="b2">Our work</span></div></div></div>
+          <div class="sec"><span>Selected projects</span><span>View all</span></div>
+          <div class="gal"><div><img src="img/oak-1.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-2.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div><div><img src="img/oak-3.jpg" width="280" height="280" alt="" loading="lazy" decoding="async"></div></div>
+          <div class="svc"><div><span>Full interior design</span><small>From concept</small></div><div><span>Kitchens &amp; bathrooms</span><small>Fitted</small></div><div><span>Styling &amp; furniture</span><small>Sourced</small></div></div>
+          <div class="quote">&ldquo;They understood the house straight away.&rdquo;<small>Client &middot; Cotswolds</small></div>
+          <div class="cta"><span>Start with a free chat</span><span>Book now</span></div>
         </div></div>
-        <figcaption><h3>Mid-range</h3><p>Booking, menu and gallery. Good for restaurants and venues.</p></figcaption>
+        <figcaption><h3>Mid-range</h3><p>Portfolio, services and enquiries. Good for studios, trades and agencies.</p></figcaption>
       </figure>
 
       <figure class="look">
         <div class="phone"><div class="screen x" aria-hidden="true">
-          <div class="nv"><span class="mb"></span><span class="wm">AUREL</span><span class="ri"><i></i><i class="bg2"></i></span></div>
-          <div class="st2">
-            <span class="sp sp1"></span><span class="sp sp2"></span>
-            <div class="wt"><div class="dl"><b class="lb">AUREL</b><i class="h1"></i><i class="h2"></i><i class="pv"></i></div></div>
-            <div class="cp"><span class="ey">The Meridian</span><b>Time, refined.</b><div class="bt"><span class="g1">Discover</span><span class="g2">Book a viewing</span></div></div>
+          <div class="nv"><span class="mb"></span><span class="wm">NORTHBOUND</span><span class="ri"><i></i><i class="bg2"></i></span></div>
+          <div class="st2"><img src="img/nb-hero.jpg" width="560" height="460" alt="" loading="lazy" decoding="async">
+            <div class="cp"><span class="ey">Guided expeditions</span><b>Go further than the map.</b><div class="bt"><span class="g1">Explore trips</span><span class="g2">Watch the film</span></div></div>
           </div>
-          <div class="sc"><span>Collections</span><span class="ga">View all &rarr;</span></div>
+          <div class="bk2"><span><small>Where</small>Anywhere</span><span><small>When</small>Any month</span><span><small>Who</small>2</span><span class="go">Search</span></div>
+          <div class="stt"><span><b>4.9</b>Traveller rating</span><span><b>60+</b>Routes</span><span><b>12</b>Max group size</span></div>
+          <div class="chips"><span class="on">All</span><span>Trekking</span><span>Cycling</span><span>Wildlife</span><span>Family</span></div>
+          <div class="sc"><span>Featured trips</span><span class="ga">View all &rarr;</span></div>
           <div class="cr2">
-            <div class="cd"><i class="v1"></i><b>Meridian</b><small>Limited edition</small></div>
-            <div class="cd"><i class="v2"></i><b>Heritage</b><small>Rose gold</small></div>
-            <div class="cd"><i class="v3"></i><b>Noir</b><small>Steel</small></div>
+            <div class="cd"><div class="im"><img src="img/nb-1.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Desert roads</b></div><small>from <em>&pound;1,890</em></small></div><div class="cd"><div class="im"><img src="img/nb-2.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>New</u><b>Above the clouds</b></div><small>from <em>&pound;2,450</em></small></div><div class="cd"><div class="im"><img src="img/nb-3.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Few left</u><b>Mountain trek</b></div><small>from <em>&pound;1,650</em></small></div><div class="cd"><div class="im"><img src="img/nb-4.jpg" width="300" height="360" alt="" loading="lazy" decoding="async"><u>Popular</u><b>Valley wild</b></div><small>from <em>&pound;2,100</em></small></div>
           </div>
-          <div class="ft3"><span>Insured delivery</span><span>5-year warranty</span><span>Private viewings</span></div>
-          <div class="ed"><i></i><div><small>The Journal</small><b>The craft behind every piece</b></div></div>
-          <div class="gb"><span>Book a private viewing</span><i></i></div>
+          <div class="ft3"><span>Small groups</span><span>Local guides</span><span>Flexible booking</span></div>
+          <div class="rv"><b>&#9733;&#9733;&#9733;&#9733;&#9733; 4.9</b>&ldquo;Best week of our year. Every detail was thought of.&rdquo;</div>
+          <div class="nl"><img src="img/nb-band.jpg" width="560" height="200" alt="" loading="lazy" decoding="async"><div>Get trip ideas first<small>One email a month. No spam.</small><span>Join</span></div></div>
+          <div class="sticky"><span>Not sure where to start?</span><i>Plan my trip</i></div>
           <span class="cc"></span>
         </div></div>
-        <figcaption><h3>Complex</h3><p>High-end and feature-rich. Good for luxury brands.</p></figcaption>
+        <figcaption><h3>Complex</h3><p>Feature-rich, with search, booking and more. Good for bigger brands.</p></figcaption>
       </figure>
     </div>
-    <p class="note">Example designs only. Not real clients.</p>
+    <p class="note">Example designs only. Not real clients. Photos from Unsplash.</p>
   </div>
 </section>
 
@@ -855,41 +908,41 @@ footer nav a{margin-left:20px}
           </div>
           <div class="layer sl" data-i="1">
             <div class="g-nav"><span class="g-logo">Studio Nine</span><span class="g-ic"><i></i></span></div>
-            <div class="hero-img g-ph"><span class="g-eb">Hair salon &middot; Witney</span><h4>Hair, done right.</h4><span class="g-btn">Book now</span></div>
+            <div class="hero-img g-ph"><img src="img/sl-hero.jpg" width="520" height="340" alt="" loading="lazy" decoding="async"><span class="g-eb">Hair salon &middot; Witney</span><h4>Hair, done right.</h4><span class="g-btn">Book now</span></div>
             <div class="chips"><span>Open today &middot; 9&ndash;6</span><span>Walk-ins welcome</span></div>
             <div class="svc"><div><span>Cut &amp; finish <small>45 min</small></span><b>&pound;35</b></div><div><span>Colour <small>2 hr</small></span><b>&pound;65</b></div><div><span>Blow dry <small>30 min</small></span><b>&pound;25</b></div></div>
             <div class="book"><em>Book online</em><div class="days"><span><small>Fri</small>11</span><span class="on"><small>Sat</small>12</span><span><small>Mon</small>14</span><span><small>Tue</small>15</span></div><div class="times"><span>2:30</span><span class="on">3:00</span><span>4:15</span></div><span class="g-btn">Confirm booking</span></div>
-            <div class="team"><span>Your stylists</span><i style="background:linear-gradient(135deg,#E79AB0,#B5546C)">A</i><i style="background:linear-gradient(135deg,#C99A82,#8A5A44)">M</i><i style="background:linear-gradient(135deg,#B79BCB,#6B4A86)">J</i></div>
+            <div class="gal3"><span>Inside the salon</span><div><img src="img/sl-g1.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g2.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"><img src="img/sl-g3.jpg" width="200" height="150" alt="" loading="lazy" decoding="async"></div></div>
             <div class="foot"><span>Gift vouchers</span><span>Mon&ndash;Sat 9&ndash;6</span></div>
           </div>
           <div class="layer ct" data-i="2">
             <div class="g-nav"><span class="g-logo"><i></i>GREENFIELD</span><span class="nr"><span class="g-ic s"><i></i></span><span class="g-ic bk"><i></i><b>3</b></span></span></div>
-            <div class="hero-card"><span class="g-eb">Plant &amp; tool hire</span><b>The right kit, ready when you are.</b><div class="srch">Search 262 products</div></div>
+            <div class="hero-card"><img src="img/ct-hero.jpg" width="520" height="300" alt="" loading="lazy" decoding="async"><span class="g-eb">Plant &amp; tool hire</span><b>The right kit, ready when you are.</b><div class="srch">Search 262 products</div></div>
             <div class="cats"><span><i><svg viewBox="0 0 24 24"><path d="M3 17h13M5 17v-4h6v4M11 13l4-7 4 2M15 6l-1-3M18 8l-2 6h4"/></svg></i>Diggers</span><span><i><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></i>Power</span><span><i><svg viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></svg></i>Access</span><span><i><svg viewBox="0 0 24 24"><path d="M15 4l5 5-3 3-5-5z"/><path d="M12.5 8.5 4 17l3 3 8.5-8.5"/></svg></i>Tools</span></div>
             <div class="g-sec"><span>Popular this week</span><span>View all</span></div>
             <div class="grid">
-              <div class="p"><div class="im" style="background:linear-gradient(135deg,#F4CB63,#D9A21C)"><u>In stock</u><svg viewBox="0 0 24 24"><path d="M3 17h13M5 17v-4h6v4M11 13l4-7 4 2M15 6l-1-3M18 8l-2 6h4"/></svg></div><b>Mini digger</b><small>1.8 tonne &middot; 4 hr min</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im" style="background:linear-gradient(135deg,#C9D2CB,#8D9A91)"><u>In stock</u><svg viewBox="0 0 24 24"><path d="M15 4l5 5-3 3-5-5z"/><path d="M12.5 8.5 4 17l3 3 8.5-8.5"/></svg></div><b>Breaker</b><small>Petrol &middot; 25 kg</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im" style="background:linear-gradient(135deg,#EFD59A,#C79A3A)"><u>Popular</u><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></div><b>Generator</b><small>6 kVA &middot; Silenced</small><span class="q">Request a quote</span></div>
-              <div class="p"><div class="im" style="background:linear-gradient(135deg,#D3DBD5,#9AA99F)"><u>In stock</u><svg viewBox="0 0 24 24"><path d="M7 3v18M17 3v18M7 7h10M7 12h10M7 17h10"/></svg></div><b>Tower scaffold</b><small>Up to 5 m &middot; Delivered</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ct-p1.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Cordless drill</b><small>18V &middot; Two batteries</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ct-p2.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Hammer drill</b><small>18V &middot; Heavy duty</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ct-p3.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>Popular</u></div><b>Hammer</b><small>Demolition &middot; 3 lb</small><span class="q">Request a quote</span></div>
+              <div class="p"><div class="im"><img src="img/ct-p4.jpg" width="280" height="200" alt="" loading="lazy" decoding="async"><u>In stock</u></div><b>Spanner set</b><small>Metric &middot; 24 piece</small><span class="q">Request a quote</span></div>
             </div>
             <div class="basket"><span>3 items selected</span><i>Request quote</i></div>
           </div>
           <div class="layer ht" data-i="3">
-            <div class="hero-img g-ph"><i></i>
-              <div class="g-nav"><span class="g-ic"><i></i></span><span class="g-logo">HARTWELL</span><span class="g-btn" style="border:1px solid #14263A;padding:5px 9px;font-size:6px">Book</span></div>
-              <div class="ttl"><span class="g-eb">Country house hotel</span><b>A quiet place in the country.</b></div>
+            <div class="hero-img g-ph"><img src="img/ht-hero.jpg" width="560" height="420" alt="" loading="lazy" decoding="async">
+              <div class="g-nav"><span class="g-ic"><i></i></span><span class="g-logo">HARTWELL</span><span class="g-btn" style="border:1px solid #F8F2E6;padding:5px 9px;font-size:6px">Book</span></div>
+              <div class="ttl"><span class="g-eb">Boutique hotel &amp; spa</span><b>A quiet place to stay.</b></div>
             </div>
             <div class="bookbar"><span><small>Check in</small>Fri 11 Oct</span><span><small>Check out</small>Sun 13 Oct</span><span><small>Guests</small>2</span><span class="go">Check availability</span></div>
             <div class="g-sec"><span>Rooms &amp; suites</span><span>View all</span></div>
             <div class="rooms">
-              <div><i style="background:linear-gradient(135deg,#D3BE94,#8E7A55)"></i><b>The Garden Room</b><small>Sleeps 2 &middot; Garden view</small></div>
-              <div><i style="background:linear-gradient(135deg,#8FA6BA,#3F566A)"></i><b>The Tower Suite</b><small>Sleeps 3 &middot; Lake view</small></div>
-              <div><i style="background:linear-gradient(135deg,#BBA991,#6F6252)"></i><b>The Library</b><small>Sleeps 2</small></div>
+              <div><img src="img/ht-r1.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Deluxe Double</b><small>Sleeps 2 &middot; Garden view</small></div>
+              <div><img src="img/ht-r2.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Classic Twin</b><small>Sleeps 2 &middot; City view</small></div>
+              <div><img src="img/ht-r3.jpg" width="260" height="160" alt="" loading="lazy" decoding="async"><b>Loft Suite</b><small>Sleeps 3 &middot; Private terrace</small></div>
             </div>
             <div class="exp"><span><i></i>Spa</span><span><i></i>Dining</span><span><i></i>Walks</span><span><i></i>Events</span></div>
             <div class="rev"><b>&#9733;&#9733;&#9733;&#9733;&#9733;</b><span>&ldquo;The quietest night&rsquo;s sleep.&rdquo;</span></div>
-            <div class="offer"><i></i><div><small>Offer</small><b>Spring escape, two nights</b></div></div>
+            <div class="offer"><img src="img/ht-offer.jpg" width="120" height="90" alt="" loading="lazy" decoding="async"><div><small>Offer</small><b>Spring escape, two nights</b></div></div>
             <div class="foot"></div>
           </div>
         </div></div>
@@ -1005,6 +1058,14 @@ footer nav a{margin-left:20px}
   range.addEventListener('input',function(){set(+range.value);});
   stops.forEach(function(b){b.addEventListener('click',function(){set(+b.getAttribute('data-i'));range.focus();});});
   set(0);
+})();
+(function(){
+  [].slice.call(document.querySelectorAll('.hp-in')).forEach(function(d){
+    var src=document.querySelector('.look '+d.getAttribute('data-src')); if(!src) return;
+    var c=src.cloneNode(true); c.removeAttribute('aria-hidden');
+    [].slice.call(c.querySelectorAll('img')).forEach(function(i){i.loading='eager';});
+    d.appendChild(c);
+  });
 })();
 (function(){
   var bs=[].slice.call(document.querySelectorAll('.steps h3 button')), canHover=window.matchMedia&&window.matchMedia('(hover:hover)').matches;
