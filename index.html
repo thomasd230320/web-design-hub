@@ -72,7 +72,7 @@ svg{display:block;max-width:100%}
 .draft{background:var(--forest);color:var(--pale);font-size:.9rem;line-height:1.4;padding:9px 16px;text-align:center}
 
 /* Header */
-.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(213,224,235,.88);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
+.header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(213,224,235,.97);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
 .logo span{color:var(--clay)}
@@ -359,9 +359,9 @@ svg{display:block;max-width:100%}
 /* Pricing slider phone (.hire): four completely different websites, one per price */
 .hire{background:#EDEAE2}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
-.hire .layer{transform:translateX(calc((var(--k,0) - var(--v,0)) * 100%));opacity:1;visibility:visible;will-change:transform}
+.hire .layer{transform:translateX(calc(var(--k,0) * 100%));opacity:1;visibility:visible;will-change:transform}
 .hire .layer[data-i="1"]{--k:1}.hire .layer[data-i="2"]{--k:2}.hire .layer[data-i="3"]{--k:3}
-.hire .g-ph::after{opacity:.16}
+.hire .g-ph::after{display:none}
 .hire img{display:block}
 
 /* Slider sites: one design system, four sizes. Same polish everywhere; only the amount of content grows. */
@@ -558,7 +558,21 @@ svg{display:block;max-width:100%}
 .panel li::before{content:"";position:absolute;left:2px;top:.85em;width:12px;height:7px;border-left:3px solid var(--clay);border-bottom:3px solid var(--clay);transform:rotate(-45deg)}
 .panel .no{margin-top:12px;font-size:1rem;color:var(--forest-2)}
 .panel .no b{color:var(--forest);font-weight:600}
-.pin.on .pin-in{position:sticky;top:96px}
+.pin.on{height:310vh;height:310svh}
+.pin.on .pin-in{position:sticky;top:0;height:100vh;height:100svh;padding-top:96px;box-sizing:border-box;display:flex;align-items:center}
+.pin.on .pin-in>.pricer{width:100%}
+@supports (animation-timeline: view()){
+  .pin.on{view-timeline-name:--pin;view-timeline-axis:block;view-timeline-inset:0}
+  .pin.on .hire .layer{animation-timing-function:linear;animation-fill-mode:both;animation-timeline:--pin;animation-range:contain 0% contain 100%}
+  .pin.on .hire .layer[data-i="0"]{animation-name:sw0}
+  .pin.on .hire .layer[data-i="1"]{animation-name:sw1}
+  .pin.on .hire .layer[data-i="2"]{animation-name:sw2}
+  .pin.on .hire .layer[data-i="3"]{animation-name:sw3}
+  @keyframes sw0{from{transform:translateX(0)}to{transform:translateX(-300%)}}
+  @keyframes sw1{from{transform:translateX(100%)}to{transform:translateX(-200%)}}
+  @keyframes sw2{from{transform:translateX(200%)}to{transform:translateX(-100%)}}
+  @keyframes sw3{from{transform:translateX(300%)}to{transform:translateX(0)}}
+}
 .pin.on .pricer-ctl{position:static}
 .phone-stage{position:relative}
 .arrow{display:none;position:absolute;top:50%;z-index:5;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:2px solid var(--forest-2);background:var(--pale);color:var(--forest);cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:0 10px 20px -10px rgba(11,16,25,.5);transition:background-color .2s,color .2s,opacity .2s}
@@ -636,8 +650,6 @@ footer nav a{margin-left:20px}
   .slide input:hover::-moz-range-thumb{transform:scale(1.1)}
   .reel:hover .reel-stage{transform:scale(1.03)}
 }
-
-#compare,#process{content-visibility:auto;contain-intrinsic-size:auto 900px}
 
 /* Responsive */
 @media (max-width:980px){
@@ -1087,8 +1099,8 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script>
 (function(){
   var root=document.querySelector('.pricer'); if(!root) return;
-  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status'), screen=root.querySelector('.screen.hire');
-  var panels=[].slice.call(root.querySelectorAll('.panel')), stops=[].slice.call(root.querySelectorAll('.stops button')), sets=[].slice.call(root.querySelectorAll('.sm-set'));
+  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status');
+  var layers=[].slice.call(root.querySelectorAll('.layer')), panels=[].slice.call(root.querySelectorAll('.panel')), stops=[].slice.call(root.querySelectorAll('.stops button')), sets=[].slice.call(root.querySelectorAll('.sm-set'));
   var prev=document.getElementById('plan-prev'), next=document.getElementById('plan-next'), cont=document.getElementById('plan-continue');
   var pin=document.getElementById('pin'), pinIn=pin&&pin.querySelector('.pin-in');
   var names=['Starter, from £395','Business, from £1,500','Content and catalogue, from £3,000','Large builds, quoted per project'];
@@ -1096,9 +1108,15 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   var sizes=['3 pages','Up to 8 pages','Catalogue of up to 75 items','Unlimited pages, quoted'];
   var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
   sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
-  var PT=96, v=0, idx=-1, dragging=false, pinned=false, anim=0, reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
+  var PT=96, v=0, idx=-1, dragging=false, pinned=false, anim=0, ticking=false;
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
+  var css=!!(window.CSS&&CSS.supports&&CSS.supports('animation-timeline: view()'));
+  function place(x){
+    if(pinned&&css) return;
+    for(var k=0;k<layers.length;k++) layers[k].style.transform='translate3d('+((k-x)*100)+'%,0,0)';
+  }
   function render(x){
-    v=Math.max(0,Math.min(3,x)); slide.style.setProperty('--v',v); screen.style.setProperty('--v',v);
+    v=Math.max(0,Math.min(3,x)); slide.style.setProperty('--v',v); place(v);
     if(!dragging) range.value=v;
     prev.disabled=v<0.02; next.disabled=v>2.98;
     var i=Math.round(v); if(i===idx) return; idx=i;
@@ -1116,32 +1134,33 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
     var from=v,t0=performance.now(),d=420+Math.abs(to-from)*140;
     (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);render(from+(to-from)*e);if(k<1)anim=requestAnimationFrame(f);})(t0);
   }
-  function geom(){var top=pin.getBoundingClientRect().top+window.pageYOffset;return{top:top,travel:Math.max(1,pin.offsetHeight-pinIn.offsetHeight)};}
-  function yFor(x){var g=geom();return g.top-PT+g.travel*x/3;}
-  function onScroll(){
-    if(!pinned) return;
-    var g=geom(), p=(window.pageYOffset-(g.top-PT))/g.travel;
+  function travel(){return Math.max(1,pin.offsetHeight-pinIn.offsetHeight);}
+  function yFor(x){return pin.getBoundingClientRect().top+window.pageYOffset+travel()*x/3;}
+  function frame(){
+    ticking=false;
+    var p=-pin.getBoundingClientRect().top/travel();
     render(Math.max(0,Math.min(1,p))*3);
     cont.classList.toggle('show',p>-0.12&&p<0.995);
   }
+  function onScroll(){ if(pinned&&!ticking){ticking=true;requestAnimationFrame(frame);} }
   function goTo(i){
     i=Math.max(0,Math.min(3,i));
     if(pinned) window.scrollTo({top:yFor(i),behavior:reduce.matches?'auto':'smooth'}); else tween(i);
   }
   function setup(){
     if(!pin||!pinIn) return;
-    pin.style.height=''; pin.classList.remove('on');
+    pin.classList.remove('on');
     var vh=window.innerHeight;
-    pinned=!reduce.matches && vh>=520 && pinIn.offsetHeight<=vh-PT-8;
-    if(pinned){pin.classList.add('on'); pin.style.height=(pinIn.offsetHeight+Math.round(vh*0.7)*3)+'px';}
+    pinned=!reduce.matches && vh>=520 && root.offsetHeight<=vh-PT-16;
+    if(pinned) pin.classList.add('on');
+    layers.forEach(function(el){el.style.transform='';});
     cont.classList.remove('show');
-    onScroll();
+    if(pinned) frame(); else place(v);
   }
   range.addEventListener('pointerdown',function(){dragging=true;});
   range.addEventListener('input',function(){
     var x=+range.value;
-    if(pinned){window.scrollTo({top:yFor(x),behavior:'instant'});}
-    else cancelAnimationFrame(anim);
+    if(pinned) window.scrollTo({top:yFor(x),behavior:'instant'}); else cancelAnimationFrame(anim);
     render(x);
   });
   range.addEventListener('change',function(){dragging=false;goTo(Math.round(+range.value));});
