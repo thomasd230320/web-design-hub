@@ -75,6 +75,8 @@ svg{display:block;max-width:100%}
 .header{position:sticky;top:10px;z-index:50;margin:14px auto 0;width:min(var(--wrap),calc(100% - 24px));background:rgba(213,224,235,.97);border:1px solid var(--rule);border-radius:999px;box-shadow:0 14px 34px -22px rgba(7,57,17,.5)}
 .header .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;max-width:none;padding:0 12px 0 26px}
 .logo{font:600 1.45rem/1 var(--serif);text-decoration:none;letter-spacing:-.01em}
+.logo{display:flex;align-items:center}
+.logo img{display:block;height:52px;width:auto}
 .logo span{color:var(--clay)}
 .nav{display:flex;align-items:center;gap:4px}
 .nav a:not(.btn){padding:10px 14px;font-weight:500;font-size:1rem;text-decoration:none;border-bottom:2px solid transparent}
@@ -705,7 +707,7 @@ footer nav a{margin-left:20px}
 
 <header class="header">
   <div class="wrap">
-    <a class="logo" href="#top" aria-label="WebDesignHub, home">Web<span>Design</span>Hub</a>
+    <a class="logo" href="#top" aria-label="WebDesignHub, home"><img src="img/logo.webp" width="120" height="104" alt="" decoding="async" fetchpriority="high"></a>
     <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="#looks">Styles</a>
