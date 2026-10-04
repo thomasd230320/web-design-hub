@@ -359,7 +359,7 @@ svg{display:block;max-width:100%}
 /* Pricing slider phone (.hire): four completely different websites, one per price */
 .hire{background:#EDEAE2}
 .hire .layer{position:absolute;inset:0;display:flex;flex-direction:column;background:#EDEAE2;color:#1D1F24;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;opacity:0;visibility:hidden}
-.hire .layer{transform:translateX(calc(var(--k,0) * 100%));opacity:1;visibility:visible;will-change:transform}
+.hire .layer{transform:translateX(calc(var(--k,0) * 100%));opacity:1;visibility:visible}
 .hire .layer[data-i="1"]{--k:1}.hire .layer[data-i="2"]{--k:2}.hire .layer[data-i="3"]{--k:3}
 .hire .g-ph::after{display:none}
 .hire img{display:block}
@@ -564,18 +564,15 @@ svg{display:block;max-width:100%}
 .pin.on .pin-in{position:sticky;top:0;height:100vh;height:100svh;padding-top:96px;box-sizing:border-box;display:flex;align-items:center}
 .pin.on .pin-in>.pricer{width:100%}
 @media (min-width:981px){.pin.on .phone-stage{transform:scale(var(--ps,1));transform-origin:50% 0;margin-bottom:calc((var(--ps,1) - 1) * 538px)}}
-@supports (animation-timeline: view()){
-  .pin.on{view-timeline-name:--pin;view-timeline-axis:block;view-timeline-inset:0}
-  .pin.on .hire .layer{animation-timing-function:linear;animation-fill-mode:both;animation-timeline:--pin;animation-range:contain 0% contain 100%}
-  .pin.on .hire .layer[data-i="0"]{animation-name:sw0}
-  .pin.on .hire .layer[data-i="1"]{animation-name:sw1}
-  .pin.on .hire .layer[data-i="2"]{animation-name:sw2}
-  .pin.on .hire .layer[data-i="3"]{animation-name:sw3}
-  @keyframes sw0{from{transform:translateX(0)}to{transform:translateX(-300%)}}
-  @keyframes sw1{from{transform:translateX(100%)}to{transform:translateX(-200%)}}
-  @keyframes sw2{from{transform:translateX(200%)}to{transform:translateX(-100%)}}
-  @keyframes sw3{from{transform:translateX(300%)}to{transform:translateX(0)}}
-}
+.pin.on{position:relative}
+.pin-s{display:none}
+.pin.on .pin-s{display:block;position:absolute;left:0;right:0;pointer-events:none}
+.pin.on .pin-s[data-i="0"]{top:0;height:85svh}
+.pin.on .pin-s[data-i="1"]{top:85svh;height:70svh}
+.pin.on .pin-s[data-i="2"]{top:155svh;height:70svh}
+.pin.on .pin-s[data-i="3"]{top:225svh;bottom:0}
+@media (prefers-reduced-motion:no-preference){.hire .layer{transition:transform .65s cubic-bezier(.22,.8,.2,1)}.hire.dragging .layer{transition:none}}
+#pricing.block{overflow:visible}
 .pin.on .pricer-ctl{position:static}
 .phone-stage{position:relative}
 .arrow{display:none;position:absolute;top:50%;z-index:5;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:2px solid var(--forest-2);background:var(--pale);color:var(--forest);cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:0 10px 20px -10px rgba(11,16,25,.5);transition:background-color .2s,color .2s,opacity .2s}
@@ -913,7 +910,7 @@ footer nav a{margin-left:20px}
       <p class="flex-note"><b>Prices can be flexible.</b> Every project is different, so these are starting points. Tell me what you need.</p>
     </div>
 
-    <div class="pin" id="pin"><div class="pin-in">
+    <div class="pin" id="pin"><i class="pin-s" data-i="0"></i><i class="pin-s" data-i="1"></i><i class="pin-s" data-i="2"></i><i class="pin-s" data-i="3"></i><div class="pin-in">
     <div class="pricer">
       <div>
         <div class="pricer-ctl">
@@ -1102,7 +1099,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script>
 (function(){
   var root=document.querySelector('.pricer'); if(!root) return;
-  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status');
+  var range=root.querySelector('input[type=range]'), slide=root.querySelector('.slide'), live=document.getElementById('plan-status'), screen=root.querySelector('.screen.hire');
   var layers=[].slice.call(root.querySelectorAll('.layer')), panels=[].slice.call(root.querySelectorAll('.panel')), stops=[].slice.call(root.querySelectorAll('.stops button')), sets=[].slice.call(root.querySelectorAll('.sm-set'));
   var prev=document.getElementById('plan-prev'), next=document.getElementById('plan-next'), cont=document.getElementById('plan-continue');
   var pin=document.getElementById('pin'), pinIn=pin&&pin.querySelector('.pin-in');
@@ -1111,15 +1108,11 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   var sizes=['3 pages','Up to 8 pages','Catalogue of up to 75 items','Unlimited pages, quoted'];
   var kind=document.getElementById('plan-kind'), size=document.getElementById('plan-size');
   sets.forEach(function(el){var n=+el.getAttribute('data-n'),f=+el.getAttribute('data-f'),h='';for(var j=0;j<n;j++)h+=j>=n-f?'<i class="f"></i>':'<i></i>';el.innerHTML=h;});
-  var PT=96, v=0, idx=-1, dragging=false, pinned=false, anim=0, ticking=false;
+  var PT=96, v=0, idx=-1, cur=0, dragging=false, pinned=false, anim=0, lock=0, lastW=0, lastH=0, rz=0;
   var reduce=window.matchMedia('(prefers-reduced-motion:reduce)');
-  var css=!!(window.CSS&&CSS.supports&&CSS.supports('animation-timeline: view()'));
-  function place(x){
-    if(pinned&&css) return;
-    for(var k=0;k<layers.length;k++) layers[k].style.transform='translate3d('+((k-x)*100)+'%,0,0)';
-  }
-  function render(x){
-    v=Math.max(0,Math.min(3,x)); slide.style.setProperty('--v',v); place(v);
+  function showLayers(x){for(var k=0;k<layers.length;k++) layers[k].style.transform='translate3d('+((k-x)*100)+'%,0,0)';}
+  function ui(x){
+    v=Math.max(0,Math.min(3,x)); slide.style.setProperty('--v',v);
     if(!dragging) range.value=v;
     prev.disabled=v<0.02; next.disabled=v>2.98;
     var i=Math.round(v); if(i===idx) return; idx=i;
@@ -1132,23 +1125,31 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
     if(live) live.textContent=names[i]+'. '+sizes[i]+'. Example: '+kinds[i];
   }
   function tween(to){
-    cancelAnimationFrame(anim);
-    if(reduce.matches){render(to);return;}
-    var from=v,t0=performance.now(),d=420+Math.abs(to-from)*140;
-    (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);render(from+(to-from)*e);if(k<1)anim=requestAnimationFrame(f);})(t0);
+    cur=to; cancelAnimationFrame(anim); showLayers(to);
+    if(reduce.matches){ui(to);return;}
+    var from=v,t0=performance.now(),d=420+Math.abs(to-from)*120;
+    (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);ui(from+(to-from)*e);if(k<1)anim=requestAnimationFrame(f);})(t0);
   }
-  function travel(){return Math.max(1,pin.offsetHeight-pinIn.offsetHeight);}
-  function yFor(x){return pin.getBoundingClientRect().top+window.pageYOffset+travel()*x/3;}
-  function frame(){
-    ticking=false;
-    var p=-pin.getBoundingClientRect().top/travel();
-    render(Math.max(0,Math.min(1,p))*3);
-    cont.classList.toggle('show',p>-0.12&&p<0.995);
-  }
-  function onScroll(){ if(pinned&&!ticking){ticking=true;requestAnimationFrame(frame);} }
+  function yFor(i){var r=pin.getBoundingClientRect();return r.top+window.pageYOffset+(pin.offsetHeight-pinIn.offsetHeight)*i/3;}
   function goTo(i){
     i=Math.max(0,Math.min(3,i));
-    if(pinned) window.scrollTo({top:yFor(i),behavior:reduce.matches?'auto':'smooth'}); else tween(i);
+    if(pinned){
+      lock=Date.now()+900;
+      window.scrollTo({top:yFor(i),behavior:reduce.matches?'auto':'smooth'});
+    }
+    tween(i);
+  }
+  var active={};
+  if('IntersectionObserver' in window&&pin){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        var i=+e.target.getAttribute('data-i');
+        if(e.isIntersecting){active[i]=1; if(pinned&&!dragging&&Date.now()>lock&&i!==cur) tween(i);}
+        else delete active[i];
+      });
+      cont.classList.toggle('show',pinned&&Object.keys(active).length>0);
+    },{rootMargin:'-50% 0px -50% 0px',threshold:0});
+    [].slice.call(pin.querySelectorAll('.pin-s')).forEach(function(el){io.observe(el);});
   }
   function reserve(){
     [[size,sizes],[kind,kinds.map(function(k){return 'Example: '+k;})]].forEach(function(p){
@@ -1160,40 +1161,39 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   }
   function setup(){
     if(!pin||!pinIn) return;
+    lastW=window.innerWidth; lastH=window.innerHeight;
     reserve();
-    pin.classList.remove('on');
-    var vh=window.innerHeight;
-    var avail=vh-PT-16, h=root.offsetHeight, ps=1;
+    var vh=window.innerHeight, avail=vh-PT-16, ps=1;
     root.style.setProperty('--ps',1);
-    if(window.innerWidth>980 && h>avail){var st=root.querySelector('.phone-stage').offsetHeight; ps=(avail-(h-st))/st; h=avail; if(ps<0.55){ps=1;h=Infinity;} else ps=Math.min(1,ps);}
+    var h=root.offsetHeight;
+    if(window.innerWidth>980&&h>avail){var st=root.querySelector('.phone-stage').offsetHeight; ps=(avail-(h-st))/st; h=avail; if(ps<0.55){ps=1;h=Infinity;} else ps=Math.min(1,ps);}
     root.style.setProperty('--ps',ps);
     pinned=!reduce.matches && vh>=520 && h<=avail;
-    if(pinned) pin.classList.add('on');
-    layers.forEach(function(el){el.style.transform='';});
-    cont.classList.remove('show');
-    if(pinned) frame(); else place(v);
+    pin.classList.toggle('on',pinned);
+    if(!pinned) cont.classList.remove('show');
   }
-  range.addEventListener('pointerdown',function(){dragging=true;});
+  range.addEventListener('pointerdown',function(){dragging=true;screen.classList.add('dragging');});
   range.addEventListener('input',function(){
-    var x=+range.value;
-    if(pinned) window.scrollTo({top:yFor(x),behavior:'instant'}); else cancelAnimationFrame(anim);
-    render(x);
+    var x=+range.value; cancelAnimationFrame(anim); showLayers(x); ui(x);
+    if(pinned) window.scrollTo({top:yFor(x),behavior:'instant'});
   });
-  range.addEventListener('change',function(){dragging=false;goTo(Math.round(+range.value));});
+  range.addEventListener('change',function(){dragging=false;screen.classList.remove('dragging');goTo(Math.round(+range.value));});
   range.addEventListener('keydown',function(e){
     var d={ArrowRight:1,ArrowUp:1,ArrowLeft:-1,ArrowDown:-1}[e.key];
-    if(d){e.preventDefault();goTo(Math.round(v)+d);}
+    if(d){e.preventDefault();goTo(cur+d);}
     else if(e.key==='Home'){e.preventDefault();goTo(0);}
     else if(e.key==='End'){e.preventDefault();goTo(3);}
   });
   stops.forEach(function(b){b.addEventListener('click',function(){goTo(+b.getAttribute('data-i'));range.focus({preventScroll:true});});});
-  prev.addEventListener('click',function(){goTo(Math.round(v)-1);});
-  next.addEventListener('click',function(){goTo(Math.round(v)+1);});
-  cont.addEventListener('click',function(){var t=document.querySelector('.extras');if(t)t.scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'start'});});
-  window.addEventListener('scroll',onScroll,{passive:true});
-  window.addEventListener('resize',setup);
+  prev.addEventListener('click',function(){goTo(cur-1);});
+  next.addEventListener('click',function(){goTo(cur+1);});
+  cont.addEventListener('click',function(){var t=document.querySelector('.extras');if(t){lock=Date.now()+1200;t.scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'start'});}});
+  window.addEventListener('resize',function(){
+    clearTimeout(rz);
+    rz=setTimeout(function(){ if(window.innerWidth!==lastW||Math.abs(window.innerHeight-lastH)>150) setup(); },200);
+  });
   if(reduce.addEventListener) reduce.addEventListener('change',setup);
-  render(0); setup();
+  showLayers(0); ui(0); setup();
 })();
 (function(){
   var cn=navigator.connection||{}, wide=window.matchMedia&&window.matchMedia('(min-width:621px)').matches;
