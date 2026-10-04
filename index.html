@@ -538,6 +538,18 @@ svg{display:block;max-width:100%}
 .care li{padding:6px 0 6px 26px;position:relative}
 .care li::before{content:"";position:absolute;left:2px;top:.9em;width:12px;height:7px;border-left:3px solid var(--tint);border-bottom:3px solid var(--tint);transform:rotate(-45deg)}
 .pricing-note{margin-top:28px;font-size:.98rem;color:var(--forest-2)}
+.pay{margin-top:48px;background:var(--pale-2);border-radius:26px;padding:28px 30px}
+.pay h3{font-size:1.5rem}
+.pay-sub{margin-top:6px;color:var(--forest-2)}
+.pay-bar{display:flex;gap:8px;margin-top:18px}
+.pay-bar li{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:18px 20px;border-radius:18px;min-height:112px}
+.pay-bar b{font:600 2.4rem/1 var(--serif)}
+.pay-bar span{font:600 1rem/1.25 var(--sans)}
+.pay-bar .p1{flex:30;background:var(--forest);color:var(--pale)}
+.pay-bar .p2{flex:50;background:#3F5478;color:var(--pale)}
+.pay-bar .p3{flex:20;background:var(--orange);color:var(--ink)}
+.pay .pricing-note{margin-top:16px;font-weight:600;color:var(--forest)}
+@media (max-width:700px){.pay{padding:22px}.pay-bar{flex-direction:column}.pay-bar li{flex:none!important;min-height:0}}
 
 /* Contact */
 .contact{text-align:left}
@@ -915,7 +927,16 @@ footer nav a{margin-left:20px}
         </ul>
       </div>
     </div>
-    <p class="pricing-note">10% upfront. 70% before the DNS change. The final 20% once the site is live.</p>
+    <section class="pay" aria-labelledby="pay-h">
+      <h3 id="pay-h">How payment works</h3>
+      <p class="pay-sub">Three payments, so you always know what is due and when.</p>
+      <ol class="pay-bar">
+        <li class="p1"><b>30%</b><span>To start</span></li>
+        <li class="p2"><b>50%</b><span>Before the DNS change</span></li>
+        <li class="p3"><b>20%</b><span>Once the site is live</span></li>
+      </ol>
+      <p class="pricing-note">30% to start, 50% before the DNS change, 20% once the site is live.</p>
+    </section>
   </div>
 </section>
 
@@ -928,9 +949,9 @@ footer nav a{margin-left:20px}
     </div>
     <ol class="steps">
       <li><h3><button type="button" aria-expanded="false" aria-controls="st1">Talk</button></h3><p>A free call.</p><p class="more" id="st1">Tell me what the site is for and who it is for.</p></li>
-      <li><h3><button type="button" aria-expanded="false" aria-controls="st2">Agree</button></h3><p>A fixed price in writing.</p><p class="more" id="st2">You get the pages and the price in writing. The first 10% starts the build.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st2">Agree</button></h3><p>A fixed price in writing.</p><p class="more" id="st2">You get the pages and the price in writing. The first 30% starts the build.</p></li>
       <li><h3><button type="button" aria-expanded="false" aria-controls="st3">Build</button></h3><p>A preview you can click through.</p><p class="more" id="st3">I build it by hand and send you a link to look around and ask for changes.</p></li>
-      <li><h3><button type="button" aria-expanded="false" aria-controls="st4">Launch</button></h3><p>Tested and handed over.</p><p class="more" id="st4">I test it on phones and computers. A further 70% is due before the DNS change, which points your domain at the new site. The final 20% is due once the site is live.</p></li>
+      <li><h3><button type="button" aria-expanded="false" aria-controls="st4">Launch</button></h3><p>Tested and handed over.</p><p class="more" id="st4">I test it on phones and computers. A further 50% is due before the DNS change, which points your domain at the new site. The final 20% is due once the site is live.</p></li>
     </ol>
   </div>
 </section>
