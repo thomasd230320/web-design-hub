@@ -198,7 +198,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   size();window.addEventListener('resize',size);
 
   /* 01 paper plane */
-  var send=document.getElementById('send'),plane=document.getElementById('plane'),flying=false;
+  var send=document.getElementById('send'),plane=document.getElementById('plane'),flying=false,runId=0;
   function spline(p,t){ // Catmull-Rom through points p, t in [0,1]
     var n=p.length-1,f=t*n,i=Math.min(n-1,Math.floor(f)),u=f-i;
     var a=p[Math.max(0,i-1)],b=p[i],c=p[i+1],d=p[Math.min(n,i+2)];
@@ -213,24 +213,23 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
     var r=send.getBoundingClientRect(),W=innerWidth,bx=r.left+r.width/2,by=r.top+r.height/2;
     function Y(v){return Math.max(36,v);}
     var pts=[{x:bx,y:by},{x:bx+(W-bx)*.4,y:Y(by-30)},{x:W*.82,y:Y(by-90)},{x:W+70,y:Y(by-150)},{x:W*.93,y:Y(by-250)},{x:W*.72,y:Y(by-235)},{x:W*.46,y:Y(by-190)},{x:W*.2,y:Y(by-200)},{x:-90,y:Y(by-260)}];
-    var dur=3200,t0=performance.now(),trail=[],lastAng=0;
+    var dur=3200,t0=performance.now(),trail=[],lastAng=0,my=++runId,hid=false;
     plane.style.display='block';
     (function frame(now){
+      if(my!==runId)return;
       var k=Math.min(1,(now-t0)/dur),e=k*k*(3-2*k),s=spline(pts,e),s2=spline(pts,Math.min(1,e+.012)),ang=Math.atan2(s2.y-s.y,s2.x-s.x)*180/Math.PI;
       if(k>=1)ang=lastAng;lastAng=ang;
       plane.style.transform='translate('+s.x+'px,'+s.y+'px) rotate('+ang+'deg)';
-      trail.push({x:s.x,y:s.y,t:now});
+      if(k<1)trail.push({x:s.x,y:s.y,t:now});
       tx.clearRect(0,0,innerWidth,innerHeight);
       for(var i=trail.length-1;i>=0;i--){
         var age=now-trail[i].t; if(age>1000){trail.splice(0,i+1);break;}
         var a=1-age/1000;
         tx.beginPath();tx.fillStyle='rgba(255,255,255,'+(a*.5)+')';tx.arc(trail[i].x-Math.cos(ang*Math.PI/180)*14,trail[i].y-Math.sin(ang*Math.PI/180)*14,4+(1-a)*12,0,6.283);tx.fill();
       }
-      if(k<1||trail.length){
-        if(k>=1){plane.style.display='none';}
-        requestAnimationFrame(frame);
-      }else{tx.clearRect(0,0,innerWidth,innerHeight);}
-      if(k>=1&&flying){flying=false;setTimeout(function(){lab.textContent='Send email';send.disabled=false;},700);}
+      if(k>=1&&!hid){hid=true;plane.style.display='none';}
+      if(k<1||trail.length){requestAnimationFrame(frame);}
+      else{tx.clearRect(0,0,innerWidth,innerHeight);flying=false;lab.textContent='Send email';send.disabled=false;}
     })(t0);
   });
 
