@@ -579,7 +579,9 @@ svg{display:block;max-width:100%}
 #apps.block{padding:56px 0}
 #apps .head{margin-bottom:28px}
 .apps{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:16px}
-.apps li{display:flex;align-items:center;gap:14px;min-width:260px;padding:14px 22px 14px 14px;background:var(--pale);border:1.5px solid var(--forest-2);border-radius:22px}
+.apps a{display:flex;align-items:center;gap:14px;min-width:280px;padding:14px 22px 14px 14px;background:var(--pale);border:1.5px solid var(--forest-2);border-radius:22px;color:inherit;text-decoration:none;transition:background-color .2s ease,border-color .2s ease}
+.apps a:hover,.apps a:focus-visible{background:#fff;border-color:var(--forest)}
+.apps em{display:block;margin-top:4px;font:600 .85rem/1 var(--sans);font-style:normal;color:var(--clay)}
 .apps .ico{display:grid;place-items:center;width:56px;height:56px;border-radius:14px;background:var(--forest);color:var(--pale);font:600 1.6rem/1 var(--display)}
 .apps b{display:block;font:600 1.15rem/1.2 var(--display);color:var(--forest)}
 .apps small{display:block;margin-top:2px;font-size:.9rem;color:var(--forest-2)}
@@ -1097,8 +1099,8 @@ footer nav a{margin-left:20px}
       <p class="small">Have an idea for an app? Mention it when you get in touch and we can talk it through.</p>
     </div>
     <ul class="apps">
-      <li><span class="ico" aria-hidden="true">M</span><span><b>Meal Maker</b><small>On the App Store</small></span></li>
-      <li><span class="ico" aria-hidden="true">W</span><span><b>Wean Well</b><small>On the App Store</small></span></li>
+      <li><a href="https://apps.apple.com/gb/app/meal-maker-planner-recipes/id6806764728" target="_blank" rel="noopener"><span class="ico" aria-hidden="true">M</span><span><b>Meal Maker</b><small>Planner &amp; Recipes</small><em>View on the App Store</em></span></a></li>
+      <li><a href="https://apps.apple.com/gb/app/weanwell-baby-weaning/id6801144104" target="_blank" rel="noopener"><span class="ico" aria-hidden="true">W</span><span><b>WeanWell</b><small>Baby Weaning</small><em>View on the App Store</em></span></a></li>
     </ul>
   </div>
 </section>
