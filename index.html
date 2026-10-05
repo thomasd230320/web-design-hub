@@ -577,7 +577,12 @@ svg{display:block;max-width:100%}
 @media (prefers-reduced-motion:no-preference){.hire .layer{transition:transform .65s cubic-bezier(.22,.8,.2,1)}.hire.dragging .layer{transition:none}}
 #pricing.block{overflow:visible}
 #apps.block{padding:56px 0}
-#apps .head{margin-bottom:0}
+#apps .head{margin-bottom:28px}
+.apps{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:16px}
+.apps li{display:flex;align-items:center;gap:14px;min-width:260px;padding:14px 22px 14px 14px;background:var(--pale);border:1.5px solid var(--forest-2);border-radius:22px}
+.apps .ico{display:grid;place-items:center;width:56px;height:56px;border-radius:14px;background:var(--forest);color:var(--pale);font:600 1.6rem/1 var(--display)}
+.apps b{display:block;font:600 1.15rem/1.2 var(--display);color:var(--forest)}
+.apps small{display:block;margin-top:2px;font-size:.9rem;color:var(--forest-2)}
 .phone-stage{position:relative}
 .arrow{display:none;position:absolute;top:50%;z-index:5;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:2px solid var(--forest-2);background:var(--pale);color:var(--forest);cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:0 10px 20px -10px rgba(11,16,25,.5);transition:background-color .2s,color .2s,opacity .2s}
 .js .arrow{display:flex}
@@ -1088,9 +1093,13 @@ footer nav a{margin-left:20px}
     <div class="head">
       <span class="num">05</span>
       <h2 id="apps-h">Apps too.</h2>
-      <p>I also design and build apps for Apple devices. Three of my own are live on the App Store.</p>
+      <p>I also design and build apps for Apple devices. Three of my own are live on the App Store, including these two.</p>
       <p class="small">Have an idea for an app? Mention it when you get in touch and we can talk it through.</p>
     </div>
+    <ul class="apps">
+      <li><span class="ico" aria-hidden="true">M</span><span><b>Meal Maker</b><small>On the App Store</small></span></li>
+      <li><span class="ico" aria-hidden="true">W</span><span><b>Wean Well</b><small>On the App Store</small></span></li>
+    </ul>
   </div>
 </section>
 
