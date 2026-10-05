@@ -561,8 +561,11 @@ svg{display:block;max-width:100%}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .pricer{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
 .pricer-label{display:block;font:600 .85rem/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--forest-2);margin-bottom:20px}
-.slide{display:none;--v:0;margin-bottom:26px}
-.js .slide{display:block}
+.slide{display:none;--v:0;margin-bottom:26px;position:relative}
+.js .slide{display:block;padding:0 42px}
+.slide .arrow{top:0;margin-top:-3px;width:34px;height:34px;border-width:2px}
+.slide .arrow svg{width:18px;height:18px}
+.slide .arrow.prev{left:0}.slide .arrow.next{right:0}
 .slide input{-webkit-appearance:none;appearance:none;display:block;width:calc(75% + 28px);margin:0 0 0 calc(12.5% - 14px);height:28px;background:transparent;cursor:pointer}
 .slide input::-webkit-slider-runnable-track{height:8px;border-radius:99px;background:linear-gradient(to right,var(--clay) calc(14px + (100% - 28px) * var(--v) / 3),var(--rule) 0)}
 .slide input::-moz-range-track{height:8px;border-radius:99px;background:linear-gradient(to right,var(--clay) calc(14px + (100% - 28px) * var(--v) / 3),var(--rule) 0)}
@@ -594,7 +597,6 @@ svg{display:block;max-width:100%}
 .arrow{display:none;position:absolute;top:50%;z-index:5;width:46px;height:46px;margin-top:-23px;border-radius:50%;border:2px solid var(--forest-2);background:var(--pale);color:var(--forest);cursor:pointer;align-items:center;justify-content:center;padding:0;box-shadow:0 10px 20px -10px rgba(11,16,25,.5);transition:background-color .2s,color .2s,opacity .2s}
 .js .arrow{display:flex}
 .arrow svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.arrow.prev{left:-60px}.arrow.next{right:-60px}
 .arrow:hover:not(:disabled){background:var(--forest);color:var(--pale)}
 .arrow:disabled{opacity:.3;cursor:default}
 .pricer-phone{display:none;justify-self:center;width:100%;max-width:272px}
@@ -618,6 +620,7 @@ svg{display:block;max-width:100%}
 .nm-full{max-width:none}
 .care{background:var(--forest);color:var(--pale);padding:28px 30px;border-radius:26px}
 .care h3{color:var(--pale)}
+.care h3 small{font:600 1rem/1 var(--sans);opacity:.8;margin-left:6px}
 .care .fee{font:600 1.9rem/1.1 var(--display);margin-bottom:12px}
 .care li{padding:6px 0 6px 26px;position:relative}
 .care li::before{content:"";position:absolute;left:2px;top:.9em;width:12px;height:7px;border-left:3px solid var(--tint);border-bottom:3px solid var(--tint);transform:rotate(-45deg)}
@@ -711,9 +714,9 @@ footer nav a{margin-left:20px}
   .pricer-ctl .slide{margin-bottom:0}
   .pricer-phone{order:2;max-width:150px}
   .phone-stage{width:272px;transform:scale(.55);transform-origin:0 0;margin-bottom:-242px}
-  .arrow{width:60px;height:60px;margin-top:-30px}
-  .arrow svg{width:30px;height:30px}
-  .arrow.prev{left:-10px}.arrow.next{right:-10px}
+  .js .slide{padding:0 38px}
+  .stops b{font-size:.85rem}
+  .stops span{font-size:.82rem}
   .pricer-phone .kind{margin-top:6px}
   .sitemap{margin-top:10px}
   .sm-set i{width:11px;height:14px;gap:3px}
@@ -945,6 +948,8 @@ footer nav a{margin-left:20px}
         <div class="pricer-ctl">
         <span class="pricer-label" id="plan-label">Slide to see what each price adds</span>
         <div class="slide">
+          <button type="button" class="arrow prev" id="plan-prev" aria-label="Previous example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+          <button type="button" class="arrow next" id="plan-next" aria-label="Next example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
           <input id="plan" type="range" min="0" max="3" step="1" value="0" aria-labelledby="plan-label" aria-valuetext="Starter, from £395">
           <ul class="stops" aria-hidden="true">
             <li><button type="button" tabindex="-1" data-i="0"><b>Starter</b><span>&pound;395</span></button></li>
@@ -979,8 +984,6 @@ footer nav a{margin-left:20px}
 
       <div class="pricer-phone">
         <div class="phone-stage">
-        <button type="button" class="arrow prev" id="plan-prev" aria-label="Previous example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button type="button" class="arrow next" id="plan-next" aria-label="Next example"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
         <div class="phone"><div class="screen hire" aria-hidden="true">
           <div class="layer dg on" data-i="0">
             <div class="g-nav"><span class="g-logo"><svg style="color:#9A7536" viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.2" cy="9.5" rx="2.1" ry="2.8"/><ellipse cx="10.2" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="14.4" cy="5.8" rx="2.1" ry="2.8"/><ellipse cx="18.2" cy="9.5" rx="2.1" ry="2.8"/><path d="M12.2 11c-3 0-5.8 3.4-5.8 6 0 2 1.7 2.8 3.2 2.5 1.2-.3 1.8-.6 2.6-.6s1.4.3 2.6.6c1.5.3 3.2-.5 3.2-2.5 0-2.6-2.8-6-5.8-6z"/></svg>Wagmore</span><span class="g-ic"><i></i></span></div>
@@ -1058,7 +1061,7 @@ footer nav a{margin-left:20px}
         </div>
       </div>
       <div class="care on-dark">
-        <h3>Care plan</h3>
+        <h3>Care plan <small>(optional)</small></h3>
         <p class="fee">&pound;20+ a month</p>
         <ul>
           <li>Hosting and security</li>
