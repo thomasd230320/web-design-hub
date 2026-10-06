@@ -247,26 +247,6 @@ svg{display:block;max-width:100%}
 .nm-pair .nm-track{height:40px}
 .nm-pair .nm-track i{font-size:.95rem}
 .nm-pair .nm-track i.nm-bad{background:var(--clay);color:var(--pale)}
-.cmp{display:grid;gap:12px}
-.cmp-head,.cmp-row{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:12px;align-items:stretch}
-.cmp-head span{font:600 .85rem/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:0 6px}
-.cmp-head .old{color:var(--clay)}.cmp-head .new{color:var(--forest)}
-.cmp-row>*{border-radius:20px;padding:16px 18px}
-.cmp-row .what{background:transparent;padding-left:6px;display:flex;flex-direction:column;justify-content:center}
-.cmp-row .what b{font:600 1.35rem/1.15 var(--display)}
-.cmp-row .what p{font-size:1rem;line-height:1.4;margin-top:6px}
-.cmp-row .what small{font-size:.85rem;color:var(--forest-2);margin-top:6px}
-.cmp-row .what small a{color:var(--forest-2)}
-.cmp-row .old,.cmp-row .new{display:flex;flex-direction:column;justify-content:center;gap:8px;font-weight:600;font-size:1rem;line-height:1.25}
-.cmp-row .old{background:#FAF8F3;border:2px dashed var(--clay)}
-.cmp-row .new{background:var(--forest);color:var(--pale)}
-.cmp-row .old::before,.cmp-row .new::before{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;font:700 1rem/1 var(--sans)}
-.cmp-row .old::before{content:"\00D7";background:var(--clay);color:var(--pale)}
-.cmp-row .new::before{content:"\2713";background:var(--tint);color:var(--forest)}
-.cmp-row .nm-track{height:22px}
-.cmp-row .nm-track i{min-width:3.2rem;padding:0 12px}
-.cmp-row .new .nm-track{background:rgba(213,224,235,.2)}
-@media (max-width:760px){.cmp-head{display:none}.cmp-row{grid-template-columns:1fr 1fr}.cmp-row .what{grid-column:1/-1;padding-bottom:0}}
 
 .glow::before,.glow::after,.hero::before,.hero::after{content:"";position:absolute;z-index:-1;pointer-events:none}
 .glow::before{width:760px;height:520px;right:-180px;top:0;background:radial-gradient(closest-side,rgba(120,150,190,.22),transparent)}
@@ -713,6 +693,59 @@ footer nav a{margin-left:20px}
   .reel:hover .reel-stage{transform:scale(1.03)}
 }
 
+/* Old vs new */
+@property --rp{syntax:"<number>";inherits:false;initial-value:69}
+.cx-switch{display:inline-flex;gap:4px;padding:5px;margin-bottom:22px;background:var(--pale-2);border:1.5px solid var(--rule);border-radius:999px}
+.cx-opt{appearance:none;border:0;background:transparent;color:var(--forest);font:600 1rem/1 var(--sans);padding:13px 22px;min-height:48px;border-radius:999px;cursor:pointer;transition:background-color .25s ease,color .25s ease}
+.cx-opt[aria-pressed=true]{background:var(--forest);color:var(--pale)}
+.cx-opt#cx-old[aria-pressed=true]{background:var(--clay)}
+.cx{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.cx-card{position:relative;display:flex;flex-direction:column;gap:14px;padding:26px 28px;border-radius:26px;border:2px dashed var(--clay);background:#FAF8F3;color:var(--forest);transition:background-color .55s ease,color .55s ease,border-color .55s ease}
+.cx[data-state=new] .cx-card{background:var(--forest);border:2px solid var(--forest);color:var(--pale)}
+.cx-top{display:flex;align-items:center;gap:12px}
+.cx-top h3{font-size:1.4rem}
+.cx-ico{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--clay);color:var(--pale);transition:background-color .55s ease,color .55s ease}
+.cx[data-state=new] .cx-ico{background:var(--pale);color:var(--forest)}
+.cx-ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cx-big{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+.cx-big b{font:600 3.6rem/1 var(--display);letter-spacing:-.02em;color:var(--clay);transition:color .55s ease}
+.cx-big b em{font-style:normal;opacity:.55;padding:0 .08em}
+.cx[data-state=new] .cx-big b{color:#E8D6C9}
+.cx-big>span{font-size:1.05rem;line-height:1.35}
+.cx-vis{min-height:84px;display:flex;align-items:center}
+.cx-track{height:34px;border-radius:99px;background:rgba(94,63,53,.14);width:100%;overflow:hidden;transition:background-color .55s ease}
+.cx[data-state=new] .cx-track{background:rgba(213,224,235,.18)}
+.cx-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 14px;font:600 .95rem/1 var(--sans);font-style:normal;background:var(--clay);color:var(--pale);transition:width .8s cubic-bezier(.3,1,.4,1),background-color .55s ease,color .55s ease}
+.cx-load{width:100%}
+.cx[data-state=new] .cx-load{width:20%;background:var(--tint);color:var(--forest)}
+.cx-two{display:grid;gap:10px;width:100%}
+.cx[data-state=new] .cx-two .cx-track i{background:var(--tint);color:var(--forest)}
+.cx-two .cx-now{background:var(--forest)}
+.cx[data-state=new] .cx-two .cx-now{background:#E8D6C9}
+.t-new,.s-new{display:none}
+.cx[data-state=new] .t-old,.cx[data-state=new] .s-old{display:none}
+.cx[data-state=new] .t-new,.cx[data-state=new] .s-new{display:inline}
+.cx-state{display:flex;align-items:center;gap:10px;font:600 1.05rem/1.25 var(--sans)}
+.cx-state::before{content:"\00D7";flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--clay);color:var(--pale);font:700 1rem/1 var(--sans)}
+.cx[data-state=new] .cx-state::before{content:"\2713";background:var(--pale);color:var(--forest)}
+.cx-card small{font-size:.85rem;color:var(--forest-2);margin-top:auto}
+.cx-card small a{color:inherit;text-underline-offset:3px}
+.cx[data-state=new] .cx-card small{color:rgba(213,224,235,.8)}
+.cx-phone{position:relative;margin:0 auto;width:54px;height:92px;border:3px solid var(--forest);border-radius:12px;overflow:hidden;background:#fff;transition:border-color .55s ease}
+.cx[data-state=new] .cx-phone{border-color:var(--pale)}
+.cx-page{display:grid;gap:7px;padding:12px 6px;width:170%;transform:translateX(-14%);transition:width .7s cubic-bezier(.3,1,.4,1),transform .7s cubic-bezier(.3,1,.4,1)}
+.cx-page i{display:block;height:11px;border-radius:3px;background:var(--rule)}
+.cx-page i:nth-child(2){background:var(--clay);width:60%}
+.cx[data-state=new] .cx-page{width:100%;transform:none}
+.cx-ring{width:96px;height:96px;margin:0 auto;border-radius:50%;--rp:69;background:conic-gradient(var(--clay) calc(var(--rp) * 1%),rgba(94,63,53,.15) 0);display:grid;place-items:center;position:relative;transition:--rp .9s ease}
+.cx-ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#FAF8F3;transition:background-color .55s ease}
+.cx[data-state=new] .cx-ring{--rp:100;background:conic-gradient(#E8D6C9 100%,#E8D6C9 0)}
+.cx[data-state=new] .cx-ring::before{background:var(--forest)}
+.cx-ring b{position:relative;font:600 1.5rem/1 var(--display);color:var(--clay)}
+.cx[data-state=new] .cx-ring b{color:#E8D6C9}
+@media (max-width:760px){.cx{grid-template-columns:1fr}.cx-card{padding:22px}.cx-big b{font-size:3rem}}
+@media (prefers-reduced-motion:reduce){.cx-card,.cx-track i,.cx-page,.cx-ring,.cx-ico{transition:none}}
+
 /* Responsive */
 @media (max-width:980px){
   .hero{padding:52px 0 60px}
@@ -932,30 +965,46 @@ footer nav a{margin-left:20px}
     <div class="head">
       <span class="num">02</span>
       <h2 id="compare-h">Old site, new site.</h2>
-      <p>Here is how each part brings more people to your site, and keeps them there.</p>
+      <p>Same business. Flip the switch and see the difference.</p>
     </div>
-    <div class="cmp">
-      <div class="cmp-head" aria-hidden="true"><span></span><span class="old">Outdated site</span><span class="new">Custom built for you</span></div>
-      <div class="cmp-row">
-        <div class="what"><b>Quick pages</b><p>Quick pages get found more. People wait a little, then leave. One shop made its pages 40% faster and got 28% more visitors from search.</p><small><a href="https://web.dev/case-studies/vitals-business-impact">Google web.dev (Nykaa, India)</a></small></div>
-        <div class="old"><div class="nm-track" aria-hidden="true"><i class="nm-bad" style="width:100%">5 s</i></div>Slow to load</div>
-        <div class="new"><div class="nm-track" aria-hidden="true"><i class="nm-good" style="width:20%;background:var(--tint);color:var(--forest)">1 s</i></div>Fast, plain code</div>
-      </div>
-      <div class="cmp-row">
-        <div class="what"><b>Works on a phone</b><p>People hold phones. If a page fits the phone, they stay and buy. Every 0.1 seconds faster gave 8.4% more sales.</p><small><a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></small></div>
-        <div class="old">Pinch, zoom and scroll sideways</div>
-        <div class="new">Designed for mobile first</div>
-      </div>
-      <div class="cmp-row">
-        <div class="what"><b>Easy to use</b><p>If a page is hard to use, people go away. 69% of disabled shoppers leave a page they find hard.</p><small><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></small></div>
-        <div class="old">Hard to navigate, poor contrast</div>
-        <div class="new">Clear, accessible by design</div>
-      </div>
-      <div class="cmp-row">
-        <div class="what"><b>Found by search and AI</b><p>Search and AI read your page to find answers. When AI answers, fewer people click: 15 in 100 before, 8 in 100 now. Clear pages are the ones they pick.</p><small><a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, 2025</a></small></div>
-        <div class="old">Built for search as it was</div>
-        <div class="new">Built for SEO and GEO</div>
-      </div>
+    <div class="cx-switch" role="group" aria-label="Choose which kind of site to show">
+      <button type="button" class="cx-opt" id="cx-old" aria-pressed="false">Outdated site</button>
+      <button type="button" class="cx-opt" id="cx-new" aria-pressed="true">Custom built for you</button>
+    </div>
+    <div class="cx" id="cx" data-state="new">
+
+      <article class="cx-card">
+        <div class="cx-top"><span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><h3>Quick pages</h3></div>
+        <div class="cx-big"><b><span data-count="28">28</span>%</b><span>more search visitors after pages got 40% faster</span></div>
+        <div class="cx-vis" aria-hidden="true"><div class="cx-track"><i class="cx-load"><span class="t-old">5 s</span><span class="t-new">1 s</span></i></div></div>
+        <p class="cx-state"><span class="s-old">Slow to load</span><span class="s-new">Fast, plain code</span></p>
+        <small><a href="https://web.dev/case-studies/vitals-business-impact">Google web.dev (Nykaa, India)</a></small>
+      </article>
+
+      <article class="cx-card">
+        <div class="cx-top"><span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.500" width="10" height="19" rx="2.500"/><path d="M11 18.500h2"/></svg></span><h3>Works on a phone</h3></div>
+        <div class="cx-big"><b><span data-count="8.4" data-dec="1">8.4</span>%</b><span>more sales for every 0.1 seconds faster</span></div>
+        <div class="cx-vis" aria-hidden="true"><div class="cx-phone"><div class="cx-page"><i></i><i></i><i></i></div></div></div>
+        <p class="cx-state"><span class="s-old">Pinch, zoom and scroll sideways</span><span class="s-new">Designed for mobile first</span></p>
+        <small><a href="https://deloitte.com/ie/en/services/consulting/research/milliseconds-make-millions.html">Deloitte for Google, 2020</a></small>
+      </article>
+
+      <article class="cx-card">
+        <div class="cx-top"><span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M5 9l7 1.500L19 9M12 10.500V15l-3 6M12 15l3 6"/></svg></span><h3>Easy to use</h3></div>
+        <div class="cx-big"><b><span data-count="69">69</span>%</b><span>of disabled shoppers leave a page they find hard</span></div>
+        <div class="cx-vis" aria-hidden="true"><div class="cx-ring"><b class="t-old">69%</b><b class="t-new">&#10003;</b></div></div>
+        <p class="cx-state"><span class="s-old">Hard to navigate, poor contrast</span><span class="s-new">Clear, accessible by design</span></p>
+        <small><a href="https://abilitynet.org.uk/news-blogs/research-shows-businesses-lose-17-billion-ignoring-accessibility-needs">Click-Away Pound, 2019</a></small>
+      </article>
+
+      <article class="cx-card">
+        <div class="cx-top"><span class="cx-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.500" cy="10.500" r="6"/><path d="M15 15l6 6"/></svg></span><h3>Found by search and AI</h3></div>
+        <div class="cx-big"><b>15 <em>&rarr;</em> 8</b><span>clicks per 100 searches, before and after AI answers</span></div>
+        <div class="cx-vis" aria-hidden="true"><div class="cx-two"><div class="cx-track"><i style="width:75%">15</i></div><div class="cx-track"><i class="cx-now" style="width:40%">8</i></div></div></div>
+        <p class="cx-state"><span class="s-old">Built for search as it was</span><span class="s-new">Built for SEO and GEO</span></p>
+        <small><a href="https://aiweekly.co/alerts/pew-ai-summaries-cut-google-click-throughs-to-8-from-15">Pew, 2025</a></small>
+      </article>
+
     </div>
   </div>
 </section>
@@ -1382,6 +1431,28 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   window.addEventListener('scroll',onScroll,{passive:true});
   window.addEventListener('resize',onScroll);
   frame();
+})();
+(function(){
+  var cx=document.getElementById('cx'); if(!cx) return;
+  var bo=document.getElementById('cx-old'), bn=document.getElementById('cx-new'), touched=false;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function set(st){cx.setAttribute('data-state',st);bo.setAttribute('aria-pressed',st==='old');bn.setAttribute('aria-pressed',st==='new');}
+  bo.addEventListener('click',function(){touched=true;set('old');});
+  bn.addEventListener('click',function(){touched=true;set('new');});
+  function count(el){
+    var to=parseFloat(el.getAttribute('data-count')),dec=+el.getAttribute('data-dec')||0,t0=performance.now(),d=1100;
+    (function f(t){var k=Math.min(1,(t-t0)/d),e=1-Math.pow(1-k,3);el.textContent=(to*e).toFixed(dec);if(k<1)requestAnimationFrame(f);})(t0);
+  }
+  if(reduce||!('IntersectionObserver' in window)) return;
+  set('old');
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return; io.disconnect();
+      [].slice.call(cx.querySelectorAll('[data-count]')).forEach(count);
+      setTimeout(function(){if(!touched) set('new');},1300);
+    });
+  },{threshold:.35});
+  io.observe(cx);
 })();
 </script>
 </body>
