@@ -1355,6 +1355,34 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   nav.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus();}});
 })();
+(function(){
+  var wrap=document.querySelector('.phones'); if(!wrap) return;
+  var figs=[].slice.call(wrap.querySelectorAll('.look')); if(figs.length<3) return;
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var ticking=false, done=false;
+  function ease(p){return 1-Math.pow(1-p,3);}
+  function frame(){
+    ticking=false;
+    var vh=window.innerHeight, w=window.innerWidth, r=wrap.getBoundingClientRect();
+    var start=vh*.96, end=vh*.3, p=Math.max(0,Math.min(1,(start-r.top)/(start-end)));
+    if(p>=1){
+      if(!done){done=true;figs.forEach(function(f){f.style.transform='';f.style.opacity='';f.style.willChange='';});}
+      return;
+    }
+    done=false;
+    var e=ease(p), o=Math.min(1,p*2.2), k=1-e;
+    var xs=[-w*.7*k,0,w*.7*k], ys=[0,vh*.75*k,0];
+    figs.forEach(function(f,i){
+      f.style.willChange='transform,opacity';
+      f.style.opacity=o;
+      f.style.transform='translate3d('+xs[i]+'px,'+ys[i]+'px,0) scale('+(.9+.1*e)+')';
+    });
+  }
+  function onScroll(){if(!ticking){ticking=true;requestAnimationFrame(frame);}}
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  frame();
+})();
 </script>
 </body>
 </html>
