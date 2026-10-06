@@ -589,22 +589,21 @@ svg{display:block;max-width:100%}
 .faq details p+p{margin-top:-8px}
 
 /* Enquiry form */
-.enq{margin-top:30px;max-width:680px}
-.enq h3{font-size:1.5rem;color:var(--pale)}
-.enq .sub{margin-top:6px;color:var(--pale);opacity:.9;font-size:1.02rem}
-.enq form{margin-top:18px;display:grid;gap:16px}
+#enquire.block{padding:64px 0}
+#enquire .head{margin-bottom:24px}
+.enq{max-width:680px}
+.enq form{display:grid;gap:16px}
 .enq .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.enq label{display:grid;gap:6px;font:600 .95rem/1.2 var(--sans);color:var(--pale)}
+.enq label{display:grid;gap:6px;font:600 .95rem/1.2 var(--sans);color:var(--forest)}
 .enq label small{font-weight:450;opacity:.8;display:inline}
-.enq input,.enq select,.enq textarea{width:100%;font:450 1.05rem/1.4 var(--sans);color:var(--ink);background:var(--pale-2);border:2px solid transparent;border-radius:14px;padding:13px 15px;min-height:52px}
+.enq input,.enq select,.enq textarea{width:100%;font:450 1.05rem/1.4 var(--sans);color:var(--ink);background:#fff;border:2px solid var(--rule);border-radius:14px;padding:13px 15px;min-height:52px}
 .enq textarea{min-height:140px;resize:vertical}
-.enq input:focus,.enq select:focus,.enq textarea:focus{outline:3px solid var(--pale);outline-offset:2px;border-color:var(--forest)}
+.enq input:focus,.enq select:focus,.enq textarea:focus{outline:3px solid var(--clay);outline-offset:2px;border-color:var(--forest)}
 .enq .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .enq .go{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
-.enq .note{font-size:.95rem;color:var(--pale);opacity:.9}
-.enq .msg{padding:14px 18px;border-radius:14px;background:var(--pale);color:var(--forest);font-weight:600}
+.enq .note{font-size:.95rem;color:var(--forest-2)}
+.enq .msg{padding:14px 18px;border-radius:14px;background:#fff;border:1.5px solid var(--rule);color:var(--forest);font-weight:600}
 .enq .msg.bad{color:#8A2D1F}
-.enq .or{margin-top:26px;font:600 .8rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.75}
 @media (max-width:640px){.enq .row{grid-template-columns:1fr}}
 #apps.block{padding:56px 0}
 #apps .head{margin-bottom:28px}
@@ -1119,12 +1118,41 @@ footer nav a{margin-left:20px}
   </div>
 </section>
 
+<!-- ENQUIRY -->
+<section class="block" id="enquire" aria-labelledby="enq-h">
+  <div class="wrap">
+    <div class="head">
+      <h2 id="enq-h">Send an enquiry.</h2>
+      <p>Tell me a little about what you need and I will get back to you.</p>
+    </div>
+    <div class="enq">
+      <form id="enq" novalidate>
+        <div class="row">
+          <label>Your name<input name="name" type="text" autocomplete="name" required></label>
+          <label>Your email<input name="email" type="email" autocomplete="email" required></label>
+        </div>
+        <div class="row">
+          <label><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel"></label>
+          <label>What do you need?<select name="need"><option>A new website</option><option>Redesigning my current site</option><option>An app</option><option>Not sure yet</option></select></label>
+        </div>
+        <label>Your message<textarea name="msg" required></textarea></label>
+        <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
+        <div class="go">
+          <button type="submit" class="btn btn-clay btn-lg">Send enquiry</button>
+          <span class="note">This opens your email app with your message ready to send.</span>
+        </div>
+        <p class="msg" id="enq-msg" role="status" hidden></p>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- APPS -->
 <section class="block" id="apps" aria-labelledby="apps-h">
   <div class="wrap">
     <div class="head">
       <span class="num">05</span>
-      <h2 id="apps-h">Apps too.</h2>
+      <h2 id="apps-h">We make apps too!</h2>
       <p>I also design and build apps for Apple devices. Three of my own are live on the App Store, including these two.</p>
       <p class="small">Have an idea for an app? Mention it when you get in touch and we can talk it through.</p>
     </div>
@@ -1160,28 +1188,6 @@ footer nav a{margin-left:20px}
 <section class="block dark on-dark contact" id="contact" aria-labelledby="contact-h">
   <div class="wrap">
     <h2 id="contact-h">Tell me about your project.</h2>
-    <div class="enq">
-      <h3>Send an enquiry</h3>
-      <p class="sub">Tell me a little about what you need and I will get back to you.</p>
-      <form id="enq" novalidate>
-        <div class="row">
-          <label>Your name<input name="name" type="text" autocomplete="name" required></label>
-          <label>Your email<input name="email" type="email" autocomplete="email" required></label>
-        </div>
-        <div class="row">
-          <label><span>Phone <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel"></label>
-          <label>What do you need?<select name="need"><option>A new website</option><option>Redesigning my current site</option><option>An app</option><option>Not sure yet</option></select></label>
-        </div>
-        <label>Your message<textarea name="msg" required></textarea></label>
-        <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
-        <div class="go">
-          <button type="submit" class="btn btn-clay btn-lg">Send enquiry</button>
-          <span class="note">This opens your email app with your message ready to send.</span>
-        </div>
-        <p class="msg" id="enq-msg" role="status" hidden></p>
-      </form>
-      <p class="or">Or get in touch directly</p>
-    </div>
     <div class="contact-gate">
       <button type="button" class="btn btn-clay btn-lg" id="reveal" aria-expanded="false" aria-controls="gate-out">Show email and phone</button>
       <noscript><p class="gate-ns">Please turn on JavaScript to see the contact details.</p></noscript>
