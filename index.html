@@ -950,6 +950,119 @@ html{scroll-padding-top:88px}
 .cta-band .btn:not(.btn-clay){border-color:var(--ink);color:var(--ink)}
 .cta-band .btn:not(.btn-clay):hover{background:var(--ink);color:var(--pale)}
 @media (max-width:620px){.cta-band{border-radius:26px;padding:34px 0}.cta-band .wrap{padding:0 22px}.cta-acts .btn{flex:1}}
+
+/* ===== Full redesign layer: modern, clean, sells itself ===== */
+.block{padding:104px 0}
+.head{margin-bottom:52px}
+.head h2{font-size:clamp(2.2rem,4.4vw,3.5rem);letter-spacing:-.025em;line-height:1.06}
+.head p{font-size:1.2rem}
+.head-c{text-align:center;margin-left:auto;margin-right:auto;max-width:760px}
+.head .num{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--rule);border-radius:999px;padding:8px 14px;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:18px}
+.dark .head .num{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#FFD27A}
+.btn{transition:transform .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease,box-shadow .2s ease}
+.btn-clay{box-shadow:0 12px 24px -14px rgba(122,79,0,.75)}
+.btn .arr{width:20px;height:20px;margin-left:8px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.btn:hover .arr{transform:translateX(4px)}
+/* hero */
+.hero{background:radial-gradient(900px 520px at 88% 8%,rgba(244,183,64,.22),transparent 62%),radial-gradient(800px 600px at 0% 0%,rgba(255,255,255,.75),transparent 60%);color:var(--forest);width:auto;margin:0;border-radius:0;padding:84px 0 96px}
+.hero::before{inset:0;width:auto;height:auto;right:auto;top:0;left:0;background:linear-gradient(rgba(43,59,87,.07) 1px,transparent 1px) 0 0/56px 56px,linear-gradient(90deg,rgba(43,59,87,.07) 1px,transparent 1px) 0 0/56px 56px;-webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 30%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 70% 30%,#000 25%,transparent 75%)}
+.hero::after{display:none}
+.hero h1{color:var(--forest);font-size:clamp(2.7rem,5.8vw,5.2rem);max-width:12ch;letter-spacing:-.03em}
+.hero .hl{color:var(--forest);background:linear-gradient(transparent 60%,rgba(244,183,64,.75) 60%,rgba(244,183,64,.75) 92%,transparent 92%);padding:0 .06em}
+.hero .lead{color:var(--forest-2);max-width:34ch;font-size:1.3rem}
+.hero .reel{background:var(--forest);box-shadow:0 40px 70px -40px rgba(7,57,17,.6)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--rule);border-radius:999px;padding:9px 16px;font:600 .9rem/1 var(--sans);color:var(--forest);margin-bottom:22px;box-shadow:0 8px 20px -16px rgba(7,57,17,.5)}
+.pulse{width:9px;height:9px;border-radius:50%;background:#2FB36F;box-shadow:0 0 0 0 rgba(47,179,111,.5)}
+@media (prefers-reduced-motion:no-preference){.pulse{animation:pulse 2.2s ease-out infinite}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,179,111,.55)}80%,100%{box-shadow:0 0 0 10px rgba(47,179,111,0)}}}
+.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:30px;font-size:.98rem;color:var(--forest-2)}
+.trust li{position:relative;padding-left:26px}
+.trust li::before{content:"";position:absolute;left:0;top:.18em;width:18px;height:18px;border-radius:50%;background:var(--orange) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12l4 4 8-8' fill='none' stroke='%232B3B57' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.trust b{color:var(--forest)}
+/* marquee */
+.marquee{overflow:hidden;background:var(--forest);color:var(--pale);padding:18px 0;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.mq-track{display:flex;width:max-content;gap:0}
+.mq-track span{display:inline-flex;align-items:center;gap:26px;padding-right:26px;font:600 1.15rem/1 var(--display);white-space:nowrap}
+.mq-track span::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--orange)}
+@media (prefers-reduced-motion:no-preference){.mq-track{animation:mq 38s linear infinite}@keyframes mq{to{transform:translateX(-50%)}}}
+/* why */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.why-card{position:relative;background:#fff;border:1px solid var(--rule);border-radius:28px;padding:34px 30px 30px;box-shadow:0 24px 50px -36px rgba(7,57,17,.45);transition:transform .25s ease,box-shadow .25s ease}
+.why-card:hover{transform:translateY(-6px);box-shadow:0 34px 60px -34px rgba(7,57,17,.5)}
+.why-n{position:absolute;top:26px;right:28px;font:600 2.6rem/1 var(--display);color:rgba(43,59,87,.1)}
+.why-ico{display:grid;place-items:center;width:56px;height:56px;border-radius:16px;background:var(--forest);color:#FFD27A;margin-bottom:22px}
+.why-ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.why-card h3{font-size:1.7rem}
+.why-card p{margin-top:10px;color:var(--forest-2);font-size:1.05rem}
+.why-card ul{margin-top:18px;display:grid;gap:8px;padding-top:18px;border-top:1px solid var(--rule)}
+.why-card li{position:relative;padding-left:26px;font-weight:600;font-size:.98rem}
+.why-card li::before{content:"";position:absolute;left:2px;top:.45em;width:11px;height:6px;border-left:2.5px solid var(--clay);border-bottom:2.5px solid var(--clay);transform:rotate(-45deg)}
+.why .band.why-stats{width:auto;margin:30px 0 0;border-radius:28px;padding:30px 36px}
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(220px,auto);gap:18px}
+.bt{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:10px;border-radius:28px;padding:30px;background:#fff;border:1px solid var(--rule);color:var(--forest);text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+a.bt:hover{transform:translateY(-5px);box-shadow:0 30px 50px -34px rgba(7,57,17,.5)}
+.bt h3{font-size:1.6rem}
+.bt p{color:var(--forest-2);font-size:1.02rem;max-width:42ch}
+.bt-apps{grid-column:1/3;grid-row:1/3;background:var(--forest);color:var(--pale);border-color:var(--forest);padding:38px}
+.bt-apps h3{font-size:2.2rem;color:#fff}
+.bt-apps p{color:var(--pale)}
+.bt-apps .apps{margin-top:14px}
+.bt-apps .apps a{background:rgba(255,255,255,.06);border-color:rgba(213,224,235,.3);color:var(--pale)}
+.bt-apps .apps a:hover{background:rgba(255,255,255,.12);border-color:var(--pale)}
+.bt-apps .apps b{color:#fff}
+.bt-apps .apps small{color:var(--pale)}
+.bt-apps .apps em{color:#FFD27A}
+.bt-apps .ico{background:var(--orange);color:var(--forest)}
+.bt-small{margin-top:auto;font-size:.95rem;opacity:.85}
+.bt-fun{grid-column:3/5;background:var(--orange);border-color:var(--orange)}
+.bt-fun p{color:var(--forest)}
+.bt-go{margin-top:auto;display:inline-flex;align-items:center;font-weight:700}
+.bt-go .arr{width:20px;height:20px;margin-left:6px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+a.bt:hover .arr{transform:translateX(4px)}
+.bt-confetti{position:absolute;right:22px;top:22px;width:120px;height:80px}
+.bt-confetti i{position:absolute;width:12px;height:8px;border-radius:2px;background:var(--forest)}
+.bt-confetti i:nth-child(1){left:10px;top:10px;transform:rotate(20deg)}
+.bt-confetti i:nth-child(2){left:50px;top:0;background:#fff;transform:rotate(-30deg)}
+.bt-confetti i:nth-child(3){left:90px;top:18px;transform:rotate(60deg)}
+.bt-confetti i:nth-child(4){left:30px;top:44px;background:#fff;transform:rotate(-10deg)}
+.bt-confetti i:nth-child(5){left:74px;top:52px;transform:rotate(35deg)}
+.bt-confetti i:nth-child(6){left:104px;top:62px;background:#fff;transform:rotate(-50deg)}
+@media (prefers-reduced-motion:no-preference){a.bt-fun:hover .bt-confetti i{animation:bob .8s ease-in-out infinite alternate}}
+/* process as cards */
+.steps{gap:18px}
+.steps li{border-top:0;background:rgba(255,255,255,.06);border:1px solid rgba(213,224,235,.2);border-radius:24px;padding:26px 24px}
+.steps li::before{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--orange);color:var(--forest);font-size:1.2rem;margin-bottom:16px}
+/* faq two-column */
+#faq .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+#faq .head{position:sticky;top:110px;margin-bottom:0}
+#faq .faq{max-width:none}
+.faq details{background:#fff}
+/* enquiry two-column */
+#enquire .wrap{display:grid;grid-template-columns:.9fr 1.1fr;grid-template-rows:auto auto 1fr;column-gap:56px;align-items:start}
+#enquire .head{grid-column:1;grid-row:1;margin-bottom:10px}
+#enquire .enq{grid-column:2;grid-row:1/4;max-width:none;background:#fff;border:1px solid var(--rule);border-radius:30px;padding:34px;box-shadow:0 30px 60px -40px rgba(7,57,17,.5)}
+#enquire .enq input,#enquire .enq select,#enquire .enq textarea{background:var(--pale-2);border-color:transparent}
+#enquire .enq-or{grid-column:1;grid-row:2;margin-top:18px}
+#enquire .contact-gate{grid-column:1;grid-row:3}
+@media (max-width:980px){
+  .block{padding:72px 0}
+  .why-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr 1fr}
+  .bt-apps{grid-column:1/3;grid-row:auto}
+  .bt-fun{grid-column:1/3}
+  #faq .wrap,#enquire .wrap{display:block}
+  #faq .head{position:static;margin-bottom:28px}
+  #enquire .enq{margin:10px 0 26px;padding:24px}
+}
+@media (max-width:620px){
+  .block{padding:60px 0}
+  .hero{padding:44px 0 56px}
+  .bento{grid-template-columns:1fr}
+  .bt-apps,.bt-fun{grid-column:auto}
+  .bt{padding:24px}
+  .why .band.why-stats{padding:24px 20px}
+  .trust{gap:8px 16px;font-size:.92rem}
+}
 </style>
 </head>
 <body>
@@ -1008,22 +1121,21 @@ html{scroll-padding-top:88px}
 <main id="main">
 
 <!-- HERO -->
-<section class="hero on-dark" id="top" aria-labelledby="hero-h">
+<section class="hero" id="top" aria-labelledby="hero-h">
   <div class="wrap">
-    <div>
-      <p class="kicker"><span>Witney, Oxfordshire</span></p>
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="pulse" aria-hidden="true"></span>Web design studio &middot; Witney, Oxfordshire</p>
       <h1 id="hero-h">A website that <span class="hl">works as hard</span> as you do.</h1>
-      <p class="lead">Plain code. Flexible prices. Yours to keep.</p>
+      <p class="lead">Custom-built websites for small businesses. Designed to be found on Google and by AI, loved by your customers, and yours to keep.</p>
       <div class="actions">
-        <a class="btn btn-clay btn-lg" href="#enquire">Get a quote</a>
-        <a class="btn btn-lg" href="#looks">See styles</a>
+        <a class="btn btn-clay btn-lg" href="#enquire">Get a quote <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-lg" href="#looks">See our work</a>
       </div>
-      <ul class="ticks">
-        <li>Designed around your business</li>
-        <li>Flexible prices</li>
-        <li>Mobile-first and accessible</li>
+      <ul class="trust">
+        <li><b>Flexible</b> prices, Starter from &pound;395</li>
+        <li><b>30 / 50 / 20</b> payments, no surprises</li>
+        <li><b>Not VAT</b> registered</li>
       </ul>
-      <p class="fine">Not VAT registered.</p>
     </div>
     <div class="hero-stage">
     <div class="hp hp1" aria-hidden="true"><div class="hp-in" data-src=".screen.x"></div></div>
@@ -1075,29 +1187,48 @@ html{scroll-padding-top:88px}
   </div>
 </section>
 
-<!-- PROOF + PROMISES -->
-<section class="band" aria-label="At a glance">
-  <div class="wrap">
-    <ul class="band-grid">
-      <li><b><span data-count="3">3</span></b><span>apps live on the App Store</span></li>
-      <li><b>&pound;<span data-count="395">395</span></b><span>Starter sites from, with flexible prices</span></li>
-      <li><b>30 / 50 / 20</b><span>payments, spelled out up front</span></li>
-      <li><b><span data-count="100">100</span>%</b><span>yours to keep, in plain files</span></li>
-    </ul>
-  </div>
-</section>
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true"><div class="mq-track"><span>Custom design</span><span>Mobile-first</span><span>SEO</span><span>GEO</span><span>Accessible</span><span>Fast, plain code</span><span>Flexible prices</span><span>Yours to keep</span><span>Apps</span><span>Care plan</span><span>Custom design</span><span>Mobile-first</span><span>SEO</span><span>GEO</span><span>Accessible</span><span>Fast, plain code</span><span>Flexible prices</span><span>Yours to keep</span><span>Apps</span><span>Care plan</span></div></div>
 
-<section class="promises" aria-labelledby="promise-h">
+<!-- WHY US -->
+<section class="block why" id="why" aria-labelledby="why-h">
   <div class="wrap">
-    <h2 id="promise-h" class="sr-only">What every site includes</h2>
-    <ul class="pr-grid">
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><b>Fast</b><span>Plain code, no page builder.</span></li>
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.500" width="10" height="19" rx="2.500"/><path d="M11 18.500h2"/></svg></span><b>Mobile-first</b><span>Designed for phones first.</span></li>
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2"/><path d="M5 9l7 1.500L19 9M12 10.500V15l-3 6M12 15l3 6"/></svg></span><b>Accessible</b><span>Clear, readable, easy to use.</span></li>
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.500" cy="10.500" r="6"/><path d="M15 15l6 6"/></svg></span><b>Found</b><span>Built for search and AI.</span></li>
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M16.500 7.500c0-1.700-2-3-4.500-3s-4.500 1.300-4.500 3 2 2.500 4.500 3 4.500 1.300 4.500 3-2 3-4.500 3-4.500-1.300-4.500-3"/></svg></span><b>Flexible price</b><span>A price that fits the job.</span></li>
-      <li><span class="pr-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 11V8a7 7 0 0 1 14 0v3M5 11h14v10H5z"/></svg></span><b>Yours to keep</b><span>Plain files, no lock-in.</span></li>
-    </ul>
+    <div class="head head-c">
+      <span class="num">Why WebDesignHub</span>
+      <h2 id="why-h">More than a website. A way to win work.</h2>
+      <p>Every site we build is designed around three things that grow a small business.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why-card">
+        <span class="why-n">01</span>
+        <span class="why-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="10.500" cy="10.500" r="6"/><path d="M15 15l6 6"/></svg></span>
+        <h3>Get found</h3>
+        <p>Built for Google search and for AI answers, with clean code, clear structure and fast pages.</p>
+        <ul><li>SEO built in from day one</li><li>Ready for AI answers (GEO)</li><li>Fast on every phone</li></ul>
+      </article>
+      <article class="why-card">
+        <span class="why-n">02</span>
+        <span class="why-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.300-9-8.600C1.600 8 3.700 5 6.900 5c1.900 0 3.400 1 5.100 2.900C13.700 6 15.200 5 17.100 5c3.200 0 5.300 3 3.900 6.400C19 15.700 12 20 12 20z"/></svg></span>
+        <h3>Get chosen</h3>
+        <p>A design that looks the part and feels right, so visitors trust you over the competition.</p>
+        <ul><li>Designed around your business</li><li>Mobile-first and accessible</li><li>Easy for your customers to use</li></ul>
+      </article>
+      <article class="why-card">
+        <span class="why-n">03</span>
+        <span class="why-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4zM4 7l8 6 8-6"/></svg></span>
+        <h3>Get enquiries</h3>
+        <p>Clear next steps and simple ways to get in touch, so interest turns into real enquiries.</p>
+        <ul><li>Clear calls to action</li><li>Simple contact forms</li><li>Easy to grow as you do</li></ul>
+      </article>
+    </div>
+    <div class="band why-stats" aria-label="At a glance">
+      <ul class="band-grid">
+        <li><b><span data-count="3">3</span></b><span>apps live on the App Store</span></li>
+        <li><b>&pound;<span data-count="395">395</span></b><span>Starter sites from, with flexible prices</span></li>
+        <li><b>30 / 50 / 20</b><span>payments, spelled out up front</span></li>
+        <li><b><span data-count="100">100</span>%</b><span>yours to keep, in plain files</span></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -1382,7 +1513,7 @@ html{scroll-padding-top:88px}
 <section class="cta-band" aria-labelledby="cta-h">
   <div class="wrap">
     <div><h2 id="cta-h">Need help shaping your brief?</h2><p>Tell us what your business does and who it is for. We will suggest what makes sense, with a flexible price in writing.</p></div>
-    <div class="cta-acts"><a class="btn btn-clay btn-lg" href="#enquire">Let&rsquo;s talk</a><a class="btn btn-lg" href="#pricing">See prices</a></div>
+    <div class="cta-acts"><a class="btn btn-clay btn-lg" href="#enquire">Let&rsquo;s talk<svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-lg" href="#pricing">See prices</a></div>
   </div>
 </section>
 
@@ -1390,15 +1521,35 @@ html{scroll-padding-top:88px}
 <section class="block" id="apps" aria-labelledby="apps-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">05 &middot; Apps</span>
-      <h2 id="apps-h">We make apps too!</h2>
-      <p>I also design and build apps for Apple devices. Three of my own are live on the App Store, including these two.</p>
-      <p class="small">Have an idea for an app? Mention it when you get in touch and we can talk it through.</p>
+      <span class="num">05 &middot; More from us</span>
+      <h2 id="apps-h">We go further than websites.</h2>
     </div>
-    <ul class="apps">
+    <div class="bento">
+      <article class="bt bt-apps on-dark">
+        <h3>We make apps too!</h3>
+        <p>We design and build apps for Apple devices. Three of our own are live on the App Store, including these two.</p>
+        <ul class="apps">
       <li><a href="https://apps.apple.com/gb/app/meal-maker-planner-recipes/id6806764728" target="_blank" rel="noopener"><span class="ico" aria-hidden="true">M</span><span><b>Meal Maker</b><small>Planner &amp; Recipes</small><em>View on the App Store</em></span></a></li>
       <li><a href="https://apps.apple.com/gb/app/weanwell-baby-weaning/id6801144104" target="_blank" rel="noopener"><span class="ico" aria-hidden="true">W</span><span><b>WeanWell</b><small>Baby Weaning</small><em>View on the App Store</em></span></a></li>
     </ul>
+        <p class="bt-small">Have an idea for an app? Mention it when you get in touch.</p>
+      </article>
+      <a class="bt bt-fun" href="/fun-functions/">
+        <span class="bt-confetti" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        <h3>Fun Functions</h3>
+        <p>Paper planes, confetti, dials and more. Little touches that make a site feel alive.</p>
+        <span class="bt-go">Have a play <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a class="bt bt-care" href="#care">
+        <h3>Care plan</h3>
+        <p>Optional. Hosting, security, small changes and backups, from &pound;20 a month.</p>
+        <span class="bt-go">See the plan <svg class="arr" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <div class="bt bt-own">
+        <h3>Yours to keep</h3>
+        <p>Plain files, no page builder, no theme. Move it, change it, own it.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1421,8 +1572,8 @@ html{scroll-padding-top:88px}
 <section class="block" id="enquire" aria-labelledby="enq-h">
   <div class="wrap">
     <div class="head">
-      <h2 id="enq-h">Send an enquiry.</h2>
-      <p>Tell me a little about what you need and I will get back to you.</p>
+      <h2 id="enq-h">Let&rsquo;s build something great.</h2>
+      <p>Tell us a little about your business and what you need, and we will get back to you.</p>
     </div>
     <div class="enq">
       <form id="enq" novalidate>
@@ -1443,7 +1594,7 @@ html{scroll-padding-top:88px}
         <p class="msg" id="enq-msg" role="status" hidden></p>
       </form>
     </div>
-    <h3 class="enq-or">Or contact me directly</h3>
+    <h3 class="enq-or">Or contact us directly</h3>
     <div class="contact-gate">
       <button type="button" class="btn btn-clay btn-lg" id="reveal" aria-expanded="false" aria-controls="gate-out">Show email and phone</button>
       <noscript><p class="gate-ns">Please turn on JavaScript to see the contact details.</p></noscript>
@@ -1463,6 +1614,7 @@ html{scroll-padding-top:88px}
     <div class="head">
       <span class="num">06 &middot; FAQ</span>
       <h2 id="faq-h">Questions, answered.</h2>
+      <p>Still not sure? <a href="#enquire">Ask us anything</a>, we are happy to help.</p>
     </div>
     <div class="faq">
       <details><summary>How much does a website cost?</summary><p>Prices are flexible and depend on what you need. As a guide, a Starter site is from &pound;395, Business from &pound;1,500 and Content and catalogue from &pound;3,000. Large builds are quoted per project. I am not VAT registered, so the price you agree is the price you pay.</p></details>
