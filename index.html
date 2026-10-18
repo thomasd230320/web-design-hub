@@ -835,6 +835,38 @@ footer nav a{margin-left:20px}
   .btn,.panel .tag{border:2px solid ButtonText}
   .phone{border:2px solid CanvasText}
 }
+
+/* Redesign: dark hero, orange proof band, fuller footer */
+.hero{background:var(--forest);color:var(--pale);width:min(1240px,calc(100% - 24px));margin:14px auto 0;border-radius:44px;padding:78px 0 86px}
+.hero::before{background:radial-gradient(closest-side,rgba(255,107,53,.22),transparent)}
+.hero::after{background:radial-gradient(closest-side,rgba(255,107,53,.12),transparent)}
+.hero h1{color:#fff;font-size:clamp(2.6rem,5.6vw,5rem)}
+.hero .hl{color:var(--orange)}
+.hero .kicker{color:var(--orange)}
+.hero .kicker span{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.2)}
+.hero .lead{color:#D9DCE1}
+.hero .ticks li{color:#fff}
+.hero .ticks li::before{border-color:var(--orange)}
+.hero .fine{color:rgba(242,243,245,.7)}
+.hero .reel{background:#1B2028;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.band{background:var(--orange);color:var(--ink);width:min(1240px,calc(100% - 24px));margin:14px auto 0;border-radius:32px}
+.band .wrap{padding:0 56px}
+.band-grid li{border-left-color:rgba(11,16,25,.35)}
+.band-grid b{color:var(--ink)}
+.band-grid li>span{opacity:1}
+footer{padding:48px 0 30px}
+footer .wrap{display:block}
+.ft-top{display:grid;grid-template-columns:1.2fr 2fr;gap:40px;padding-bottom:30px;border-bottom:1px solid rgba(242,243,245,.18)}
+.ft-brand b{font:650 1.6rem/1.1 var(--display);color:#fff}
+.ft-brand p{margin:10px 0 18px;max-width:32ch;opacity:.85}
+.ft-nav{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ft-nav h3{font:700 .8rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+footer .ft-nav a{display:block;margin:0;padding:6px 0;text-decoration:none;color:var(--pale)}
+footer .ft-nav a:hover{color:var(--orange)}
+.ft-bot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 30px;padding-top:22px;font-size:.92rem;opacity:.85}
+.ft-bot a{color:inherit}
+@media (max-width:980px){.hero{padding:56px 0 64px}.band .wrap{padding:0 28px}.ft-top{grid-template-columns:1fr}}
+@media (max-width:620px){.hero{padding:40px 0 44px;border-radius:32px}.band{border-radius:26px}.band .wrap{padding:0 22px}.ft-nav{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
@@ -858,7 +890,7 @@ footer nav a{margin-left:20px}
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" id="top" aria-labelledby="hero-h">
+<section class="hero on-dark" id="top" aria-labelledby="hero-h">
   <div class="wrap">
     <div>
       <p class="kicker"><span>Witney, Oxfordshire</span></p>
@@ -926,7 +958,7 @@ footer nav a{margin-left:20px}
 </section>
 
 <!-- PROOF + PROMISES -->
-<section class="band on-dark" aria-label="At a glance">
+<section class="band" aria-label="At a glance">
   <div class="wrap">
     <ul class="band-grid">
       <li><b><span data-count="3">3</span></b><span>apps live on the App Store</span></li>
@@ -1324,8 +1356,22 @@ footer nav a{margin-left:20px}
 
 <footer>
   <div class="wrap">
-    <span>No page builder, no theme. All custom built to your requirements. &copy; 2026 WebDesignHub</span>
-    <nav aria-label="Footer"><a href="#looks">Styles</a><a href="#pricing">Prices</a><a href="#faq">FAQ</a><a href="#enquire">Contact</a><a href="/fun-functions/">Fun Functions</a></nav>
+    <div class="ft-top">
+      <div class="ft-brand">
+        <b>WebDesignHub</b>
+        <p>Custom websites and apps for small businesses. Witney, Oxfordshire, working across the UK.</p>
+        <a class="btn btn-clay" href="#enquire">Get a quote</a>
+      </div>
+      <nav class="ft-nav" aria-label="Footer">
+        <div><h3>Explore</h3><a href="#looks">Styles</a><a href="#compare">Old vs new</a><a href="#pricing">Prices</a><a href="#process">Process</a></div>
+        <div><h3>Help</h3><a href="#faq">FAQ</a><a href="#enquire">Contact</a><a href="/fun-functions/">Fun Functions</a></div>
+        <div><h3>Our apps</h3><a href="https://apps.apple.com/gb/app/meal-maker-planner-recipes/id6806764728" target="_blank" rel="noopener">Meal Maker</a><a href="https://apps.apple.com/gb/app/weanwell-baby-weaning/id6801144104" target="_blank" rel="noopener">WeanWell</a></div>
+      </nav>
+    </div>
+    <div class="ft-bot">
+      <span>No page builder, no theme. All custom built to your requirements. &copy; 2026 WebDesignHub. Not VAT registered.</span>
+      <a href="#top">Back to top &uarr;</a>
+    </div>
   </div>
 </footer>
 
