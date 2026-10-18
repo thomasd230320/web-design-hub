@@ -5,9 +5,9 @@
 
   Palette (all text pairings checked against WCAG 2.2 AA)
     primary   #2B3B57  deep navy: text, dark bands
-    secondary #9D7568  dusty terracotta: button fills and accents (near-black text on it)
+    secondary #F4B740  dusty terracotta: button fills and accents (near-black text on it)
     background #D5E0EB soft sage grey: page background, and the "light" text on dark bands
-    supporting: #E6EDF4 panels, #AEBDCD hairlines, #364868 secondary text, #5E3F35 deep terracotta for text and lines
+    supporting: #E6EDF4 panels, #AEBDCD hairlines, #364868 secondary text, #7A4F00 deep terracotta for text and lines
   There is no pure white anywhere on the page itself.
 -->
 <html lang="en-GB">
@@ -46,9 +46,9 @@
   --rule:#AEBDCD;
   --forest:#2B3B57;
   --forest-2:#364868;
-  --clay:#5E3F35;
-  --orange:#9D7568;
-  --orange-hover:#B08A7D;
+  --clay:#7A4F00;
+  --orange:#F4B740;
+  --orange-hover:#F8C965;
   --tint:#FAF8F3;
   --ink:#0B1019;
   --sans:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
@@ -710,10 +710,10 @@ footer nav a{margin-left:20px}
 .cx-big{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
 .cx-big b{font:600 3.6rem/1 var(--display);letter-spacing:-.02em;color:var(--clay);transition:color .55s ease}
 .cx-big b em{font-style:normal;opacity:.55;padding:0 .08em}
-.cx[data-state=new] .cx-big b{color:#E8D6C9}
+.cx[data-state=new] .cx-big b{color:#FFD27A}
 .cx-big>span{font-size:1.05rem;line-height:1.35}
 .cx-vis{min-height:84px;display:flex;align-items:center}
-.cx-track{height:34px;border-radius:99px;background:rgba(94,63,53,.14);width:100%;overflow:hidden;transition:background-color .55s ease}
+.cx-track{height:34px;border-radius:99px;background:rgba(122,79,0,.14);width:100%;overflow:hidden;transition:background-color .55s ease}
 .cx[data-state=new] .cx-track{background:rgba(213,224,235,.18)}
 .cx-track i{display:flex;align-items:center;height:100%;border-radius:99px;padding:0 14px;font:600 .95rem/1 var(--sans);font-style:normal;background:var(--clay);color:var(--pale);transition:width .8s cubic-bezier(.3,1,.4,1),background-color .55s ease,color .55s ease}
 .cx-load{width:100%}
@@ -721,7 +721,7 @@ footer nav a{margin-left:20px}
 .cx-two{display:grid;gap:10px;width:100%}
 .cx[data-state=new] .cx-two .cx-track i{background:var(--tint);color:var(--forest)}
 .cx-two .cx-now{background:var(--forest)}
-.cx[data-state=new] .cx-two .cx-now{background:#E8D6C9}
+.cx[data-state=new] .cx-two .cx-now{background:#FFD27A}
 .t-new,.s-new{display:none}
 .cx[data-state=new] .t-old,.cx[data-state=new] .s-old{display:none}
 .cx[data-state=new] .t-new,.cx[data-state=new] .s-new{display:inline}
@@ -737,12 +737,12 @@ footer nav a{margin-left:20px}
 .cx-page i{display:block;height:11px;border-radius:3px;background:var(--rule)}
 .cx-page i:nth-child(2){background:var(--clay);width:60%}
 .cx[data-state=new] .cx-page{width:100%;transform:none}
-.cx-ring{width:96px;height:96px;margin:0 auto;border-radius:50%;--rp:69;background:conic-gradient(var(--clay) calc(var(--rp) * 1%),rgba(94,63,53,.15) 0);display:grid;place-items:center;position:relative;transition:--rp .9s ease}
+.cx-ring{width:96px;height:96px;margin:0 auto;border-radius:50%;--rp:69;background:conic-gradient(var(--clay) calc(var(--rp) * 1%),rgba(122,79,0,.15) 0);display:grid;place-items:center;position:relative;transition:--rp .9s ease}
 .cx-ring::before{content:"";position:absolute;inset:11px;border-radius:50%;background:#FAF8F3;transition:background-color .55s ease}
-.cx[data-state=new] .cx-ring{--rp:100;background:conic-gradient(#E8D6C9 100%,#E8D6C9 0)}
+.cx[data-state=new] .cx-ring{--rp:100;background:conic-gradient(#FFD27A 100%,#FFD27A 0)}
 .cx[data-state=new] .cx-ring::before{background:var(--forest)}
 .cx-ring b{position:relative;font:600 1.5rem/1 var(--display);color:var(--clay)}
-.cx[data-state=new] .cx-ring b{color:#E8D6C9}
+.cx[data-state=new] .cx-ring b{color:#FFD27A}
 @media (max-width:760px){.cx{grid-template-columns:1fr}.cx-card{padding:22px}.cx-big b{font-size:3rem}}
 @media (prefers-reduced-motion:reduce){.cx-card,.cx-track i,.cx-page,.cx-ring,.cx-ico{transition:none}}
 
@@ -869,14 +869,14 @@ footer .ft-nav a:hover{color:var(--orange)}
 @media (max-width:620px){.hero{padding:40px 0 44px;border-radius:32px}.band{border-radius:26px}.band .wrap{padding:0 22px}.ft-nav{grid-template-columns:1fr 1fr}}
 
 /* Original palette on the new layout: keep text readable on the navy panels */
-.hero::before{background:radial-gradient(closest-side,rgba(232,214,201,.14),transparent)}
+.hero::before{background:radial-gradient(closest-side,rgba(255,210,122,.14),transparent)}
 .hero::after{background:radial-gradient(closest-side,rgba(120,150,190,.28),transparent)}
-.hero .hl,.hero .kicker{color:#E8D6C9}
-.hero .ticks li::before{border-color:#E8D6C9}
+.hero .hl,.hero .kicker{color:#FFD27A}
+.hero .ticks li::before{border-color:#FFD27A}
 .hero .reel{background:#34476A}
-.pr-ico{color:#E8D6C9}
-.ft-nav h3{color:#E8D6C9}
-footer .ft-nav a:hover{color:#E8D6C9}
+.pr-ico{color:#FFD27A}
+.ft-nav h3{color:#FFD27A}
+footer .ft-nav a:hover{color:#FFD27A}
 
 /* Navigation: utility bar, full-width header, services mega menu, mobile drawer */
 html{scroll-padding-top:88px}
@@ -1043,15 +1043,15 @@ html{scroll-padding-top:88px}
           <path d="M44 172 C120 170 190 174 262 171" stroke-width="2"/>
           <path d="M44 200 C150 197 250 202 336 199 L337 300 C240 303 140 298 45 301 Z"/>
           <path d="M45 201 L336 300 M336 199 L46 300" stroke-width="1.4" opacity=".55"/>
-          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#5E3F35" stroke-width="2.6"/>
-          <path d="M62 345 l104 0" stroke="#5E3F35" stroke-width="2.6"/>
+          <path d="M44 328 C90 325 140 330 184 327 L185 362 C140 365 90 360 45 363 Z" stroke="#7A4F00" stroke-width="2.6"/>
+          <path d="M62 345 l104 0" stroke="#7A4F00" stroke-width="2.6"/>
           <path d="M44 396 l120 0 M44 414 l86 0" stroke-width="1.8"/>
         </g>
         <g font-family="Manrope,system-ui,sans-serif" font-weight="600" font-size="17" fill="#364868">
           <text x="372" y="52">header</text>
           <text x="372" y="122">headline</text>
           <text x="372" y="256">your photos</text>
-          <text x="200" y="352" font-size="18" fill="#5E3F35" font-weight="bold">one clear step</text>
+          <text x="200" y="352" font-size="18" fill="#7A4F00" font-weight="bold">one clear step</text>
         </g>
       </svg>
         </div>
