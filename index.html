@@ -877,23 +877,131 @@ footer .ft-nav a:hover{color:var(--orange)}
 .pr-ico{color:#E8D6C9}
 .ft-nav h3{color:#E8D6C9}
 footer .ft-nav a:hover{color:#E8D6C9}
+
+/* Navigation: utility bar, full-width header, services mega menu, mobile drawer */
+html{scroll-padding-top:88px}
+.topbar{background:var(--forest);color:var(--pale);font-size:.9rem}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:38px}
+.tb-r{display:flex;gap:22px}
+.tb-r a{text-decoration:none;font-weight:600}
+.tb-r a:hover{text-decoration:underline}
+.topbar :focus-visible{outline-color:var(--pale)}
+.header{position:sticky;top:0;z-index:50;margin:0;width:100%;border:0;border-bottom:1px solid var(--rule);border-radius:0;background:rgba(213,224,235,.96);box-shadow:0 10px 30px -24px rgba(7,57,17,.6)}
+.header .wrap{display:flex;align-items:center;gap:28px;min-height:76px;max-width:var(--wrap);padding:0 28px}
+.logo img{height:50px}
+.nav{display:flex;align-items:center;flex:1}
+.nav-list{display:flex;align-items:center;gap:2px;margin:0;padding:0;list-style:none}
+.nav-list>li>a,.nav-top{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;min-height:44px;font:600 1rem/1 var(--sans);color:var(--forest);text-decoration:none;background:none;border:0;border-radius:12px;cursor:pointer}
+.nav-list>li>a:hover,.nav-top:hover,.nav-top[aria-expanded=true]{background:var(--pale-2)}
+.chev{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s ease}
+.nav-top[aria-expanded=true] .chev{transform:rotate(180deg)}
+.nav-foot,.mega-back{display:none}
+.hdr-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.hdr-actions .btn{min-height:44px;padding:10px 20px}
+.hdr-mob{display:none!important}
+.has-mega{position:static}
+.mega{position:absolute;left:0;right:0;top:100%;background:var(--pale);border-bottom:1px solid var(--rule);box-shadow:0 30px 50px -30px rgba(7,57,17,.55)}
+.mega-in{max-width:var(--wrap);margin:0 auto;padding:30px 28px 34px;display:grid;grid-template-columns:1fr 1fr 1.1fr;gap:30px}
+.mega-col h3{font:700 .8rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--clay);margin-bottom:10px}
+.mega-col a{display:block;padding:12px 14px;margin:0 -14px;border-radius:14px;text-decoration:none}
+.mega-col a:hover,.mega-col a:focus-visible{background:var(--pale-2)}
+.mega-col b{display:block;font:600 1.08rem/1.25 var(--display);color:var(--forest)}
+.mega-col span{display:block;margin-top:3px;font-size:.95rem;color:var(--forest-2)}
+.mega-cta{background:var(--forest);color:var(--pale);border-radius:22px;padding:24px 24px 26px;display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.mega-cta b{font:600 1.3rem/1.2 var(--display);color:#fff}
+.mega-cta p{font-size:1rem;opacity:.9}
+.mega-cta .btn-clay{border-color:var(--orange)}
+.mega-cta :focus-visible{outline-color:var(--pale)}
+@media (prefers-reduced-motion:no-preference){.mega:not([hidden]){animation:megaIn .22s ease}}
+@keyframes megaIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+@media (max-width:1100px){.hdr-sec{display:none}}
+@media (max-width:980px){
+  .header .wrap{gap:12px;min-height:66px;padding:0 16px 0 20px}
+  .logo img{height:44px}
+  .menu-btn{display:inline-flex}
+  .nav{display:block;position:fixed;top:0;right:0;bottom:0;left:auto;width:min(420px,100%);z-index:60;border:0;border-radius:0;text-align:left;background:var(--pale);padding:84px 24px 24px;overflow-y:auto;transform:translateX(100%);visibility:hidden;transition:transform .3s ease,visibility 0s .3s;box-shadow:-30px 0 60px -30px rgba(7,57,17,.6)}
+  .nav.open{display:block;transform:none;visibility:visible;transition:transform .3s ease}
+  .nav-list{display:block}
+  .nav-list>li>a{display:flex;width:100%;border-radius:0}
+  .nav-top{width:100%;justify-content:space-between;padding:15px 0;font-size:1.1rem;border-radius:0;border-bottom:1px solid var(--rule)}
+  .nav-list>li>a:hover,.nav-top:hover,.nav-top[aria-expanded=true]{background:none}
+  .nav-top .chev{transform:rotate(-90deg)}
+  .nav-top[aria-expanded=true] .chev{transform:rotate(-90deg)}
+  .mega{position:absolute;inset:0;z-index:2;padding:76px 24px 24px;overflow-y:auto;box-shadow:none;border:0;background:var(--pale)}
+  .mega-back{display:inline-flex;position:absolute;top:22px;left:20px;align-items:center;min-height:44px;padding:8px 14px;border:2px solid var(--forest-2);border-radius:999px;background:none;color:var(--forest);font:600 1rem/1 var(--sans);cursor:pointer}
+  .mega-in{display:block;padding:0}
+  .mega-col{margin-bottom:22px}
+  .mega-col a{margin:0;padding:14px 4px;border-bottom:1px solid var(--rule);border-radius:0}
+  .nav-foot{display:grid;gap:12px;margin-top:26px}
+  .nav-foot .btn{width:100%}
+  .menu-btn{position:relative;z-index:70}
+  body.nav-open{overflow:hidden}
+  .nav-scrim{position:fixed;inset:0;z-index:45;background:rgba(11,16,25,.45)}
+}
+@media (max-width:620px){.topbar{display:none}.hdr-cta{padding:8px 14px;font-size:.95rem}}
+
+.cta-band{width:min(1240px,calc(100% - 24px));margin:14px auto;border-radius:36px;background:var(--orange);color:var(--ink);padding:44px 0}
+.cta-band .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;padding:0 56px}
+.cta-band h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+.cta-band p{margin-top:8px;max-width:46ch;font-size:1.1rem}
+.cta-acts{display:flex;flex-wrap:wrap;gap:12px}
+.cta-band .btn-clay{background:var(--forest);border-color:var(--forest);color:var(--pale)}
+.cta-band .btn-clay:hover{background:var(--ink);border-color:var(--ink);color:var(--pale)}
+.cta-band .btn:not(.btn-clay){border-color:var(--ink);color:var(--ink)}
+.cta-band .btn:not(.btn-clay):hover{background:var(--ink);color:var(--pale)}
+@media (max-width:620px){.cta-band{border-radius:26px;padding:34px 0}.cta-band .wrap{padding:0 22px}.cta-acts .btn{flex:1}}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to main content</a>
 
-<header class="header">
+<div class="topbar">
+  <div class="wrap">
+    <span>Witney, Oxfordshire &middot; Websites and apps for small businesses</span>
+    <span class="tb-r"><a href="#faq">FAQ</a><a href="/fun-functions/">Fun Functions</a><a href="#enquire">Get in touch</a></span>
+  </div>
+</div>
+<header class="header" id="hdr">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="WebDesignHub, home"><img src="img/logo.webp" width="120" height="104" alt="" decoding="async" fetchpriority="high"></a>
-    <div class="hdr-mob"><a class="btn btn-clay hdr-cta" href="#enquire">Contact us</a><button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button></div>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#looks">Styles</a>
-      <a href="#compare">Old vs new</a>
-      <a href="#pricing">Prices</a>
-      <a href="#process">Process</a>
-      <a href="#faq">FAQ</a>
-      <a class="btn btn-clay" href="#enquire">Contact us</a>
+      <ul class="nav-list">
+        <li class="has-mega">
+          <button type="button" class="nav-top" id="svc-btn" aria-expanded="false" aria-controls="mega">Services <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+          <div class="mega" id="mega" hidden>
+            <button type="button" class="mega-back" id="mega-back">&lsaquo; Back</button>
+            <div class="mega-in">
+              <div class="mega-col">
+                <h3>Websites</h3>
+                <a href="#looks"><b>Design styles</b><span>Simple to complex, built for phones first</span></a>
+                <a href="#compare"><b>Old site, new site</b><span>What a rebuild changes for you</span></a>
+                <a href="#pricing"><b>Prices</b><span>Flexible prices, Starter from &pound;395</span></a>
+              </div>
+              <div class="mega-col">
+                <h3>More from us</h3>
+                <a href="#apps"><b>Apps</b><span>Designed and built for Apple devices</span></a>
+                <a href="#care"><b>Care plan</b><span>Optional, from &pound;20 a month</span></a>
+                <a href="/fun-functions/"><b>Fun Functions</b><span>Little effects that make a site feel alive</span></a>
+              </div>
+              <div class="mega-cta">
+                <b>Not sure what you need?</b>
+                <p>Tell us about your business and we will suggest what makes sense. No pressure.</p>
+                <a class="btn btn-clay" href="#enquire">Get a quote</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="#team">About us</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-foot"><a class="btn btn-clay btn-lg" href="#enquire">Get a quote</a><a class="btn btn-lg" href="#pricing">See prices</a></div>
     </nav>
+    <div class="hdr-actions">
+      <a class="btn hdr-sec" href="#pricing">See prices</a>
+      <a class="btn btn-clay hdr-cta" href="#enquire">Contact us</a>
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
+    </div>
   </div>
 </header>
 
@@ -997,7 +1105,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
 <section class="block glow" id="looks" aria-labelledby="looks-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">01</span>
+      <span class="num">01 &middot; Our work</span>
       <h2 id="looks-h">Bespoke designs from simple to complex.</h2>
       <p class="small">Built with mobile view in mind.</p>
     </div>
@@ -1056,7 +1164,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
 <section class="block" id="compare" aria-labelledby="compare-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">02</span>
+      <span class="num">02 &middot; Why it matters</span>
       <h2 id="compare-h">Old site, new site.</h2>
       <p>Same business. Flip the switch and see the difference.</p>
     </div>
@@ -1106,7 +1214,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
 <section class="block" id="pricing" aria-labelledby="pricing-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">03</span>
+      <span class="num">03 &middot; Prices</span>
       <h2 id="pricing-h">Prices.</h2>
       <p>Every site gets the same care and design. The price follows the size.</p>
       <p class="flex-note"><b>Prices can be flexible.</b> Every project is different, so these are starting points. Tell me what you need.</p>
@@ -1230,7 +1338,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
           <p class="addons-more"><b>And more.</b> These three are just examples. Other add-ons are chosen to suit each site.</p>
         </div>
       </div>
-      <div class="care on-dark">
+      <div class="care on-dark" id="care">
         <h3>Care plan <small>(optional)</small></h3>
         <p class="fee">&pound;20+ a month</p>
         <ul>
@@ -1258,7 +1366,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
 <section class="block dark on-dark" id="process" aria-labelledby="process-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">04</span>
+      <span class="num">04 &middot; How it works</span>
       <h2 id="process-h">How it works.</h2>
     </div>
     <ol class="steps">
@@ -1270,11 +1378,19 @@ footer .ft-nav a:hover{color:#E8D6C9}
   </div>
 </section>
 
+<!-- CTA BAND -->
+<section class="cta-band" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div><h2 id="cta-h">Need help shaping your brief?</h2><p>Tell us what your business does and who it is for. We will suggest what makes sense, with a flexible price in writing.</p></div>
+    <div class="cta-acts"><a class="btn btn-clay btn-lg" href="#enquire">Let&rsquo;s talk</a><a class="btn btn-lg" href="#pricing">See prices</a></div>
+  </div>
+</section>
+
 <!-- APPS -->
 <section class="block" id="apps" aria-labelledby="apps-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">05</span>
+      <span class="num">05 &middot; Apps</span>
       <h2 id="apps-h">We make apps too!</h2>
       <p>I also design and build apps for Apple devices. Three of my own are live on the App Store, including these two.</p>
       <p class="small">Have an idea for an app? Mention it when you get in touch and we can talk it through.</p>
@@ -1345,7 +1461,7 @@ footer .ft-nav a:hover{color:#E8D6C9}
 <section class="block" id="faq" aria-labelledby="faq-h">
   <div class="wrap">
     <div class="head">
-      <span class="num">06</span>
+      <span class="num">06 &middot; FAQ</span>
       <h2 id="faq-h">Questions, answered.</h2>
     </div>
     <div class="faq">
@@ -1519,12 +1635,30 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   b.addEventListener('click',function(){var p=r.classList.toggle('paused');b.setAttribute('aria-pressed',String(p));b.textContent=p?'Play animation':'Pause animation';});
 })();
 (function(){
-  var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav');
+  var btn=document.getElementById('menu-btn'), nav=document.getElementById('nav'), sb=document.getElementById('svc-btn'), mega=document.getElementById('mega'), back=document.getElementById('mega-back'), li=sb&&sb.parentNode, scrim=null;
   if(!btn||!nav) return;
-  function set(open){nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Close':'Menu';}
-  btn.addEventListener('click',function(){set(!nav.classList.contains('open'));});
-  nav.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus();}});
+  var mq=window.matchMedia('(max-width:980px)'), hoverOK=window.matchMedia('(hover:hover) and (pointer:fine)'), t=0;
+  function setMega(open,focus){sb.setAttribute('aria-expanded',String(open));mega.hidden=!open;if(open&&focus){var f=mq.matches?back:mega.querySelector('a');if(f)f.focus();}}
+  function setNav(open){
+    nav.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));btn.textContent=open?'Close':'Menu';
+    document.body.classList.toggle('nav-open',open);
+    if(open){scrim=document.createElement('div');scrim.className='nav-scrim';scrim.addEventListener('click',function(){setNav(false);});document.body.appendChild(scrim);var f=nav.querySelector('.nav-top');if(f)f.focus();}
+    else{if(scrim){scrim.remove();scrim=null;}setMega(false);}
+  }
+  btn.addEventListener('click',function(){setNav(!nav.classList.contains('open'));});
+  sb.addEventListener('click',function(){var o=sb.getAttribute('aria-expanded')!=='true';setMega(o,o&&mq.matches);});
+  back.addEventListener('click',function(){setMega(false);sb.focus();});
+  nav.addEventListener('click',function(e){var a=e.target.closest('a');if(a){setMega(false);if(nav.classList.contains('open'))setNav(false);}});
+  li.addEventListener('mouseenter',function(){if(!mq.matches&&hoverOK.matches){clearTimeout(t);setMega(true);}});
+  li.addEventListener('mouseleave',function(){if(!mq.matches&&hoverOK.matches){t=setTimeout(function(){setMega(false);},180);}});
+  li.addEventListener('focusout',function(e){if(!mq.matches&&!li.contains(e.relatedTarget))setMega(false);});
+  document.addEventListener('click',function(e){if(!mq.matches&&!li.contains(e.target))setMega(false);});
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape')return;
+    if(!mega.hidden){setMega(false);sb.focus();}
+    else if(nav.classList.contains('open')){setNav(false);btn.focus();}
+  });
+  (mq.addEventListener?mq.addEventListener('change',function(){setNav(false);}):0);
 })();
 (function(){
   var wrap=document.querySelector('.phones'); if(!wrap) return;
